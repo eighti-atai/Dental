@@ -18,52 +18,56 @@ import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.service.PatientService;
 
+/*import com.atai.dental.generic.controller.AbstractController;
+import com.atai.dental.module.enterp.model.Patient;
+import com.atai.dental.module.enterp.service.PatientService;*/
+
 @RestController
 public class PatientController extends AbstractController<Integer, Patient>{
 
 	@Autowired
 	public PatientController(PatientService service) {
-		super(service, Integer.class, "payments");
+		super(service, Integer.class, "Patients");
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	@GetMapping(value = "/payments")
+	@GetMapping(value = "/Patients")
 	public ModelAndView init(Model model) {
 		// TODO Auto-generated method stub
 		return super.init(model);
 	}
 
 	@Override
-	@GetMapping(value = "/Payment")
+	@GetMapping(value = "/Patient")
 	public ResponseEntity<List<Patient>> list() {
 		// TODO Auto-generated method stub
 		return super.list();
 	}
 
 	@Override
-	@PostMapping(value = "/Payment")
+	@PostMapping(value = "/Patient")
 	public ResponseEntity<Void> add(@RequestBody Patient object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}
 
 	@Override
-	@PutMapping(value = "/Payment")
+	@PutMapping(value = "/Patient")
 	public ResponseEntity<Patient> modify(@RequestBody Patient newObject) {
 		// TODO Auto-generated method stub
 		return super.modify(newObject);
 	}
 
 	@Override
-	@DeleteMapping(value = "/Payment/{objid:.+}")
+	@DeleteMapping(value = "/Patient/{objid:.+}")
 	public ResponseEntity<Patient> delete(@PathVariable String objid) {
 		// TODO Auto-generated method stub
 		return super.delete(objid);
 	}
 
 	@Override
-	@PostMapping(value = "/Payment/Search")
+	@PostMapping(value = "/Patient/Search")
 	public ResponseEntity<List<Patient>> search(@RequestBody Patient object) {
 		// TODO Auto-generated method stub
 		return super.search(object);

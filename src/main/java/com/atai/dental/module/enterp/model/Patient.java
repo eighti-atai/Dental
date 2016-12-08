@@ -12,22 +12,24 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Entity
-@Table(name = "payment_tab")
+@Table(name = "patient_tab")
 public class Patient implements Model<Integer> {
 
 	@Id
-	@Column(name = "payment_no")
-	private int paymentNo;
-	@Column(name = "payment_type")
-	private String paymentType;
-	@Column(name = "payment_method")
-	private String paymentMethod;
-	@Column(name = "cheque_no")
-	private String chequeNo;
-	@Column(name = "cheque_exp_date")
-	private Date chequeExpDate;
-	@Column(name = "cheque_bank")
-	private String chequeBank;
+	@Column(name = "patient_id")
+	private int patientId;
+	@Column(name = "patient_name")
+	private String patientName;
+	@Column(name = "patient_address")
+	private String patientAddress;
+	@Column(name = "patient_id_no")
+	private String patientIdNo;
+	@Column(name = "patient_birth_date")
+	private Date patientBirthDate;
+	@Column(name = "patient_contact_no")
+	private String patientContactNo;
+	@Column(name = "patient_gender")
+	private String patientGender;
 	private String objid;
 	
 	
@@ -38,63 +40,69 @@ public class Patient implements Model<Integer> {
 	public void setObjid(String objid) {
 		this.objid = objid;
 	}
-
-	public int getPaymentNo() {
-		return paymentNo;
+	public int getPatientId() {
+		return patientId;
 	}
 
-	public void setPaymentNo(int paymentNo) {
-		this.paymentNo = paymentNo;
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 
-	public String getPaymentType() {
-		return paymentType;
+	public String getPatientName() {
+		return patientName;
 	}
 
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
 
-	public String getPaymentMethod() {
-		return paymentMethod;
+	public String getPatientAddress() {
+		return patientAddress;
 	}
 
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
+	public void setPatientAddress(String patientAddress) {
+		this.patientAddress = patientAddress;
 	}
 
-	public String getChequeNo() {
-		return chequeNo;
+	public String getPatientIdNo() {
+		return patientIdNo;
 	}
 
-	public void setChequeNo(String chequeNo) {
-		this.chequeNo = chequeNo;
+	public void setPatientIdNo(String patientIdNo) {
+		this.patientIdNo = patientIdNo;
 	}
 
-	//@JsonSerialize(using=DateSerializer.class)
-	public Date getChequeExpDate() {
-		return chequeExpDate;
+	public Date getPatientBirthDate() {
+		return patientBirthDate;
 	}
 
-	public void setChequeExpDate(Date chequeExpDate) {
-		this.chequeExpDate = chequeExpDate;
+	public void setPatientBirthDate(Date patientBirthDate) {
+		this.patientBirthDate = patientBirthDate;
 	}
 
-	public String getChequeBank() {
-		return chequeBank;
+	public String getPatientContactNo() {
+		return patientContactNo;
 	}
 
-	public void setChequeBank(String chequeBank) {
-		this.chequeBank = chequeBank;
+	public void setPatientContactNo(String patientContactNo) {
+		this.patientContactNo = patientContactNo;
+	}
+
+	public String getPatientGender() {
+		return patientGender;
+	}
+
+	public void setPatientGender(String patientGender) {
+		this.patientGender = patientGender;
 	}
 
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return getPaymentNo();
+		return getPatientId();
 	}
 
 	public void setId(Integer id) {
-		setPaymentNo(id);
+		setPatientId(id);
 
 	}
 
