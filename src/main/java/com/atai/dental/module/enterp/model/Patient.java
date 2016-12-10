@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 public class Patient implements Model<Integer> {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "patient_id")
 	private int patientId;
 	@Column(name = "patient_name")
