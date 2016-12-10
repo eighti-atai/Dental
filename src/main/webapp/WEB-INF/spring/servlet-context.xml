@@ -56,8 +56,8 @@
 				<value>com.atai.dental.module.enterprise.model.User</value>
 				<value>com.atai.dental.module.enterprise.model.Role</value>
 				<value>com.atai.dental.module.enterprise.model.Site</value>
-				<value>com.atai.dental.module.enterprise.model.Customer</value>
-				<value>com.atai.dental.module.payment.model.Payment</value> -->
+				<value>com.atai.dental.module.enterprise.model.Customer</value> -->
+				<value>com.atai.dental.module.payment.model.Patient</value> 
 			</list>
 		</property>
 		<property name="hibernateProperties">
