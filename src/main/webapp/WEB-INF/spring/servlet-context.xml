@@ -55,8 +55,8 @@
 				<value>com.atai.dental.module.invent.model.InvPartInStock</value>
 				<value>com.atai.dental.module.enterprise.model.User</value>
 				<value>com.atai.dental.module.enterprise.model.Role</value>
-				<value>com.atai.dental.module.enterprise.model.Site</value>
-				<value>com.atai.dental.module.enterprise.model.Customer</value> -->
+				<value>com.atai.dental.module.enterprise.model.Site</value>-->
+				<value>com.atai.dental.module.enterp.model.Appointment</value>
 				<value>com.atai.dental.module.enterp.model.Patient</value> 
 			</list>
 		</property>
@@ -80,7 +80,7 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>                 
             </props>
         </property>
     </bean>
