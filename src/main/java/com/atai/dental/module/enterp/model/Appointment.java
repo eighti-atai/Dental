@@ -56,7 +56,7 @@ public class Appointment implements Model<AppointmentKey> {
 		return key;
 	}
 	
-	public void setId(int patientId, int appointmentId)
+	public void setKey(int patientId, int appointmentId)
 	{
 		this.key.setPatientId(patientId);
 		this.key.setAppointmentId(appointmentId);

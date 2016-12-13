@@ -105,7 +105,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentId">Appointment ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.appointmentId" id="appointmentId" class="appointmentId form-control input-sm" placeholder="Enter Appointment ID " required ng-minlength="1"/>
+                                  <input type="text" ng-model="ctrl.Record.key.appointmentId" id="appointmentId" class="appointmentId form-control input-sm" placeholder="Enter Appointment ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.appointmentId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.appointmentId.$invalid">This field is invalid </span>
@@ -117,7 +117,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="patientId">Patient ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                                  <input type="text" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
@@ -170,16 +170,20 @@
                           <tr>
                               <th>UoM ID</th>
                               <th>Description</th>
+                              <th>UoM ID</th>
+                              <th>Description</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientId"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.appointmentId"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.patientId"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentDate"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
-                                                                                          
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientId"style="width: 100%"/></td>
+                               
+                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.appointmentId"style="width: 100%"/></td>                                                           
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.patientId"style="width: 100%"/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentDate" style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->

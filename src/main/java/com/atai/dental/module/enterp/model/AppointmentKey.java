@@ -30,6 +30,29 @@ public class AppointmentKey implements Serializable {
 	public void setAppointmentId(int appointmentId) {
 		this.appointmentId = appointmentId;
 	}
+	
+	
+	/*@Column(name = "site_id")
+	private String siteId;
+
+	@Column(name="inv_part_no")
+	private String invPartNo;
+
+	public String getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
+	public String getInvPartNo() {
+		return invPartNo;
+	}
+
+	public void setInvPartNo(String invPartNo) {
+		this.invPartNo = invPartNo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,7 +75,7 @@ public class AppointmentKey implements Serializable {
 		if (patientId != other.patientId)
 			return false;
 		return true;
-	}
+	}*/
 	
 	
 }
