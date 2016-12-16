@@ -4,6 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+    
+    <script type="text/javascript">
+        function Reset(id) 
+        {
+            if (parent.document.all.f1)
+                alert("resultFrame found X1");
+            else
+                alert("resultFrame NOT found X2");
+
+            if (typeof (parent.document.getElementById("f1").contentWindow.Reset) == "function")
+            	parent.document.getElementById("f1").contentWindow.Reset(id);
+            else
+                alert("f1.Reset NOT found X3");
+        }
+    </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ATAI</title>
 <style>
@@ -92,10 +108,11 @@
       <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+<input type="button" onclick="Reset(1)" value="Reset"></input>
+      <div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
            
           <div class="panel panel-default">
-              <div class="panel-heading"><span class="lead">UoMs</span></div>
+              <div class="panel-heading"><span class="lead">Patients</span></div>
               <div class="formcontainer">
               	  <md-content>
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
@@ -103,9 +120,9 @@
 
 						<div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="patientName">UoM ID</label>
+                              <label class="col-md-2 control-lable" for="patientName">Patient Name</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter UoM ID " required ng-minlength="1"/>
+                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientName.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
@@ -140,13 +157,13 @@
           
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of UoMs </span></div>
+              <div class="panel-heading"><span class="lead">List of Patients </span></div>
               <div class="tablecontainer">
                   <table class="table table-hover">
                       <thead>
                           <tr>
-                              <th>UoM ID</th>
-                              <th>Description</th>
+                              <th>Patient Name</th>
+                              <th>Address</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>

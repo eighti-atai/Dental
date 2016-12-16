@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	
 <title>ATAI</title>
 <style>
  .salesPartId.ng-valid {
@@ -90,12 +91,25 @@
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
       <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+      
+      <script type="text/javascript">
+        function Reset(id) 
+        {
+            alert("reset (in f1) Z1 = "+id);
+           // angular.element(document.getElementById('MainWrap')).scope().init();
+            var scope = angular.element(document.getElementById("con")).scope();
+            scope.ctrl.Record.key.patientId = id;
+            scope.$apply(scope.ctrl.searchRecords());
+            /*scope.$apply(function () {
+            scope.init();*/
+        }
+    </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+      <div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
            
           <div class="panel panel-default">
-              <div class="panel-heading"><span class="lead">UoMs</span></div>
+              <div class="panel-heading"><span class="lead">Appointments</span></div>
               <div class="formcontainer">
               	  <md-content>
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
@@ -163,15 +177,15 @@
           
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of UoMs </span></div>
+              <div class="panel-heading"><span class="lead">List of Appointments </span></div>
               <div class="tablecontainer">
                   <table class="table table-hover">
                       <thead>
                           <tr>
-                              <th>UoM ID</th>
-                              <th>Description</th>
-                              <th>UoM ID</th>
-                              <th>Description</th>
+                              <th>Appointment ID</th>
+                              <th>Patient ID</th>
+                              <th>Date</th>
+                              <th>Time</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
