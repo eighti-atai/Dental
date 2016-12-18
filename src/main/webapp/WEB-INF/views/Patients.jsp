@@ -7,15 +7,15 @@
 
     
     <script type="text/javascript">
-        function Reset(id) 
+        function populatePage(Record) 
         {
             if (parent.document.all.f1)
                 alert("resultFrame found X1");
             else
                 alert("resultFrame NOT found X2");
 
-            if (typeof (parent.document.getElementById("f1").contentWindow.Reset) == "function")
-            	parent.document.getElementById("f1").contentWindow.Reset(id);
+            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
+            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId);
             else
                 alert("f1.Reset NOT found X3");
         }
@@ -176,7 +176,7 @@
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientAddress" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
-                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> <button type="button" ng-click="ctrl.populateRecord(u.objid)" class="btn btn-success custom-width">C</button>
                               </td>
                           </tr>
                       </tbody>

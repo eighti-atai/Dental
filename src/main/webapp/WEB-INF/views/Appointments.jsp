@@ -93,12 +93,12 @@
       <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
       
       <script type="text/javascript">
-        function Reset(id) 
+        function populate(patientId) 
         {
-            alert("reset (in f1) Z1 = "+id);
+            alert("reset (in f1) Z1 = "+patientId);
            // angular.element(document.getElementById('MainWrap')).scope().init();
             var scope = angular.element(document.getElementById("con")).scope();
-            scope.ctrl.Record.key.patientId = id;
+            scope.ctrl.Record.key.patientId = patientId;
             scope.$apply(scope.ctrl.searchRecords());
             /*scope.$apply(function () {
             scope.init();*/

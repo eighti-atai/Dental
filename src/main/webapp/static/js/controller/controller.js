@@ -18,12 +18,26 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.searchRecords = searchRecords;
     self.numberOfPages = numberOfPages;
     self.entity = '';
+    self.populateRecord = populateRecord;
     self.currentPage  = 0;
     self.pageSize  = 5;
     self.myDate = new Date();
  
  
-    
+    function populateRecord(objid){
+       /* if (parent.document.all.f1)
+            alert("resultFrame found X1");
+        else
+            alert("resultFrame NOT found X2");
+
+        if (typeof (parent.document.getElementById("f1").contentWindow.Reset) == "function")
+        	parent.document.getElementById("f1").contentWindow.Reset(id);
+        else
+            alert("f1.Reset NOT found X3");*/
+    	edit(objid);
+    	populatePage(self.Record);
+    	
+    }
  
     function init(){
     	self.Record= EntityService.record;
