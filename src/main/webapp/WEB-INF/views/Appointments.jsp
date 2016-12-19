@@ -95,8 +95,8 @@
       <script type="text/javascript">
         function populate(patientId) 
         {
-            alert("reset (in f1) Z1 = "+patientId);
-           // angular.element(document.getElementById('MainWrap')).scope().init();
+            //alert("reset (in f1) Z1 = "+patientId);
+            // angular.element(document.getElementById('MainWrap')).scope().init();
             var scope = angular.element(document.getElementById("con")).scope();
             scope.ctrl.Record.key.patientId = patientId;
             scope.$apply(scope.ctrl.searchRecords());

@@ -9,16 +9,40 @@
     <script type="text/javascript">
         function populatePage(Record) 
         {
-            if (parent.document.all.f1)
+           /* if (parent.document.all.f1)
                 alert("resultFrame found X1");
             else
-                alert("resultFrame NOT found X2");
+                alert("resultFrame NOT found X2");*/
 
             if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
             	parent.document.getElementById("f1").contentWindow.populate(Record.patientId);
             else
                 alert("f1.Reset NOT found X3");
         }
+        
+        $(document).on("click", "tableId tr", function(e) {
+            alert(this.id);
+        });
+        
+        function addRowHandlers() {
+            var table = document.getElementById("tableId");
+            var rows = table.getElementsByTagName("tr");
+            for (i = 0; i < rows.length; i++) {
+                var currentRow = table.rows[i];
+                var createClickHandler = 
+                    function(row) 
+                    {
+                        return function() { 
+                                                var cell = row.getElementsByTagName("td")[0];
+                                                var id = cell.innerHTML;
+                                                alert("id:" + id);
+                                         };
+                    };
+
+                currentRow.onclick = createClickHandler(currentRow);
+            }
+        }
+        window.onload = addRowHandlers();
     </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ATAI</title>
@@ -159,7 +183,7 @@
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Patients </span></div>
               <div class="tablecontainer">
-                  <table class="table table-hover">
+                  <table id="tableId" class="table table-hover">
                       <thead>
                           <tr>
                               <th>Patient Name</th>
@@ -168,7 +192,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-click="ctrl.populateRecord(u.objid)" >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
                                                                                           
@@ -176,7 +200,7 @@
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientAddress" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
-                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> <button type="button" ng-click="ctrl.populateRecord(u.objid)" class="btn btn-success custom-width">C</button>
+                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> 
                               </td>
                           </tr>
                       </tbody>
