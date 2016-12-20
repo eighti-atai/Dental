@@ -114,7 +114,6 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Patients</span></div>
               <div class="formcontainer">
-              	  <md-content>
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 
@@ -187,8 +186,6 @@
                           </div>
                       </div>
                   </form>
-                  
-                  </md-content>
               </div>
           
           <div class="panel panel-default">

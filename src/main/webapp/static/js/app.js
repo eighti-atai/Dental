@@ -1,2 +1,2 @@
 
-var App = angular.module('generalModule',['entityModule']);
+var App = angular.module('generalModule',['entityModule','ngMaterial','ngMessages']);

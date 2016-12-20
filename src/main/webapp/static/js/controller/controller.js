@@ -22,18 +22,20 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.currentPage  = 0;
     self.pageSize  = 5;
     self.myDate = new Date();
+    self.setDate = setDate;
+    self.setFocusedElement = setFocusedElement;
+    self.lastFocused;
+    self.lov;
+    self.lovTitles;
+    self.ListOfValues = ListOfValues;
+    self.LovRecords = [];
+    self.LovColumsHeads = [];
+    self.lovClose = lovClose;
+    self.setLovValue = setLovValue;
+    self.lovTitle;
  
  
     function populateRecord(objid){
-       /* if (parent.document.all.f1)
-            alert("resultFrame found X1");
-        else
-            alert("resultFrame NOT found X2");
-
-        if (typeof (parent.document.getElementById("f1").contentWindow.Reset) == "function")
-        	parent.document.getElementById("f1").contentWindow.Reset(id);
-        else
-            alert("f1.Reset NOT found X3");*/
     	edit(objid);
     	populatePage(self.Record);
     	
@@ -165,6 +167,84 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     
     function numberOfPages() {
         return Math.ceil(self.Records.length/self.pageSize);                
+    }
+    
+    function setDate(objid, field, value){
+    	for(var i = 0; i < self.Records.length; i++){
+	            if(self.Records[i].objid === objid) {
+	               Reflect.set(self.Records[i], field, (new Date(value)));
+	            }
+	    }
+    	field = new Date(value);
+    	return field;
+    }
+    
+    function setFocusedElement()
+    {
+    	self.lastFocused = document.activeElement;
+    }
+ 
+    
+    function ListOfValues()
+    {
+    	var isLovField = self.lov[self.lastFocused.id];
+    	if (isLovField !== undefined)
+		{
+    		self.lovTitle = self.lovTitles[self.lastFocused.id];
+	    	self.LovColumsHeads = [];
+	    	document.getElementById("lov").style.display = "none";
+	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
+	    	var current_url = $location.absUrl();
+	    	var base_url = current_url.substr(0, current_url.indexOf('Unter')+6);
+	    	var lovUrl = base_url + self.lov[self.lastFocused.id] + '/';   
+	    	$http.get(lovUrl)
+	        .then(
+		        function (response) {
+		        	self.LovRecords = response.data;
+		        	for (var key in self.LovRecords[0])
+	        		{
+	        			if (self.LovRecords[0].hasOwnProperty(key) && typeof self.LovRecords[0][key] !== 'function'){
+	        				if (key != 'objid')
+	    					{
+	        					self.LovColumsHeads.push(key);
+	    					}
+	        			}
+	        		}
+		        },
+		        function(errResponse){
+		            console.error('Error while fetching Records');
+		        }
+	        );
+	    	document.getElementById("lov").style.display = "block";
+		}
+    }
+    
+    function lovClose()
+    {
+    	document.getElementById("lov").style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("lov")) {
+        	document.getElementById("lov").style.display = "none";
+        }
+    }
+    
+    function setLovValue(lovRecord)
+    {
+    	for (var key in lovRecord)
+		{
+			if (lovRecord.hasOwnProperty(key) && typeof lovRecord[key] !== 'function'){
+				if (key != 'objid')
+				{
+					if (key === self.lastFocused.id)
+					{
+						self.Record[key] = lovRecord[key];
+					}
+				}
+			}
+		}
+    	document.getElementById("lov").style.display = "none";
     }
  
 }]);

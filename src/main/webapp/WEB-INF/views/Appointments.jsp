@@ -86,7 +86,6 @@
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
     <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
-      <script src="webjars/angularjs/1.5.8/angular.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
@@ -111,7 +110,6 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Appointments</span></div>
               <div class="formcontainer">
-              	  <md-content>
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 
@@ -127,35 +125,37 @@
                               </div>
                           </div>
                       	</div>
-						<div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="patientId">Patient ID</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.patientId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      
-                      <div class="row">
+                      	<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentDate">Appointment Date</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.appointmentDate" id="appointmentDate" class="appointmentDate form-control input-sm" placeholder="Enter Date" required/>
+                               <md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" ></md-datepicker>
+
+                              <!--  <div class="col-md-7">
+                              	
+                                  <input type="text" ng-model="ctrl.Record.appointmentDate" id="appointmentDate" class="appointmentDate form-control input-sm" placeholder="Enter Appointment Date" required/>
                               	  <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
                                   </div>
-                              </div>
+                              </div>-->
                           </div>
                       </div>
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentTime">Appointment Time</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Time" required/>
+                                  <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required/>
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="doctor">Doctor</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required/>
                               	  <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
                                   </div>
@@ -172,7 +172,6 @@
                       </div>
                   </form>
                   
-                  </md-content>
               </div>
           
           <div class="panel panel-default">
@@ -183,23 +182,23 @@
                       <thead>
                           <tr>
                               <th>Appointment ID</th>
-                              <th>Patient ID</th>
+                             <!--  <th>Patient ID</th> -->
                               <th>Date</th>
                               <th>Time</th>
+                              <th>Doctor</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.appointmentId"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.patientId"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentDate"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
                                
-                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.appointmentId"style="width: 100%"/></td>                                                           
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.patientId"style="width: 100%"/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentDate" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.appointmentId"style="width: 100%"/></td>                                                           
+                              <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.appointmentDate"></md-datepicker></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
                               <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>

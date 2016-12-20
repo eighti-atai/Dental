@@ -32,14 +32,12 @@ public class Appointment implements Model<AppointmentKey> {
 	
 
 	@Column(name = "appointment_date")
-	private String appointmentDate;
+	private Date appointmentDate;
 	@Column(name = "appointment_time")
 	private String appointmentTime;
+	private String doctor;
 	private String objid;
 	
-	
-	
-
 	public Patient getPatient() {
 		return patient;
 	}
@@ -77,11 +75,11 @@ public class Appointment implements Model<AppointmentKey> {
 		this.patientId = patientId;
 	}*/
 
-	public String getAppointmentDate() {
+	public Date getAppointmentDate() {
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(String appointmentDate) {
+	public void setAppointmentDate(Date appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 
@@ -91,6 +89,14 @@ public class Appointment implements Model<AppointmentKey> {
 
 	public void setAppointmentTime(String appointmentTime) {
 		this.appointmentTime = appointmentTime;
+	}
+
+	public String getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(String doctor) {
+		this.doctor = doctor;
 	}
 
 	public String getObjid() {
