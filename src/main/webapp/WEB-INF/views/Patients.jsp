@@ -18,31 +18,8 @@
             	parent.document.getElementById("f1").contentWindow.populate(Record.patientId);
             else
                 alert("f1.Reset NOT found X3");
-        }
-        
-        $(document).on("click", "tableId tr", function(e) {
-            alert(this.id);
-        });
-        
-        function addRowHandlers() {
-            var table = document.getElementById("tableId");
-            var rows = table.getElementsByTagName("tr");
-            for (i = 0; i < rows.length; i++) {
-                var currentRow = table.rows[i];
-                var createClickHandler = 
-                    function(row) 
-                    {
-                        return function() { 
-                                                var cell = row.getElementsByTagName("td")[0];
-                                                var id = cell.innerHTML;
-                                                alert("id:" + id);
-                                         };
-                    };
+        }    
 
-                currentRow.onclick = createClickHandler(currentRow);
-            }
-        }
-        window.onload = addRowHandlers();
     </script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ATAI</title>
@@ -57,13 +34,13 @@
           background-color: yellow;
       }
  
-      .patientAddress.ng-valid {
+      .patientName.ng-valid {
           background-color: lightgreen;
       }
-      .patientAddress.ng-dirty.ng-invalid-required {
+      .patientName.ng-dirty.ng-invalid-required {
           background-color: red;
       }
-      .patientAddress.ng-dirty.ng-invalid-email {
+      .patientName.ng-dirty.ng-invalid-email {
           background-color: yellow;
       }
  .invPartNo.ng-valid {
@@ -132,7 +109,6 @@
       <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-<input type="button" onclick="Reset(1)" value="Reset"></input>
       <div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
            
           <div class="panel panel-default">
@@ -157,15 +133,51 @@
                       
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="description">Description</label>
+                              <label class="col-md-2 control-lable" for="patientAddress">Address</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.patientAddress" id="description" class="description form-control input-sm" placeholder="Enter description" required/>
+                                  <input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
                               	  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.patientAddress.$error.required">This is a required field</span>
                                   </div>
                               </div>
                           </div>
                       </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="patientIdNo">Id No</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" />
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="patientBirthDate">Birth Date</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.patientBirthDate" id="patientBirthDate" class="patientBirthDate form-control input-sm" placeholder="Enter Birth Date"/>
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="patientContactNo">Contact No</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" />
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                                      
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
@@ -188,6 +200,9 @@
                           <tr>
                               <th>Patient Name</th>
                               <th>Address</th>
+                              <th>Id No</th>
+                              <th>Birth Date</th>
+                              <th>Contact No</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
@@ -195,9 +210,17 @@
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-click="ctrl.populateRecord(u.objid)" >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
+                              
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientIdNo"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientBirthDate"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
                                                                                           
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientName"style="width: 100%"/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientAddress" style="width: 100%""/></td>
+                              
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientIdNo" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientBirthDate" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientContactNo" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
                               <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> 
