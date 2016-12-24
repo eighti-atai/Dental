@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -109,13 +111,14 @@ public class AbstractDao<PK extends Serializable, T> {
 		String fieldValue;
 		field.setAccessible(true);
 		Method method;
+		Date date;
 		char[] fieldNameArray;
 		
 		if (!checkIfNull(entity, field))
 		{ 
 			Class<?> c = field.getType();
 			
-			if(c.isPrimitive() || (c.getTypeName() == "java.lang.String") || (c.getTypeName() == "java.math.BigDecimal"))
+			if(c.isPrimitive() || (c.getTypeName() == "java.lang.String") || (c.getTypeName() == "java.math.BigDecimal") || (c.getTypeName() == "java.util.Date"))
 			{
 				fieldName = field.getName();
 				fieldValue = field.get(entity).toString();
@@ -133,14 +136,30 @@ public class AbstractDao<PK extends Serializable, T> {
 				}
 				else
 				{
-					if (alias == null)
+					if (c.getTypeName() == "java.util.Date")
 					{
-						criteria.add(Restrictions.eq(fieldName, field.get(entity)));
+						date = (Date)field.get(entity);
+						if (alias == null)
+						{							
+							criteria.add(Restrictions.eq(fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+						}
+						else
+						{
+							criteria.add(Restrictions.eq(alias + "."+fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+						}
 					}
 					else
 					{
-						criteria.add(Restrictions.eq(alias + "."+fieldName, field.get(entity)));
+						if (alias == null)
+						{
+							criteria.add(Restrictions.eq(fieldName, field.get(entity)));
+						}
+						else
+						{
+							criteria.add(Restrictions.eq(alias + "."+fieldName, field.get(entity)));
+						}
 					}
+					
 				}
 			}
 			else

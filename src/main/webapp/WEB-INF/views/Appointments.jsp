@@ -98,6 +98,7 @@
             // angular.element(document.getElementById('MainWrap')).scope().init();
             var scope = angular.element(document.getElementById("con")).scope();
             scope.ctrl.Record.key.patientId = patientId;
+            scope.ctrl.Record.appointmentDate = null;
             scope.$apply(scope.ctrl.searchRecords());
             /*scope.$apply(function () {
             scope.init();*/
