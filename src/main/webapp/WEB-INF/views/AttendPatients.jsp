@@ -175,18 +175,18 @@
                       <thead>
                           <tr>
                               <th>Patient ID</th>
-                              <th>Time</th>
+                              <th>Waiting Time</th>
                               <th>Doctor</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.patientId"></span></td>                             
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patient.patientName"></span></td>                             
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.startTime"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
                                
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.patientId"style="width: 100%"/></td>                                                                                         
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patient.patientName"style="width: 100%"/></td>                                                                                         
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.startTime" style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
