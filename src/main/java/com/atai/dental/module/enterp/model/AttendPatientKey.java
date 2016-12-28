@@ -1,8 +1,12 @@
 package com.atai.dental.module.enterp.model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 
-public class AttendPatientKey {
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class AttendPatientKey implements Serializable {
 	
 	@Column(name = "patient_id")
 	private int patientId;
