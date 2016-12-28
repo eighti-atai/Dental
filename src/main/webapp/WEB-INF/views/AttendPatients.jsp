@@ -8,6 +8,9 @@
 	
 <title>ATAI</title>
 <style>
+.abc, {
+    display: none;
+}
  .salesPartId.ng-valid {
           background-color: lightgreen;
       }
@@ -123,11 +126,11 @@
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+      <div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()" >
            
-          <div class="panel panel-default">
-              <div class="panel-heading"><span class="lead">Patients Queue</span></div>
-              <div class="formcontainer">
+          <div class="panel panel-default" display: none>
+              <div class="panel-heading" style="display: none;"><span class="lead">Patients Queue</span> </div>
+              <div class="formcontainer" style="display: none;">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
                       <input type="text" ng-model="ctrl.Record.key.attendPatientId" id="attendPatientId" class="attendPatientId form-control input-sm" placeholder="Enter Appointment ID "/>
