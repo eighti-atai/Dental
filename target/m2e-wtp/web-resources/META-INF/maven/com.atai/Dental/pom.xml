@@ -137,6 +137,22 @@
 		    <artifactId>angular-material</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>jquery</artifactId>
+    <version>2.1.4</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.ajaxtags/ajaxtags -->
+<dependency>
+    <groupId>org.ajaxtags</groupId>
+    <artifactId>ajaxtags</artifactId>
+    <version>1.1.5</version>
+</dependency>
+
+		
   </dependencies>
   <build>
     <finalName>Dental</finalName>

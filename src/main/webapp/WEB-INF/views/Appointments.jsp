@@ -79,17 +79,30 @@
     </style>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">
+    <script src="webjars/jquery/2.1.4/jquery.min.js"></script>
+  <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    
+    
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
+    
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
     <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
+    
+    <script src="<c:url value='/static/js/other/bootstrap-datepicker.js' />"></script>
+    <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
+
+    
       <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
       <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+     <!-- <script src="webjars/jquery/2.1.4/jquery.min.js"></script>-->
       
       <script type="text/javascript">
         function populate(patientId) 
@@ -103,6 +116,10 @@
             /*scope.$apply(function () {
             scope.init();*/
         }
+            
+        $(function() {
+            $('#appointmentTime').timepicker();
+        });
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
@@ -126,29 +143,22 @@
                               </div>
                           </div>
                       	</div>
-                      	<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                      	<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
                        <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentDate">Appointment Date</label>
                                <md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" ></md-datepicker>
-
-                              <!--  <div class="col-md-7">
-                              	
-                                  <input type="text" ng-model="ctrl.Record.appointmentDate" id="appointmentDate" class="appointmentDate form-control input-sm" placeholder="Enter Appointment Date" required/>
-                              	  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
-                                  </div>
-                              </div>-->
                           </div>
                       </div>
+                      
+                     
+                     
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentTime">Appointment Time</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required/>
-                              	  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
-                                  </div>
+                                 <p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="doctor form-control input-sm" placeholder="Enter Appointment Time" /></p>
+                              	  
                               </div>
                           </div>
                       </div>
@@ -156,7 +166,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="doctor">Doctor</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required/>
+                                  <input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" />
                               	  <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
                                   </div>

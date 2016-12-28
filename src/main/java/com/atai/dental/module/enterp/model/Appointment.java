@@ -1,5 +1,7 @@
 package com.atai.dental.module.enterp.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,9 +23,7 @@ public class Appointment implements Model<AppointmentKey> {
 
 	@Id
 	private AppointmentKey key;
-	
-	//@Column(name = "appointment_id")
-	//private int appointmentId;
+
 	
 	@ManyToOne
 	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
@@ -88,7 +88,21 @@ public class Appointment implements Model<AppointmentKey> {
 	}
 
 	public void setAppointmentTime(String appointmentTime) {
-		this.appointmentTime = appointmentTime;
+		
+		String time = appointmentTime.replaceAll("\\s","");
+		if(time.length()>2){
+			String s = time.substring(time.length()-1, time.length());
+			/*if(s.toLowerCase()=="pm")
+			{
+				string
+			}*/
+			
+			time = time.substring(0, time.length()-2);
+			time = time+":00";
+		}
+		
+		System.out.println("########### "+time );
+		this.appointmentTime = time;
 	}
 
 	public String getDoctor() {
