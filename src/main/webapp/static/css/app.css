@@ -25,15 +25,10 @@ body, .form-control{
 	padding-left: 20px;
 	overflow-x: auto;
 	border : #bbb solid 1px;
-	resize:both;
 }
 
 .generic-container {
-  width:80%;
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
+  width:100%;
   background-color: #EAE7E7;
   border: 1px solid #ddd;
   border-radius: 4px;
