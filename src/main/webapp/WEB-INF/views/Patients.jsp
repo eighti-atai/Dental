@@ -15,7 +15,7 @@
                 alert("resultFrame NOT found X2");*/
 
             if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
-            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId);
+            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId, Record.patientName);
             else
                 alert("f1.Reset NOT found X3");
         }    
@@ -24,6 +24,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ATAI</title>
 <style>
+html
+{
+    position: relative;
+    min-width: 700px;
+    min-height: 300px;
+    height: 100%;
+}
+
+/**
+ *     Set the body as a 1024 x 768 rectangle in center of the screen
+ */
+body
+{
+
+    position:                        absolute;
+    height:                             300px;
+    width:                             700px;
+}
  .salesPartId.ng-valid {
           background-color: lightgreen;
       }
@@ -197,14 +215,14 @@
                           <tr>
                               <th>Patient Name</th>
                               <th>Address</th>
-                              <th>Id No</th>
+                              <th>Id Number</th>
                               <th>Birth Date</th>
-                              <th>Contact No</th>
+                              <th>Contact Number</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-click="ctrl.populateRecord(u.objid)" >
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
                               

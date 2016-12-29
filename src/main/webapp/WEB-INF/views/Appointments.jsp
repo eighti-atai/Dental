@@ -8,6 +8,24 @@
 	
 <title>ATAI</title>
 <style>
+html
+{
+    position: relative;
+    min-width: 300px;
+    min-height: 500px;
+    height: 100%;
+}
+
+/**
+ *     Set the body as a 1024 x 768 rectangle in center of the screen
+ */
+body
+{
+
+    position:                        absolute;
+    height:                             500px;
+    width:                            300px;
+}
  .salesPartId.ng-valid {
           background-color: lightgreen;
       }
@@ -105,12 +123,13 @@
      <!-- <script src="webjars/jquery/2.1.4/jquery.min.js"></script>-->
       
       <script type="text/javascript">
-        function populate(patientId) 
+        function populate(patientId,patientName) 
         {
             //alert("reset (in f1) Z1 = "+patientId);
             // angular.element(document.getElementById('MainWrap')).scope().init();
             var scope = angular.element(document.getElementById("con")).scope();
             scope.ctrl.Record.key.patientId = patientId;
+            scope.ctrl.Records.patient.patientName = patientName;
             scope.ctrl.Record.appointmentDate = null;
             scope.$apply(scope.ctrl.searchRecords());
             /*scope.$apply(function () {
@@ -131,7 +150,7 @@
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 
-						<div class="row">
+						<!-- <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="appointmentId">Appointment ID</label>
                               <div class="col-md-7">
@@ -142,7 +161,18 @@
                                   </div>
                               </div>
                           </div>
-                      	</div>
+                      	</div> -->
+                      	<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="patientName">Doctor</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.patient.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Patient Name" />
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                       	<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
                        <div class="row">
                           <div class="form-group col-md-12">
