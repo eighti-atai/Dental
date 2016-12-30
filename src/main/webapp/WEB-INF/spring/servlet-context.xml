@@ -59,6 +59,7 @@
 				<value>com.atai.dental.module.enterp.model.Appointment</value>
 				<value>com.atai.dental.module.enterp.model.Patient</value>
 				<value>com.atai.dental.module.enterp.model.AttendPatient</value> 
+				<value>com.atai.dental.module.trment.model.Treatment</value> 
 			</list>
 		</property>
 		<property name="hibernateProperties">
