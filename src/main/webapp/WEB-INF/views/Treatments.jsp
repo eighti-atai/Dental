@@ -162,12 +162,48 @@
                       	</div> 
                       	<div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="treatmentId">Appointment ID</label>
+                              <label class="col-md-2 control-lable" for="patientId">Patient ID</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentId.$invalid">This field is invalid </span>
+                                      <span ng-show="myForm.patientId.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      	</div> 
+                      	<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="treatmentMainType">Main Type</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.treatmentMainType" id="treatmentMainType" class="treatmentMainType form-control input-sm" placeholder="Enter Main Type " required ng-minlength="1"/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.treatmentMainType.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.treatmentMainType.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      	</div> 
+                      	<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="treatmentSubType">Sub Type</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required ng-minlength="1"/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.treatmentSubType.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.treatmentSubType.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      	</div> 
+                      	<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="treatmentImage">Image</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.treatmentImage" id="treatmentImage" class="treatmentImage form-control input-sm" placeholder="Enter Image " />
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.treatmentImage.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.treatmentImage.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
