@@ -33,7 +33,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lovClose = lovClose;
     self.setLovValue = setLovValue;
     self.lovTitle;
- 
+    self.test = test;
  
     function populateRecord(objid){
     	edit(objid);
@@ -183,7 +183,11 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     {
     	self.lastFocused = document.activeElement;
     }
- 
+    function test()
+    {
+    	//self.lastFocused = document.activeElement;
+    	var t = $scope.isTouch;
+    }
     
     function ListOfValues()
     {

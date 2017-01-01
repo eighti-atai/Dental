@@ -120,6 +120,8 @@ body
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
     <script src="<c:url value='/static/js/entity/Patient.js' />"></script>
+    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>
+    
       <script src="webjars/angularjs/1.5.8/angular.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>

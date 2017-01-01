@@ -174,12 +174,70 @@
             /*scope.$apply(function () {
             scope.init();*/
         }
-            
+        function populatePage(Record) 
+        {
+        	var url = Record.treatmentImage;
+        	//document.getElementById("ss1").src = url;
+        	
+
         
+        }   
+        function setImgBytes(dataURL)
+        {
+            //alert("reset (in f1) Z1 = "+patientId);
+            // angular.element(document.getElementById('MainWrap')).scope().init();
+            var scope = angular.element(document.getElementById("con3")).scope();
+            //alert(dataURL);
+            //scope.ctrl.Record.key.patientId = patientId;
+            var byteString;
+		    if (dataURL.split(',')[0].indexOf('base64') >= 0)
+		        byteString = atob(dataURL.split(',')[1]);
+		    else
+		        byteString = unescape(dataURL.split(',')[1]);
+		
+		    // separate out the mime component
+		    var mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+		
+		    // write the bytes of the string to a typed array
+		    var ia = new Uint8Array(byteString.length);
+		    for (var i = 0; i < byteString.length; i++) {
+		        ia[i] = byteString.charCodeAt(i);
+		    }
+		   
+            scope.ctrl.Record.treatmentImage = dataURL;
+            /*scope.ctrl.Record.appointmentDate = null;
+            scope.$apply(scope.ctrl.searchRecords());
+            /*scope.$apply(function () {
+            scope.init();*/
+            
+           /* var BASE64_MARKER = ';base64,';
+
+           
+              var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+              var base64 = dataURI.substring(base64Index);
+              var raw = window.atob(base64);
+              var rawLength = raw.length;
+              var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+              for(i = 0; i < rawLength; i++) {
+                array[i] = raw.charCodeAt(i);
+              }
+              scope.ctrl.Record.treatmentImage =array;*/
+             // return array;
+            
+        }
+            
+        function getImgBytes()
+        {
+            var scope = angular.element(document.getElementById("con3")).scope();		   
+            var dataURL =  scope.ctrl.Record.treatmentImage ;
+            return dataURL;
+            
+        }
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+      <div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
            
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Appointments</span></div>
@@ -251,18 +309,18 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="treatmentMainType">Doctor</label>
                               <div class="col-md-7">
-                                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsCAYAAADtt+XCAAALmUlEQVR4nO3dXXHrVhuA0dIwAomAjSAhYBNIEeQQSBEEQUogDIJACMzACMxA303b6fSTpXe/kb2laK2Zc78nPvET7T/91gNAwm+1BwDAOgkIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAkCKgACQIiAApAgIACkCAsym67r+dDr1bdv2bdv2p9Op77qu9rC4EwEBvu16vfa/fv3q27btd7vd//17f3+vPUTuQECAb+m67mY4/v3Pk8jPIyBAWjQeu92uPx6PtYfLzAQESLler+F47Ha7vm3b2kNmZgICpLy9vYXjsdvt+qZpag+ZmQkIkPL8/FwUEFNYP4+AACkl8bCI/jMJCJBSEg/beH8mAQGKXa/XcDy+vr5qD5c7ERCg2Pv7++SC+d87tPi5BAQoUrJ918L5zyYgQJGPj4/w9NXb21vt4XJHAsJDuWxv/V5eXsIBuVwutYfLHQkIDzM2b26Xznocj0dPH/R9LyA8SNd1k9dc/PHHH/5iXYHo08f1eq09VO5MQHiI6F+tbdv2f/75Z+3hMiIaEH4+AeEhSi7d2+12/a9fv2oPmRsEhL8JCA9REg/rIss1NRX597+np6faQ+UBBISHeHp6SkXEKeZl+fr6Cn1uzn9sg4DwEKVXf/97TcRi7HJMnUC3A2tbBISHuF6vfdM0qYj8/vvvtYfPX15fX00/8g8B4WG6rktHxFTWMkR30/m8tkFAeKjL5dK/vr4Wh+RwOJjK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">
+                                  <img id="imm" src="">
                               </div>
                           </div>
                       </div>
-<div pw-canvas
-           version="ctrl.version" ng-model="ctrl.Record.treatmentImage"
+<div pw-canvas id="ss1"
+           version="ctrl.version" ng-click="ctrl.undo()"
            options="{undo: true, width: 400, height: 300, color: selectedColor, lineWidth: selectedLineWidth}"></div>
       <div pw-color-selector="['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']" color="selectedColor"></div>
       <input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector">{{selectedLineWidth}}
 
       <div class="undo">
-        <button ng-click="ctrl.undo()"
+        <button ng-click="ctrl.test()"
                 ng-disabled="ctrl.version < 1">Undo (Version {{ctrl.version}})</button>
       </div>
                       <div class="row">
@@ -293,11 +351,12 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)">
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentSubType"></span></td> 
-<!--                               <td><img ng-src="data:image/png;base64,u.treatmentImage"></img></td>   -->
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td> 
+                             <td ng-if="!ctrl.change(u.objid)"><img src="u.treatmentImage"></img></td>    
 <!--                               <td><img src="data:image/png;base64,></img></td -->
 <!--                               <td ng-if="!ctrl.change(u.objid)"><img id="ItemPreview1" src="data:image/jpg;base64,u.treatmentImage" /></td>  -->
                                

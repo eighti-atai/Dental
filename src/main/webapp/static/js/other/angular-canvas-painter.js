@@ -43,7 +43,8 @@ angular.module('pw.canvas-painter')
       },
       templateUrl: '../templates/canvas.html',
       link: function postLink(scope, elm) {
-
+    	  //var canvas ;
+    	  //var dataURL ; 
         var isTouch = !!('ontouchstart' in window);
 
         var PAINT_START = isTouch ? 'touchstart' : 'mousedown';
@@ -63,6 +64,7 @@ angular.module('pw.canvas-painter')
         options.lineWidth = options.lineWidth || 1;
         options.undo = options.undo || false;
         options.imageSrc = options.imageSrc || false;
+        //options.imageData = options.imageData|| null;
 
         // background image
         if (options.imageSrc) {
@@ -264,6 +266,7 @@ angular.module('pw.canvas-painter')
 
             document.body.addEventListener('mousedown', mousedown);
             document.body.addEventListener('mouseup', mouseup);
+            document.body.addEventListener('dblclick', dblclick);
 
             scope.$on('$destroy', removeEventListeners);
 
@@ -275,13 +278,30 @@ angular.module('pw.canvas-painter')
             MOUSE_DOWN = true;
           }
 
+          function dblclick() {
+        	  var myCanvas = document.getElementById(options.canvasId);
+        	  var ctx = myCanvas.getContext('2d');
+        	  var img = new Image;
+        	  img.onload = function(){
+        	    ctx.drawImage(img,0,0); // Or at whatever offset you like
+        	  };
+        	  img.src = window.getImgBytes();
+        	 // image.src = window.getImgBytes();
+            }
+
           function mouseup() {
+        	  
+        	  var canvas = document.getElementById(options.canvasId);
+        	  var dataURL = canvas.toDataURL(); 
             MOUSE_DOWN = false;
+            window.setImgBytes(dataURL);
           }
 
           function removeEventListeners() {
             document.body.removeEventListener('mousedown', mousedown);
             document.body.removeEventListener('mouseup', mouseup);
+            document.body.removeEventListener('dblclick', dblclick);
+            
           }
 
           function mouseenter(e) {
@@ -298,7 +318,7 @@ angular.module('pw.canvas-painter')
             }
           }
         };
-
+        
         var undo = function(version) {
           if (undoCache.length > 0) {
             ctx.putImageData(undoCache[version], 0, 0);

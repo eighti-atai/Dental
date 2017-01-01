@@ -1,9 +1,11 @@
 package com.atai.dental.module.trment.model;
+import java.sql.Blob;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,7 +33,7 @@ public class Treatment implements Model<TreatmentKey> {
 	@Column(name = "treatment_desc")
 	private String treatmentDesc;
 	@Column(name = "treatment_image")
-	private byte[] treatmentImage;
+	private String treatmentImage;
 	@Column(name = "treatment_stat")
 	private String treatmentStat;
 	@Column(name = "treatment_paid_stat")
@@ -114,11 +116,11 @@ public class Treatment implements Model<TreatmentKey> {
 		this.treatmentDesc = treatmentDesc;
 	}
 
-	public byte[] getTreatmentIimage() {
+	public String getTreatmentImage() {
 		return treatmentImage;
 	}
 
-	public void setTreatmentImage(byte[] treatmentImage) {		
+	public void setTreatmentImage(String treatmentImage) {		
 		this.treatmentImage = treatmentImage;
 	}
 

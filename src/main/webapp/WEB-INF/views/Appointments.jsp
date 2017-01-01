@@ -114,7 +114,7 @@ body
     
     <script src="<c:url value='/static/js/other/bootstrap-datepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
-
+<script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>
     
       <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
