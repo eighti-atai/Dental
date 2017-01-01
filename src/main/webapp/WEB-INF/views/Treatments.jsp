@@ -162,69 +162,15 @@
      <!-- <script src="webjars/jquery/2.1.4/jquery.min.js"></script>-->
       
       <script type="text/javascript">
-        function populate(patientId,treatmentMainType) 
-        {
-            //alert("reset (in f1) Z1 = "+patientId);
-            // angular.element(document.getElementById('MainWrap')).scope().init();
-            var scope = angular.element(document.getElementById("con")).scope();
-            scope.ctrl.Record.key.patientId = patientId;
-            scope.ctrl.Records.patient.treatmentMainType = treatmentMainType;
-            scope.ctrl.Record.appointmentDate = null;
-            scope.$apply(scope.ctrl.searchRecords());
-            /*scope.$apply(function () {
-            scope.init();*/
-        }
         function populatePage(Record) 
         {
         	var url = Record.treatmentImage;
-        	//document.getElementById("ss1").src = url;
-        	
-
+        }  
         
-        }   
         function setImgBytes(dataURL)
         {
-            //alert("reset (in f1) Z1 = "+patientId);
-            // angular.element(document.getElementById('MainWrap')).scope().init();
             var scope = angular.element(document.getElementById("con3")).scope();
-            //alert(dataURL);
-            //scope.ctrl.Record.key.patientId = patientId;
-            var byteString;
-		    if (dataURL.split(',')[0].indexOf('base64') >= 0)
-		        byteString = atob(dataURL.split(',')[1]);
-		    else
-		        byteString = unescape(dataURL.split(',')[1]);
-		
-		    // separate out the mime component
-		    var mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-		
-		    // write the bytes of the string to a typed array
-		    var ia = new Uint8Array(byteString.length);
-		    for (var i = 0; i < byteString.length; i++) {
-		        ia[i] = byteString.charCodeAt(i);
-		    }
-		   
-            scope.ctrl.Record.treatmentImage = dataURL;
-            /*scope.ctrl.Record.appointmentDate = null;
-            scope.$apply(scope.ctrl.searchRecords());
-            /*scope.$apply(function () {
-            scope.init();*/
-            
-           /* var BASE64_MARKER = ';base64,';
-
-           
-              var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-              var base64 = dataURI.substring(base64Index);
-              var raw = window.atob(base64);
-              var rawLength = raw.length;
-              var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-              for(i = 0; i < rawLength; i++) {
-                array[i] = raw.charCodeAt(i);
-              }
-              scope.ctrl.Record.treatmentImage =array;*/
-             // return array;
-            
+            scope.ctrl.Record.treatmentImage = dataURL;       
         }
             
         function getImgBytes()
@@ -313,16 +259,12 @@
                               </div>
                           </div>
                       </div>
-<div pw-canvas id="ss1"
+<div pw-canvas
            version="ctrl.version" ng-click="ctrl.undo()"
            options="{undo: true, width: 400, height: 300, color: selectedColor, lineWidth: selectedLineWidth}"></div>
-      <div pw-color-selector="['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']" color="selectedColor"></div>
-      <input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector">{{selectedLineWidth}}
+      <div pw-color-selector="['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#ffffff']" color="selectedColor"></div>
+      <input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector">{{selectedLineWidth}} 
 
-      <div class="undo">
-        <button ng-click="ctrl.test()"
-                ng-disabled="ctrl.version < 1">Undo (Version {{ctrl.version}})</button>
-      </div>
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
