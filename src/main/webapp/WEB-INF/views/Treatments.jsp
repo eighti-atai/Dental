@@ -288,7 +288,7 @@
                              <!--  <th>Patient ID</th> -->
                               <th>Main Type</th>
                               <th>Sub Type</th>
-                              <th>Img</th>
+<!--                               <th>Img</th> -->
                               <th width="20%"></th>
                           </tr>
                       </thead>
@@ -297,8 +297,8 @@
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentSubType"></span></td> 
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td> 
-                             <td ng-if="!ctrl.change(u.objid)"><img src="u.treatmentImage"></img></td>    
+<!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td>  -->
+<!--                              <td ng-if="!ctrl.change(u.objid)"><img src="u.treatmentImage"></img></td>     -->
 <!--                               <td><img src="data:image/png;base64,></img></td -->
 <!--                               <td ng-if="!ctrl.change(u.objid)"><img id="ItemPreview1" src="data:image/jpg;base64,u.treatmentImage" /></td>  -->
                                
