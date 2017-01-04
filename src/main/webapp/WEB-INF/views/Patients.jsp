@@ -21,7 +21,7 @@
 			html
 			{
 			    position: relative;
-			    min-width: 700px;
+			    min-width: 500px;
 			    min-height: 300px;
 			    height: 100%;
 			}
@@ -33,8 +33,15 @@
 			{	
 			    position:                        absolute;
 			    height:                             300px;
-			    width:                             700px;
+			    width:                             500px;
 			}
+			
+			{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 	 		.patientId.ng-valid {
 	         	background-color: lightgreen;
 	      	}
@@ -94,7 +101,7 @@
 	      	.patientContactNo.ng-dirty.ng-invalid-email {
 	          	background-color: yellow;
 	      	}
-	      
+
 	       .patientGender.ng-valid {
 	          	background-color: lightgreen;
 	      	}
@@ -157,8 +164,19 @@
 		                </div>
 		                      
 		                <div class="row">
-		                	<div class="form-group col-md-12">
-		                    <label class="col-md-2 control-lable" for="patientIdNo">Id No</label>
+		                	<div class="form-group col-xs-8">
+		                    	<label class="col-md-2 control-lable" for="patientBirthDate">Date of Birth</label>
+		                        <div class="col-md-7">		                        	
+		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate"  md-placeholder="Enter Date" ></md-datepicker>
+		                        	<div class="has-error" ng-show="myForm.$dirty">
+		                        	</div>
+		                        </div>
+		                	</div>
+<!-- 		                </div> -->
+		                      
+<!-- 		                <div class="row"> -->
+		                	<div class="form-group col-xs-5">
+		                    <label class="col-md-2 control-lable" for="patientIdNo">Id Number</label>
 		                    	<div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
@@ -168,36 +186,24 @@
 		                </div>
 		                      
 		                <div class="row">
-		                	<div class="form-group col-md-12">
-		                    	<label class="col-md-2 control-lable" for="patientBirthDate">Birth Date</label>
-		                        <div class="col-md-7">
-		                        	<input type="text" ng-model="ctrl.Record.patientBirthDate" id="patientBirthDate" class="patientBirthDate form-control input-sm" placeholder="Enter Birth Date"/>
-		                        	<div class="has-error" ng-show="myForm.$dirty">
-		                        	</div>
-		                        </div>
-		                	</div>
-		                </div>
-		                      
-		                <div class="row">
-		                	<div class="form-group col-md-12">
-		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact No</label>
+		                	<div class="form-group col-xs-8">
+		                    	<label class="col-md-3 control-lable" for="patientContactNo">Contact No</label>
 		                        <div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
-		                </div>
+<!-- 		                </div> -->
 		                      
-		                <div class="row">
-		                	<div class="form-group col-md-12">
-		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact No</label>
+<!-- 		                <div class="row"> -->
+		                	<div class="form-group col-xs-5">
+		                    	<label class="col-md-2 control-lable" for="patientGender">Gender</label>
 		                        <div class="col-md-7">
-		                      		<select>
-								  		<option value="volvo">Volvo</option>
-								  		<option value="saab">Saab</option>
-								  		<option value="opel">Opel</option>
-								  		<option value="audi">Audi</option>
+		                      		<select ng-model="ctrl.Record.patientGender" id="patientGender" class="patientGender form-control input-sm" placeholder="Selet Gender">
+								  		<option value=""></option>
+								  		<option value="Male">Male</option>
+								  		<option value="Female">Female</option>
 									</select>
 								</div>
 							</div>
@@ -223,9 +229,10 @@
 		                    	<tr>
 		                        	<th>Patient Name</th>
 		                            <th>Address</th>
-		                            <th>Id Number</th>
-		                            <th>Birth Date</th>
+		                            <th>Date of Birth</th>
+		                            <th>Id Number</th>	                            
 		                            <th>Contact Number</th>
+		                            <th>Gender</th>
 		                            <th width="20%"></th>
 		                        </tr>
 		                  	</thead>
@@ -233,17 +240,17 @@
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
-		                              
+		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'patientBirthDate', u.patientBirthDate)|date:yyyy/MM/dd"></span></td>  
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientIdNo"></span></td>
-		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientBirthDate"></span></td>
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
+		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientGender"></span></td>
 		                                                                                          
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientName"style="width: 100%"/></td>
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientAddress" style="width: 100%""/></td>
-		                              
+		                            <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.patientBirthDate"></md-datepicker></td>
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientIdNo" style="width: 100%""/></td>
-		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientBirthDate" style="width: 100%""/></td>
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientContactNo" style="width: 100%""/></td>
+		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientGender" style="width: 100%""/></td>
 		                              
 		                           	<td>
 		                           		<button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> 
