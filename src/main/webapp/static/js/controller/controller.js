@@ -45,7 +45,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	self.Record= EntityService.record;
     	//self.EmptyRecord = angular.copy(EntityService.record);
     	RecordService.setRestServiceUri(EntityService.name);
-    	fetchAllRecords();
+    	//fetchAllRecords();
     }
     
     function fetchAllRecords(){

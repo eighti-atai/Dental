@@ -141,8 +141,8 @@
 		
 						<div class="row">
 		                	<div class="form-group col-md-12">
-		                    	<label class="col-md-2 control-lable" for="patientName">Patient Name</label>
-		                        <div class="col-md-7">
+		                    	<label class="col-xs-2 control-lable" for="patientName">Name</label>
+		                        <div class="col-xs-10">
 		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.patientName.$error.required">This is a required field</span>
@@ -154,8 +154,8 @@
 		                      
 		                <div class="row">
 		                	<div class="form-group col-md-12">
-		                    	<label class="col-md-2 control-lable" for="patientAddress">Address</label>
-		                        <div class="col-md-7">
+		                    	<label class="col-xs-2 control-lable" for="patientAddress">Address</label>
+		                        <div class="col-xs-10">
 		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
