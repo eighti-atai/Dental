@@ -33,7 +33,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lovClose = lovClose;
     self.setLovValue = setLovValue;
     self.lovTitle;
-    self.test = test;
+    self.recordHasValue = recordHasValue;
  
     function populateRecord(objid){
     	edit(objid);
@@ -170,6 +170,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
     
     function setDate(objid, field, value){
+    	console.log('field = ', field);
+    	console.log('value = ', value);
+    	if(value===null)
+    		{
+    		return null;
+    		}
+    	else
+    		{
     	for(var i = 0; i < self.Records.length; i++){
 	            if(self.Records[i].objid === objid) {
 	               Reflect.set(self.Records[i], field, (new Date(value)));
@@ -177,17 +185,28 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    }
     	field = new Date(value);
     	return field;
+    		}
+    	
     }
     
     function setFocusedElement()
     {
     	self.lastFocused = document.activeElement;
     }
-    function test()
-    {
-    	//self.lastFocused = document.activeElement;
-    	var t = $scope.isTouch;
+    
+    function recordHasValue(){
+    	self.EmptyRecord = EntityService.emptyRecord();
+    	if(self.Record === self.EmptyRecord)
+		{
+    		return false;
+		}
+    	return true; //reset Form
+        
     }
+    
+    $scope.$evalAsync(function () {
+    	  $scope.IsDisabled = false;
+    	});
     
     function ListOfValues()
     {

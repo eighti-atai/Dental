@@ -65,6 +65,7 @@
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
     <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
+    <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>    
     <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
@@ -98,8 +99,8 @@
                     		<label class="col-md-2 control-lable" for="appointmentDate">Appointment Date</label>
                             <md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required></md-datepicker>
                             <div class="has-error" ng-show="myForm.$dirty">
-                            	<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
-                                <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
+                            	<span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
+                                <span ng-show="myForm.appointmentDate.$invalid">This field is invalid </span>
                             </div>
                  		</div>
   					</div>

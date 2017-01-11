@@ -82,15 +82,7 @@
 	          	background-color: yellow;
 	      	}
 	      	
-	      	.patientBirthDate.ng-valid {
-	          	background-color: lightgreen;
-	      	}
-	      	.patientBirthDate.ng-dirty.ng-invalid-required {
-	          	background-color: red;
-	      	}
-	      	.patientBirthDate.ng-dirty.ng-invalid-minlength {
-	          	background-color: yellow;
-	      	}
+	      	
 	 
 	      	.patientContactNo.ng-valid {
 	          	background-color: lightgreen;
@@ -134,7 +126,7 @@
 	<body ng-app="generalModule" class="ng-cloak">
 		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">           
 		    <div class="panel panel-default">
-		    	<div class="panel-heading"><span class="lead">Patients</span></div>
+		    	<div class="panel-heading"><span class="lead">Patient</span></div>
 		        <div class="formcontainer">
 		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
@@ -167,7 +159,7 @@
 		                	<div class="form-group col-xs-8">
 		                    	<label class="col-md-2 control-lable" for="patientBirthDate">Date of Birth</label>
 		                        <div class="col-md-7">		                        	
-		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate"  md-placeholder="Enter Date" ></md-datepicker>
+		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate" md-placeholder="Enter date"></md-datepicker>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                        	</div>
 		                        </div>
@@ -176,7 +168,7 @@
 		                      
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-xs-5">
-		                    <label class="col-md-2 control-lable" for="patientIdNo">Id Number</label>
+		                    <label class="col-md-2 control-lable" for="patientIdNo">ID Number</label>
 		                    	<div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
@@ -187,7 +179,7 @@
 		                      
 		                <div class="row">
 		                	<div class="form-group col-xs-8">
-		                    	<label class="col-md-3 control-lable" for="patientContactNo">Contact No</label>
+		                    	<label class="col-md-3 control-lable" for="patientContactNo">Contact Number</label>
 		                        <div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
@@ -212,7 +204,7 @@
 		                <div class="row">
 		                	<div class="form-actions floatRight">
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="IsDisabled">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
 		                    </div>
@@ -227,11 +219,11 @@
 		                <table id="tableId" class="table table-hover">
 		                	<thead>
 		                    	<tr>
-		                        	<th>Patient Name</th>
+		                        	<th>Name</th>
 		                            <th>Address</th>
 		                            <th>Date of Birth</th>
-		                            <th>Id Number</th>	                            
-		                            <th>Contact Number</th>
+		                            <th>ID No</th>	                            
+		                            <th>Contact No</th>
 		                            <th>Gender</th>
 		                            <th width="20%"></th>
 		                        </tr>
