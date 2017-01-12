@@ -63,7 +63,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function createRecord(Record){
         RecordService.createRecord(Record)
             .then(
-            fetchAllRecords,
+            		null,
+            //fetchAllRecords,
             function(errResponse){
                 console.error('Error while creating Record');
             }
@@ -98,7 +99,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             updateRecord(self.Record, self.Record.objid);
             console.log('Record updated with id ', self.Record.objid);
         }
-        reset();
+        //reset();
     }
  
     function searchRecords(){
@@ -170,22 +171,20 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
     
     function setDate(objid, field, value){
-    	console.log('field = ', field);
-    	console.log('value = ', value);
     	if(value===null)
-    		{
+    	{
     		return null;
-    		}
+    	}
     	else
-    		{
-    	for(var i = 0; i < self.Records.length; i++){
-	            if(self.Records[i].objid === objid) {
-	               Reflect.set(self.Records[i], field, (new Date(value)));
-	            }
-	    }
-    	field = new Date(value);
-    	return field;
-    		}
+    	{
+	    	for(var i = 0; i < self.Records.length; i++){
+		            if(self.Records[i].objid === objid) {
+		               Reflect.set(self.Records[i], field, (new Date(value)));
+		            }
+		    }
+	    	field = new Date(value);
+	    	return field;
+    	}
     	
     }
     
@@ -203,10 +202,6 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	return true; //reset Form
         
     }
-    
-    $scope.$evalAsync(function () {
-    	  $scope.IsDisabled = false;
-    	});
     
     function ListOfValues()
     {
