@@ -44,7 +44,7 @@ public class AttendPatientController extends AbstractController<Integer, AttendP
 
 	@Override
 	@PostMapping(value = "/AttendPatient")
-	public ResponseEntity<Void> add(@RequestBody AttendPatient object) {
+	public ResponseEntity<AttendPatient> add(@RequestBody AttendPatient object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}

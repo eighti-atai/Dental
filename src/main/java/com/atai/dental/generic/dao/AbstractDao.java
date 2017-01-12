@@ -49,7 +49,7 @@ public class AbstractDao<PK extends Serializable, T> {
     	{
     		e.printStackTrace();
     	}
-        getSession().persist(entity);
+        getSession().save(entity);
     }
  
     public void update(T entity) {

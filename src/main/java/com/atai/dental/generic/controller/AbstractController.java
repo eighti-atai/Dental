@@ -43,11 +43,11 @@ public class AbstractController<PK extends Serializable, T>{
 	}
 	
 	@PostMapping(value = "/Object")
-	public ResponseEntity<Void> add(@RequestBody T object){
+	public ResponseEntity<T> add(@RequestBody T object){
 		
 		System.out.println(persistentClass.getSimpleName() +" object will be added");
 		this.service.persist(object);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<T>(object,HttpStatus.CREATED);
 	}
 	
 	public ResponseEntity<T> modify(T newObject)

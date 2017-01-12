@@ -46,7 +46,7 @@ public class AppointmentController extends AbstractController<Integer, Appointme
 
 	@Override
 	@PostMapping(value = "/Appointment")
-	public ResponseEntity<Void> add(@RequestBody Appointment object) {
+	public ResponseEntity<Appointment> add(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}

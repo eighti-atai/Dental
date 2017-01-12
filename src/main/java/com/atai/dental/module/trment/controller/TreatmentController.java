@@ -48,7 +48,7 @@ public class TreatmentController extends AbstractController<Integer, Treatment>{
 
 	@Override
 	@PostMapping(value = "/Treatment")
-	public ResponseEntity<Void> add(@RequestBody Treatment object) {
+	public ResponseEntity<Treatment> add(@RequestBody Treatment object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}

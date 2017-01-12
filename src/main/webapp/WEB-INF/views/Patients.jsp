@@ -130,6 +130,7 @@
 		        <div class="formcontainer">
 		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
+		            	<input type="hidden" ng-model="ctrl.Record.patientId" /> 
 		
 						<div class="row">
 		                	<div class="form-group col-md-12">

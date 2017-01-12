@@ -47,6 +47,12 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
             .then(
             function (response) {
                 deferred.resolve(response.data);
+                ///Record = angular.copy(response.data);
+                for (var key in Record) {
+                    if(Record.hasOwnProperty(key) && response.data.hasOwnProperty(key)) {
+                    	Record[key] = response.data[key];
+                    }
+                  }
             },
             function(errResponse){
                 console.error('Error while creating Record');

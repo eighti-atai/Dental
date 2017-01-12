@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,7 +48,7 @@ public class PatientController extends AbstractController<Integer, Patient>{
 
 	@Override
 	@PostMapping(value = "/Patient")
-	public ResponseEntity<Void> add(@RequestBody Patient object) {
+	public @ResponseBody ResponseEntity<Patient> add(@RequestBody Patient object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}
