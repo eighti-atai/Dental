@@ -99,9 +99,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             updateRecord(self.Record, self.Record.objid);
             console.log('Record updated with id ', self.Record.objid);
         }
-        //reset();
+
     }
- 
+     
     function searchRecords(){
         RecordService.searchRecord(self.Record)
             .then(
@@ -264,5 +264,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		}
     	document.getElementById("lov").style.display = "none";
     }
+    
+    $scope.$watch('ctrl.Record.objid', function (nval, oval) {
+        if (oval !== nval) {
+        	if (typeof (populatePage) == "function")
+        	{
+        		populatePage(self.Record);
+        	}
+        }
+    });
  
 }]);
