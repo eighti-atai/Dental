@@ -1,3 +1,9 @@
+CREATE TABLE IF NOT EXISTS dental.part_category_tab (
+	category VARCHAR(30) NOT NULL PRIMARY KEY,
+	description VARCHAR(1000) NOT NULL,
+	objid VARCHAR(1000) NOT NULL)
+ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS `dental`.`inventory_part_tab` (
   `inv_part_no` VARCHAR(30) NOT NULL PRIMARY KEY,
   `description` VARCHAR(200) NULL,
