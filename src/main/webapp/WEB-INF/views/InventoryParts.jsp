@@ -79,7 +79,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">    
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-    
+    <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
@@ -92,6 +92,7 @@
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
 	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
     <script src="<c:url value='/static/js/entity/InventoryPart.js' />"></script>
+    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
 </head>
 <body>
 	<body ng-app="generalModule" class="ng-cloak">
@@ -100,8 +101,18 @@
               <div class="panel-heading"><span class="lead">Inventory Parts</span></div>
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                  	  <div id="lov" unter-lov class = "lov"></div>	
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 					  
+					  <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="category">Category</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.category" id="category" class="category form-control input-sm" placeholder="Enter/Select from lov." required ng-focus="ctrl.setFocusedElement()"/>
+                              </div>
+                          </div>
+                      </div>
+                      
 					  <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="invPartNo">Inventory Part No</label>
@@ -159,6 +170,7 @@
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
                                <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
                                <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+                          	   <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
                           </div>
                       </div>
                   </form>
@@ -183,12 +195,14 @@
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.invPartNo"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.category"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.description"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.uomId"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.reorderLevel"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.safetyStockLevel"></span></td>
                                                                                           
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.invPartNo" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.category" style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.description"style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.uomId"style="width: 100%"/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.reorderLevel" style="width: 100%""/></td>

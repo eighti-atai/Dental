@@ -7,6 +7,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `dental`.`inventory_part_tab` (
   `inv_part_no` VARCHAR(30) NOT NULL PRIMARY KEY,
   `description` VARCHAR(200) NULL,
+  `category` VARCHAR(30) NULL,
   `uom_id` VARCHAR(10) NULL,
   `reorder_level` DOUBLE NULL,
   `safety_stock_level` DOUBLE NULL,

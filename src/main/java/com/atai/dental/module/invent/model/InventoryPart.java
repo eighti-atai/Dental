@@ -3,6 +3,8 @@ package com.atai.dental.module.invent.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.atai.dental.generic.interfaces.Model;
@@ -35,6 +37,12 @@ public class InventoryPart implements Model<String>{
 	@Column(name="safety_stock_level")
 	private double safetyStockLevel;
 	
+	private String category;
+	
+	@OneToOne
+	@JoinColumn(name = "category", referencedColumnName = "category", insertable = false, updatable = false)
+	private PartCategory partCategory;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -61,6 +69,18 @@ public class InventoryPart implements Model<String>{
 	}
 	public String getObjid() {
 		return objid;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public PartCategory getPartCategory() {
+		return partCategory;
+	}
+	public void setPartCategory(PartCategory partCategory) {
+		this.partCategory = partCategory;
 	}
 	public void setObjid(String objid) {
 		this.objid = objid;
