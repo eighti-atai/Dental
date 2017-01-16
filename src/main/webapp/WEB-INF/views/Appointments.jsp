@@ -20,7 +20,7 @@
 		
 		    position:                        absolute;
 		    height:                          500px;
-		    width:                           300px;
+		    width:                           350px;
 		}
 	 	.appointmentDate.ng-valid {
 	   		background-color: lightgreen;
@@ -77,7 +77,6 @@
        {
            var scope = angular.element(document.getElementById("con")).scope();
            scope.ctrl.Record.key.patientId = patientId;
-           scope.ctrl.Record.appointmentDate = null;
            scope.$apply(scope.ctrl.searchRecords());
        }
            
@@ -96,7 +95,7 @@
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
                     <div class="row">
                     	<div class="form-group col-md-12">
-                    		<label class="col-md-2 control-lable" for="appointmentDate">Appointment Date</label>
+                    		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
                             <md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required></md-datepicker>
                             <div class="has-error" ng-show="myForm.$dirty">
                             	<span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
@@ -106,8 +105,8 @@
   					</div>
                    	<div class="row">
                     	<div class="form-group col-md-12">
-                         	<label class="col-md-2 control-lable" for="appointmentTime">Appointment Time</label>
-                            <div class="col-md-7">
+                         	<label class="col-xs-2 control-lable" for="appointmentTime">Time</label>
+                            <div class="col-xs-10">
                             	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="doctor form-control input-sm" placeholder="Enter Appointment Time" required/></p>
                               	<div class="has-error" ng-show="myForm.$dirty">
                                 	<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
@@ -117,8 +116,8 @@
             		</div>
                     <div class="row">
                     	<div class="form-group col-md-12">
-                        	<label class="col-md-2 control-lable" for="doctor">Doctor</label>
-                            <div class="col-md-7">
+                        	<label class="col-xs-2 control-lable" for="doctor">Doctor</label>
+                            <div class="col-xs-10">
                             	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required/>
                               	<div class="has-error" ng-show="myForm.$dirty">
                                		<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
