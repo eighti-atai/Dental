@@ -275,5 +275,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         	}
         }
     });
+    
+    $scope.$watch('ctrl.Record.appointmentDate', function (nval, oval) {
+        if (oval !== nval) {
+        	if (typeof (populatePage) == "function")
+        	{
+        		populatePage(self.Record);
+        	}
+        }
+    });
  
 }]);
