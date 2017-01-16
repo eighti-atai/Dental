@@ -60,6 +60,8 @@
 				<value>com.atai.dental.module.enterp.model.Patient</value>
 				<value>com.atai.dental.module.enterp.model.AttendPatient</value> 
 				<value>com.atai.dental.module.trment.model.Treatment</value> 
+				<value>com.atai.dental.module.invent.model.InventoryPart</value>
+				<value>com.atai.dental.module.invent.model.PartCategory</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

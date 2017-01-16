@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 	<title>ATAI</title>
 	<style>
-		html
+		/*html
 		{
 		    position: relative;
 		    min-height: 500px;
@@ -21,7 +21,7 @@
 		    position:                        absolute;
 		    height:                          500px;
 		    width:                           350px;
-		}
+		}*/
 	 	.appointmentDate.ng-valid {
 	   		background-color: lightgreen;
 	    }
@@ -64,7 +64,7 @@
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
-    <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
+    <script src="<c:url value='/static/js/entity/AppointmentsDate.js' />"></script>
     <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>    
     <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
@@ -73,32 +73,20 @@
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 
     <script type="text/javascript">
-       function populate(patientId,patientName) 
+       function populate(appointmentDate) 
        {
-           var scope = angular.element(document.getElementById("con")).scope();
-           scope.ctrl.Record.key.patientId = patientId;
+           var scope = angular.element(document.getElementById("con2")).scope();
+           scope.ctrl.Record.appointmentDate = appointmentDate;
            scope.$apply(scope.ctrl.searchRecords());
        }
-           
-       $(function() {
-           $('#appointmentTime').timepicker();
-       });
-       
-       function populatePage(Record) 
-       {
-           if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
-           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate);
-           else
-               alert("f1.Reset NOT found X3");
-       }  
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
-    	<div class="panel panel-default">
-        	<div class="panel-heading"><span class="lead">Appointments</span></div>
-            <div class="formcontainer">
-           		<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+<!--     	<div class="panel panel-default"> -->
+<!--         	<div class="panel-heading"><span class="lead">Appointments</span></div> -->
+<!--             <div class="formcontainer"> -->
+           		<!-- <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
                     <div class="row">
@@ -142,7 +130,7 @@
                     	</div>
                		</div>
     			</form>
-			</div>
+			</div> -->
           
           	<div class="panel panel-default">
        			<div class="panel-heading"><span class="lead">List of Appointments </span></div>

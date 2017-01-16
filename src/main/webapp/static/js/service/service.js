@@ -20,7 +20,7 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
     function setRestServiceUri(entity) {
     	var deferred = $q.defer();
     	current_url = $location.absUrl();
-    	base_url = current_url.substr(0, current_url.indexOf('Unter')+6);
+    	base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
     	REST_SERVICE_URI = base_url + entity +'/';   
     	
         return deferred.promise;

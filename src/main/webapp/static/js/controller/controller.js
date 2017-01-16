@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('generalModule').controller('RecordController', ['$scope', 'RecordService','EntityService', function($scope, RecordService,EntityService) {
+angular.module('generalModule').controller('RecordController', ['$scope', 'RecordService','EntityService', '$location','$http', function($scope, RecordService,EntityService,$location,$http) {
     var self = this;
     
     self.Records=[];
@@ -46,6 +46,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	//self.EmptyRecord = angular.copy(EntityService.record);
     	RecordService.setRestServiceUri(EntityService.name);
     	//fetchAllRecords();
+    	self.lov = EntityService.lov;
+    	self.lovTitles = EntityService.lovTitles;
     }
     
     function fetchAllRecords(){
@@ -213,7 +215,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	document.getElementById("lov").style.display = "none";
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
-	    	var base_url = current_url.substr(0, current_url.indexOf('Unter')+6);
+	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
 	    	var lovUrl = base_url + self.lov[self.lastFocused.id] + '/';   
 	    	$http.get(lovUrl)
 	        .then(
@@ -266,6 +268,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
     
     $scope.$watch('ctrl.Record.objid', function (nval, oval) {
+        if (oval !== nval) {
+        	if (typeof (populatePage) == "function")
+        	{
+        		populatePage(self.Record);
+        	}
+        }
+    });
+    
+    $scope.$watch('ctrl.Record.appointmentDate', function (nval, oval) {
         if (oval !== nval) {
         	if (typeof (populatePage) == "function")
         	{
