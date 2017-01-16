@@ -2,7 +2,8 @@
 <script src="webjars/jquery/2.1.4/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#f3').attr('src',window.location.href+'AttendPatients');
+	$('#f4').attr('src',window.location.href+'AttendPatients');
+    $('#f3').attr('src',window.location.href+'AppointmentsDates');
     $('#f1').attr('src',window.location.href+'Appointments');
     $('#f2').attr('src',window.location.href+'Patients');
 })
@@ -12,13 +13,17 @@ $(document).ready(function() {
   }
 </script>
 <body>
-<iframe id="f2" src="" width="712" height="1050"  scrolling="no" >
+<iframe style="margin-left:-8px;margin-top:0px;" id="f2" src="" width="512" height="1000">
 </iframe>
  
-<iframe id="f1" src="" width="512" height="1050"  scrolling="no" >
+<iframe style="margin-left:514px;margin-top:-1003px;" id="f1" src="" width="362" height="1000" >
 </iframe>
  
-<iframe id="f3" src="" width="600" height="900"  >
+<iframe style="margin-left:882px;margin-top:-1005px;" id="f3" src="" width="300" height="600">
 </iframe>
+
+<iframe style="margin-left:882px;margin-top:-405px;" id="f4" src="" width="300" height="400"  >
+</iframe>
+
 </body>
 </html>
