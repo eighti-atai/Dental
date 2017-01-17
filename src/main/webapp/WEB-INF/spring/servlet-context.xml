@@ -63,6 +63,7 @@
 				<value>com.atai.dental.module.invent.model.InventoryPart</value>
 				<value>com.atai.dental.module.invent.model.PartCategory</value>
 				<value>com.atai.dental.module.invent.model.InventoryPartCost</value>
+				<value>com.atai.dental.module.invent.model.InvPartInStock</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
