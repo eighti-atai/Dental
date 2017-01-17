@@ -31,7 +31,6 @@ public class AttendPatient implements Model<AttendPatientKey> {
 	private String doctor;
 	@Column(name = "start_time")
 	private String startTime;
-	private String done;
 	private String objid;
 	
 	
@@ -71,14 +70,6 @@ public class AttendPatient implements Model<AttendPatientKey> {
 	public void setStartTime(String startTime) {
 		String timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
 		this.startTime = timeStamp;
-	}
-
-	public String getDone() {
-		return done;
-	}
-
-	public void setDone(String done) {
-		this.done = done;
 	}
 
 	public Patient getPatient() {

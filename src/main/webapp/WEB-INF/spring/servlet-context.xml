@@ -35,7 +35,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/dental" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="" />
 	</bean>
 	
 	<!-- Hibernate 5 SessionFactory Bean definition. Add your beans under <beans:list> defined in the model package. kanchana-->
@@ -62,7 +62,6 @@
 				<value>com.atai.dental.module.trment.model.Treatment</value> 
 				<value>com.atai.dental.module.invent.model.InventoryPart</value>
 				<value>com.atai.dental.module.invent.model.PartCategory</value>
-				<value>com.atai.dental.module.invent.model.InventoryPartCost</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -159,6 +158,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 	<mvc:resources mapping="/static/**" location="/static/" />
+	<mvc:resources mapping="/pages/**" location="/pages/" />
 	<!--mvc:resources mapping="/public/**" location="classpath:/public/"/>
 	<mvc:resources mapping="/resources/**" location="classpath:/META-INF/resources/" />
 	<mvc:resources mapping="/webjars/**" location="/webjars/"/>
