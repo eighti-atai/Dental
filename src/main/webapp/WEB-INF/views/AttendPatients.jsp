@@ -120,6 +120,7 @@
         function insertAttendPatient(patientId,doctor) 
         {
             var scope = angular.element(document.getElementById("conX")).scope();
+            scope.$apply(scope.ctrl.reset());
             scope.ctrl.Record.key.patientId = patientId;
             scope.ctrl.Record.doctor = doctor;
             scope.$apply(scope.ctrl.submit());
