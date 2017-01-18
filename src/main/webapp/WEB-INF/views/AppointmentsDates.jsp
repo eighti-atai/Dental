@@ -79,11 +79,12 @@
            var scope = angular.element(document.getElementById("con2")).scope();
            scope.ctrl.Record.appointmentDate = appointmentDate;
            scope.$apply(scope.ctrl.searchRecords());
+           scope.setPanelHeader('List of Appointments - '+appointmentDate)
        }
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('List of Appointments')">
 <!--     	<div class="panel panel-default"> -->
 <!--         	<div class="panel-heading"><span class="lead">Appointments</span></div> -->
 <!--             <div class="formcontainer"> -->
@@ -134,7 +135,7 @@
 			</div> -->
           
           	<div class="panel panel-default">
-       			<div class="panel-heading"><span class="lead">List of Appointments </span></div>
+       			<div class="panel-heading" ng-bind-html="panelHeader"></div>
               	<div class="tablecontainer">
                		<table class="table table-hover">
                   		<thead>
