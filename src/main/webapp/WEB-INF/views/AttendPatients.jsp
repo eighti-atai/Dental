@@ -88,6 +88,7 @@
     <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
+    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
     
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
@@ -120,6 +121,7 @@
         function insertAttendPatient(patientId,doctor) 
         {
             var scope = angular.element(document.getElementById("conX")).scope();
+            scope.$apply(scope.ctrl.reset());
             scope.ctrl.Record.key.patientId = patientId;
             scope.ctrl.Record.doctor = doctor;
             scope.$apply(scope.ctrl.submit());

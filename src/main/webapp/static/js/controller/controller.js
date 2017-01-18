@@ -35,6 +35,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lovTitle;
     self.recordHasValue = recordHasValue;
     self.fetchAllRecords =fetchAllRecords;
+    self.setPanelHeader = setPanelHeader;
  
     function populateRecord(objid){
     	edit(objid);
@@ -49,6 +50,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	//fetchAllRecords();
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
+    	//setPanelHeader(title);
     }
     
     function fetchAllRecords(){
@@ -285,5 +287,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         	}
         }
     });
+    
+    function setPanelHeader(title)
+    {
+    	if (typeof ($scope.panelHeader) !== "undefine")
+    	{
+    		$scope.panelHeader = "<span class='lead'>"+title+"</span>"
+    	}
+    }
+   
  
 }]);

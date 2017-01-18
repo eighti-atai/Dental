@@ -60,6 +60,7 @@
     <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
     
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
+    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
@@ -77,12 +78,13 @@
        {
            var scope = angular.element(document.getElementById("con2")).scope();
            scope.ctrl.Record.appointmentDate = appointmentDate;
+           scope.ctrl.setPanelHeader('Appointments - '+appointmentDate.getDate()+'/'+(appointmentDate.getMonth()+1)+'/'+appointmentDate.getFullYear());
            scope.$apply(scope.ctrl.searchRecords());
        }
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointments')">
 <!--     	<div class="panel panel-default"> -->
 <!--         	<div class="panel-heading"><span class="lead">Appointments</span></div> -->
 <!--             <div class="formcontainer"> -->
@@ -133,7 +135,7 @@
 			</div> -->
           
           	<div class="panel panel-default">
-       			<div class="panel-heading"><span class="lead">List of Appointments </span></div>
+       			<div class="panel-heading" ng-bind-html="panelHeader"></div>
               	<div class="tablecontainer">
                		<table class="table table-hover">
                   		<thead>
