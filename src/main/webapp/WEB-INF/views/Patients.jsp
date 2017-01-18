@@ -150,6 +150,7 @@
 	    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 	    
 	    <script src="webjars/angularjs/1.5.8/angular.js"></script>
+	    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
 	    <script src="webjars/jquery/2.1.4/jquery.min.js"></script> 
 	    <script src="<c:url value='/static/js/app.js' />"></script>
 	    <script src="<c:url value='/static/js/service/service.js' />"></script>
@@ -183,7 +184,7 @@
 	<body ng-app="generalModule" class="ng-cloak">
 		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">           
 		    <div class="panel panel-default">
-		    	<div class="panel-heading"><span class="lead">Patient</span></div>
+		    	<div class="panel-heading"><span class="lead">Patient Details</span></div>
 		        <div class="formcontainer">
 		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
@@ -263,7 +264,6 @@
 		                	<div class="form-actions floatRight">
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="IsDisabled">Reset Form</button>
-		                        <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
 		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" >Add to Q</button>
 		                    </div>
@@ -284,7 +284,7 @@
 		                            <th>ID No</th>	                            
 		                            <th>Contact No</th>
 		                            <th>Gender</th>
-		                            <th width="20%"></th>
+		                            <th width="10%"></th>
 		                        </tr>
 		                  	</thead>
 		                	<tbody>
@@ -304,7 +304,7 @@
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientGender" style="width: 100%""/></td>
 		                              
 		                           	<td>
-		                           		<button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> 
+		                           		<button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button> 
 		                           	</td>
 		                      	</tr>
 		                   		</tbody>		                      

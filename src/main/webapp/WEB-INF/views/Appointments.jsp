@@ -25,9 +25,9 @@
 	 	.appointmentDate.ng-valid {
 	   		background-color: lightgreen;
 	    }
-	    .appointmentDate.ng-dirty.ng-invalid-required {
+	   /* .appointmentDate.ng-dirty.ng-invalid-required {
 	        background-color: red;
-	    }
+	    }*/
 	    .appointmentDate.ng-dirty.ng-invalid-minlength {
 	        background-color: yellow;
 	    }
@@ -35,18 +35,18 @@
 	    .appointmentTime.ng-valid {
 	        background-color: lightgreen;
 	    }
-	    .appointmentTime.ng-dirty.ng-invalid-required {
+	    /*.appointmentTime.ng-dirty.ng-invalid-required {
 	        background-color: red;
-	    }
+	    }*/
 	    .appointmentTime.ng-dirty.ng-invalid-email {
 	        background-color: yellow;
 	    }
 	 	.doctor.ng-valid {
 	        background-color: lightgreen;
 	    }
-	    .doctor.ng-dirty.ng-invalid-required {
+	    /*.doctor.ng-dirty.ng-invalid-required {
 	        background-color: red;
-	    }
+	    }*/
 	    .doctor.ng-dirty.ng-invalid-minlength {
 	        background-color: yellow;
 	    }
@@ -58,8 +58,10 @@
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
     
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
+    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
@@ -71,34 +73,17 @@
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
 
-    <script type="text/javascript">
-       function populate(patientId,patientName) 
-       {
-           var scope = angular.element(document.getElementById("con")).scope();
-           scope.ctrl.Record.key.patientId = patientId;
-           scope.$apply(scope.ctrl.searchRecords());
-       }
-           
-       $(function() {
-           $('#appointmentTime').timepicker();
-       });
-       
-       function populatePage(Record) 
-       {
-           if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
-           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate);
-           else
-               alert("f1.Reset NOT found X3");
-       }  
-    </script>
+    
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointments')">
     	<div class="panel panel-default">
-        	<div class="panel-heading"><span class="lead">Appointments</span></div>
+        	<div class="panel-heading" ng-bind-html="panelHeader"></div>
             <div class="formcontainer">
            		<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+           			<div id="lov" unter-lov class = "lov"></div>	
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
                     <div class="row">
@@ -137,8 +122,8 @@
             			<div class="form-actions floatRight">
                        		<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                             <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                            <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
                             <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+                            <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
                     	</div>
                		</div>
     			</form>
@@ -166,7 +151,7 @@
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
 	                        <td>
-	                        	<button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
+	                        	<button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
 	                        </td>
                         </tr>
                  	</tbody>
@@ -184,4 +169,31 @@
       	</div>
   	</div>
 </body>
+	<script type="text/javascript">
+       //var scope = angular.element(document.getElementById("con")).scope();
+       //scope.ctrl.setPanelHeader("Appointment");
+       function populate(patientId,patientName) 
+       {
+    	   var scope = angular.element(document.getElementById("con")).scope();
+           scope.ctrl.Record.key.patientId = patientId;
+           scope.ctrl.Record.key.appointmentId = '';
+           scope.ctrl.Record.appointmentDate = '';
+           scope.ctrl.Record.appointmentTime = '';
+           scope.ctrl.Record.doctor = '';
+           scope.ctrl.setPanelHeader("Appointment - "+patientName);
+           scope.$apply(scope.ctrl.searchRecords());
+       }
+           
+       $(function() {
+           $('#appointmentTime').timepicker();
+       });
+       
+       function populatePage(Record) 
+       {
+           if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
+           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate);
+           else
+               alert("f1.Reset NOT found X3");
+       }  
+    </script>
 </html>
