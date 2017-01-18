@@ -78,7 +78,7 @@
     
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointments')">
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointment')">
     	<div class="panel panel-default">
         	<div class="panel-heading" ng-bind-html="panelHeader"></div>
             <div class="formcontainer">
