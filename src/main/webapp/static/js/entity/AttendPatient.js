@@ -4,13 +4,13 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'AttendPatient',
-        record :{key:{attendPatientId:'',patientId:''} ,doctor:'',done:'',startTime:'',objid:null},
+        record :{key:{attendPatientId:'',patientId:''} ,doctor:'',startTime:'',objid:null},
         emptyRecord :emptyRecord
     };
     return entityRec;
     
     function emptyRecord() {
-        return {key:{attendPatientId:'',patientId:''} ,doctor:'',done:'',startTime:'',objid:null};
+        return {key:{attendPatientId:'',patientId:''} ,doctor:'',startTime:'',objid:null};
     }	
 }]);/**
  * 

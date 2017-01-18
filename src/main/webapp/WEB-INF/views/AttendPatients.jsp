@@ -106,25 +106,29 @@
      <!-- <script src="webjars/jquery/2.1.4/jquery.min.js"></script>-->
       
       <script type="text/javascript">
-        function populate(patientId) 
-        {
-            //alert("reset (in f1) Z1 = "+patientId);
-            // angular.element(document.getElementById('MainWrap')).scope().init();
-            var scope = angular.element(document.getElementById("con")).scope();
-            scope.ctrl.Record.key.patientId = patientId;
-            scope.ctrl.Record.appointmentDate = null;
-            scope.$apply(scope.ctrl.searchRecords());
-            /*scope.$apply(function () {
-            scope.init();*/
-        }
-            
+      function populate(patientId,doctor) 
+      {
+         // var scope = angular.element(document.getElementById("con2")).scope();
+          //scope.ctrl.Record.appointmentDate = appointmentDate;
+         // scope.$apply(scope.ctrl.searchRecords());
+         alert(patientId+doctor);
+      }
+
         $(function() {
             $('#startTime').timepicker();
         });
+        function insertAttendPatient(patientId,doctor) 
+        {
+            var scope = angular.element(document.getElementById("conX")).scope();
+            scope.ctrl.Record.key.patientId = patientId;
+            scope.ctrl.Record.doctor = doctor;
+            scope.$apply(scope.ctrl.submit());
+            scope.$apply(scope.ctrl.fetchAllRecords());
+        }
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak" >
-      <div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()" >
+      <div id="conX" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()" >
            
           <div class="panel panel-default" >
               <div class="panel-heading" style="display: none;"><span class="lead">Patients Queue</span> </div>

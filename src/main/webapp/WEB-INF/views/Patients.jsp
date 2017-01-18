@@ -14,7 +14,8 @@
 	            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId, Record.patientName);
 	            else
 	                alert("f1.Reset NOT found X3");
-	        }    
+	        } 
+	        
 	    </script>
 		
 		<style>
@@ -104,6 +105,44 @@
 	          	background-color: yellow;
 	      	}
 	
+	
+			.modal {
+			    display: none; /* Hidden by default */
+			    position: fixed; /* Stay in place */
+			    z-index: 1; /* Sit on top */
+			    padding-top: 100px; /* Location of the box */
+			    left: 0;
+			    top: 0;
+			    width: 100%; /* Full width */
+			    height: 100%; /* Full height */
+			    overflow: auto; /* Enable scroll if needed */
+			    background-color: rgb(0,0,0); /* Fallback color */
+			    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+		
+			/* Modal Content */
+			.modal-content {
+			    background-color: #fefefe;
+			    margin: auto;
+			    padding: 20px;
+			    border: 1px solid #888;
+			    width: 80%;
+			}
+		
+			/* The Close Button */
+			.close {
+			    color: #aaaaaa;
+			    float: right;
+			    font-size: 28px;
+			    font-weight: bold;
+			}
+		
+			.close:hover,
+			.close:focus {
+			    color: #000;
+			    text-decoration: none;
+			    cursor: pointer;
+			}
 	    </style>
 	    
 	    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -111,6 +150,7 @@
 	    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 	    
 	    <script src="webjars/angularjs/1.5.8/angular.js"></script>
+	    <script src="webjars/jquery/2.1.4/jquery.min.js"></script> 
 	    <script src="<c:url value='/static/js/app.js' />"></script>
 	    <script src="<c:url value='/static/js/service/service.js' />"></script>
 	    <script src="<c:url value='/static/js/controller/controller.js' />"></script>
@@ -123,6 +163,23 @@
 	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 	</head>
 
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    
+    <p>Please select doctor..</p>
+    <input type="text" id="doctor"  placeholder="Enter Doctor"/>
+    <button id="okBtn">OK</button>
+  </div>
+
+	<div class="modal-content">
+
+
+    </div>
+</div>
+
 	<body ng-app="generalModule" class="ng-cloak">
 		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">           
 		    <div class="panel panel-default">
@@ -130,7 +187,7 @@
 		        <div class="formcontainer">
 		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
-		            	<input type="hidden" ng-model="ctrl.Record.patientId" /> 
+		            	<input id="patientId" type="hidden" ng-model="ctrl.Record.patientId" /> 
 		
 						<div class="row">
 		                	<div class="form-group col-md-12">
@@ -208,6 +265,7 @@
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="IsDisabled">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" >Add to Q</button>
 		                    </div>
 		               	</div>
 		                
@@ -263,4 +321,50 @@
 			</div>
 		</div>	
 	</body>
+	<script type="text/javascript">
+	        
+	     // Get the modal
+	        var modal = document.getElementById('myModal');
+
+	        // Get the button that opens the modal
+	        var btn = document.getElementById("mbtn");
+	        //var okBtn = document.getElementById("okBtn");
+
+	        // Get the <span> element that closes the modal
+	        var span = document.getElementsByClassName("close")[0];
+
+	        // When the user clicks the button, open the modal 
+	        btn.onclick = function() {
+	            modal.style.display = "block";
+	        }
+	        
+	        /*okBtn.onclick = function() {
+	            modal.style.display = "none";
+	        }*/
+
+	        // When the user clicks on <span> (x), close the modal
+	        span.onclick = function() {
+	        	//var field = document.getElementById("doctor");
+	            modal.style.display = "none";
+	        }
+
+	        // When the user clicks anywhere outside of the modal, close it
+	        window.onclick = function(event) {
+	            if (event.target == modal) {
+	                modal.style.display = "none";
+	            }
+	        }
+	        $('#okBtn').click(function(){
+	        	var doctor = $('#doctor').val();
+	        	var scope = angular.element(document.getElementById("con1")).scope();
+	            
+	            $("#doctor").val("");
+	            modal.style.display = "none";
+            	var pId= scope.ctrl.Record.patientId;
+	            if (typeof (parent.document.getElementById("f4").contentWindow.insertAttendPatient) == "function")
+	            	parent.document.getElementById("f4").contentWindow.insertAttendPatient(pId, doctor);
+	            else
+	                alert("f1.Reset NOT found X3");
+	        });
+	    </script>
 </html>

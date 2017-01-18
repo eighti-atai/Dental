@@ -34,6 +34,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.setLovValue = setLovValue;
     self.lovTitle;
     self.recordHasValue = recordHasValue;
+    self.fetchAllRecords =fetchAllRecords;
  
     function populateRecord(objid){
     	edit(objid);

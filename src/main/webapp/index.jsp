@@ -13,16 +13,16 @@ $(document).ready(function() {
   }
 </script>
 <body>
-<iframe style="margin-left:-8px;margin-top:0px;" id="f2" src="" width="512" height="1000">
+<iframe style="margin-left:-8px;margin-top:0px;position:absolute;" id="f2" src="" width="512" height="1000">
 </iframe>
  
-<iframe style="margin-left:514px;margin-top:-1003px;" id="f1" src="" width="362" height="1000" >
+<iframe style="margin-left:514px;margin-top:0px;position:absolute;"; id="f1" src="" width="362" height="1000" >
 </iframe>
  
-<iframe style="margin-left:882px;margin-top:-1005px;" id="f3" src="" width="300" height="600">
+<iframe style="margin-left:882px;margin-top:0px;position:absolute;"; id="f3" src="" width="300" height="600">
 </iframe>
 
-<iframe style="margin-left:882px;margin-top:-405px;" id="f4" src="" width="300" height="400"  >
+<iframe style="margin-left:882px;margin-top:600px;position:absolute;" id="f4" src="" width="300" height="400"  >
 </iframe>
 
 </body>
