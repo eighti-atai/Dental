@@ -1,4 +1,5 @@
 <html>
+<link rel="stylesheet" href="../webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
 <script src="../webjars/jquery/2.1.4/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -8,22 +9,57 @@ $(document).ready(function() {
     $('#f1').attr('src',base_url+'Appointments');
     $('#f2').attr('src',base_url+'Patients');
 })
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  function resizeIframe() {
+	iframeLoaded('f2');
+	iframeLoaded('f1');
+	iframeLoaded('f3');
+	iframeLoaded('f4');
   }
+  
+function iframeLoaded(x) {
+	var y =($(window).width()-20);
+    var iFrameID = document.getElementById(x);
+    var maxH = document.getElementById('f2').contentWindow.document.body.scrollHeight ;
+    var maxW = document.getElementById('f2').contentWindow.document.body.scrollWidth ;
+      
+    if(iFrameID) {
+          // here you can make the height, I delete it first, then I make it again
+          iFrameID.height = "";
+          iFrameID.height = maxH;
+          if(x==='f1')
+        	{
+        	  	iFrameID.width = "";
+              	iFrameID.width = (y/2) + "px";
+        	}
+          else if(x==='f2')
+        	{
+        	  	iFrameID.width = "";
+              	iFrameID.width = y + "px";
+        	}
+          else
+      		{
+      	  		iFrameID.width = "";
+            	iFrameID.width = (y/4) + "px";
+      		}
+    }   
+}
 </script>
-<body>
-<iframe style="margin-left:-8px;margin-top:0px;position:absolute;" id="f2" src="" width="512" height="1000">
+<body onresize="resizeIframe()">
+
+<!-- <div class="embed-responsive embed-responsive-16by9"> -->
+<iframe style="display:inline" id="f2" onload="iframeLoaded('f2')">
 </iframe>
- 
-<iframe style="margin-left:514px;margin-top:0px;position:absolute;"; id="f1" src="" width="362" height="1000" >
+<!--  </div> -->
+ <div>
+ </div>
+<!--  <div class="embed-responsive embed-responsive-16by9"> -->
+<iframe style="display:inline"; id="f1" onload="iframeLoaded('f1')" >
 </iframe>
- 
-<iframe style="margin-left:882px;margin-top:0px;position:absolute;"; id="f3" src="" width="300" height="600">
+<!--  </div> -->
+<iframe style="display:inline"; id="f3" onload="iframeLoaded('f3')">
 </iframe>
 
-<iframe style="margin-left:882px;margin-top:600px;position:absolute;" id="f4" src="" width="300" height="400"  >
+<iframe style="display:inline" id="f4"  onload="iframeLoaded('f4')">
 </iframe>
 
 </body>

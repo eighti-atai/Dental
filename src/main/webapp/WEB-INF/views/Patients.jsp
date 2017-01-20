@@ -19,17 +19,13 @@
 	    </script>
 		
 		<style>
-			html
+			/*html
 			{
 			    position: relative;
 			    min-width: 500px;
 			    min-height: 300px;
 			    height: 100%;
 			}
-	
-			/**
-			 *     Set the body as a 1024 x 768 rectangle in center of the screen
-			 */
 			body
 			{	
 			    position:                        absolute;
@@ -41,7 +37,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
+}*/
 
 	 		.patientId.ng-valid {
 	         	background-color: lightgreen;
@@ -191,9 +187,9 @@
 		            	<input id="patientId" type="hidden" ng-model="ctrl.Record.patientId" /> 
 		
 						<div class="row">
-		                	<div class="form-group col-md-12">
-		                    	<label class="col-xs-2 control-lable" for="patientName">Name</label>
-		                        <div class="col-xs-10">
+		                	<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientName">Name</label>
+		                        <div class="col-md-10">
 		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.patientName.$error.required">This is a required field</span>
@@ -201,21 +197,21 @@
 		                            </div>
 		                		</div>
 		                	</div>
-		                </div>
+<!-- 		                </div> -->
 		                      
-		                <div class="row">
-		                	<div class="form-group col-md-12">
-		                    	<label class="col-xs-2 control-lable" for="patientAddress">Address</label>
-		                        <div class="col-xs-10">
+<!-- 		                <div class="row"> -->
+		                	<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientAddress">Address</label>
+		                        <div class="col-md-10">
 		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
-		                </div>
+<!-- 		                </div> -->
 		                      
-		                <div class="row">
-		                	<div class="form-group col-xs-8">
+<!-- 		                <div class="row"> -->
+		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientBirthDate">Date of Birth</label>
 		                        <div class="col-md-7">		                        	
 		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate" md-placeholder="Enter date"></md-datepicker>
@@ -226,7 +222,7 @@
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-5">
+		                	<div class="form-group col-xs-4">
 		                    <label class="col-md-2 control-lable" for="patientIdNo">ID Number</label>
 		                    	<div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" />
@@ -234,11 +230,11 @@
 		                			</div>
 		                        </div>
 		                    </div>
-		                </div>
+<!-- 		                </div> -->
 		                      
-		                <div class="row">
-		                	<div class="form-group col-xs-8">
-		                    	<label class="col-md-3 control-lable" for="patientContactNo">Contact Number</label>
+<!-- 		                <div class="row"> -->
+		                	<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact Number</label>
 		                        <div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
@@ -248,7 +244,7 @@
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-5">
+		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientGender">Gender</label>
 		                        <div class="col-md-7">
 		                      		<select ng-model="ctrl.Record.patientGender" id="patientGender" class="patientGender form-control input-sm" placeholder="Selet Gender">

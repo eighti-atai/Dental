@@ -25,6 +25,7 @@ body, .form-control{
 	padding-left: 20px;
 	overflow-x: auto;
 	border : #bbb solid 1px;
+	line-height: 10px;
 }
 
 .generic-container {
