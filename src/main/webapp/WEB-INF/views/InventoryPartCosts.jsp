@@ -114,7 +114,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="invPartNo">Inventory Part No</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.id.invPartNo" id="invPartNo" class="salesPartId form-control input-sm" placeholder="Enter Inventory Part No " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.id.invPartNo" id="id.invPartNo" class="salesPartId form-control input-sm" placeholder="Enter Inventory Part No " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.invPartNo.$error.required">This is a required field</span>
                                       <span ng-show="myForm.invPartNo.$error.minlength">Minimum length required is 3</span>
