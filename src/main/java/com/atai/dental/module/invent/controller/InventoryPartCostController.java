@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,25 +44,25 @@ public class InventoryPartCostController extends AbstractController<InventoryPar
 	}
 	@Override
 	@PostMapping(value = url)
-	public ResponseEntity<InventoryPartCost> add(InventoryPartCost object) {
+	public ResponseEntity<InventoryPartCost> add(@RequestBody InventoryPartCost object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
 	}
 	@Override
 	@PutMapping(value = url)
-	public ResponseEntity<InventoryPartCost> modify(InventoryPartCost newObject) {
+	public ResponseEntity<InventoryPartCost> modify(@RequestBody InventoryPartCost newObject) {
 		// TODO Auto-generated method stub
 		return super.modify(newObject);
 	}
 	@Override
 	@DeleteMapping(value = "/InventoryPartCost/{objid:.+}")
-	public ResponseEntity<InventoryPartCost> delete(String objid) {
+	public ResponseEntity<InventoryPartCost> delete(@PathVariable("objid") String objid) {
 		// TODO Auto-generated method stub
 		return super.delete(objid);
 	}
 	@Override
 	@PostMapping(value = "/InventoryPartCost/Search")
-	public ResponseEntity<List<InventoryPartCost>> search(InventoryPartCost object) {
+	public ResponseEntity<List<InventoryPartCost>> search(@RequestBody InventoryPartCost object) {
 		// TODO Auto-generated ethod stub
 		return super.search(object);
 	}

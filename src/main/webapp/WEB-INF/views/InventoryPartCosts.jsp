@@ -77,20 +77,25 @@
 
     </style>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">    
+    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css"> 
+    <script src="webjars/jquery/2.1.4/jquery.min.js"></script>   
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
+    
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
+    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="<c:url value='/static/js/app.js' />"></script>
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
-    <script src="<c:url value='/static/js/entity/Patient.js' />"></script>
+    <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
+    <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>    
     <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
-	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
     <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
     <script src="<c:url value='/static/js/entity/InventoryPartCost.js' />"></script>
@@ -144,6 +149,18 @@
                       </div>
                       
                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="quantity">Quantity</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.Record.quantity" id="quantity" class="description form-control input-sm" placeholder="Enter Quantity." required/>
+                              	  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.quantity.$error.required">This is a required field</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
@@ -168,6 +185,7 @@
                               <th>Inventory Part No</th>
                               <th>Inventory Part Cost No</th>
                               <th>Cost</th>
+                              <th>Quantity</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
@@ -176,10 +194,12 @@
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.invPartNo"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.invPartCostNo"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.cost"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.quantity"></span></td>
                                    
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.id.invPartNo"style="width: 100%"/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.id.invPartCostNo" style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.cost"style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.quantity"style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
                               <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
