@@ -14,22 +14,15 @@ CREATE TABLE IF NOT EXISTS `dental`.`inventory_part_tab` (
   objid VARCHAR(1000) NOT NULL)
 ENGINE = InnoDB;
   
-CREATE TABLE IF NOT EXISTS `unter`.`inventory_location_tab` (
-  `site_id` VARCHAR(5) NOT NULL,
-  `inv_location_id` VARCHAR(5) NOT NULL,
-  `inv_location_type` VARCHAR(10) NULL,
-  `objid` VARCHAR(1000) NOT NULL,
-  PRIMARY KEY (`site_id`, `inv_location_id`))
-ENGINE = InnoDB;
 
-
-CREATE TABLE IF NOT EXISTS `unter`.`inventory_part_cost_tab` ( 
+CREATE TABLE IF NOT EXISTS `dental`.`inventory_part_cost_tab` ( 
 `site_id` VARCHAR(5) NOT NULL,
 `inv_part_no` VARCHAR(10) NOT NULL,   
 `inv_part_cost_no` INT NOT NULL,   
 `cost` NUMERIC(20,2) NULL, 
+`quantity` NUMERIC(20,2) NULL,
 `objid` VARCHAR(1000) NOT NULL,
-PRIMARY KEY (`site_id`,`inv_part_no`, `inv_part_cost_no`)) ENGINE = InnoDB;
+PRIMARY KEY (`inv_part_no`, `inv_part_cost_no`)) ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `unter`.`inv_part_in_stock_tab` (   
