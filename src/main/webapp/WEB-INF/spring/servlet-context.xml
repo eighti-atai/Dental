@@ -35,7 +35,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/dental" />
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="arjunkan3+" />
 	</bean>
 	
 	<!-- Hibernate 5 SessionFactory Bean definition. Add your beans under <beans:list> defined in the model package. kanchana-->
@@ -64,6 +64,7 @@
 				<value>com.atai.dental.module.invent.model.PartCategory</value>
 				<value>com.atai.dental.module.invent.model.InventoryPartCost</value>
 				<value>com.atai.dental.module.invent.model.InvPartInStock</value>
+				<value>com.atai.dental.module.payment.model.Payment</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
