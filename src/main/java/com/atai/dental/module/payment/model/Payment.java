@@ -1,12 +1,15 @@
 package com.atai.dental.module.payment.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,6 +28,7 @@ public class Payment implements Model<PaymentKey> {
 	private String paymentType;
 	@Column(name = "payment_method")
 	private String paymentMethod;
+	private BigDecimal amount;
 	@Column(name = "cheque_no")
 	private String chequeNo;
 	@Column(name = "cheque_exp_date")
@@ -33,7 +37,7 @@ public class Payment implements Model<PaymentKey> {
 	private String chequeBank;
 	private String objid;
 	
-	@OneToOne
+	@ManyToOne//(fetch = FetchType.LAZY)
 	@JoinColumns({
 		@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false),
 		@JoinColumn(name = "treatment_id", referencedColumnName = "treatment_id", insertable = false, updatable  =false)
@@ -113,7 +117,13 @@ public class Payment implements Model<PaymentKey> {
 	public void setTreatment(Treatment treatment) {
 		this.treatment = treatment;
 	}
-	
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
 	
 
 }

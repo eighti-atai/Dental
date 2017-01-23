@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atai.dental.generic.controller.AbstractController;
@@ -18,7 +19,7 @@ import com.atai.dental.generic.service.AbstractService;
 import com.atai.dental.module.payment.model.Payment;
 import com.atai.dental.module.payment.model.PaymentKey;
 import com.atai.dental.module.payment.service.PaymentService;
-
+@RestController
 public class PaymentController extends AbstractController<PaymentKey, Payment> {
 
 	private final String initUrl = "/Payments";
@@ -43,7 +44,8 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 	@Override
 	@PostMapping(value = url)
 	public ResponseEntity<Payment> add(@RequestBody Payment object) {
-		// TODO Auto-generated method stub
+		object.setPaymentType("cash");
+		object.setPaymentMethod("cash");
 		return super.add(object);
 	}
 	@Override

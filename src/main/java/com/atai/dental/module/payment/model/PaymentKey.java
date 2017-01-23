@@ -9,17 +9,12 @@ import javax.persistence.Embeddable;
 public class PaymentKey implements Serializable{
 
 	@Column(name = "patient_id")
-	private int patient_id;
+	private int patientId;
 	@Column(name = "treatment_id")
 	private int treatmentId;
 	@Column(name = "payment_no")
 	private int paymentNo;
-	public int getPatient_id() {
-		return patient_id;
-	}
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
-	}
+	
 	public int getTreatmentId() {
 		return treatmentId;
 	}
@@ -32,11 +27,17 @@ public class PaymentKey implements Serializable{
 	public void setPaymentNo(int paymentNo) {
 		this.paymentNo = paymentNo;
 	}
+	public int getPatientId() {
+		return patientId;
+	}
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + patient_id;
+		result = prime * result + patientId;
 		result = prime * result + paymentNo;
 		result = prime * result + treatmentId;
 		return result;
@@ -50,7 +51,7 @@ public class PaymentKey implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PaymentKey other = (PaymentKey) obj;
-		if (patient_id != other.patient_id)
+		if (patientId != other.patientId)
 			return false;
 		if (paymentNo != other.paymentNo)
 			return false;
@@ -58,6 +59,7 @@ public class PaymentKey implements Serializable{
 			return false;
 		return true;
 	}
+	
 	
 	
 	
