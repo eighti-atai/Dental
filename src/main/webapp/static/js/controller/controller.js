@@ -210,7 +210,28 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     
     function ListOfValues()
     {
-    	var isLovField = self.lov[self.lastFocused.id];
+    	var isLovField;
+    	for (var field in self.lov)
+		{
+    		if (!(self.lov[field] instanceof Object))
+    		{    				
+    			if (field === self.lastFocused.id)
+				{
+    				var isLovField = self.lov[self.lastFocused.id];
+				}
+			}
+    		else
+			{
+    			for (var field2 in self.lov[field])
+				{
+    				if (field2 === self.lastFocused.id)
+    				{
+        				isLovField = self.lov[field][self.lastFocused.id];
+    				}
+				}
+			}
+		}
+    	
     	if (isLovField !== undefined)
 		{
     		self.lovTitle = self.lovTitles[self.lastFocused.id];
@@ -219,7 +240,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
 	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
-	    	var lovUrl = base_url + self.lov[self.lastFocused.id] + '/';   
+	    	var lovUrl = base_url + isLovField + '/';   
 	    	$http.get(lovUrl)
 	        .then(
 		        function (response) {
@@ -260,9 +281,25 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 			if (lovRecord.hasOwnProperty(key) && typeof lovRecord[key] !== 'function'){
 				if (key != 'objid')
 				{
-					if (key === self.lastFocused.id)
+					for (var field in self.lov)
 					{
-						self.Record[key] = lovRecord[key];
+						if (key === self.lastFocused.id)
+						{
+							if (!(self.lov[field] instanceof Object))
+							{
+								//if (self.lov[self.lastFocused.id] === key)
+								//{
+									self.Record[key] = lovRecord[key];
+								//}
+							}
+							else
+							{
+								//if (self.lov[field][self.lastFocused.id] === key)
+								//{
+									self.Record[field][key] = lovRecord[key];
+								//}
+							}
+						}
 					}
 				}
 			}
