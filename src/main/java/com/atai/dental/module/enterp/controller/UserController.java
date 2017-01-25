@@ -21,7 +21,7 @@ import com.atai.dental.module.enterp.service.SecurityService;
 import com.atai.dental.module.enterp.service.UserService;
 import com.atai.dental.module.enterp.validator.UserValidator;
 
-@Controller
+
 public class UserController {
 	
 	@Autowired
