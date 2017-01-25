@@ -191,13 +191,13 @@
               	<div class="formcontainer">
                 	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                     	<input type="hidden" ng-model="ctrl.Record.objid" /> 
-                    	<input type="hidden" ng-model="ctrl.Record.key.treatmentId" id="treatmentId" class="treatmentId form-control input-sm" placeholder="Enter Treatmnet ID"/>
+                    	<input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="treatmentId form-control input-sm" placeholder="Enter Treatmnet ID"/>
 
                       	<div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="patientId">Patient ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                                  <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" ng-blur="ctrl.validateRecords('Patient')" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
@@ -369,7 +369,7 @@
                       </thead>
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)">
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.key.treatmentId"></span></td>
+                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentSubType"></span></td> 
 <!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td>  -->

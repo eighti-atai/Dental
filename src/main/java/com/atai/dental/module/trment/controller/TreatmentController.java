@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,10 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atai.dental.generic.controller.AbstractController;
+import com.atai.dental.module.enterp.dao.PatientDao;
+import com.atai.dental.module.enterp.model.Patient;
+import com.atai.dental.module.enterp.service.PatientService;
 import com.atai.dental.module.trment.model.Treatment;
 import com.atai.dental.module.trment.service.TreatmentService;
 
@@ -26,6 +33,8 @@ import com.atai.dental.module.trment.service.TreatmentService;
 @RestController
 public class TreatmentController extends AbstractController<Integer, Treatment>{
 
+	@Autowired
+	PatientService patientService;
 	@Autowired
 	public TreatmentController(TreatmentService service) {
 		super(service, Integer.class, "Treatments");
@@ -74,18 +83,27 @@ public class TreatmentController extends AbstractController<Integer, Treatment>{
 		return super.search(object);
 	}
 
-	/*@GetMapping(value = "/imageDisplay")
-	  public ResponseEntity<Treatment> showImage() 
-	          throws ServletException, IOException{
-
-
-	    Treatment item = service.getByKey(key)get(itemId);        
-	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-	    response.getOutputStream().write(item.getItemImage());
-
-
-	    response.getOutputStream().close();
-	}*/
+	@Override
+	@PostMapping(value = "/Treatment/Validate")
+	public ResponseEntity<Treatment> validate(@RequestBody Treatment object,@RequestBody Model entity) {
+		// TODO Auto-generated method stub
+		//String a = 
+		System.out.println(entity.toString()+" XXXXX object will be added");
+		return super.validate(object,entity);
+	}
+	
+	/*@RequestMapping(value = "/Treatment/Validate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Treatment> getTreatment(@RequestBody Treatment treatment) {
+        System.out.println("Fetching Sales Part with id XXXXXXXXXXXX"+ treatment.getId().getPatientId());
+       // PatientService patientService = new PatientService(PatientDao);
+        Patient patient = patientService.getByKey(treatment.getId().getPatientId());
+        if (patient == null) {
+            System.out.println("Sales Part with id " + "" + " not found");
+            return new ResponseEntity<Treatment>(HttpStatus.NOT_FOUND);
+        }
+        treatment.setTreatment_paid_stat(patient.getPatientName());
+        return new ResponseEntity<Treatment>(treatment, HttpStatus.OK);
+    }*/
 	
 }
 

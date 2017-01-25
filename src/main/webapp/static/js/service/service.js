@@ -13,6 +13,7 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
         updateRecord:updateRecord,
         deleteRecord:deleteRecord,
         searchRecord:searchRecord,
+        validateRecord:validateRecord,
     };
  
     return factory;
@@ -97,6 +98,22 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
     function searchRecord(Record) {
         var deferred = $q.defer();
         $http.post(REST_SERVICE_URI+"Search/", Record)
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while creating Record');
+                deferred.reject(errResponse);
+            }
+        );
+        return deferred.promise;
+    }
+    
+    function validateRecord(Record,entity) {
+    	//console.error('EEEEEEEEEEEEE'+Record.id.patientId);
+        var deferred = $q.defer();
+        $http.post(REST_SERVICE_URI+"Validate/", Record,entity)
             .then(
             function (response) {
                 deferred.resolve(response.data);
