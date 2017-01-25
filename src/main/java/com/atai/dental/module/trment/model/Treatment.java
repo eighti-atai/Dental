@@ -19,7 +19,7 @@ public class Treatment implements Model<TreatmentKey> {
 	
 
 	@Id
-	private TreatmentKey key;
+	private TreatmentKey id;
 
 	
 	@ManyToOne
@@ -60,18 +60,18 @@ public class Treatment implements Model<TreatmentKey> {
 		this.patient = patient;
 	}
 
-	public void setKey(TreatmentKey key) {
+	/*public void setId(TreatmentKey key) {
 		this.key = key;
 	}
 	
 	public TreatmentKey getKey() {
 		return key;
-	}
+	}*/
 	
 	public void setKey(int patientId, int treatmentId)
 	{
-		this.key.setPatientId(patientId);
-		this.key.setTreatmentId(treatmentId);
+		this.id.setPatientId(patientId);
+		this.id.setTreatmentId(treatmentId);
 	}
 	
 	public String getObjid() {
@@ -84,11 +84,11 @@ public class Treatment implements Model<TreatmentKey> {
 
 	public TreatmentKey getId() {
 		// TODO Auto-generated method stub
-		return getKey();
+		return id;
 	}
 
-	public void setId(TreatmentKey key) {
-		setKey(key);
+	public void setId(TreatmentKey id) {
+		this.id = id;
 
 	}
 

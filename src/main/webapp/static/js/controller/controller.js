@@ -16,6 +16,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.editRow   = editRow;
     self.updateAll = updateAll;
     self.searchRecords = searchRecords;
+    self.validateRecords = validateRecords;
     self.numberOfPages = numberOfPages;
     self.entity = '';
     self.populateRecord = populateRecord;
@@ -113,6 +114,18 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             .then(
             function(d) {
                 self.Records = d;
+            },
+            function(errResponse){
+                console.error('Error while fetching Records');
+            }
+        );
+    }
+    
+    function validateRecords(entity){
+        RecordService.validateRecord(self.Record,entity)
+            .then(
+            function(d) {
+                self.Record = d;
             },
             function(errResponse){
                 console.error('Error while fetching Records');

@@ -111,4 +111,30 @@ public class AbstractController<PK extends Serializable, T>{
 		List<T> objects = this.service.executeSelectQuery(object);
 		return new ResponseEntity<List<T>>(objects, HttpStatus.OK);
 	}
+	
+	public ResponseEntity<T> validate(@RequestBody T object,Model model){
+		
+		try{
+			System.out.println(model.toString()+" object will be added");
+			/*Method method = newObject.getClass().getMethod("getObjid");
+	    	String objid = method.invoke(newObject).toString();
+			T oldObject = service.getByObjid(objid);
+			method = newObject.getClass().getMethod("setId", keyClass);
+			method.invoke(newObject, oldObject.getClass().getMethod("getId").invoke(oldObject));*/
+		}
+		/*catch(NoSuchMethodException e)
+		{
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/ catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /*catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		return new ResponseEntity<T>(object, HttpStatus.OK);
+	}
 }
