@@ -36,6 +36,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.recordHasValue = recordHasValue;
     self.fetchAllRecords =fetchAllRecords;
     self.setPanelHeader = setPanelHeader;
+    self.clearImage=clearImage;
  
     function populateRecord(objid){
     	edit(objid);
@@ -296,5 +297,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	}
     }
    
+    function clearImage(){
+        $scope.$broadcast('clearImage',{});
+    }
  
 }]);
