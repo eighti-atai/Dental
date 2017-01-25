@@ -1,4 +1,4 @@
-package com.atai.dental.module.invent.controller;
+package com.atai.dental.module.payment.controller;
 
 import java.util.List;
 
@@ -15,19 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atai.dental.generic.controller.AbstractController;
-import com.atai.dental.module.invent.model.InventoryPartCost;
-import com.atai.dental.module.invent.model.InventoryPartCostKey;
-import com.atai.dental.module.invent.service.InventoryPartCostService;
-
+import com.atai.dental.generic.service.AbstractService;
+import com.atai.dental.module.payment.model.Payment;
+import com.atai.dental.module.payment.model.PaymentKey;
+import com.atai.dental.module.payment.service.PaymentService;
 @RestController
-public class InventoryPartCostController extends AbstractController<InventoryPartCostKey, InventoryPartCost> {
+public class PaymentController extends AbstractController<PaymentKey, Payment> {
 
-	private final String initUrl = "/InventoryPartCosts";
-	private final String url = "/InventoryPartCost";
-	
+	private final String initUrl = "/Payments";
+	private final String url = "/Payment";
 	@Autowired
-	public InventoryPartCostController(InventoryPartCostService service) {
-		super(service, InventoryPartCostKey.class, "InventoryPartCosts");
+	public PaymentController(PaymentService service) {
+		super(service, PaymentKey.class, "Payments");
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -38,32 +37,33 @@ public class InventoryPartCostController extends AbstractController<InventoryPar
 	}
 	@Override
 	@GetMapping(value = url)
-	public ResponseEntity<List<InventoryPartCost>> list() {
+	public ResponseEntity<List<Payment>> list() {
 		// TODO Auto-generated method stub
 		return super.list();
 	}
 	@Override
 	@PostMapping(value = url)
-	public ResponseEntity<InventoryPartCost> add(@RequestBody InventoryPartCost object) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<Payment> add(@RequestBody Payment object) {
+		object.setPaymentType("cash");
+		object.setPaymentMethod("cash");
 		return super.add(object);
 	}
 	@Override
 	@PutMapping(value = url)
-	public ResponseEntity<InventoryPartCost> modify(@RequestBody InventoryPartCost newObject) {
+	public ResponseEntity<Payment> modify(@RequestBody Payment newObject) {
 		// TODO Auto-generated method stub
 		return super.modify(newObject);
 	}
 	@Override
-	@DeleteMapping(value = "/InventoryPartCost/{objid:.+}")
-	public ResponseEntity<InventoryPartCost> delete(@PathVariable("objid") String objid) {
+	@DeleteMapping(value = "/Payment/{objid:.+}")
+	public ResponseEntity<Payment> delete(@PathVariable("objid") String objid) {
 		// TODO Auto-generated method stub
 		return super.delete(objid);
 	}
 	@Override
-	@PostMapping(value = "/InventoryPartCost/Search")
-	public ResponseEntity<List<InventoryPartCost>> search(@RequestBody InventoryPartCost object) {
-		// TODO Auto-generated ethod stub
+	@PostMapping(value = "/Payment/Search")
+	public ResponseEntity<List<Payment>> search(@RequestBody Payment object) {
+		// TODO Auto-generated method stub
 		return super.search(object);
 	}
 

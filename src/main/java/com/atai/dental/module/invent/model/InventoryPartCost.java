@@ -27,6 +27,16 @@ public class InventoryPartCost implements Serializable, Model<InventoryPartCostK
 	
 	private BigDecimal cost;
 	
+	private int quantity;
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	private String objid;
 	
 	public String getObjid() {
