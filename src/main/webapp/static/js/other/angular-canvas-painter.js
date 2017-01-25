@@ -64,7 +64,7 @@ angular.module('pw.canvas-painter')
         options.lineWidth = options.lineWidth || 1;
         options.undo = options.undo || false;
         options.imageSrc = options.imageSrc || false;
-        //options.imageData = options.imageData|| null;
+        options.imageData = options.imageData|| 0;
 
         // background image
         if (options.imageSrc) {
@@ -155,6 +155,16 @@ angular.module('pw.canvas-painter')
           }
         });
 
+        /*scope.$watch('options.imageData', function(newValue) {
+        	ctx.fillStyle = options.backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });*/
+        
+        scope.$watch('options.imageData', function(newval, oldval){
+            console.log(newval, oldval);
+           // updateSeatInfo(scope,element);
+        }, true);
+        
         var getOffset = function(elem) {
           var offsetTop = 0;
           var offsetLeft = 0;
@@ -325,13 +335,21 @@ angular.module('pw.canvas-painter')
             undoCache = undoCache.slice(0, version);
           }
         };
+        
+        scope.clearImage = function(){
+        	ctx.fillStyle = options.backgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          };
+            scope.$on('clearImage',function(event, data){
+                scope.clearImage()
+            });
 
         initListeners();
       }
     };
   });
 
-
+	
 
 angular.module('pw.canvas-painter')
   .directive('pwColorSelector', function () {
