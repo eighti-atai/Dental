@@ -65,6 +65,9 @@
 				<value>com.atai.dental.module.invent.model.InventoryPartCost</value>
 				<value>com.atai.dental.module.invent.model.InvPartInStock</value>
 				<value>com.atai.dental.module.payment.model.Payment</value>
+				<value>com.atai.dental.module.enterp.model.User</value>
+				<value>com.atai.dental.module.enterp.model.Role</value>
+				
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -156,6 +159,13 @@
 	
 	<!-- <bean id="invPartCostDao" 		class="com.atai.dental.module.invent.dao.InventoryPartCostDaoImpl"/> -->
 	<!-- <bean id="invPartCostService" 	class="com.atai.dental.module.invent.service.InventoryPartCostServiceImpl"/> -->
+	<!-- bean id="userDao" class="com.atai.dental.module.enterp.dao.UserDaoImpl" parent="AbstractDao">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	
+	<bean id="roleDao" class="com.atai.dental.module.enterp.dao.RoleDaoImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean > -->
 	
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />

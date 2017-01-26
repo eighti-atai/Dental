@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/" access="hasRole('USER')"/>
+        <intercept-url pattern="/welcome" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/salespartlist1" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/addresses" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/site2" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invlocations" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/showAddInventoryPart" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invPart" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invpartinstock" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/sites" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/salespartprices" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invPartCost" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invlocations" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/addresses" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invPartCosts" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/invpartinstocks" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/customers" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/payments" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/customerorders" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/CustomerOrderLines" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <logout logout-success-url="/login?logout" />
+        <csrf token-repository-ref="tokenRepository"/>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl" class="com.atai.dental.module.enterp.service.UserDetailsServiceImpl"></beans:bean>
+
+    <beans:bean id="encoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+    <beans:bean id="tokenRepository"
+	class="org.springframework.security.web.csrf.CookieCsrfTokenRepository"
+	p:cookieHttpOnly="false"/>
+</beans:beans>
