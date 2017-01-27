@@ -28,6 +28,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lastFocused;
     self.lov;
     self.lovTitles;
+    self.lovRecord;
     self.ListOfValues = ListOfValues;
     self.LovRecords = [];
     self.LovColumsHeads = [];
@@ -52,6 +53,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	//fetchAllRecords();
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
+    	self.lovRecord = EntityService.lovRecord;
     	//setPanelHeader(title);
     }
     
@@ -254,9 +256,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
 	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
-	    	var lovUrl = base_url + isLovField + '/';   
-	    	$http.get(lovUrl)
-	        .then(
+	    	var lovUrl = base_url + isLovField + '/';  
+	    	//$http.get(lovUrl)
+	    	$http.post(lovUrl+"Search/", self.lovRecord[self.lastFocused.id])
+	    	.then(
 		        function (response) {
 		        	self.LovRecords = response.data;
 		        	for (var key in self.LovRecords[0])
