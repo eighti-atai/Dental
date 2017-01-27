@@ -84,6 +84,13 @@ public class TreatmentController extends AbstractController<Integer, Treatment>{
 	}
 
 	@Override
+	@PostMapping(value = "/Treatment/GetByKeys")
+	public ResponseEntity<Treatment> getByKeys(@RequestBody Treatment object) {
+		// TODO Auto-generated method stub
+		return super.getByKeys(object);
+	}
+	
+	@Override
 	@PostMapping(value = "/Treatment/Validate")
 	public ResponseEntity<Treatment> validate(@RequestBody Treatment object,@RequestBody Model entity) {
 		// TODO Auto-generated method stub

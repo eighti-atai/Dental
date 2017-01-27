@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.service.PatientService;
+import com.atai.dental.module.trment.model.Treatment;
 
 /*import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Patient;
@@ -74,5 +75,11 @@ public class PatientController extends AbstractController<Integer, Patient>{
 		return super.search(object);
 	}
 
-	
+	@Override
+	@PostMapping(value = "/Patient/GetByKeys")
+	public ResponseEntity<Patient> getByKeys(@RequestBody Patient object) {
+		System.out.println("#####################################");
+		// TODO Auto-generated method stub
+		return super.getByKeys(object);
+	}
 }

@@ -112,6 +112,30 @@ public class AbstractController<PK extends Serializable, T>{
 		return new ResponseEntity<List<T>>(objects, HttpStatus.OK);
 	}
 	
+	public ResponseEntity<T> getByKeys(T object)
+	{
+		T objects = null;
+		try {
+			objects = this.service.getByKey((PK)object.getClass().getMethod("getId").invoke(object));
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<T>(objects, HttpStatus.OK);
+	}
+	
 	public ResponseEntity<T> validate(@RequestBody T object,Model model){
 		
 		try{

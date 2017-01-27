@@ -113,7 +113,7 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
     function validateRecord(Record,entity) {
     	//console.error('EEEEEEEEEEEEE'+Record.id.patientId);
         var deferred = $q.defer();
-        $http.post(REST_SERVICE_URI+"Validate/", Record,entity)
+        $http.post(REST_SERVICE_URI+"Validate/"+entity, Record)
             .then(
             function (response) {
                 deferred.resolve(response.data);
