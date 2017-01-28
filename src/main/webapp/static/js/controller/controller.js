@@ -17,6 +17,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.updateAll = updateAll;
     self.searchRecords = searchRecords;
     self.validateRecords = validateRecords;
+    self.validate;
+    self.ValRecord;
     self.numberOfPages = numberOfPages;
     self.entity = '';
     self.populateRecord = populateRecord;
@@ -83,7 +85,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
-            fetchAllRecords,
+            null,
             function(errResponse){
                 console.error('Error while updating Record');
             }
@@ -93,7 +95,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function deleteRecord(objid){
         RecordService.deleteRecord(objid)
             .then(
-            fetchAllRecords,
+            null,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
@@ -123,8 +125,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         );
     }
     
-    function validateRecords(entity){
-        RecordService.validateRecord(self.Record,entity)
+    function validateRecords(entity, keys){
+       /* RecordService.validateRecord(self.Record,entity)
             .then(
             function(d) {
                 self.Record = d;
@@ -132,7 +134,58 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             function(errResponse){
                 console.error('Error while fetching Records');
             }
-        );
+        );*/
+    	
+    	/*var isValField;
+    	for (var field in self.validate)
+		{
+    		if (!(self.validate[field] instanceof Object))
+    		{    				
+    			if (field === self.lastFocused.id)
+				{
+    				 isValField = self.validate[self.lastFocused.id];
+				}
+			}
+    		else
+			{
+    			for (var field2 in self.validate[field])
+				{
+    				if (field2 === self.lastFocused.id)
+    				{
+        				isValField = self.validate[field][self.lastFocused.id];
+    				}
+				}
+			}
+		}*/
+    	
+    	if (entity !== undefined)
+		{
+	    	//var valField = Reflect.get(EntityService.validate, self.lastFocused.id);
+	    	var current_url = $location.absUrl();
+	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+	    	var valUrl = base_url + entity + '/GetByKeys/';  
+	    	//var rec = new Object();
+	    	//rec[column] = keys;
+	    	$http.post(valUrl,keys)
+	        .then(
+		        function (response) {
+		        	self.ValRecord = response.data;
+		        	/*for (var key in self.ValRecords[0])
+	        		{
+	        			if (self.ValRecords[0].hasOwnProperty(key) && typeof self.LovRecords[0][key] !== 'function'){
+	        				if (key != 'objid')
+	    					{
+	        					self.LovColumsHeads.push(key);
+	    					}
+	        			}
+	        		}*/
+		        },
+		        function(errResponse){
+		            console.error('Error while fetching Records');
+		        }
+	        );
+	    	//document.getElementById("lov").style.display = "block";
+		}
     }
     
     function edit(objid){
