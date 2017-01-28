@@ -34,6 +34,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.ListOfValues = ListOfValues;
     self.LovRecords = [];
     self.LovColumsHeads = [];
+    self.lovDataRecord = [];
     self.lovClose = lovClose;
     self.setLovValue = setLovValue;
     self.lovTitle;
@@ -279,7 +280,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     
     function ListOfValues()
     {
+    	var count = 0;
     	var isLovField;
+    	var obj;
     	for (var field in self.lov)
 		{
     		if (!(self.lov[field] instanceof Object))
@@ -305,17 +308,49 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		{
     		self.lovTitle = self.lovTitles[self.lastFocused.id];
 	    	self.LovColumsHeads = [];
+	    	self.LovRecords = [];
 	    	document.getElementById("lov").style.display = "none";
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
 	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
 	    	var lovUrl = base_url + isLovField + '/';  
 	    	//$http.get(lovUrl)
+	    	mergeRecAndLovRec(self.Record, self.lovRecord);
 	    	$http.post(lovUrl+"Search/", self.lovRecord[self.lastFocused.id])
 	    	.then(
 		        function (response) {
-		        	self.LovRecords = response.data;
-		        	for (var key in self.LovRecords[0])
+		        	//self.LovRecords = response.data;
+		        	for (var key0 in response.data)
+	        		{
+		        		self.lovDataRecord = [];
+		        		for(var key1 in response.data[key0])
+	        			{
+			        		if ((response.data[key0][key1] instanceof Object) && (key1 === "id"))
+		        			{
+			        			for (var key3 in response.data[key0][key1])
+		        				{
+			        				self.lovDataRecord[key3] = response.data[key0][key1][key3];
+			        				if(count === 0)
+			        				{
+				        				self.LovColumsHeads.push(key3);
+			        				}
+		        				}
+		        			}
+			        		else
+		        			{
+			        			var obj = new Object();
+			        			obj[key1] = response.data[key0][key1];
+			        			self.lovDataRecord[key1] = response.data[key0][key1];
+			        			if(count === 0)
+		        				{
+			        				self.LovColumsHeads.push(key1);
+		        				}
+		        			}
+	        			}
+		        		self.LovRecords.push(self.lovDataRecord);
+		        		count++;
+	        		}
+		        	/*for (var key in self.LovRecords[0])
 	        		{
 	        			if (self.LovRecords[0].hasOwnProperty(key) && typeof self.LovRecords[0][key] !== 'function'){
 	        				if (key != 'objid')
@@ -323,13 +358,74 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        					self.LovColumsHeads.push(key);
 	    					}
 	        			}
-	        		}
+	        		}*/
 		        },
 		        function(errResponse){
 		            console.error('Error while fetching Records');
 		        }
 	        );
 	    	document.getElementById("lov").style.display = "block";
+		}
+    }
+    
+    
+    function mergeRecAndLovRec(Record, lovRecord)
+    {
+    	for(var fld in Record)
+		{
+    		if (Record[fld] instanceof Object)
+    		{ 
+    			mergeRecAndLovRec(Record[fld], lovRecord);
+    		}
+    		else
+			{
+    			merge(Record, lovRecord, fld);
+    			/*for(var lovFld in lovRecord)
+				{
+    				if(!lovRecord[lovFld] instanceof Object)
+    				{
+    					if (lovFld === fld)
+						{
+    						lovRecord[lovFld] = Record[lovFld];
+						}
+    				}
+    				else
+					{
+    					for(var lovFld2 in lovRecord[lovFld])
+						{
+    						if(lovFld2 === fld)
+							{
+    							lovRecord[lovFld][lovFld2] = Record[lovFld];
+							}
+						}
+					}
+				}*/
+			}
+		}
+    }
+    
+    function merge(Record, lovRecord, fld)
+    {
+    	for(var lovFld in lovRecord)
+		{
+			if(!(lovRecord[lovFld] instanceof Object))
+			{
+				if (lovFld === fld)
+				{
+					lovRecord[lovFld] = Record[lovFld];
+				}
+			}
+			else
+			{
+				//for(var lovFld2 in lovRecord[lovFld])
+				//{
+					merge(Record, lovRecord[lovFld], fld);
+					/*if(lovFld2 === fld)
+					{
+						lovRecord[lovFld][lovFld2] = Record[lovFld];
+					}*/
+				//}
+			}
 		}
     }
     
