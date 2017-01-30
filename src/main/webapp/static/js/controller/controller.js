@@ -17,6 +17,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.updateAll = updateAll;
     self.searchRecords = searchRecords;
     self.validateRecords = validateRecords;
+    self.validate;
+    self.ValRecord;
     self.numberOfPages = numberOfPages;
     self.entity = '';
     self.populateRecord = populateRecord;
@@ -87,7 +89,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
-            fetchAllRecords,
+            null,
             function(errResponse){
                 console.error('Error while updating Record');
             }
@@ -97,7 +99,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function deleteRecord(objid){
         RecordService.deleteRecord(objid)
             .then(
-            fetchAllRecords,
+            null,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
@@ -127,16 +129,23 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         );
     }
     
-    function validateRecords(entity){
-        RecordService.validateRecord(self.Record,entity)
-            .then(
-            function(d) {
-                self.Record = d;
-            },
-            function(errResponse){
-                console.error('Error while fetching Records');
-            }
-        );
+    function validateRecords(entity, keys){
+      
+    	if (entity !== undefined)
+		{
+	    	var current_url = $location.absUrl();
+	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+	    	var valUrl = base_url + entity + '/GetByKeys/';  
+	    	$http.post(valUrl,keys)
+	        .then(
+		        function (response) {
+		        	self.ValRecord = response.data;
+		        },
+		        function(errResponse){
+		            console.error('Error while fetching Records');
+		        }
+	        );
+		}
     }
     
     function edit(objid){
