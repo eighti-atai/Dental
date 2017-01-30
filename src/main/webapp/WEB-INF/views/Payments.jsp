@@ -98,6 +98,7 @@
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
     <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
+    <script src="<c:url value='/static/js/directives/unterLovSearch.js' />"></script>
     <script src="<c:url value='/static/js/entity/Payment.js' />"></script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
@@ -109,6 +110,8 @@
               	  <!-- <md-content> -->
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                   	 <div id="lov" unter-lov class = "lov"></div>
+<!--                   	 <div id="kan" unter-search class = "lov"></div> -->
+					  <div id="kan" unter-search class = "lov"></div>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 
 						<div class="row">

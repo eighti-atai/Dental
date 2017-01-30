@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('generalModule').controller('RecordController', ['$scope', 'RecordService','EntityService', '$location','$http', function($scope, RecordService,EntityService,$location,$http) {
+angular.module('generalModule').controller('RecordController', ['$scope', 'RecordService','EntityService', '$location','$http','$compile', function($scope, RecordService,EntityService,$location,$http,$compile) {
     var self = this;
     
     self.Records=[];
@@ -36,10 +36,13 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lovClose = lovClose;
     self.setLovValue = setLovValue;
     self.lovTitle;
+    self.lovSearch = lovSearch;
+    self.lovSearchClose = lovSearchClose;
     self.recordHasValue = recordHasValue;
     self.fetchAllRecords =fetchAllRecords;
     self.setPanelHeader = setPanelHeader;
     self.clearImage=clearImage;
+    self.smartBind = smartBind;
  
     function populateRecord(objid){
     	edit(objid);
@@ -257,6 +260,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	self.LovColumsHeads = [];
 	    	self.LovRecords = [];
 	    	document.getElementById("lov").style.display = "none";
+	    	document.getElementById("kan").style.display = "none";
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
 	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
@@ -420,6 +424,18 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	document.getElementById("lov").style.display = "none";
     }
     
+    function lovSearch()
+    {
+    	lovClose();
+    	smartBind();
+    	document.getElementById("kan").style.display = "block";
+    }
+    
+    function lovSearchClose()
+    {
+    	document.getElementById("kan").style.display = "none";
+    }
+    
     $scope.$watch('ctrl.Record.objid', function (nval, oval) {
         if (oval !== nval) {
         	if (typeof (populatePage) == "function")
@@ -448,6 +464,40 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
    
     function clearImage(){
         $scope.$broadcast('clearImage',{});
+    }
+    
+    function smartBind()
+    {
+    	var stmt;
+    	var rec = {};
+    	rec = self.lovRecord[self.lastFocused.id];
+    	stmt = "<div id='myModal'>" +
+				"<div class = 'modal-content'>" +
+				"<div class='modal-header'>" +
+				"<span class='close' id='lovClose' onclick='ctrl.lovSearchClose()'>&times;</span>" +
+				"<h2>{{"+self.lovTitle+"}} - Search</h2>"+
+				"</div>" +
+				"<table class='table table-hover'>";
+    	for (var fld in rec)
+		{
+    		stmt += 	"<tr>" +
+						"<td>"+
+						"<span> "+fld+": </span>" +
+						"<span><input type='text' ng-model='ctrl.lovRecord."+self.lastFocused.id+"."+fld+"' style='width: 100%'/></span>"+
+						"</td>" +
+						"</tr>";
+		}
+    	stmt +="</table>" +
+		    	"</div>" +
+		        "</div>";
+    	//stmt = $compile(stmt)($scope);
+    	//return 'ctrl.lovRecord.patientId.'+a;
+    	document.getElementById("kan").innerHTML = stmt;
+    	/*var injector = $('[ng-app]').injector();
+    	var $compile = injector.get('$compile');
+    	var $rootScope = injector.get('$rootScope');
+    	$compile(self.$el)($rootScope);
+    	$rootScope.$digest();*/
     }
  
 }]);
