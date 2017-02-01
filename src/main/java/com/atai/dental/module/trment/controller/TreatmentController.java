@@ -27,17 +27,18 @@ import com.atai.dental.module.enterp.dao.PatientDao;
 import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.service.PatientService;
 import com.atai.dental.module.trment.model.Treatment;
+import com.atai.dental.module.trment.model.TreatmentKey;
 import com.atai.dental.module.trment.service.TreatmentService;
 
 
 @RestController
-public class TreatmentController extends AbstractController<Integer, Treatment>{
+public class TreatmentController extends AbstractController<TreatmentKey, Treatment>{
 
 	@Autowired
 	PatientService patientService;
 	@Autowired
 	public TreatmentController(TreatmentService service) {
-		super(service, Integer.class, "Treatments");
+		super(service, TreatmentKey.class, "Treatments");
 		// TODO Auto-generated constructor stub
 	}
 
