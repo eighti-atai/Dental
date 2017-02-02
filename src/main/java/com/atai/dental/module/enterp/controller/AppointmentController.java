@@ -18,15 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
+import com.atai.dental.module.enterp.model.AppointmentKey;
 import com.atai.dental.module.enterp.service.AppointmentService;
 
 
 @RestController
-public class AppointmentController extends AbstractController<Integer, Appointment>{
+public class AppointmentController extends AbstractController<AppointmentKey, Appointment>{
 
 	@Autowired
 	public AppointmentController(AppointmentService service) {
-		super(service, Integer.class, "Appointments");
+		super(service, AppointmentKey.class, "Appointments");
 		// TODO Auto-generated constructor stub
 	}
 

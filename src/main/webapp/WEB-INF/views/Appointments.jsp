@@ -182,6 +182,7 @@
            scope.ctrl.Record.appointmentDate = '';
            scope.ctrl.Record.appointmentTime = '';
            scope.ctrl.Record.doctor = '';
+           scope.ctrl.Record.objid = null;
            scope.ctrl.setPanelHeader("Appointment - "+patientName);
            scope.$apply(scope.ctrl.searchRecords());
        }

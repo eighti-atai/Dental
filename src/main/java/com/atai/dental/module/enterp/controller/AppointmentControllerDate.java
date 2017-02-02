@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,15 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
+import com.atai.dental.module.enterp.model.AppointmentKey;
 import com.atai.dental.module.enterp.service.AppointmentService;
 
 
 @RestController
-public class AppointmentControllerDate extends AbstractController<Integer, Appointment>{
+public class AppointmentControllerDate extends AbstractController<AppointmentKey, Appointment>{
 
 	@Autowired
 	public AppointmentControllerDate(AppointmentService service) {
-		super(service, Integer.class, "AppointmentsDates");
+		super(service, AppointmentKey.class, "AppointmentsDates");
 		System.out.println("Appointment dates entity");
 		// TODO Auto-generated constructor stub
 	}
@@ -47,6 +50,13 @@ public class AppointmentControllerDate extends AbstractController<Integer, Appoi
 	public ResponseEntity<List<Appointment>> search(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
 		return super.search(object);
+	}
+
+	@Override
+	@DeleteMapping(value = "/AppointmentsDate/{objid:.+}")
+	public ResponseEntity<Appointment> delete(@PathVariable("objid") String objid) {
+		// TODO Auto-generated method stub
+		return super.delete(objid);
 	}
 
 	
