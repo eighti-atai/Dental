@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,6 +60,17 @@ public class AppointmentControllerDate extends AbstractController<AppointmentKey
 		return super.delete(objid);
 	}
 
-	
+	@Override
+	@PostMapping(value = "/AppointmentsDate")
+	public ResponseEntity<Appointment> add(@RequestBody Appointment object) {
+		return null;
+	}
+
+	@Override
+	@PutMapping(value = "/AppointmentsDate")
+	public ResponseEntity<Appointment> modify(@RequestBody Appointment newObject) {
+		return null;
+	}
+
 }
 

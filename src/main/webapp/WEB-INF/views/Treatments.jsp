@@ -364,7 +364,6 @@
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset();ctrl.clearImage();" class="btn btn-warning btn-sm">Reset Form</button>
-                               <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
                                <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
                           </div>
                       </div>
@@ -374,7 +373,7 @@
           
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Appointments </span></div>
+              <div class="panel-heading"><span class="lead">List of Treatments </span></div>
               <div class="tablecontainer">
                   <table class="table table-hover">
                       <thead>
