@@ -17,7 +17,7 @@ import com.atai.dental.generic.service.AbstractService;
 
 public class AbstractController<PK extends Serializable, T>{
 
-	private AbstractService<PK, T> service;
+	public AbstractService<PK, T> service;
 	private final Class<T> persistentClass;
 	private String baseUrl;
 	private Class<PK> keyClass;

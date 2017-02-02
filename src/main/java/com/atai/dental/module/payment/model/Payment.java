@@ -28,7 +28,7 @@ public class Payment implements Model<PaymentKey> {
 	private String paymentType;
 	@Column(name = "payment_method")
 	private String paymentMethod;
-	private BigDecimal amount;
+	private Double amount;
 	@Column(name = "cheque_no")
 	private String chequeNo;
 	@Column(name = "cheque_exp_date")
@@ -117,11 +117,11 @@ public class Payment implements Model<PaymentKey> {
 	public void setTreatment(Treatment treatment) {
 		this.treatment = treatment;
 	}
-	public BigDecimal getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 	

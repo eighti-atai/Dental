@@ -19,11 +19,15 @@ import com.atai.dental.generic.service.AbstractService;
 import com.atai.dental.module.payment.model.Payment;
 import com.atai.dental.module.payment.model.PaymentKey;
 import com.atai.dental.module.payment.service.PaymentService;
+import com.atai.dental.module.trment.model.Treatment;
+import com.atai.dental.module.trment.service.TreatmentService;
 @RestController
 public class PaymentController extends AbstractController<PaymentKey, Payment> {
 
 	private final String initUrl = "/Payments";
 	private final String url = "/Payment";
+	@Autowired
+	TreatmentService treatmentService;
 	@Autowired
 	public PaymentController(PaymentService service) {
 		super(service, PaymentKey.class, "Payments");
@@ -46,13 +50,33 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 	public ResponseEntity<Payment> add(@RequestBody Payment object) {
 		object.setPaymentType("cash");
 		object.setPaymentMethod("cash");
-		return super.add(object);
+		PaymentKey key = object.getId();
+		ResponseEntity<Payment> res =  super.add(object);
+		Payment paymentObject = service.getByKey(key);
+		Treatment treatment = paymentObject.getTreatment();
+		if (treatment.getTreatmentPaid()== null)
+		{
+			treatment.setTreatmentPaid(0.0);
+		}
+		treatment.setTreatmentPaid(treatment.getTreatmentPaid()+paymentObject.getAmount());
+		treatmentService.update(treatment);
+		return res;
 	}
 	@Override
 	@PutMapping(value = url)
 	public ResponseEntity<Payment> modify(@RequestBody Payment newObject) {
-		// TODO Auto-generated method stub
-		return super.modify(newObject);
+		PaymentKey key = newObject.getId();
+		Double oldAmount = service.getByKey(key).getAmount();
+		Double newAmount = newObject.getAmount();
+		ResponseEntity<Payment> res =  super.modify(newObject);
+		if (oldAmount != newAmount)
+		{
+			Payment paymentObject = service.getByKey(key);
+			Treatment  treatment = paymentObject.getTreatment();
+			treatment.setTreatmentPaid((treatment.getTreatmentPaid()- oldAmount) + newAmount);
+			treatmentService.update(treatment);
+		}
+		return res;
 	}
 	@Override
 	@DeleteMapping(value = "/Payment/{objid:.+}")
