@@ -107,13 +107,18 @@
      <!-- <script src="webjars/jquery/2.1.4/jquery.min.js"></script>-->
       
       <script type="text/javascript">
-      function populate(patientId,doctor) 
+      function populatePage(Record) 
       {
-         // var scope = angular.element(document.getElementById("con2")).scope();
-          //scope.ctrl.Record.appointmentDate = appointmentDate;
-         // scope.$apply(scope.ctrl.searchRecords());
-         alert(patientId+doctor);
-      }
+    	  var base_url = parent.document.getElementById("f1").contentDocument.location.href
+    	  var url = base_url.substr(base_url.indexOf('Dental')+7,base_url.length);
+    	  if(url === 'Treatments')
+    	  {
+	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
+	            	parent.document.getElementById("f1").contentWindow.populate(Record.key.patientId);
+	            else
+	                alert("f1.Reset NOT found X3");
+      		}
+      } 
 
         $(function() {
             $('#startTime').timepicker();
@@ -130,7 +135,7 @@
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak" >
-      <div id="conX" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()" >
+      <div id="conX" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.fetchAllRecords();" >
            
           <div class="panel panel-default" >
               <div class="panel-heading" style="display: none;"><span class="lead">Patients Queue</span> </div>
@@ -185,7 +190,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)" >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patient.patientName"></span></td>                             
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.startTime"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
@@ -195,7 +200,7 @@
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
-                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
+                                <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
                               </td>
                           </tr>
                       </tbody>

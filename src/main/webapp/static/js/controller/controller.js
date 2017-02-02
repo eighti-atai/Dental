@@ -99,7 +99,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function deleteRecord(objid){
         RecordService.deleteRecord(objid)
             .then(
-            null,
+            		fetchAllRecords,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
@@ -129,7 +129,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         );
     }
     
-    function validateRecords(entity, keys){
+    function validateRecords(entity, keys,sourceList,destList){
       
     	if (entity !== undefined)
 		{
@@ -140,6 +140,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        .then(
 		        function (response) {
 		        	self.ValRecord = response.data;
+		        	for(var i = 0; i < sourceList.length; i++){
+		                self.Record[destList[i]] =self.ValRecord[sourceList[i]] ;
+		            }
 		        },
 		        function(errResponse){
 		            console.error('Error while fetching Records');
