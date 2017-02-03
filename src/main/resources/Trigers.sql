@@ -15,7 +15,6 @@ END$$
 
 DELIMITER ;
 
--- ----------------------------------------------------------------------------------------------
 DELIMITER $$
 
 DROP TRIGGER IF EXISTS dental.attend_patient_tab_BEFORE_INSERT$$
@@ -29,8 +28,6 @@ SET NEW.attend_patient_id = (
     );
 END$$
 DELIMITER ;
-
--- -----------------------------------------------------------------------------------------------
 
 DELIMITER $$
 
@@ -48,9 +45,6 @@ DELIMITER ;
 
 DELIMITER $$
 
--- ----------------------------------------------------------------------------------------------
-
-DELIMITER $$
 
 DROP TRIGGER IF EXISTS dental.payment_tab_BEFORE_INSERT$$
 USE `dental`$$
