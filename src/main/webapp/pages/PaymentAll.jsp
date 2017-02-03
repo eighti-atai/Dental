@@ -4,22 +4,22 @@
 <script>
 $(document).ready(function() {
 	var base_url = window.location.href.substr(0, window.location.href.indexOf('Dental')+7);
-	$('#f1').attr('src',base_url+'Patients');
-	$('#f2').attr('src',base_url+'TreatmentQueries');
+	$('#f2').attr('src',base_url+'Patients');
+	$('#f1').attr('src',base_url+'TreatmentQueries');
 	$('#f3').attr('src',base_url+'Payments');
     
 })
   function resizeIframe() {
-	iframeLoaded('f1');
 	iframeLoaded('f2');
+	iframeLoaded('f1');
 	iframeLoaded('f3');
   }
   
 function iframeLoaded(x) {
 	var y =($(window).width()-20);
     var iFrameID = document.getElementById(x);
-    var maxH = document.getElementById('f1').contentWindow.document.body.scrollHeight ;
-    var maxW = document.getElementById('f1').contentWindow.document.body.scrollWidth ;
+    var maxH = document.getElementById('f2').contentWindow.document.body.scrollHeight ;
+    var maxW = document.getElementById('f2').contentWindow.document.body.scrollWidth ;
     iFrameID.height = "";
     var h1 = maxH;
     var h2 = h1/4;
@@ -30,13 +30,13 @@ function iframeLoaded(x) {
           
           
           
-          if(x==='f1')
+          if(x==='f2')
         	{
         	  	iFrameID.width = "";
               	iFrameID.width = y + "px";
               	iFrameID.height = maxH;
         	}
-          else if(x==='f2')
+          else if(x==='f1')
       		{
       	  		iFrameID.width = "";
             	iFrameID.width = (y/2) + "px";
@@ -61,13 +61,13 @@ function reloadIFrame() {
 <body onresize="resizeIframe()">
 
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->
-<iframe style="display:inline" id="f1" onload="iframeLoaded('f1')">
+<iframe style="display:inline" id="f2" onload="iframeLoaded('f2')">
 </iframe>
 <!--  </div> -->
  <div>
  </div>
 <!--  <div class="embed-responsive embed-responsive-16by9"> -->
-<iframe style="display:inline" id="f2" onload="iframeLoaded('f2')" >
+<iframe style="display:inline" id="f1" onload="iframeLoaded('f1')" >
 </iframe>
 <!--  </div> -->
 <iframe style="display:inline"; id="f3" onload="iframeLoaded('f3')">
