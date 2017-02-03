@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(userform.getPassword()));
         user.setRoles(roles);
         user.setUsername(userform.getUserName());
+        user.setName(userform.getName());
         userDao.addUser(user);
     }
 

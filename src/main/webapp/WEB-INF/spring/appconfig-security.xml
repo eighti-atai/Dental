@@ -9,6 +9,9 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
+    	<headers>
+        	<frame-options policy="SAMEORIGIN"/>
+    	</headers>
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/index_db" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <!-- intercept-url pattern="/salespartlist1" access="hasRole('USER') or hasRole('ADMIN')"/>

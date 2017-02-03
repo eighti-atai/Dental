@@ -39,7 +39,14 @@
                 <form:errors path="username"></form:errors>
             </div>
         </spring:bind>
-
+		
+		<spring:bind path="name">
+            <div class="form-group">
+                <form:input type="text" path="name" class="form-control" placeholder="Name"
+                            autofocus="true"></form:input>
+                </div>
+        </spring:bind>
+		
 		<spring:bind path="userrole">
 			<div class="form-group">
 				<form:select path="userrole" class="form-control">

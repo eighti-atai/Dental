@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `user_tab` (
   `user_name` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
   `state` VARCHAR(30) NOT NULL,  
+  `name` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE (`user_name`));
 
