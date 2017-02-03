@@ -6,6 +6,6 @@ import com.atai.dental.generic.dao.AbstractDao;
 import com.atai.dental.module.trment.model.MainTreatmentType;
 
 @Repository
-public class MainTreatmentTypeDao extends AbstractDao<Integer, MainTreatmentType> {
+public class MainTreatmentTypeDao extends AbstractDao<String, MainTreatmentType> {
 
 }

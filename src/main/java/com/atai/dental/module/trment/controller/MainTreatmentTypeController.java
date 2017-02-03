@@ -25,11 +25,11 @@ import com.atai.dental.module.enterp.model.MainTreatmentType;
 import com.atai.dental.module.enterp.service.MainTreatmentTypeService;*/
 
 @RestController
-public class MainTreatmentTypeController extends AbstractController<Integer, MainTreatmentType>{
+public class MainTreatmentTypeController extends AbstractController<String, MainTreatmentType>{
 
 	@Autowired
 	public MainTreatmentTypeController(MainTreatmentTypeService service) {
-		super(service, Integer.class, "MainTreatmentTypes");
+		super(service, String.class, "MainTreatmentTypes");
 		// TODO Auto-generated constructor stub
 	}
 

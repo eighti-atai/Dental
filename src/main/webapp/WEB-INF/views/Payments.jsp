@@ -115,9 +115,9 @@
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 
 						<div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="patientId">Patient ID</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-xs-6">
+                              <label class="col-xs-3 control-lable" for="patientId">Patient ID</label>
+                              <div class="col-xs-7">
                                   <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
@@ -126,12 +126,12 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+<!--                       </div> -->
                       
-                      <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="treatmentId">Treatment ID</label>
-                              <div class="col-md-7">
+<!--                       <div class="row"> -->
+                          <div class="form-group col-xs-6">
+                              <label class="col-xs-3 control-lable" for="treatmentId">Treatment ID</label>
+                              <div class="col-xs-7">
                                   <input type="text" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentId.$error.required">This is a required field</span>
@@ -143,9 +143,9 @@
                       </div>
 						
 						<div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="paymentNo">Payment No</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-xs-6">
+                              <label class="col-xs-3 control-lable" for="paymentNo">Payment No</label>
+                              <div class="col-xs-7">
                                   <input type="text" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.paymentNo.$error.required">This is a required field</span>
@@ -154,12 +154,12 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+<!--                       </div> -->
                       
-                      <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="amount">Amount</label>
-                              <div class="col-md-7">
+<!--                       <div class="row"> -->
+                          <div class="form-group col-xs-6">
+                              <label class="col-xs-3 control-lable" for="amount">Amount</label>
+                              <div class="col-xs-7">
                                   <input type="text" ng-model="ctrl.Record.amount" id="amount" class="salesPartId form-control input-sm" placeholder="Enter Amount " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.amount.$error.required">This is a required field</span>
@@ -171,66 +171,16 @@
                       </div>
                       
                       <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="paymentDate">Payment Date</label>
-<!--                               <div class="col-md-7">    ng-model="ctrl.myDate" -->
+                          <div class="form-group col-xs-6">
+                              <label class="col-xs-3 control-lable" for="paymentDate">Payment Date</label>
+<!--                               <div class="col-xs-7">    ng-model="ctrl.myDate" -->
 									<md-datepicker ng-model="ctrl.Record.paymentDate" md-placeholder="Enter date"></md-datepicker>
 <!--                                   <input type="date" ng-model="ctrl.Record.chequeExpDate" id="chequeExpDate" class="description form-control input-sm" placeholder="Enter Cheque Exp Date." required/> -->
 <!--                               </div> -->
                           </div>
                       </div>
                       
-                      <!-- <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="paymentType">Payment Type</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.paymentType" id="paymentType" class="description form-control input-sm" placeholder="Enter Payment Type" required/>
-                              	  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.paymentType.$error.required">This is a required field</span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      
-                      <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="paymentMethod">Payment Method</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.paymentMethod" id="paymentMethod" class="description form-control input-sm" placeholder="Enter Payment Method" required/>
-                              	  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.paymentMethod.$error.required">This is a required field</span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div> -->
-                      
-                     <!--  <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="chequeNo">Cheque No</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.chequeNo" id="chequeNo" class="description form-control input-sm" placeholder="Enter Cheque No." required/>
-                              </div>
-                          </div>
-                      </div> -->
-                      
-                      <!-- <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="chequeExpDate">Cheque Exp Date</label>
-                              <div class="col-md-7">    ng-model="ctrl.myDate"
-									<md-datepicker ng-model="ctrl.Record.chequeExpDate" md-placeholder="Enter date"></md-datepicker>
-                                  <input type="date" ng-model="ctrl.Record.chequeExpDate" id="chequeExpDate" class="description form-control input-sm" placeholder="Enter Cheque Exp Date." required/>
-                              </div>
-                          </div>
-                      </div> -->
-                      
-                      <!-- <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="chequeBank">Cheque Issued Bank</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.chequeBank" id="chequeBank" class="description form-control input-sm" placeholder="Enter the bank where cheque was issued." required/>
-                              </div>
-                          </div>
-                      </div> -->
+
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">

@@ -186,7 +186,7 @@
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
 		
 						<div class="row">
-		                	<div class="form-group col-xs-4">
+		                	<div class="form-group col-md-12">
 		                    	<label class="col-md-2 control-lable" for="mttId">Type ID</label>
 		                        <div class="col-md-10">
 		                        	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" class="mttId form-control input-sm" placeholder="Enter MainTreatmentType Name " required ng-minlength="1"/>
@@ -199,7 +199,7 @@
 		                </div>
 		                      
 		                <div class="row">
-		                	<div class="form-group col-xs-4">
+		                	<div class="form-group col-md-12">
 		                    	<label class="col-md-2 control-lable" for="mttName">Type Name</label>
 		                        <div class="col-md-10">
 		                           	<input type="text" ng-model="ctrl.Record.mttName" id="mttName" class="mttName form-control input-sm" placeholder="Enter Type Name"/>
@@ -210,7 +210,7 @@
 		                </div>
 		                      
 		                <div class="row">
-		                	<div class="form-group col-xs-4">
+		                	<div class="form-group col-md-12">
 		                    <label class="col-md-2 control-lable" for="mttDescription">Type Description</label>
 		                    	<div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.mttDescription" id="mttDescription" class="mttDescription form-control input-sm" placeholder="Enter Type Description" />

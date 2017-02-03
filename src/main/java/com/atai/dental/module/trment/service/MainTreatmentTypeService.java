@@ -9,7 +9,7 @@ import com.atai.dental.module.trment.dao.MainTreatmentTypeDao;
 import com.atai.dental.module.trment.model.MainTreatmentType;
 
 @Service
-public class MainTreatmentTypeService extends AbstractService<Integer, MainTreatmentType>{
+public class MainTreatmentTypeService extends AbstractService<String, MainTreatmentType>{
 
 	@Autowired
 	public MainTreatmentTypeService(MainTreatmentTypeDao dao) {

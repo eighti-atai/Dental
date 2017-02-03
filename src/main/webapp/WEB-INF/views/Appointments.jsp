@@ -82,7 +82,7 @@
     	<div class="panel panel-default">
         	<div class="panel-heading" ng-bind-html="panelHeader"></div>
             <div class="formcontainer">
-           		<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+           		<form ng-submit="ctrl.submit();" name="myForm" class="form-horizontal">
            			<div id="lov" unter-lov class = "lov"></div>	
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>

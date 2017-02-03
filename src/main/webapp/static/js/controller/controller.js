@@ -45,11 +45,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.setPanelHeader = setPanelHeader;
     self.clearImage=clearImage;
     self.smartBind = smartBind;
+    self.populatePageFromRecord = populatePageFromRecord;
  
     function populateRecord(objid){
     	edit(objid);
     	populatePage(self.Record);
     	
+    }
+    function populatePageFromRecord(objid){
+    	populatePage(self.Record);   	
     }
  
     function init(){
