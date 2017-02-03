@@ -166,23 +166,23 @@
       
     <script type="text/javascript">
     	
-        function populate(patientId) 
+        function populate(patientId,patientName) 
         {
      	   var scope = angular.element(document.getElementById("con3")).scope();
      	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
             scope.ctrl.Record.id.patientId = patientId;
-            //scope.ctrl.setPanelHeader("Appointment - "+patientName);
+            scope.ctrl.setPanelHeader("List of Treatments - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
         }
     </script>
 </head>
 	<body ng-app="generalModule" class="ng-cloak">
-    	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.fetchAllRecords();">
+    	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('List of Treatments');">
 
           
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Treatments </span></div>
+              <div class="panel-heading" ng-bind-html="panelHeader"></div>
               <div class="tablecontainer">
                   <table class="table table-hover">
                       <thead>
