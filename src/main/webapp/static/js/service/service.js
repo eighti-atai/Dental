@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('generalModule').factory('RecordService', ['$http', '$q', '$location', function($http, $q, $location){
+angular.module('generalModule').factory('RecordService', ['$http', '$q', '$location', '$mdDialog', function($http, $q, $location, $mdDialog){
  
     var REST_SERVICE_URI;
     var current_url;
@@ -55,8 +55,24 @@ angular.module('generalModule').factory('RecordService', ['$http', '$q', '$locat
                     }
                   }
             },
+            /*function(errResponse){
+                console.error('Error while creating Record');
+                deferred.reject(errResponse);
+            }*/
+
             function(errResponse){
                 console.error('Error while creating Record');
+                if (errResponse.data.defaultMessage != null){
+                 alert = $mdDialog.alert({
+                    title: 'Attention',
+                    textContent: errResponse.data.defaultMessage,
+                    ok: 'Close'
+                  });
+                  $mdDialog.show( alert )
+                    .finally(function() {
+                      alert = undefined;
+                    });
+                }
                 deferred.reject(errResponse);
             }
         );

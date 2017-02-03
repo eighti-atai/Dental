@@ -5,8 +5,11 @@ package com.atai.dental.module.enterp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,11 +23,15 @@ import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
 import com.atai.dental.module.enterp.model.AppointmentKey;
 import com.atai.dental.module.enterp.service.AppointmentService;
+import com.atai.dental.module.enterp.validator.AppointmentValidator;
 
 
 @RestController
 public class AppointmentController extends AbstractController<AppointmentKey, Appointment>{
 
+	@Autowired
+	private AppointmentValidator appointmentValidator;
+	
 	@Autowired
 	public AppointmentController(AppointmentService service) {
 		super(service, AppointmentKey.class, "Appointments");
@@ -45,11 +52,28 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		return super.list();
 	}
 
-	@Override
+	/*@Override
 	@PostMapping(value = "/Appointment")
 	public ResponseEntity<Appointment> add(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
 		return super.add(object);
+	}*/
+	 
+	@PostMapping(value="/Appointment")
+	public ResponseEntity<?> add(@RequestBody Appointment appointment, BindingResult result){
+		
+		appointmentValidator.validate(appointment, result);
+		if(result.hasErrors())
+		{
+			System.out.println("Has errors");
+			return new ResponseEntity<ObjectError>(result.getGlobalError(), HttpStatus.CONFLICT);
+		}
+		else
+		{
+			System.out.println("Appointment Part is Successfully added.");
+			super.add(appointment);
+		}
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
 	@Override

@@ -172,6 +172,7 @@
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean > -->
 	
+    <bean id="appointmentValidator" class="com.atai.dental.module.enterp.validator.AppointmentValidator" />
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
