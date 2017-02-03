@@ -113,54 +113,17 @@
 <!--                   	 <div id="kan" unter-search class = "lov"></div> -->
 					  <div id="kan" unter-search class = "lov"></div>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-
-						<div class="row">
-                          <div class="form-group col-xs-6">
-                              <label class="col-xs-3 control-lable" for="patientId">Patient ID</label>
-                              <div class="col-xs-7">
-                                  <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.patientId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.patientId.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       </div> -->
-                      
-<!--                       <div class="row"> -->
-                          <div class="form-group col-xs-6">
-                              <label class="col-xs-3 control-lable" for="treatmentId">Treatment ID</label>
-                              <div class="col-xs-7">
-                                  <input type="text" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentId.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="myForm.treatmentId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="hidden" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
 						
-						<div class="row">
-                          <div class="form-group col-xs-6">
-                              <label class="col-xs-3 control-lable" for="paymentNo">Payment No</label>
-                              <div class="col-xs-7">
-                                  <input type="text" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No " required ng-minlength="1"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.paymentNo.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.paymentNo.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="myForm.paymentNo.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
 <!--                       </div> -->
                       
-<!--                       <div class="row"> -->
+                      <div class="row">
                           <div class="form-group col-xs-6">
                               <label class="col-xs-3 control-lable" for="amount">Amount</label>
                               <div class="col-xs-7">
-                                  <input type="text" ng-model="ctrl.Record.amount" id="amount" class="salesPartId form-control input-sm" placeholder="Enter Amount " required ng-minlength="1"/>
+                                  <input type="number" step="0.01" ng-model="ctrl.Record.amount" id="amount" class="salesPartId form-control input-sm" placeholder="Enter Amount " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.amount.$error.required">This is a required field</span>
                                       <span ng-show="myForm.amount.$error.minlength">Minimum length required is 3</span>
@@ -168,13 +131,13 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+<!--                       </div> -->
                       
-                      <div class="row">
+<!--                       <div class="row"> -->
                           <div class="form-group col-xs-6">
                               <label class="col-xs-3 control-lable" for="paymentDate">Payment Date</label>
 <!--                               <div class="col-xs-7">    ng-model="ctrl.myDate" -->
-									<md-datepicker ng-model="ctrl.Record.paymentDate" md-placeholder="Enter date"></md-datepicker>
+									<md-datepicker ng-model="ctrl.Record.paymentDate" md-placeholder="Enter date" required></md-datepicker>
 <!--                                   <input type="date" ng-model="ctrl.Record.chequeExpDate" id="chequeExpDate" class="description form-control input-sm" placeholder="Enter Cheque Exp Date." required/> -->
 <!--                               </div> -->
                           </div>
@@ -184,10 +147,7 @@
                       <div class="row">
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                               <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
-                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                               <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button>
                           </div>
                       </div>
                   </form>
@@ -205,7 +165,7 @@
                       <thead>
                           <tr>
                           	  <th>Patient ID</th>
-                          	  <th>Appointment ID</th>
+                          	  <th>Treatment ID</th>
                               <th>Payment No</th>
                               <th>Amount</th>
                               <th>Payment Date</th>
