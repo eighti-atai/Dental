@@ -46,6 +46,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.clearImage=clearImage;
     self.smartBind = smartBind;
     self.populatePageFromRecord = populatePageFromRecord;
+
+    self.today = new Date();
  
     function populateRecord(objid){
     	edit(objid);
