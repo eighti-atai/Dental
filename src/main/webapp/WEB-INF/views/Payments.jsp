@@ -100,12 +100,24 @@
     <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
     <script src="<c:url value='/static/js/directives/unterLovSearch.js' />"></script>
     <script src="<c:url value='/static/js/entity/Payment.js' />"></script>
+    <script type="text/javascript">
+    	
+        function populate(patientId,treatmentId) 
+        {
+     	   var scope = angular.element(document.getElementById("con3")).scope();
+     	  	scope.ctrl.Record = {id:{patientId:'', treatmentId:'', paymentNo:''},paymentDate:(new Date()), paymentType:'',paymentMethod:'',amount:'', chequeNo:'',chequeExpDate:'',chequeBank:'',objid:null};
+            scope.ctrl.Record.id.patientId = patientId;
+            scope.ctrl.Record.id.treatmentId = treatmentId;
+            scope.ctrl.setPanelHeader("Payments - Patient ID: "+patientId+"Treatment ID: "+treatmentId);
+            scope.$apply(scope.ctrl.searchRecords());
+        }
+    </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">
+      <div id = "con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Payment');">
            
           <div class="panel panel-default">
-              <div class="panel-heading"><span class="lead">Payments</span></div>
+              <div class="panel-heading" ng-bind-html="panelHeader"></div>
               <div class="formcontainer">
               	  <!-- <md-content> -->
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
@@ -113,9 +125,9 @@
 <!--                   	 <div id="kan" unter-search class = "lov"></div> -->
 					  <div id="kan" unter-search class = "lov"></div>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-					  <input type="hidden" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
+					  <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="text" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="text" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
 						
 <!--                       </div> -->
                       
@@ -214,16 +226,7 @@
     			  <button ng-disabled="ctrl.currentPage >= ctrl.Records.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
        						 	Next
     					  </button>
-                 <!--  <input type="text" ng-model="ctrl.Records[1].salesPartId"/>
-                  ctrl.Record = ctrl.Records[1]
-                              <input type="text" ng-model="u.description"/>
-                              <input type="text" ng-model="u.invPartNo"/>
-                              <input type="text" ng-model="u.invConversionFactor"/>
-                             <input type="text" ng-model="u.uom"/>
-                              <input type="text" ng-model="u.priceCategory"/>
-                              <input type="text" ng-model="u.generalCategory"/>
-                              <input type="text" ng-model="u.objid"/>
-                              <td> {{$index}} </td> -->
+   
               </div>
           </div>
       </div>
