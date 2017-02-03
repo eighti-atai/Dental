@@ -165,6 +165,14 @@
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
       
     <script type="text/javascript">
+    
+	    function populatePage(Record) 
+	    {
+	        if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
+	        	parent.document.getElementById("f3").contentWindow.populate(Record.id.patientId, Record.id.treatmentId);
+	        else
+	            alert("f1.Reset NOT found X3");
+	    } 
     	
         function populate(patientId,patientName) 
         {
@@ -197,7 +205,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)">
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'treatmentDate', u.treatmentDate)|date:yyyy/MM/dd"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>

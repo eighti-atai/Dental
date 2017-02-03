@@ -20,6 +20,7 @@ import com.atai.dental.module.payment.model.Payment;
 import com.atai.dental.module.payment.model.PaymentKey;
 import com.atai.dental.module.payment.service.PaymentService;
 import com.atai.dental.module.trment.model.Treatment;
+import com.atai.dental.module.trment.model.TreatmentKey;
 import com.atai.dental.module.trment.service.TreatmentService;
 @RestController
 public class PaymentController extends AbstractController<PaymentKey, Payment> {
@@ -28,6 +29,9 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 	private final String url = "/Payment";
 	@Autowired
 	TreatmentService treatmentService;
+	
+	TreatmentKey tKey = new TreatmentKey();
+	
 	@Autowired
 	public PaymentController(PaymentService service) {
 		super(service, PaymentKey.class, "Payments");
@@ -52,13 +56,15 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 		object.setPaymentMethod("cash");
 		PaymentKey key = object.getId();
 		ResponseEntity<Payment> res =  super.add(object);
-		Payment paymentObject = service.getByKey(key);
-		Treatment treatment = paymentObject.getTreatment();
+		//Payment paymentObject = service.getByKey(key);
+		tKey.setPatientId(key.getPatientId());
+		tKey.setTreatmentId(key.getTreatmentId());
+		Treatment treatment = treatmentService.getByKey(tKey);
 		if (treatment.getTreatmentPaid()== null)
 		{
 			treatment.setTreatmentPaid(0.0);
 		}
-		treatment.setTreatmentPaid(treatment.getTreatmentPaid()+paymentObject.getAmount());
+		treatment.setTreatmentPaid(treatment.getTreatmentPaid()+object.getAmount());
 		treatmentService.update(treatment);
 		return res;
 	}
