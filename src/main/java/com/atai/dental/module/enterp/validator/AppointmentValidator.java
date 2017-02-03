@@ -15,8 +15,8 @@ public class AppointmentValidator implements Validator{
 
 	@Autowired
 	private AppointmentService appointmentService;
-	//@Autowired
-	//private UserService userService;
+	@Autowired
+	private UserService userService;
 	
 	public boolean supports(Class<?> arg0) {
 		return Appointment.class.isAssignableFrom(arg0);
@@ -33,20 +33,20 @@ public class AppointmentValidator implements Validator{
 		}
 	}
 	
-	private boolean validateDoctor(Errors errors, String doctorId){
-		/*User doctor = userService.getByKey(doctorId);
+	private boolean validateDoctor(Errors errors, String doctorName){
+		User doctor = userService.findByUsername(doctorName);
         if (doctor == null) {
-        	errors.reject("doctor.notExists", "Doctor does not exist.");
+        	errors.reject("doctor.notExists", "Doctor "+ doctorName +" is not a regitered doctor.");
         	return false;
-        }*/
+        }
 		return true;
 	}
 	
 	private boolean validateApointmentDateAndTime(Errors errors, Appointment appointment){
-		if(appointmentService.AppointemtTimeExists(appointment)){
+		/*if(appointmentService.AppointemtTimeExists(appointment)){
         	errors.reject("appointment.DateAndTimeExists", "Doctor a=has a appointment at this date and time.");
         	return false;
-		}
+		}*/
 		return true;
 	}
 }

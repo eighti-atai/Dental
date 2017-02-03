@@ -71,9 +71,8 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		else
 		{
 			System.out.println("Appointment Part is Successfully added.");
-			super.add(appointment);
+			return super.add(appointment);
 		}
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
 	@Override

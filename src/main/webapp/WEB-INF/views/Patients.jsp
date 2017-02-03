@@ -225,7 +225,7 @@
 		                	<div class="form-group col-xs-4">
 		                    <label class="col-md-2 control-lable" for="patientIdNo">ID Number</label>
 		                    	<div class="col-md-7">
-		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" />
+		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" maxlength="15" style="text-transform:uppercase"/>
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                			</div>
 		                        </div>
