@@ -23,7 +23,7 @@ function iframeLoaded(x) {
     iFrameID.height = "";
     var h1 = maxH;
     var h2 = h1/4;
-    var h3 = h2*5;
+    var h3 = h2*8;
       
     if(iFrameID) {
           // here you can make the height, I delete it first, then I make it again
