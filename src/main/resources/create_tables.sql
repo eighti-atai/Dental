@@ -114,7 +114,7 @@ CREATE TABLE `patient_tab` (
   `patient_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_name` varchar(200) NOT NULL,
   `patient_address` varchar(1000) DEFAULT NULL,
-  `patient_id_no` varchar(10) DEFAULT NULL,
+  `patient_id_no` varchar(20) DEFAULT NULL,
   `patient_birth_date` date DEFAULT NULL,
   `patient_contact_no` varchar(10) DEFAULT NULL,
   `patient_gender` varchar(6) DEFAULT NULL,
