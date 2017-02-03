@@ -90,7 +90,7 @@
                     	<div class="form-group col-xs-5">
                     		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
                     		<div class="col-md-3">
-	                            <p><md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required></md-datepicker></p>
+	                            <p><md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required md-min-date="ctrl.today"></md-datepicker></p>
 	                            <div class="has-error" ng-show="myForm.$dirty">
 	                            	<span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
 	                                <span ng-show="myForm.appointmentDate.$invalid">This field is invalid </span>
