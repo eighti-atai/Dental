@@ -10,8 +10,8 @@
 
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll"/>
-        <!-- intercept-url pattern="/welcome" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/salespartlist1" access="hasRole('USER') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/index_db" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <!-- intercept-url pattern="/salespartlist1" access="hasRole('USER') or hasRole('ADMIN')"/>
         <intercept-url pattern="/addresses" access="hasRole('USER') or hasRole('ADMIN')"/>
         <intercept-url pattern="/site2" access="hasRole('USER') or hasRole('ADMIN')"/>
         <intercept-url pattern="/invlocations" access="hasRole('USER') or hasRole('ADMIN')"/>
@@ -29,7 +29,7 @@
         <intercept-url pattern="/payments" access="hasRole('USER') or hasRole('ADMIN')"/>
         <intercept-url pattern="/customerorders" access="hasRole('USER') or hasRole('ADMIN')"/>
         <intercept-url pattern="/CustomerOrderLines" access="hasRole('USER') or hasRole('ADMIN')"/-->
-        <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <form-login login-page="/login" default-target-url="/index_db" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
         <csrf token-repository-ref="tokenRepository"/>
     </http>

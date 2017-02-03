@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atai.dental.module.enterp.form.UserForm;
 import com.atai.dental.module.enterp.model.User;
 import com.atai.dental.module.enterp.service.SecurityService;
 import com.atai.dental.module.enterp.service.UserService;
 import com.atai.dental.module.enterp.validator.UserValidator;
 
-
+@Controller
 public class UserController {
 	
 	@Autowired
@@ -35,14 +36,14 @@ public class UserController {
   
     @GetMapping(value = "/registration")
     public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+        model.addAttribute("userForm", new UserForm());
 
         return "registration";
     }
 
     @PostMapping(value = "/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-       // userValidator.validate(userForm, bindingResult);
+    public String registration(@ModelAttribute("userForm") UserForm userForm, BindingResult bindingResult, Model model) {
+       userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -50,9 +51,9 @@ public class UserController {
 
         userService.save(userForm);
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        securityService.autologin(userForm.getUserName(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/index_db";
     }
 
     @GetMapping(value = "/login")
@@ -66,9 +67,9 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping(value = {"/", "/welcome"})
+    @GetMapping(value = {"/", "/index_db"})
     public String welcome(Model model) {
-        return "welcome";
+        return "index_db";
     }
 
 }

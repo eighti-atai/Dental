@@ -1,5 +1,6 @@
 package com.atai.dental.module.enterp.validator;
 
+import com.atai.dental.module.enterp.form.UserForm;
 import com.atai.dental.module.enterp.model.User;
 import com.atai.dental.module.enterp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +19,23 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object o, Errors errors) {
-        User user = (User) o;
+        UserForm userform = (UserForm) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty", "Test");
+        if (userform.getUsername().length() < 6 || userform.getUserName().length() > 32) {
+            errors.reject("username", "Please use between 6 and 32 characters.");
         }
-        if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+        if (userService.findByUsername(userform.getUserName()) != null) {
+            errors.reject("username", "Someone already has this username.");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-            errors.rejectValue("password", "Size.userForm.password");
+        if (userform.getPassword().length() < 8 || userform.getPassword().length() > 32) {
+            errors.reject("password", "Try one with at least 8 characters.");
         }
 
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+        if (!userform.getPasswordConfirm().equals(userform.getPassword())) {
+            errors.reject("passwordConfirm", "These passwords don't match.");
         }
     }
 }

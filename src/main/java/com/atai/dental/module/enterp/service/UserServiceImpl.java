@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.atai.dental.module.enterp.form.UserForm;
 import com.atai.dental.module.enterp.dao.RoleDao;
 import com.atai.dental.module.enterp.dao.UserDao;
 import com.atai.dental.module.enterp.model.Role;
@@ -29,11 +30,24 @@ public class UserServiceImpl implements UserService {
 	 * @see com.atai.unter.module.enterprise.service.UserService#save(com.atai.unter.module.enterprise.model.User)
 	 */
     @Transactional
-    public void save(User user) {
+    public void save(UserForm userform) {
     	Set<Role> roles = new HashSet<Role>();
-    	roles.add(roleDao.getRoleById(1));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    	User user = new User();
+    	int userRoleId = 1;
+    	String role = userform.getUserRole();
+    	/*if (roleName == "USER") {
+    			userRoleId = 1;
+    	}
+    	else if (roleName == "ADMIN") {
+			userRoleId = 3;
+    	}
+    	else if (roleName == "USER") {
+			userRoleId = 3;
+    	}*/
+    	roles.add(roleDao.getRoleById(Integer.parseInt(userform.getUserRole())));
+        user.setPassword(bCryptPasswordEncoder.encode(userform.getPassword()));
         user.setRoles(roles);
+        user.setUsername(userform.getUserName());
         userDao.addUser(user);
     }
 

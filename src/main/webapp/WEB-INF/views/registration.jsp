@@ -40,6 +40,16 @@
             </div>
         </spring:bind>
 
+		<spring:bind path="userrole">
+			<div class="form-group">
+				<form:select path="userrole" class="form-control">
+					<form:option value="1" label="Normal" />
+                	<form:option value="2" label="Doctor" />
+                	<form:option value="3" label="Administrator" />      
+            	</form:select>
+            </div>
+		</spring:bind>
+
         <spring:bind path="password">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
