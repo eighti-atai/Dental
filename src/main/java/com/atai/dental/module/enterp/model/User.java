@@ -18,6 +18,14 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private int userId;
 	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	@Column(name = "user_name", unique=true, nullable=false)
     private String userName;
 	

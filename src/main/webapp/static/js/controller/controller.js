@@ -278,7 +278,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	self.LovColumsHeads = [];
 	    	self.LovRecords = [];
 	    	document.getElementById("lov").style.display = "none";
-	    	document.getElementById("kan").style.display = "none";
+	    	//document.getElementById("kan").style.display = "none";
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
 	    	var current_url = $location.absUrl();
 	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);

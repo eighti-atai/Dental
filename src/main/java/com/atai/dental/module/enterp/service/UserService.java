@@ -8,5 +8,7 @@ public interface UserService {
 	void save(UserForm userform);
 
 	User findByUsername(String username);
+	
+	User findByUserId(int userId);
 
 }

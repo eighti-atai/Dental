@@ -26,15 +26,15 @@ public class AppointmentValidator implements Validator{
 		Appointment form = (Appointment)target;
 		Date appointmentDate = form.getAppointmentDate();
 		String appointmentTime = form.getAppointmentTime();
-		String doctorId = form.getDoctor();
+		int doctorId = form.getDoctor();
 		
 		if(validateDoctor(errors, doctorId)){
 			validateApointmentDateAndTime(errors, form);
 		}
 	}
 	
-	private boolean validateDoctor(Errors errors, String doctorName){
-		User doctor = userService.findByUsername(doctorName);
+	private boolean validateDoctor(Errors errors, int doctorName){
+		User doctor = userService.findByUserId(doctorName);
         if (doctor == null) {
         	errors.reject("doctor.notExists", "Doctor "+ doctorName +" is not a regitered doctor.");
         	return false;

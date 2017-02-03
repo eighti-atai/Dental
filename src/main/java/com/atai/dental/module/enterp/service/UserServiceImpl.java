@@ -59,4 +59,10 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userDao.findByUserName(username);
     }
+
+    @Transactional(readOnly = true)
+	public User findByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return userDao.findByUserId(userId);
+	}
 }

@@ -69,7 +69,7 @@
 				<value>com.atai.dental.module.payment.model.Payment</value>
 				<value>com.atai.dental.module.enterp.model.User</value>
 				<value>com.atai.dental.module.enterp.model.Role</value>
-				
+				<value>com.atai.dental.module.enterp.model.DoctorLov</value>
 				
 				
 				

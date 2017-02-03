@@ -113,7 +113,7 @@
                     	<div class="form-group col-xs-4">
                         	<label class="col-md-2 control-lable" for="doctor">Doctor</label>
                             <div class="col-md-3">
-                            	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required/>
+                            	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()" />
                               	<div class="has-error" ng-show="myForm.$dirty">
                                		<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
                                 </div>
