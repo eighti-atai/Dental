@@ -188,7 +188,13 @@
        }
            
        $(function() {
-           $('#appointmentTime').timepicker();
+           $('#appointmentTime').timepicker({
+        	    'disableTimeRanges': [
+    	                ['11pm', '12am'],
+     	                ['12am', '6am']
+  	                  ],
+           'scrollDefault': 'now'                 
+           });
        });
        
        function populatePage(Record) 
