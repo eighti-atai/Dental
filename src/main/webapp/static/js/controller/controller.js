@@ -108,7 +108,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         if( retVal == true ){
         	RecordService.deleteRecord(objid)
             .then(
-            		fetchAllRecords,
+            		searchRecords,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
@@ -116,6 +116,20 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         }
     }
  
+    function deleteRecordWithFetch(objid){
+        /**/
+    	var retVal = confirm("Do you want to remove the record ?");
+        if( retVal == true ){
+        	RecordService.deleteRecord(objid)
+            .then(
+            		fetchAllRecords,
+            function(errResponse){
+                console.error('Error while deleting Record');
+            }
+        );
+        }
+    }
+    
     function submit() {
         if(self.Record.objid===null){
             console.log('Saving New Record', self.Record);
@@ -171,12 +185,16 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         }
     }
  
-    function remove(objid){
+    function remove(objid,fetchAll){
         console.log('id to be deleted', objid);
         if(self.Record.objid === objid) {//clean form if the Record to be deleted is shown there.
             reset();
         }
-        deleteRecord(objid);
+        if(fetchAll === 'true')
+        	{deleteRecordWithFetch(objid)}
+        else
+        	{deleteRecord(objid);}
+        
     }
  
     function change(objid){
