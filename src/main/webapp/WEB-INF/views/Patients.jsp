@@ -144,6 +144,7 @@
 	    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">    
 	    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+	    <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
 	    
 	    <script src="webjars/angularjs/1.5.8/angular.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
@@ -158,31 +159,40 @@
 	    <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
 	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+	    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
 	</head>
 
-<div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    
-    <p>Please select doctor..</p>
-    <input type="text" id="doctor"  placeholder="Enter Doctor"/>
-    <button id="okBtn">OK</button>
-  </div>
-
-	<div class="modal-content">
-
-
-    </div>
-</div>
 
 	<body ng-app="generalModule" class="ng-cloak">
-		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">           
+		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">  
+		
+		<!--  Add 2 Q Start-->       
+		
+		<div id="myModal" class="modal">
+			<div id="lov" unter-lov class = "lov"></div>
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <span class="close">&times;</span>
+		    
+		    <p>Please select doctor..</p>
+		    <input type="text" id="doctor"  placeholder="Enter Doctor" ng-focus="ctrl.setFocusedElement()" />
+		    <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+		    <button id="okBtn">OK</button>
+		  </div>
+		
+			<div class="modal-content">
+		
+		
+		    </div>
+		</div>
+		
+		<!-- Add 2 Q End -->  
 		    <div class="panel panel-default">
 		    	<div class="panel-heading"><span class="lead">Patient Details</span></div>
 		        <div class="formcontainer">
 		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+		        			
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
 		            	<input id="patientId" type="hidden" ng-model="ctrl.Record.patientId" /> 
 		

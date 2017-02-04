@@ -424,7 +424,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 							{
 								//if (self.lov[self.lastFocused.id] === key)
 								//{
+								if (self.Record[key]  !== undefined)
+								{
 									self.Record[key] = lovRecord[key];
+								}
+								else
+								{
+									document.getElementById(key).value = lovRecord[key];
+								}
 								//}
 							}
 							else
