@@ -271,7 +271,7 @@
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="IsDisabled">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" >Add to Q</button>
+		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button>
 		                    </div>
 		               	</div>
 		                
