@@ -105,7 +105,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function deleteRecord(objid){
         RecordService.deleteRecord(objid)
             .then(
-            		searchRecords,
+            		fetchAllRecords,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
