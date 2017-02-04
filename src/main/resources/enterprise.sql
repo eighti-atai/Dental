@@ -34,3 +34,13 @@ CREATE TABLE IF NOT EXISTS `user_role_tab` (
   phone_no_1 VARCHAR(15),
   phone_no_2 VARCHAR(15),
   objid VARCHAR(1000) NOT NULL);
+  
+  CREATE VIEW `dental`.`doctor_lov` AS
+    SELECT 
+        `user_tab`.`user_id` AS `user_id`,
+        `user_tab`.`user_name` AS `user_name`
+    FROM
+        (`user_tab`
+        JOIN `user_role_tab`)
+    WHERE
+        (`user_tab`.`user_id` = `user_role_tab`.`user_id`);
