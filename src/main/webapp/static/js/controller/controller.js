@@ -103,13 +103,17 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
  
     function deleteRecord(objid){
-        RecordService.deleteRecord(objid)
+        /**/
+    	var retVal = confirm("Do you want to remove the record ?");
+        if( retVal == true ){
+        	RecordService.deleteRecord(objid)
             .then(
             		fetchAllRecords,
             function(errResponse){
                 console.error('Error while deleting Record');
             }
         );
+        }
     }
  
     function submit() {
