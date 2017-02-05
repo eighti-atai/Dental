@@ -8,6 +8,7 @@ $(document).ready(function() {
     $('#f3').attr('src',base_url+'AppointmentsDates');
     $('#f1').attr('src',base_url+'Appointments');
     $('#f2').attr('src',base_url+'Patients');
+    
 })
   function resizeIframe() {
 	iframeLoaded('f2');
@@ -54,6 +55,12 @@ function reloadIFrame() {
 <body onresize="resizeIframe()">
 
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->
+
+<nav class = "navbar-dfault navbar-static-top" role = "navigation" style = "margin-bottom: 0">
+<div class="navbar-header">               
+    <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				
+</div>
+</nav>
 <iframe style="display:inline" id="f2" onload="iframeLoaded('f2')">
 </iframe>
 <!--  </div> -->

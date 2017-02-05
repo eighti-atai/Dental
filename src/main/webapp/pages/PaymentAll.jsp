@@ -59,7 +59,11 @@ function reloadIFrame() {
 
 </script>
 <body onresize="resizeIframe()">
-
+<nav class = "navbar-dfault navbar-static-top" role = "navigation" style = "margin-bottom: 0">
+<div class="navbar-header">               
+    <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				
+</div>
+</nav>
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->
 <iframe style="display:inline" id="f2" onload="iframeLoaded('f2')">
 </iframe>
