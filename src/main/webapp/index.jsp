@@ -268,13 +268,13 @@
                             <a ><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="javascript:OpenSubWindow('PD');" class="active"><i class="fa fa-database fa-fw"></i>Patient Registration<span class="fa arrow"></span></a>
+                            <a href="javascript:OpenSubWindow('PD');" class="active"><i class="fa fa-wheelchair fa-fw"></i>Patient Registration<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="javascript:OpenSubWindow('PM');" class="active"><i class="fa fa-database fa-fw"></i>Payment Information<span class="fa arrow"></span></a>
+                            <a href="javascript:OpenSubWindow('PM');" class="active"><i class="fa fa-credit-card fa-fw"></i>Payment Information<span class="fa arrow"></span></a>
                         </li>
                         <li>
-                            <a href="javascript:OpenSubWindow('PP');" class="active"><i class="fa fa-address-book fa-fw"></i>Treatment Information<span class="fa arrow"></span></a>
+                            <a href="javascript:OpenSubWindow('PP');" class="active"><i class="fa fa-user-md fa-fw"></i>Treatment Information<span class="fa arrow"></span></a>
 	                    </li>
                     </ul>
                 </div>
@@ -297,7 +297,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-wheelchair fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">Patients</div>
@@ -319,7 +319,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-credit-card fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">Payments</div>
@@ -341,7 +341,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-user-md  fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">Treatments</div>
