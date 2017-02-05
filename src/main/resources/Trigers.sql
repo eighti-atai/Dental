@@ -38,7 +38,7 @@ BEGIN
 SET NEW.treatment_id = (
        SELECT IFNULL(MAX(treatment_id), 0) + 1
        FROM treatment_tab
-       WHERE treatment_id  = NEW.treatment_id
+       WHERE patient_id  = NEW.patient_id
     );
 END$$
 DELIMITER ;

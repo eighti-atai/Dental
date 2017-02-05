@@ -53,7 +53,7 @@ public class UserController {
 
         securityService.autologin(userForm.getUserName(), userForm.getPasswordConfirm());
 
-        return "redirect:/index_db";
+        return "redirect:/index";
     }
 
     @GetMapping(value = "/login")
@@ -67,9 +67,9 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping(value = {"/", "/index_db"})
+    @GetMapping(value = {"/", "/index"})
     public String welcome(Model model) {
-        return "index_db";
+        return "index";
     }
 
 }

@@ -40,12 +40,13 @@ function iframeLoaded(x) {
           else
       		{
       	  		iFrameID.width = "";
-            	iFrameID.width = (y/4) + "px";
+      	  		var ff = y/4
+            	iFrameID.width = (ff-5) + "px";
       		}
     }   
 }
 
-window.setInterval("reloadIFrame();", 30000);
+//window.setInterval("reloadIFrame();", 30);
 
 function reloadIFrame() {
  document.getElementById('f4').contentWindow.document.location.reload();
@@ -56,10 +57,10 @@ function reloadIFrame() {
 
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->
 
-<nav class = "navbar-dfault navbar-static-top" role = "navigation" style = "margin-bottom: 0">
-<div class="navbar-header">               
-    <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				
-</div>
+<!-- <nav class = "navbar-dfault navbar-static-top" role = "navigation" style = "margin-bottom: 0"> -->
+<!-- <div class="navbar-header">                -->
+<!--     <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				 -->
+<!-- </div> -->
 </nav>
 <iframe style="display:inline" id="f2" onload="iframeLoaded('f2')">
 </iframe>
