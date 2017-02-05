@@ -501,6 +501,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         }
     });
     
+//    $scope.$watch('ctrl.Record.treatmentAmount', function (nval, oval) {
+//        if (oval !== nval) {
+//        	if (typeof (setTotalAmount) == "function")
+//        	{
+//        		setTotalAmount();
+//        	}
+//        }
+//    });
+    
     function setPanelHeader(title)
     {
     	if (typeof ($scope.panelHeader) !== "undefine")

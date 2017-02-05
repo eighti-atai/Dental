@@ -38,6 +38,15 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }*/
+			::-webkit-input-placeholder { /* WebKit browsers */
+			    text-transform: none;
+			}
+			:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			    text-transform: none;
+			}
+			::-moz-placeholder { /* Mozilla Firefox 19+ */
+			    text-transform: none;
+			}
 
 	 		.patientId.ng-valid {
 	         	background-color: lightgreen;

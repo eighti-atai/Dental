@@ -242,7 +242,7 @@
                           <div class="form-group col-md-4">
                               <label class="col-md-3 control-lable" for="treatmentSubType">Sub Type</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount'],['treatmentAmount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" style="text-transform:uppercase"/>
+                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" style="text-transform:uppercase"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentSubType.$error.required">This is a required field</span>
                                       <span ng-show="myForm.treatmentSubType.$invalid">This field is invalid </span>
