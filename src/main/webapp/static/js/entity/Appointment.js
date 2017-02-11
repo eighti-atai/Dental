@@ -4,17 +4,19 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Appointment',
-        record :{key:{appointmentId:'',patientId:''} ,appointmentDate:'',appointmentTime:'',objid:null},
+        record :{key:{appointmentId:'',patientId:''} ,appointmentDate:'',appointmentTime:'',doctor:'',objid:null},
         emptyRecord :emptyRecord,
         lov :{doctor: 'DoctorLov'},
         lovRecord:{doctor:{doctor:'',userName:''}},
-        lovTitles :{doctor: 'Doctors'} 
+        lovTitles :{doctor: 'Doctors'} ,
+        blurList : ['appointmentDate','appointmentTime','doctor']
     };
     return entityRec;
     
     function emptyRecord() {
-        return {key:{appointmentId:'',patientId:''},appointmentDate:'',appointmentTime:'',objid:null};
-    }	
+        return {key:{appointmentId:'',patientId:''},appointmentDate:'',appointmentTime:'',doctor:'',objid:null};
+    }
+    
 }]);/**
  * 
  */

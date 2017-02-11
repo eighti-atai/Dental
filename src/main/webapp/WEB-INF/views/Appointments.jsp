@@ -78,7 +78,7 @@
     
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointment')">
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointment')" >
     	<div class="panel panel-default">
         	<div class="panel-heading" ng-bind-html="panelHeader"></div>
             <div class="formcontainer">
@@ -144,7 +144,7 @@
                           	</tr>
                       	</thead>
            			<tbody>
-                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)" >
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
@@ -172,7 +172,7 @@
   	</div>
 </body>
 	<script type="text/javascript">
-       //var scope = angular.element(document.getElementById("con")).scope();
+       //var  scope= angular.element(document.getElementById("con")).scope();
        //scope.ctrl.setPanelHeader("Appointment");
        function populate(patientId,patientName) 
        {
@@ -196,7 +196,19 @@
            'scrollDefault': 'now'                 
            });
        });
+
        
+//        $(document).ready(function() {
+//     	   var scopeT = angular.element(document.getElementById("con")).scope();
+// //     	   watch(scopeT.ctrl.Record, "appointmentDate", function(){
+// //     		   alert("f1.Reset NOT found X3");
+// //     		   populatePage(scopeT.ctrl.Record);
+    		   
+//     		   watch(scopeT.ctrl.Record, "doctor", function(){
+//         		   alert("f1.Reset NOT found X3");
+//         		   populatePage(scopeT.ctrl.Record);
+//        	});
+//     	})
        function populatePage(Record) 
        {
            if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
@@ -204,5 +216,11 @@
            else
                alert("f1.Reset NOT found X3");
        }  
+       
+       function cc(Record) 
+       {
+           
+               alert("f1.Reset NOT found X3");
+       } 
     </script>
 </html>

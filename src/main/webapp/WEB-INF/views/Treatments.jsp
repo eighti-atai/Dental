@@ -213,9 +213,9 @@
                     	<input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="treatmentId form-control input-sm" placeholder="Enter Treatmnet ID"/>
 
                       	<div class="row">
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="patientId">Patient ID</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="patientId">Patient ID</label>
+                              <div class="col-sm-7">
                                   <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
@@ -226,9 +226,9 @@
 <!--                       	</div>  -->
                       	
 <!--                       	<div class="row"> -->
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentMainType">Main Type</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentMainType">Main Type</label>
+                              <div class="col-sm-7">
                                   <input type="text" ng-model="ctrl.Record.treatmentMainType" id="treatmentMainType" class="treatmentMainType form-control input-sm" placeholder="Enter Main Type " required maxlength="20" style="text-transform:uppercase"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentMainType.$error.required">This is a required field</span>
@@ -239,9 +239,9 @@
 <!--                       	</div>  -->
                       	
 <!--                       	<div class="row"> -->
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentSubType">Sub Type</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentSubType">Sub Type</label>
+                              <div class="col-sm-7">
                                   <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" style="text-transform:uppercase"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentSubType.$error.required">This is a required field</span>
@@ -252,9 +252,9 @@
                       	</div> 
 
                       	<div class="row">
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentStat">Treatment State</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentStat">Treatment State</label>
+                              <div class="col-sm-7">
                                   <input type="text" ng-model="ctrl.Record.treatmentStat" id="treatmentStat" class="treatmentStat form-control input-sm" placeholder="Enter Treatment State " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentStat.$error.required">This is a required field</span>
@@ -265,9 +265,9 @@
 <!--                       	</div>  -->
                       	
 <!--                       	<div class="row"> -->
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentPaidStat">Payment State</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentPaidStat">Payment State</label>
+                              <div class="col-sm-7">
                                   <input type="text" ng-model="ctrl.Record.treatmentPaidStat" id="treatmentPaidStat" class="treatmentPaidStat form-control input-sm" placeholder="Enter Payment State " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentPaidStat.$error.required">This is a required field</span>
@@ -278,9 +278,9 @@
 <!--                       	</div> -->
                       	
 <!--                       	<div class="row">  -->
-		                	<div class="form-group col-md-4">
-		                    	<label class="col-md-3 control-lable" for="treatmentDate">Treatment Date</label>
-		                        <div class="col-md-7">		                        	
+		                	<div class="form-group col-sm-4">
+		                    	<label class="col-sm-3 control-lable" for="treatmentDate">Treatment Date</label>
+		                        <div class="col-sm-7">		                        	
 		                        	<md-datepicker ng-model="ctrl.Record.treatmentDate" md-placeholder="Enter Date"></md-datepicker>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                        	</div>
@@ -289,9 +289,9 @@
  		                </div>
 
                       	<div class="row">
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentAmount">Treatment Amount</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentAmount">Treatment Amount</label>
+                              <div class="col-sm-7">
                                   <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentAmount" id="treatmentAmount" class="treatmentAmount form-control input-sm" placeholder="Treatment Amount " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentAmount.$error.required">This is a required field</span>
@@ -302,9 +302,9 @@
 <!--                       	</div> -->
                       	
 <!--                       	<div class="row"> -->
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentDiscount">Discount</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentDiscount">Discount</label>
+                              <div class="col-sm-7">
                                   <input type="number" step="0.01" ng-model="ctrl.Record.treatmentDiscount" id="treatmentDiscount" onblur ="setTotalAmount()" class="treatmentDiscount form-control input-sm" placeholder="Enter Treatment Discount " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentDiscount.$error.required">This is a required field</span>
@@ -315,9 +315,9 @@
 <!--                       	</div> -->
                       	
 <!--                       	<div class="row"> -->
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentTotal">Total Amount</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentTotal">Total Amount</label>
+                              <div class="col-sm-7">
                                   <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentTotal" id="treatmentTotal" class="treatmentTotal form-control input-sm" placeholder="Treatment Total " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentTotal.$error.required">This is a required field</span>
@@ -328,9 +328,9 @@
                       	</div>
                       	
                       	<div class="row">
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentPaid">Paid Amount</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentPaid">Paid Amount</label>
+                              <div class="col-sm-7">
                                   <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentPaid" id="treatmentPaid" class="treatmentPaid form-control input-sm" placeholder="Paid Amount " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentPaid.$error.required">This is a required field</span>
@@ -341,9 +341,9 @@
                       	</div>
                       	
                       	<div class="row">
-                          <div class="form-group col-md-4">
-                              <label class="col-md-3 control-lable" for="treatmentDesc">Description</label>
-                              <div class="col-md-7">
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="treatmentDesc">Description</label>
+                              <div class="col-sm-7">
 <!--                                   <input type="text" ng-model="ctrl.Record.treatmentDesc" id="treatmentDesc" class="treatmentDesc form-control input-sm" placeholder="Enter Treatment Desc " /> -->
                                   <textarea rows="4" cols="50" ng-model="ctrl.Record.treatmentDesc" id="treatmentDesc" class="treatmentDesc form-control input-sm" placeholder="Enter Treatment Desc "></textarea>
                                   <div class="has-error" ng-show="myForm.$dirty">
