@@ -123,15 +123,16 @@ public class AbstractDao<PK extends Serializable, T> {
 				fieldName = field.getName();
 				fieldValue = field.get(entity).toString();
 				System.out.println("field value is ----------------------"+fieldValue);
-				if(fieldValue.contains("%"))
+				//if(fieldValue.contains("%"))
+				if(c.getTypeName() == "java.lang.String")
 				{
 					if (alias == null)
 					{
-						criteria.add(Restrictions.ilike(fieldName, field.get(entity)));
+						criteria.add(Restrictions.ilike(fieldName, "%"+field.get(entity).toString()+"%"));
 					}
 					else
 					{
-						criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
+						criteria.add(Restrictions.ilike(alias + "."+fieldName, "%"+field.get(entity)+"%"));
 					}
 				}
 				else
