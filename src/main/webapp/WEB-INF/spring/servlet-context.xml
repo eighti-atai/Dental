@@ -57,6 +57,7 @@
 				<value>com.atai.dental.module.enterprise.model.Role</value>
 				<value>com.atai.dental.module.enterprise.model.Site</value>-->
 				<value>com.atai.dental.module.enterp.model.Appointment</value>
+				<value>com.atai.dental.module.enterp.model.TmpAppointment</value>
 				<value>com.atai.dental.module.enterp.model.Patient</value>
 				<value>com.atai.dental.module.enterp.model.AttendPatient</value> 
 				<value>com.atai.dental.module.trment.model.Treatment</value> 
