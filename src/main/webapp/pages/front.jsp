@@ -55,13 +55,13 @@ function iframeLoaded(x) {
 }
 
 
-setInterval(function(){
+// setInterval(function(){
 	
-	if (hf1 !== document.getElementById('f1').contentDocument.body.scrollHeight||hf2 !== document.getElementById('f2').contentDocument.body.scrollHeight )
-		{
-			resizeIframe();
-		}
-}, 200);
+// 	if (hf1 !== document.getElementById('f1').contentDocument.body.scrollHeight||hf2 !== document.getElementById('f2').contentDocument.body.scrollHeight )
+// 		{
+// 			resizeIframe();
+// 		}
+// }, 200);
 //window.setInterval("reloadIFrame();", 30);
 
 // function reloadIFrame() {
