@@ -296,6 +296,7 @@
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
+                        		<a href="javascript:OpenSubWindow('PD');" class="active a-db">
                                 <div class="col-xs-3">
                                     <i class="fa fa-wheelchair fa-5x"></i>
                                 </div>
@@ -303,6 +304,7 @@
                                     <div class="huge">Patients</div>
                                     <div>Registration</div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <a href="javascript:OpenSubWindow('PD');" class="active">
@@ -318,6 +320,7 @@
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
+                        		<a href="javascript:OpenSubWindow('PM');" class="active a-db">
                                 <div class="col-xs-3">
                                     <i class="fa fa-credit-card fa-5x"></i>
                                 </div>
@@ -325,6 +328,7 @@
                                     <div class="huge">Payments</div>
                                     <div>Payment details</div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <a href="javascript:OpenSubWindow('PM');" class="active">
@@ -340,6 +344,7 @@
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
+                        		<a href="javascript:OpenSubWindow('PP');" class="active a-db">
                                 <div class="col-xs-3">
                                     <i class="fa fa-user-md  fa-5x"></i>
                                 </div>
@@ -347,6 +352,7 @@
                                     <div class="huge">Treatments</div>
                                     <div>treatment info</div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <a href="javascript:OpenSubWindow('PP');" class="active">
