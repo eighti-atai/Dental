@@ -12,27 +12,17 @@
     	<headers>
         	<frame-options policy="SAMEORIGIN"/>
     	</headers>
-        <intercept-url pattern="/" access="permitAll"/>
-        <intercept-url pattern="/index_db" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
-        <!-- intercept-url pattern="/salespartlist1" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/addresses" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/site2" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invlocations" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/showAddInventoryPart" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invPart" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invpartinstock" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/sites" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/salespartprices" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invPartCost" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invlocations" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/addresses" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invPartCosts" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/invpartinstocks" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/customers" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/payments" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/customerorders" access="hasRole('USER') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/CustomerOrderLines" access="hasRole('USER') or hasRole('ADMIN')"/-->
-        <form-login login-page="/login" default-target-url="/index_db" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/index" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/Treatments" access="hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/AttendPatients" access="hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/Patients" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/TreatmentQueries" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/Payments" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/AppointmentsDates" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/Appointments" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <form-login login-page="/login" default-target-url="/index" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
         <csrf token-repository-ref="tokenRepository"/>
     </http>
