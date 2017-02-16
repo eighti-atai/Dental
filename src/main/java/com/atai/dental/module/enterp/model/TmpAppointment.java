@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.atai.dental.generic.interfaces.Model;
+import com.atai.dental.generic.other.Time12HoursValidator;
 
 @Entity
 @Table(name = "tmp_appointment_tab")
@@ -31,6 +32,8 @@ public class TmpAppointment implements Model<Integer> {
 	private Integer  doctor;
 	private String code;
 	private String objid;
+	@Column(name = "contact_no")
+	private Integer contactNo;
 	
 	
 	
@@ -75,11 +78,15 @@ public class TmpAppointment implements Model<Integer> {
 	}
 
 	public String getTime() {
-		return time;
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		return timeValidate.convertTimeBack(time);
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		String timeT = time.replaceAll("\\s","");
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		timeValidate.validate(timeT);
+		this.time = timeValidate.convertTime(timeT);
 	}
 
 	public Integer getDoctor() {
@@ -115,26 +122,14 @@ public class TmpAppointment implements Model<Integer> {
 		setAppointmentId(id);
 
 	}
-//	public String getAppointmentTime() {
-//		return appointmentTime;
-//	}
-//
-//	public void setAppointmentTime(String appointmentTime) {
-//		
-//		String time = appointmentTime.replaceAll("\\s","");
-//		if(time.length()>2){
-//			String s = time.substring(time.length()-1, time.length());
-//			/*if(s.toLowerCase()=="pm")
-//			{
-//				string
-//			}*/
-//			
-//			time = time.substring(0, time.length()-2);
-//			time = time+":00";
-//		}
-//		
-//		System.out.println("########### "+time );
-//		this.appointmentTime = time;
-//	}
+
+	public Integer getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(Integer contactNo) {
+		this.contactNo = contactNo;
+	}
+
 
 }
