@@ -134,10 +134,12 @@
              			<div class="form-group col-xs-6">
                         	<label class="col-md-2 control-lable" for="code">Treatment Code</label>
                             <div class="col-md-3">
-                            	<input type="text" ng-model="ctrl.Record.code" id="code" class="doctor form-control input-sm" placeholder="Enter Treatment Code"  />
-                              	<div class="has-error" ng-show="myForm.$dirty">
-                               		<span ng-show="myForm.code.$error.required">This is a required field</span>
-                                </div>
+                            	<select ng-model="ctrl.Record.code" id="code" class="code form-control input-sm" placeholder="Select Treatment Code">
+								  		<option value=""></option>
+								  		<option value="General">General</option>
+								  		<option value="Treatment 1">Treatment 1</option>
+								  		<option value="Treatment 2">Treatment 2</option>
+									</select>
                      		</div>
              			</div>
              			

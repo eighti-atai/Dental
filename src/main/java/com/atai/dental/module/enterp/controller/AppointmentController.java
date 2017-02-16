@@ -81,7 +81,7 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 			ResponseEntity<Appointment> res =  super.add(appointment);
 			appointment = service.getByObjid(appointment.getObjid()) ;
 			TmpAppointment tmpAppointment = new TmpAppointment();
-			//tmpAppointment.setCode(appointment.getCode());
+			tmpAppointment.setCode(appointment.getCode());
 			tmpAppointment.setDate(appointment.getAppointmentDate());
 			tmpAppointment.setTime(appointment.getAppointmentTime());
 			tmpAppointment.setPatientId(appointment.getId().getPatientId());
@@ -113,7 +113,7 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		tmpAppointment = (list.isEmpty() ? null : list.get(0));
 		if(tmpAppointment!= null)
 		{
-			//tmpAppointment.setCode(appointment.getCode());
+			tmpAppointment.setCode(newObject.getCode());
 			tmpAppointment.setDate(newObject.getAppointmentDate());
 			tmpAppointment.setTime(newObject.getAppointmentTime());
 			tmpAppointment.setDoctor(newObject.getDoctor());
