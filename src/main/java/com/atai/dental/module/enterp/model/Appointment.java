@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.atai.dental.generic.interfaces.Model;
+import com.atai.dental.generic.other.Time12HoursValidator;
 
 @Entity
 @Table(name = "appointment_tab")
@@ -88,25 +89,16 @@ public class Appointment implements Model<AppointmentKey> {
 	}
 
 	public String getAppointmentTime() {
-		return appointmentTime;
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		return timeValidate.convertTimeBack(appointmentTime);
 	}
 
 	public void setAppointmentTime(String appointmentTime) {
 		
 		String time = appointmentTime.replaceAll("\\s","");
-		if(time.length()>2){
-			String s = time.substring(time.length()-1, time.length());
-			/*if(s.toLowerCase()=="pm")
-			{
-				string
-			}*/
-			
-			time = time.substring(0, time.length()-2);
-			time = time+":00";
-		}
-		
-		System.out.println("########### "+time );
-		this.appointmentTime = time;
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		timeValidate.validate(time);
+		this.appointmentTime = timeValidate.convertTime(time);
 	}
 
 	public int getDoctor() {
