@@ -20,41 +20,41 @@ public class TmpAppointment implements Model<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "app_id")
-	private int appointmentId;
+	private Integer appointmentId;
 	@Column(name = "patient_id")
-	private int patientId;
+	private Integer patientId;
 	@Column(name = "org_appoinment_id")
-	private int orgAppoinmentId;
+	private Integer orgAppoinmentId;
 	private String name;
 	private Date date;
 	private String time;
-	private int doctor;
+	private Integer  doctor;
 	private String code;
 	private String objid;
 	
 	
 	
-	public int getAppointmentId() {
+	public Integer getAppointmentId() {
 		return appointmentId;
 	}
 
-	public void setAppointmentId(int appointmentId) {
+	public void setAppointmentId(Integer appointmentId) {
 		this.appointmentId = appointmentId;
 	}
 
-	public int getPatientId() {
+	public Integer getPatientId() {
 		return patientId;
 	}
 
-	public void setPatientId(int patientId) {
+	public void setPatientId(Integer patientId) {
 		this.patientId = patientId;
 	}
 
-	public int getOrgAppoinmentId() {
+	public Integer getOrgAppoinmentId() {
 		return orgAppoinmentId;
 	}
 
-	public void setOrgAppoinmentId(int orgAppoinmentId) {
+	public void setOrgAppoinmentId(Integer orgAppoinmentId) {
 		this.orgAppoinmentId = orgAppoinmentId;
 	}
 
@@ -82,11 +82,11 @@ public class TmpAppointment implements Model<Integer> {
 		this.time = time;
 	}
 
-	public int getDoctor() {
+	public Integer getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(int doctor) {
+	public void setDoctor(Integer  doctor) {
 		this.doctor = doctor;
 	}
 

@@ -86,6 +86,7 @@
            			<div id="lov" unter-lov class = "lov"></div>	
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
+         			<input type="number" ng-model="ctrl.Record.key.appointmentId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
                     <div class="row">
                     	<div class="form-group col-xs-5">
                     		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
@@ -134,7 +135,7 @@
           	<div class="panel panel-default">
        			<div class="panel-heading"><span class="lead">List of Appointments </span></div>
               	<div class="tablecontainer">
-               		<table class="table table-hover">
+               		<table id="tableId" class="table table-hover">
                   		<thead>
                         	<tr>
                    				<th>Date</th>

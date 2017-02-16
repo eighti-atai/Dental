@@ -269,8 +269,9 @@
 		                        <div class="col-md-7">
 		                      		<select ng-model="ctrl.Record.code" id="code" class="code form-control input-sm" placeholder="Selet Gender">
 								  		<option value=""></option>
-								  		<option value="Male">Male</option>
-								  		<option value="Female">Female</option>
+								  		<option value="General">General</option>
+								  		<option value="Treatment 1">Treatment 1</option>
+								  		<option value="Treatment 2">Treatment 2</option>
 									</select>
 								</div>
 							</div>

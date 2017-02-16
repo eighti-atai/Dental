@@ -22,8 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
 import com.atai.dental.module.enterp.model.AppointmentKey;
+import com.atai.dental.module.enterp.model.TmpAppointment;
 import com.atai.dental.module.enterp.service.AppointmentService;
+import com.atai.dental.module.enterp.service.TmpAppointmentService;
 import com.atai.dental.module.enterp.validator.AppointmentValidator;
+import com.atai.dental.module.payment.model.Payment;
 
 
 @RestController
@@ -31,6 +34,10 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 
 	@Autowired
 	private AppointmentValidator appointmentValidator;
+	
+	@Autowired
+	private TmpAppointmentService tmpAppointmentService;
+	
 	
 	@Autowired
 	public AppointmentController(AppointmentService service) {
@@ -71,7 +78,18 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		else
 		{
 			System.out.println("Appointment Part is Successfully added.");
-			return super.add(appointment);
+			ResponseEntity<Appointment> res =  super.add(appointment);
+			appointment = service.getByObjid(appointment.getObjid()) ;
+			TmpAppointment tmpAppointment = new TmpAppointment();
+			//tmpAppointment.setCode(appointment.getCode());
+			tmpAppointment.setDate(appointment.getAppointmentDate());
+			tmpAppointment.setTime(appointment.getAppointmentTime());
+			tmpAppointment.setPatientId(appointment.getId().getPatientId());
+			tmpAppointment.setOrgAppoinmentId(appointment.getId().getAppointmentId());
+			tmpAppointment.setDoctor(appointment.getDoctor());
+			tmpAppointmentService.persist(tmpAppointment);
+			
+			return res;
 		}
 	}
 
@@ -79,7 +97,29 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 	@PutMapping(value = "/Appointment")
 	public ResponseEntity<Appointment> modify(@RequestBody Appointment newObject) {
 		// TODO Auto-generated method stub
-		return super.modify(newObject);
+		ResponseEntity<Appointment> res =  super.modify(newObject);
+		TmpAppointment tmpAppointment = new TmpAppointment();
+		tmpAppointment.setPatientId(newObject.getId().getPatientId());
+		tmpAppointment.setOrgAppoinmentId(newObject.getId().getAppointmentId());
+		List<TmpAppointment> list = tmpAppointmentService.executeSelectQuery(tmpAppointment);
+		if(list.isEmpty())
+		{
+			tmpAppointment= null;
+		}
+		else
+		{
+			tmpAppointment = list.get(0);
+		}
+		tmpAppointment = (list.isEmpty() ? null : list.get(0));
+		if(tmpAppointment!= null)
+		{
+			//tmpAppointment.setCode(appointment.getCode());
+			tmpAppointment.setDate(newObject.getAppointmentDate());
+			tmpAppointment.setTime(newObject.getAppointmentTime());
+			tmpAppointment.setDoctor(newObject.getDoctor());
+			tmpAppointmentService.update(tmpAppointment);
+		}
+		return res;
 	}
 
 	@Override

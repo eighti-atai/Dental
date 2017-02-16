@@ -77,7 +77,7 @@
        function populate(appointmentDate) 
        {
            var scope = angular.element(document.getElementById("con2")).scope();
-           scope.ctrl.Record.appointmentDate = appointmentDate;
+           scope.ctrl.Record.date = appointmentDate;
            scope.ctrl.setPanelHeader('Appointments - '+appointmentDate.getDate()+'/'+(appointmentDate.getMonth()+1)+'/'+appointmentDate.getFullYear());
            scope.$apply(scope.ctrl.searchRecords());
        }
@@ -85,72 +85,26 @@
 </head>
 <body ng-app="generalModule" class="ng-cloak">
 	<div id="con2" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointments')">
-<!--     	<div class="panel panel-default"> -->
-<!--         	<div class="panel-heading"><span class="lead">Appointments</span></div> -->
-<!--             <div class="formcontainer"> -->
-           		<!-- <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-               		<input type="hidden" ng-model="ctrl.Record.objid" /> 
-         			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
-                    <div class="row">
-                    	<div class="form-group col-md-12">
-                    		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
-                            <md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required></md-datepicker>
-                            <div class="has-error" ng-show="myForm.$dirty">
-                            	<span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
-                                <span ng-show="myForm.appointmentDate.$invalid">This field is invalid </span>
-                            </div>
-                 		</div>
-  					</div>
-                   	<div class="row">
-                    	<div class="form-group col-md-12">
-                         	<label class="col-xs-2 control-lable" for="appointmentTime">Time</label>
-                            <div class="col-xs-10">
-                            	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="doctor form-control input-sm" placeholder="Enter Appointment Time" required/></p>
-                              	<div class="has-error" ng-show="myForm.$dirty">
-                                	<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
-                                </div> 
-                      		</div>
-                		</div>
-            		</div>
-                    <div class="row">
-                    	<div class="form-group col-md-12">
-                        	<label class="col-xs-2 control-lable" for="doctor">Doctor</label>
-                            <div class="col-xs-10">
-                            	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required/>
-                              	<div class="has-error" ng-show="myForm.$dirty">
-                               		<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
-                                </div>
-                     		</div>
-             			</div>
-               		</div>
-                    <div class="row">
-            			<div class="form-actions floatRight">
-                       		<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                            <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                            <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
-                            <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                    	</div>
-               		</div>
-    			</form>
-			</div> -->
-          
+         
           	<div class="panel panel-default">
        			<div class="panel-heading" ng-bind-html="panelHeader"></div>
               	<div class="tablecontainer">
-               		<table class="table table-hover">
+               		<table id="tableId" class="table table-hover">
                   		<thead>
                         	<tr>
                    				<th>Date</th>
                               	<th>Time</th>
                               	<th>Doctor</th>
+                              	<th>Treatment Code</th>
                               	<th width="20%"></th>
                           	</tr>
                       	</thead>
            			<tbody>
                     	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd"></span></td>
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
+	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'date', u.date)|date:yyyy/MM/dd"></span></td>
+	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.time"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
+	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.code"></span></td>
 	                                                                                         
 	                        <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.appointmentDate"></md-datepicker></td>
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>

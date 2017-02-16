@@ -19,15 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
 import com.atai.dental.module.enterp.model.AppointmentKey;
+import com.atai.dental.module.enterp.model.TmpAppointment;
 import com.atai.dental.module.enterp.service.AppointmentService;
+import com.atai.dental.module.enterp.service.TmpAppointmentService;
 
 
 @RestController
-public class AppointmentControllerDate extends AbstractController<AppointmentKey, Appointment>{
+public class AppointmentControllerDate extends AbstractController<Integer, TmpAppointment>{
 
 	@Autowired
-	public AppointmentControllerDate(AppointmentService service) {
-		super(service, AppointmentKey.class, "AppointmentsDates");
+	public AppointmentControllerDate(TmpAppointmentService service) {
+		super(service, Integer.class, "AppointmentsDates");
 		System.out.println("Appointment dates entity");
 		// TODO Auto-generated constructor stub
 	}
@@ -41,34 +43,34 @@ public class AppointmentControllerDate extends AbstractController<AppointmentKey
 
 	@Override
 	@GetMapping(value = "/AppointmentsDate")
-	public ResponseEntity<List<Appointment>> list() {
+	public ResponseEntity<List<TmpAppointment>> list() {
 		// TODO Auto-generated method stub
 		return super.list();
 	}
 
 	@Override
 	@PostMapping(value = "/AppointmentsDate/Search")
-	public ResponseEntity<List<Appointment>> search(@RequestBody Appointment object) {
+	public ResponseEntity<List<TmpAppointment>> search(@RequestBody TmpAppointment object) {
 		// TODO Auto-generated method stub
 		return super.search(object);
 	}
 
 	@Override
 	@DeleteMapping(value = "/AppointmentsDate/{objid:.+}")
-	public ResponseEntity<Appointment> delete(@PathVariable("objid") String objid) {
+	public ResponseEntity<TmpAppointment> delete(@PathVariable("objid") String objid) {
 		// TODO Auto-generated method stub
 		return super.delete(objid);
 	}
 
 	@Override
 	@PostMapping(value = "/AppointmentsDate")
-	public ResponseEntity<Appointment> add(@RequestBody Appointment object) {
+	public ResponseEntity<TmpAppointment> add(@RequestBody TmpAppointment object) {
 		return null;
 	}
 
 	@Override
 	@PutMapping(value = "/AppointmentsDate")
-	public ResponseEntity<Appointment> modify(@RequestBody Appointment newObject) {
+	public ResponseEntity<TmpAppointment> modify(@RequestBody TmpAppointment newObject) {
 		return null;
 	}
 

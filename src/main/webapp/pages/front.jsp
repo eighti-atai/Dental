@@ -12,7 +12,7 @@ $(document).ready(function() {
     $('#f3').attr('src',base_url+'AppointmentsDates');
     $('#f1').attr('src',base_url+'Appointments');
    
-    
+    //$("f2").contents().find("body").onclick = function() { alert('hhjgh') };
 })
   function resizeIframe() {
 	iframeLoaded('f2');
@@ -51,17 +51,26 @@ function iframeLoaded(x) {
             	hf3 = document.getElementById('f1').contentDocument.body.scrollHeight ;
             	iFrameID.height = hf3; 
       		}
-    }   
-}
-
-
-// setInterval(function(){
-	
-// 	if (hf1 !== document.getElementById('f1').contentDocument.body.scrollHeight||hf2 !== document.getElementById('f2').contentDocument.body.scrollHeight )
-// 		{
-// 			resizeIframe();
-// 		}
-// }, 200);
+    }
+}  
+var x1;
+	var x2 ;
+	var x3 ;
+	var x1p;
+	var x2p;
+	var x3p;
+setInterval(function(){
+	 x1 = window[0].document.getElementById("tableId").rows.length;
+	 x2 = window[1].document.getElementById("tableId").rows.length;
+	 x3 = window[2].document.getElementById("tableId").rows.length;
+	if (x1 !== x1p||x2 !== x2p||x3 !== x3p )
+		{
+			resizeIframe();
+			x1p = x1;
+			x2p = x2;
+			x3p = x3;
+		}
+}, 200);
 //window.setInterval("reloadIFrame();", 30);
 
 // function reloadIFrame() {
@@ -78,7 +87,7 @@ function iframeLoaded(x) {
 <!--     <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				 -->
 <!-- </div> -->
 </nav>
-<iframe  id="f2" onload="iframeLoaded('f2')" scrolling="no">
+<iframe  id="f2" onload="iframeLoaded('f2')" scrolling="no" >
 </iframe>
 <!--  </div> -->
  <div>
@@ -87,7 +96,7 @@ function iframeLoaded(x) {
 <iframe  id="f1" onload="iframeLoaded('f1')" scrolling="no">
 </iframe>
 <!--  </div> -->
-<iframe  id="f3" onload="iframeLoaded('f3')">
+<iframe  id="f3" onload="iframeLoaded('f3')" scrolling="no">
 </iframe>
 <div>
  </div>
