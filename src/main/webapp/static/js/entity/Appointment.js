@@ -4,7 +4,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Appointment',
-        record :{key:{appointmentId:'',patientId:''} ,appointmentDate:'',appointmentTime:'',doctor:'',objid:null},
+        record :{key:{appointmentId:'',patientId:''} ,appointmentDate:'',appointmentTime:'',doctor:'',code:'',objid:null},
         emptyRecord :emptyRecord,
         lov :{doctor: 'DoctorLov'},
         lovRecord:{doctor:{doctor:'',userName:''}},
@@ -14,7 +14,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
     return entityRec;
     
     function emptyRecord() {
-        return {key:{appointmentId:'',patientId:''},appointmentDate:'',appointmentTime:'',doctor:'',objid:null};
+        return {key:{appointmentId:'',patientId:''},appointmentDate:'',appointmentTime:'',doctor:'',code:'',objid:null};
     }
     
 }]);/**

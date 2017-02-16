@@ -42,6 +42,7 @@ public class Appointment implements Model<AppointmentKey> {
 	private String appointmentTime;
 	private int doctor;
 	private String objid;
+	private String code;
 	
 	public Patient getPatient() {
 		return patient;
@@ -125,6 +126,14 @@ public class Appointment implements Model<AppointmentKey> {
 	public void setId(AppointmentKey key) {
 		setKey(key);
 
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

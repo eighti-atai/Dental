@@ -109,7 +109,16 @@
 	      	.patientGender.ng-dirty.ng-invalid-email {
 	          	background-color: yellow;
 	      	}
-	
+	      	
+			.email.ng-valid {
+	          	background-color: lightgreen;
+	      	}
+	      	.email.ng-dirty.ng-invalid-required {
+	          	background-color: red;
+	      	}
+	      	.email.ng-dirty.ng-invalid-email {
+	          	background-color: yellow;
+	      	}
 	
 			.modal {
 			    display: none; /* Hidden by default */
@@ -220,10 +229,10 @@
 		                      
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientAddress">Address</label>
+		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact Number</label>
 		                        <div class="col-md-10">
-		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
-		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                        	<input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                            <div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
@@ -231,8 +240,8 @@
 		                      
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientBirthDate">Date of Birth</label>
-		                        <div class="col-md-7">		                        	
+		                    	<label class="col-md-2 control-lable" for="patientBirthDate">DoB</label>
+		                        <div class="col-md-10">		                        	
 		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate" md-placeholder="Enter date"></md-datepicker>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                        	</div>
@@ -243,7 +252,7 @@
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-xs-4">
 		                    <label class="col-md-2 control-lable" for="patientIdNo">ID Number</label>
-		                    	<div class="col-md-7">
+		                    	<div class="col-md-10">
 		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" maxlength="15" style="text-transform:uppercase"/>
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                			</div>
@@ -252,20 +261,21 @@
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact Number</label>
-		                        <div class="col-md-7">
-		                        	<input type="text" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" />
-		                            <div class="has-error" ng-show="myForm.$dirty">
+							<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientAddress">Address</label>
+		                        <div class="col-md-10">
+		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
+		                	
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientGender">Gender</label>
-		                        <div class="col-md-7">
+		                        <div class="col-md-10">
 		                      		<select ng-model="ctrl.Record.patientGender" id="patientGender" class="patientGender form-control input-sm" placeholder="Selet Gender">
 								  		<option value=""></option>
 								  		<option value="Male">Male</option>
@@ -274,13 +284,22 @@
 								</div>
 							</div>
 		                </div>
-		
+						<div class="row"> 
+		                	<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="email">Email</label>
+		                        <div class="col-md-10">
+		                           	<input type="text" ng-model="ctrl.Record.email" id="email" class="email form-control input-sm" placeholder="Enter Email"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                            </div>
+		                        </div>
+		                	</div>
+		                </div>
 		                <div class="row">
 		                	<div class="form-actions floatRight">
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button>
+<!-- 		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button> -->
 		                    </div>
 		               	</div>
 		                
@@ -294,22 +313,24 @@
 		                	<thead>
 		                    	<tr>
 		                        	<th>Name</th>
+		                        	<th>Contact No</th>
 		                            <th>Address</th>
 		                            <th>Date of Birth</th>
 		                            <th>ID No</th>	                            
-		                            <th>Contact No</th>
 		                            <th>Gender</th>
+		                            <th>Email</th>
 		                            <th width="10%"></th>
 		                        </tr>
 		                  	</thead>
 		                	<tbody>
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'patientBirthDate', u.patientBirthDate)|date:yyyy/MM/dd"></span></td>  
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientIdNo"></span></td>
-		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientGender"></span></td>
+		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.email"></span></td>
 		                                                                                          
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientName"style="width: 100%"/></td>
 		                           	<td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patientAddress" style="width: 100%""/></td>
@@ -381,5 +402,11 @@
 	            else
 	                alert("f1.Reset NOT found X3");
 	        });
+	        function isNumberKey(evt){
+	            var charCode = (evt.which) ? evt.which : event.keyCode
+	            if (charCode > 31 && (charCode < 48 || charCode > 57))
+	                return false;
+	            return true;
+	        }
 	    </script>
 </html>

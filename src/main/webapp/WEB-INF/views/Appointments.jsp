@@ -50,6 +50,16 @@
 	    .doctor.ng-dirty.ng-invalid-minlength {
 	        background-color: yellow;
 	    }
+	    
+	    .code.ng-valid {
+	        background-color: lightgreen;
+	    }
+	    /*.code.ng-dirty.ng-invalid-required {
+	        background-color: red;
+	    }*/
+	    .code.ng-dirty.ng-invalid-minlength {
+	        background-color: yellow;
+	    }
 
     </style>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -88,7 +98,7 @@
          			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
          			<input type="hidden" ng-model="ctrl.Record.key.appointmentId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
                     <div class="row">
-                    	<div class="form-group col-xs-5">
+                    	<div class="form-group col-xs-6">
                     		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
                     		<div class="col-md-3">
 	                            <p><md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required md-min-date="ctrl.today"></md-datepicker></p>
@@ -100,7 +110,7 @@
                  		</div>
 <!--   					</div> -->
 <!--                    	<div class="row"> -->
-                    	<div class="form-group col-xs-3">
+                    	<div class="form-group col-xs-6">
                          	<label class="col-md-2 control-lable" for="appointmentTime">Time</label>
                             <div class="col-md-3">
                             	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required/></p>
@@ -109,9 +119,9 @@
                                 </div> 
                       		</div>
                 		</div>
-<!--             		</div> -->
-<!--                     <div class="row"> -->
-                    	<div class="form-group col-xs-4">
+            		</div>
+                    <div class="row">
+                    	<div class="form-group col-xs-6">
                         	<label class="col-md-2 control-lable" for="doctor">Doctor</label>
                             <div class="col-md-3">
                             	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()" />
@@ -120,6 +130,17 @@
                                 </div>
                      		</div>
              			</div>
+             			
+             			<div class="form-group col-xs-6">
+                        	<label class="col-md-2 control-lable" for="code">Treatment Code</label>
+                            <div class="col-md-3">
+                            	<input type="text" ng-model="ctrl.Record.code" id="code" class="doctor form-control input-sm" placeholder="Enter Treatment Code"  />
+                              	<div class="has-error" ng-show="myForm.$dirty">
+                               		<span ng-show="myForm.code.$error.required">This is a required field</span>
+                                </div>
+                     		</div>
+             			</div>
+             			
                		</div>
                     <div class="row">
             			<div class="form-actions floatRight">

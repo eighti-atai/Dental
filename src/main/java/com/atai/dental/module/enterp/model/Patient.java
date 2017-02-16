@@ -33,6 +33,7 @@ public class Patient implements Model<Integer> {
 	private String patientContactNo;
 	@Column(name = "patient_gender")
 	private String patientGender;
+	private String email;
 	private String objid;
 	
 	
@@ -107,6 +108,14 @@ public class Patient implements Model<Integer> {
 	public void setId(Integer id) {
 		setPatientId(id);
 
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
