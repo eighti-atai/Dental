@@ -49,7 +49,7 @@ public class User {
 	@Column(name="state", nullable=false)
     private String state=State.ACTIVE.getState();
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role_tab", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> userRoles = new HashSet<Role>();
    

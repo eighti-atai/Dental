@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import com.atai.dental.module.enterp.model.User;
@@ -24,7 +27,8 @@ public class Role {
 	@Column(name = "role_name", length=15, unique=true, nullable=false)
 	private String name = UserRoleTypes.USER.getUserRoleType();
 	
-	@ManyToMany(mappedBy = "userRoles")
+	@ManyToMany(fetch = FetchType.EAGER)//(mappedBy = "userRoles" )
+	@JoinTable(name = "user_role_tab", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 
     public int getId() {
