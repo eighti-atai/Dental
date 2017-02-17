@@ -221,8 +221,8 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="doctor">Doctor</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Select Doctor"/>
-		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                           	<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"></select>
+                              		<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
