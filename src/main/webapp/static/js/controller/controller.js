@@ -46,6 +46,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.clearImage=clearImage;
     self.smartBind = smartBind;
     self.populatePageFromRecord = populatePageFromRecord;
+    self.getDoctors = getDoctors;
+    self.doctors = [];
+    
 
     self.today = new Date();
  
@@ -66,6 +69,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
     	self.lovRecord = EntityService.lovRecord;
+    	getDoctors();
     	//setPanelHeader(title);
     }
     
@@ -554,6 +558,25 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	var $rootScope = injector.get('$rootScope');
     	$compile(self.$el)($rootScope);
     	$rootScope.$digest();*/
+    }
+    
+    function getDoctors()
+    {
+    	var current_url = $location.absUrl();
+    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+    	var lovUrl = base_url + 'DoctorLov/';  
+    	$http.post(lovUrl+"Search/", self.lovRecord['doctor'])
+    	.then(
+	        function (response) {
+	        	for (var key0 in response.data)
+        		{
+	        		self.doctors.push(response.data[key0]['userName']);	
+	        	}
+	        },
+	        function(errResponse){
+	            console.error('Error while fetching Records');
+	        }
+	        );
     }
  
 }]);
