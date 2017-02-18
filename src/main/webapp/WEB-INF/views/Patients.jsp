@@ -167,12 +167,14 @@
 	    <script src="webjars/angularjs/1.5.8/angular.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
 	    <script src="webjars/jquery/2.1.4/jquery.min.js"></script> 
+	    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js""></script>
 	    <script src="<c:url value='/static/js/app.js' />"></script>
 	    <script src="<c:url value='/static/js/service/service.js' />"></script>
 	    <script src="<c:url value='/static/js/controller/controller.js' />"></script>
 	    <script src="<c:url value='/static/js/filter/filter.js' />"></script>
 	    <script src="<c:url value='/static/js/entity/Patient.js' />"></script>
-	    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>    
+	    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script> 
+	    <script src="<c:url value='/static/js/other/bootbox.min.js' />"></script>    
 	    <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>

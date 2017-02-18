@@ -29,7 +29,7 @@ public class TmpAppointment implements Model<Integer> {
 	private String name;
 	private Date date;
 	private String time;
-	private Integer  doctor;
+	private String  doctor;
 	private String code;
 	private String objid;
 	@Column(name = "contact_no")
@@ -89,11 +89,11 @@ public class TmpAppointment implements Model<Integer> {
 		this.time = timeValidate.convertTime(timeT);
 	}
 
-	public Integer getDoctor() {
+	public String getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(Integer  doctor) {
+	public void setDoctor(String  doctor) {
 		this.doctor = doctor;
 	}
 

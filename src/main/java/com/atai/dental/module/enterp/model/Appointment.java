@@ -30,9 +30,9 @@ public class Appointment implements Model<AppointmentKey> {
 	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
 	private Patient patient;
 	
-	@ManyToOne
-	@JoinColumn(name = "doctor", referencedColumnName = "user_id", insertable = false, updatable = false)
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "doctor", referencedColumnName = "user_name", insertable = false, updatable = false)
+//	private User user;
 	
 	
 
@@ -40,7 +40,7 @@ public class Appointment implements Model<AppointmentKey> {
 	private Date appointmentDate;
 	@Column(name = "appointment_time")
 	private String appointmentTime;
-	private int doctor;
+	private String doctor;
 	private String objid;
 	private String code;
 	
@@ -102,11 +102,11 @@ public class Appointment implements Model<AppointmentKey> {
 		this.appointmentTime = timeValidate.convertTime(time);
 	}
 
-	public int getDoctor() {
+	public String getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(int doctor) {
+	public void setDoctor(String doctor) {
 		this.doctor = doctor;
 	}
 

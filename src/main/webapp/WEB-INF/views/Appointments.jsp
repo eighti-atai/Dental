@@ -113,7 +113,7 @@
                     	<div class="form-group col-xs-6">
                          	<label class="col-md-2 control-lable" for="appointmentTime">Time</label>
                             <div class="col-md-3">
-                            	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required/></p>
+                            	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required  ng-blur="ctrl.populateTargetPage()"/></p>
                               	<div class="has-error" ng-show="myForm.$dirty">
                                 	<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
                                 </div> 
@@ -124,7 +124,7 @@
                     	<div class="form-group col-xs-6">
                         	<label class="col-md-2 control-lable" for="doctor">Doctor</label>
                             <div class="col-md-3">
-                            	<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"></select>
+                            	<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"  ng-blur="ctrl.populateTargetPage()"></select>
                               	<div class="has-error" ng-show="myForm.$dirty">
                                		<span ng-show="myForm.doctor.$error.required">This is a required field</span>
                                 </div>
@@ -132,9 +132,9 @@
              			</div>
              			
              			<div class="form-group col-xs-6">
-                        	<label class="col-md-2 control-lable" for="code">Treatment Code</label>
+                        	<label class="col-md-2 control-lable" for="code" >Treatment Code</label>
                             <div class="col-md-3">
-                            	<select ng-model="ctrl.Record.code" id="code" class="code form-control input-sm" placeholder="Select Treatment Code">
+                            	<select ng-model="ctrl.Record.code" id="code" class="code form-control input-sm" placeholder="Select Treatment Code" >
 								  		<option value=""></option>
 								  		<option value="General">General</option>
 								  		<option value="Treatment 1">Treatment 1</option>
@@ -149,7 +149,7 @@
                        		<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                             <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button>
                             <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                            <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+<!--                             <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button> -->
                     	</div>
                		</div>
     			</form>
@@ -164,6 +164,7 @@
                    				<th>Date</th>
                               	<th>Time</th>
                               	<th>Doctor</th>
+                              	<th>Treatment Code</th>
                               	<th width="20%"></th>
                           	</tr>
                       	</thead>
@@ -172,6 +173,7 @@
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
+	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.code"></span></td>
 	                                                                                         
 	                        <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.appointmentDate"></md-datepicker></td>
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
@@ -236,7 +238,7 @@
        function populatePage(Record) 
        {
            if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
-           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate);
+           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate,Record.doctor,Record.appointmentTime);
            else
                alert("f1.Reset NOT found X3");
        }  
@@ -244,7 +246,7 @@
        function cc(Record) 
        {
            
-               alert("f1.Reset NOT found X3");
+               alert("f1SSSSSSSSSSSSSSSSS");
        } 
     </script>
 </html>

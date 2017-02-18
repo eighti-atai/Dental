@@ -85,6 +85,11 @@ public class Time12HoursValidator{
 						iN=12;
 						s = "am";
 					}
+					else if(iN==12)
+					{
+						iN=12;
+						s = "pm";
+					}
 					else if(iN<12)
 					{
 						s="am";

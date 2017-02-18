@@ -48,7 +48,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.populatePageFromRecord = populatePageFromRecord;
     self.getDoctors = getDoctors;
     self.doctors = [];
-    
+    self.populateTargetPage = populateTargetPage;
 
     self.today = new Date();
  
@@ -88,8 +88,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function createRecord(Record){
         RecordService.createRecord(Record)
             .then(
-            		null,
-            //fetchAllRecords,
+            		bootbox.alert("Hello world!"),
             function(errResponse){
                 console.error('Error while creating Record');
             }
@@ -99,7 +98,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
-            null,
+            		alert("The record has been successfully updated"),
             function(errResponse){
                 console.error('Error while updating Record');
             }
@@ -504,6 +503,11 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         	}
         }
     });
+    
+    function populateTargetPage()
+    {
+    	populatePage(self.Record);
+    }
     
 //    $scope.$watch('ctrl.Record.treatmentAmount', function (nval, oval) {
 //        if (oval !== nval) {
