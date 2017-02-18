@@ -81,6 +81,7 @@
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">
     <script src="webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js""></script>
   <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
     
     
@@ -98,8 +99,8 @@
     
     <script src="<c:url value='/static/js/other/bootstrap-datepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
-<script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>
-    
+	<script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>
+    <script src="<c:url value='/static/js/other/bootbox.min.js' />"></script>
       <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
       <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
