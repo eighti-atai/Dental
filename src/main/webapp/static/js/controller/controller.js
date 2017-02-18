@@ -88,9 +88,18 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function createRecord(Record){
         RecordService.createRecord(Record)
             .then(
-            		bootbox.alert("Hello world!"),
+            		bootbox.alert({
+            		    message: "The record has been successfully added",
+            		    size: 'small',
+            		    title: "Information!"
+            		}),
             function(errResponse){
                 console.error('Error while creating Record');
+                bootbox.alert({
+        		    message: "Error while creating record",
+        		    size: 'small',
+        		    title: "<font  color='red'>Error!</font>"
+        		});
             }
         );
     }
@@ -98,25 +107,54 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
-            		alert("The record has been successfully updated"),
+            		bootbox.alert({
+            		    message: "The record has been successfully updated",
+            		    size: 'small',
+            		    title: "Information!"
+            		}),
             function(errResponse){
-                console.error('Error while updating Record');
+            			bootbox.alert({
+                		    message: "Error while updating record",
+                		    size: 'small',
+                		    title: "<font  color='red'>Error!</font>"
+                		});
             }
         );
     }
  
     function deleteRecord(objid){
         /**/
-    	var retVal = confirm("Do you want to remove the record ?");
-        if( retVal == true ){
-        	RecordService.deleteRecord(objid)
-            .then(
-            		searchRecords,
-            function(errResponse){
-                console.error('Error while deleting Record');
-            }
-        );
-        }
+    	var retVal = bootbox.confirm({
+    	    message: "Do you want to remove the record ?",
+    	    title: "<font  color='blue'>Question ?</font>",
+    	    buttons: {
+    	        confirm: {
+    	            label: 'Yes',
+    	            className: 'btn-success'
+    	        },
+    	        cancel: {
+    	            label: 'No',
+    	            className: 'btn-danger'
+    	        }
+    	    },
+    	    callback: function (result) {
+    	    	if( result == true ){
+    	        	RecordService.deleteRecord(objid)
+    	            .then(searchRecords,
+    	            function(errResponse){
+    	                console.error('Error while deleting Record');
+    	                bootbox.alert({
+    	        		    message: "Error while deleting record",
+    	        		    size: 'small',
+    	        		    title: "<font  color='red'>Error!</font>"
+    	        		});
+    	            }
+    	        );
+    	        }
+    	    }
+    	});
+    	//confirm("Do you want to remove the record ?");
+        
     }
  
     function deleteRecordWithFetch(objid){
