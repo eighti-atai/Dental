@@ -8,13 +8,13 @@
 	<title>ATAI</title>
 	    
 	    <script type="text/javascript">
-	        function populatePage(Record) 
-	        {
-	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
-	            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId, Record.name);
-	            else
-	                alert("f1.Reset NOT found X3");
-	        } 
+	    function populatePage(Record) 
+	       {
+	           if (typeof (parent.document.getElementById("f2").contentWindow.populate) == "function")
+	           		parent.document.getElementById("f2").contentWindow.populate(Record.date,Record.doctor,Record.time);
+	           else
+	               alert("f1.Reset NOT found X3");
+	       } 
 	        
 	    </script>
 		
@@ -201,7 +201,7 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="date">Date</label>
 		                        <div class="col-sm-10">		                        	
-		                        	<md-datepicker ng-model="ctrl.Record.date" md-placeholder="Enter date" required></md-datepicker>
+		                        	<md-datepicker ng-model="ctrl.Record.date" md-placeholder="Enter date" required ng-blur="ctrl.populateTargetPage()"></md-datepicker>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                        	</div>
 		                        </div>
@@ -212,7 +212,7 @@
                     	<div class="form-group col-sm-4">
                          	<label class="col-sm-2 control-lable" for="time" >Time</label>
                             <div class="col-sm-10">
-                            	<p> <input type="text" ng-model="ctrl.Record.time" id="time" class="time form-control input-sm" placeholder="Enter Appointment Time" required/></p>
+                            	<p> <input type="text" ng-model="ctrl.Record.time" id="time" class="time form-control input-sm" placeholder="Enter Appointment Time" required  ng-blur="ctrl.populateTargetPage()"/></p>
                               	<div class="has-error" ng-show="myForm.$dirty">
                                 	<span ng-show="myForm.time.$error.required">This is a required field</span>
                                 </div> 
@@ -223,9 +223,10 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="doctor">Doctor</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.doctor" id="doctor" class="doctor form-control input-sm" placeholder="Select Doctor"/>
-		                           	<div class="has-error" ng-show="myForm.$dirty">
-		                            </div>
+		                           	<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"  ng-blur="ctrl.populateTargetPage()"></select>
+                              		<div class="has-error" ng-show="myForm.$dirty">
+                               			<span ng-show="myForm.doctor.$error.required">This is a required field</span>
+                                	</div>
 		                        </div>
 		                	</div>
 <!-- 		                </div> -->
