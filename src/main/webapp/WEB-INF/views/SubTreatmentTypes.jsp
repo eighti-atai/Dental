@@ -109,6 +109,8 @@
         	<div class="panel-heading"><span class="lead">Sub Treatment Type Details</span></div>
             <div class="formcontainer">
            		<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+           			<div id="lov" unter-lov class = "lov"></div>
+					<div id="kan" unter-search class = "lov"></div>
            			<div id="lov" unter-lov class = "lov"></div>	
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
          			

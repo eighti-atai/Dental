@@ -115,7 +115,7 @@
     	  if(url === 'Treatments')
     	  {
 	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
-	            	parent.document.getElementById("f1").contentWindow.populate(Record.key.patientId);
+	            	parent.document.getElementById("f1").contentWindow.populate(Record.id.patientId);
 	            else
 	                alert("f1.Reset NOT found X3");
       		}
@@ -128,7 +128,7 @@
         {
             var scope = angular.element(document.getElementById("conX")).scope();
             scope.$apply(scope.ctrl.reset());
-            scope.ctrl.Record.key.patientId = patientId;
+            scope.ctrl.Record.id.patientId = patientId;
             scope.ctrl.Record.doctor = doctor;
             scope.$apply(scope.ctrl.submit());
             scope.$apply(scope.ctrl.fetchAllRecords());
@@ -143,8 +143,8 @@
               <div class="formcontainer" style="display: none;">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-                      <input type="text" ng-model="ctrl.Record.key.attendPatientId" id="attendPatientId" class="attendPatientId form-control input-sm" placeholder="Enter Appointment ID "/>
-                      <input type="text" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />  
+                      <input type="text" ng-model="ctrl.Record.id.attendPatientId" id="attendPatientId" class="attendPatientId form-control input-sm" placeholder="Enter Appointment ID "/>
+                      <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />  
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="startTime">Start Time</label>

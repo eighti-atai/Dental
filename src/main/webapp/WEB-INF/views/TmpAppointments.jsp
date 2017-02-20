@@ -257,7 +257,7 @@
 		        </div>
 		              		          
 		        <div class="panel panel-default">
-		        	<div class="panel-heading"><span class="lead">List of TmpAppointments </span></div>
+		        	<div class="panel-heading"><span class="lead">List of Appointments </span></div>
 		            <div class="tablecontainer">
 		                <table id="tableId" class="table table-hover">
 		                	<thead>

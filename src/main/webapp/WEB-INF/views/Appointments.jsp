@@ -97,8 +97,8 @@
            		<form ng-submit="ctrl.submit();" name="myForm" class="form-horizontal">
            			<div id="lov" unter-lov class = "lov"></div>	
                		<input type="hidden" ng-model="ctrl.Record.objid" /> 
-         			<input type="hidden" ng-model="ctrl.Record.key.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
-         			<input type="hidden" ng-model="ctrl.Record.key.appointmentId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
+         			<input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
+         			<input type="hidden" ng-model="ctrl.Record.id.appointmentId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
                     <div class="row">
                     	<div class="form-group col-xs-6">
                     		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
@@ -205,11 +205,12 @@
        function populate(patientId,patientName) 
        {
     	   var scope = angular.element(document.getElementById("con")).scope();
-           scope.ctrl.Record.key.patientId = patientId;
-           scope.ctrl.Record.key.appointmentId = '';
-           scope.ctrl.Record.appointmentDate = '';
+           scope.ctrl.Record.id.patientId = patientId;
+           scope.ctrl.Record.id.appointmentId = '';
+           scope.ctrl.Record.appointmentDate = null;
            scope.ctrl.Record.appointmentTime = '';
            scope.ctrl.Record.doctor = '';
+           scope.ctrl.Record.code = '';
            scope.ctrl.Record.objid = null;
            scope.ctrl.setPanelHeader("Appointment - "+patientName);
            scope.$apply(scope.ctrl.searchRecords());
@@ -239,10 +240,25 @@
 //     	})
        function populatePage(Record) 
        {
-           if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function")
-           		parent.document.getElementById("f3").contentWindow.populate(Record.appointmentDate,Record.doctor,Record.appointmentTime);
+           if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function"){
+        	   var date;
+        	   if( typeof (Record.appointmentDate)==="number")
+        		   {
+        		   date =new Date(Record.appointmentDate);      		   
+        		   }
+        	   else
+        		   {
+        		   date = Record.appointmentDate;
+        		   }
+        		   
+        		   
+        		   
+           		parent.document.getElementById("f3").contentWindow.populate(date,Record.doctor,Record.appointmentTime);
+           }
            else
+        	   {
                alert("f1.Reset NOT found X3");
+        	   }
        }  
        
        function cc(Record) 

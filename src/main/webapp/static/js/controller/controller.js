@@ -49,6 +49,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.getDoctors = getDoctors;
     self.doctors = [];
     self.populateTargetPage = populateTargetPage;
+    self.InsertRecords = InsertRecords;
 
     self.today = new Date();
  
@@ -81,6 +82,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             },
             function(errResponse){
                 console.error('Error while fetching Records');
+                bootbox.alert({
+        		    message: "Error while fetching record",
+        		    title: "<font  color='red'>Error!</font>"
+        		});
             }
         );
     }
@@ -88,16 +93,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function createRecord(Record){
         RecordService.createRecord(Record)
             .then(
+            		function() {
             		bootbox.alert({
             		    message: "The record has been successfully added",
-            		    size: 'small',
             		    title: "Information!"
-            		}),
+            		})},
             function(errResponse){
                 console.error('Error while creating Record');
                 bootbox.alert({
         		    message: "Error while creating record",
-        		    size: 'small',
         		    title: "<font  color='red'>Error!</font>"
         		});
             }
@@ -107,15 +111,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
+            		function() {
             		bootbox.alert({
             		    message: "The record has been successfully updated",
-            		    size: 'small',
             		    title: "Information!"
-            		}),
+            		})},
             function(errResponse){
             			bootbox.alert({
                 		    message: "Error while updating record",
-                		    size: 'small',
                 		    title: "<font  color='red'>Error!</font>"
                 		});
             }
@@ -145,7 +148,6 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	                console.error('Error while deleting Record');
     	                bootbox.alert({
     	        		    message: "Error while deleting record",
-    	        		    size: 'small',
     	        		    title: "<font  color='red'>Error!</font>"
     	        		});
     	            }
@@ -159,16 +161,44 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
  
     function deleteRecordWithFetch(objid){
         /**/
-    	var retVal = confirm("Do you want to remove the record ?");
-        if( retVal == true ){
-        	RecordService.deleteRecord(objid)
-            .then(
-            		fetchAllRecords,
-            function(errResponse){
-                console.error('Error while deleting Record');
-            }
-        );
-        }
+    	var retVal = bootbox.confirm({
+    	    message: "Do you want to remove the record ?",
+    	    title: "<font  color='blue'>Question ?</font>",
+    	    buttons: {
+    	        confirm: {
+    	            label: 'Yes',
+    	            className: 'btn-success'
+    	        },
+    	        cancel: {
+    	            label: 'No',
+    	            className: 'btn-danger'
+    	        }
+    	    },
+    	    callback: function (result) {
+    	    	if( result == true ){
+    	        	RecordService.deleteRecord(objid)
+    	            .then(fetchAllRecords,
+    	            function(errResponse){
+    	                console.error('Error while deleting Record');
+    	                bootbox.alert({
+    	        		    message: "Error while deleting record",
+    	        		    title: "<font  color='red'>Error!</font>"
+    	        		});
+    	            }
+    	        );
+    	        }
+    	    }
+    	});
+//    	var retVal = confirm("Do you want to remove the record ?");
+//        if( retVal == true ){
+//        	RecordService.deleteRecord(objid)
+//            .then(
+//            		fetchAllRecords,
+//            function(errResponse){
+//                console.error('Error while deleting Record');
+//            }
+//        );
+//        }
     }
     
     function submit() {
@@ -190,6 +220,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             },
             function(errResponse){
                 console.error('Error while fetching Records');
+                bootbox.alert({
+        		    message: "Error while fetching record",
+        		    title: "<font  color='red'>Error!</font>"
+        		});
             }
         );
     }
@@ -211,6 +245,31 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		        },
 		        function(errResponse){
 		            console.error('Error while fetching Records');
+		        }
+	        );
+		}
+    }
+    
+    function InsertRecords(entity, Record){
+        
+    	if (entity !== undefined)
+		{
+	    	var current_url = $location.absUrl();
+	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+	    	var valUrl = base_url + entity ;  
+	    	$http.post(valUrl,Record)
+	        .then(
+		        function (response) {
+		        	bootbox.alert({
+            		    message: "The patient has been successfully added to the Q",
+            		    title: "Information!"
+            		})},
+		        function(errResponse){
+		            console.error('Error while fetching Records');
+		            bootbox.alert({
+	        		    message: "Error while adding patient to the Q",
+	        		    title: "<font  color='red'>Error!</font>"
+	        		});
 		        }
 	        );
 		}

@@ -22,8 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Appointment;
 import com.atai.dental.module.enterp.model.AppointmentKey;
+import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.model.TmpAppointment;
 import com.atai.dental.module.enterp.service.AppointmentService;
+import com.atai.dental.module.enterp.service.PatientService;
 import com.atai.dental.module.enterp.service.TmpAppointmentService;
 import com.atai.dental.module.enterp.validator.AppointmentValidator;
 import com.atai.dental.module.payment.model.Payment;
@@ -37,6 +39,9 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 	
 	@Autowired
 	private TmpAppointmentService tmpAppointmentService;
+	
+	@Autowired
+	private PatientService patientService;
 	
 	
 	@Autowired
@@ -79,7 +84,9 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		{
 			System.out.println("Appointment Part is Successfully added.");
 			ResponseEntity<Appointment> res =  super.add(appointment);
+			
 			appointment = service.getByObjid(appointment.getObjid()) ;
+			Patient patient = patientService.getByKey(appointment.getId().getPatientId());
 			TmpAppointment tmpAppointment = new TmpAppointment();
 			tmpAppointment.setCode(appointment.getCode());
 			tmpAppointment.setDate(appointment.getAppointmentDate());
@@ -87,6 +94,8 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 			tmpAppointment.setPatientId(appointment.getId().getPatientId());
 			tmpAppointment.setOrgAppoinmentId(appointment.getId().getAppointmentId());
 			tmpAppointment.setDoctor(appointment.getDoctor());
+			tmpAppointment.setName(patient.getPatientName());
+			tmpAppointment.setContactNo(patient.getPatientContactNo());
 			tmpAppointmentService.persist(tmpAppointment);
 			
 			return res;
@@ -99,6 +108,7 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		// TODO Auto-generated method stub
 		ResponseEntity<Appointment> res =  super.modify(newObject);
 		TmpAppointment tmpAppointment = new TmpAppointment();
+		Patient patient = patientService.getByKey(newObject.getId().getPatientId());
 		tmpAppointment.setPatientId(newObject.getId().getPatientId());
 		tmpAppointment.setOrgAppoinmentId(newObject.getId().getAppointmentId());
 		List<TmpAppointment> list = tmpAppointmentService.executeSelectQuery(tmpAppointment);
@@ -117,6 +127,8 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 			tmpAppointment.setDate(newObject.getAppointmentDate());
 			tmpAppointment.setTime(newObject.getAppointmentTime());
 			tmpAppointment.setDoctor(newObject.getDoctor());
+			tmpAppointment.setName(patient.getPatientName());
+			tmpAppointment.setContactNo(patient.getPatientContactNo());
 			tmpAppointmentService.update(tmpAppointment);
 		}
 		return res;

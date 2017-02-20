@@ -196,8 +196,9 @@
 		    <span class="close">&times;</span>
 		    
 		    <p>Please select doctor..</p>
-		    <input type="text" id="doctor"  placeholder="Enter Doctor" ng-focus="ctrl.setFocusedElement()" />
-		    <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+<!-- 		    <input type="text" id="doctor"  placeholder="Enter Doctor" ng-focus="ctrl.setFocusedElement()" /> -->
+			<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"  ng-blur="ctrl.populateTargetPage()"></select>
+<!-- 		    <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button> -->
 		    <button id="okBtn">OK</button>
 		  </div>
 		
@@ -301,7 +302,7 @@
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-<!-- 		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button> -->
+		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button>
 		                    </div>
 		               	</div>
 		                
@@ -398,11 +399,11 @@
 	            
 	            $("#doctor").val("");
 	            modal.style.display = "none";
+	            
             	var pId= scope.ctrl.Record.patientId;
-	            if (typeof (parent.document.getElementById("f4").contentWindow.insertAttendPatient) == "function")
-	            	parent.document.getElementById("f4").contentWindow.insertAttendPatient(pId, doctor);
-	            else
-	                alert("f1.Reset NOT found X3");
+            	tmpRecord = {id:{attendPatientId:'',patientId:pId} ,doctor:'',startTime:'',objid:null};
+            	tmpRecord.doctor = doctor.split(":").pop();
+            	scope.ctrl.InsertRecords('AttendPatient',tmpRecord);
 	        });
 	        function isNumberKey(evt){
 	            var charCode = (evt.which) ? evt.which : event.keyCode

@@ -33,7 +33,7 @@ public class TmpAppointment implements Model<Integer> {
 	private String code;
 	private String objid;
 	@Column(name = "contact_no")
-	private Integer contactNo;
+	private String contactNo;
 	
 	
 	
@@ -123,11 +123,11 @@ public class TmpAppointment implements Model<Integer> {
 
 	}
 
-	public Integer getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(Integer contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 

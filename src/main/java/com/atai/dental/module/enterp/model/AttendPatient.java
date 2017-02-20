@@ -21,7 +21,7 @@ import com.atai.dental.generic.interfaces.Model;
 @Table(name = "attend_patient_tab")
 public class AttendPatient implements Model<AttendPatientKey> {
 	@Id
-	private AttendPatientKey key;
+	private AttendPatientKey id;
 
 	
 	@ManyToOne
@@ -80,22 +80,14 @@ public class AttendPatient implements Model<AttendPatientKey> {
 		this.patient = patient;
 	}
 
-	public void setKey(AttendPatientKey key) {
-		this.key = key;
+	public void setKey(AttendPatientKey id) {
+		this.id = id;
 	}
 	
 	public AttendPatientKey getKey() {
-		return key;
+		return id;
 	}
 	
-	public void setKey(int patientId, int attendPatientId)
-	{
-		this.key.setAttendPatientId(attendPatientId);
-		this.key.setPatientId(patientId);
-		
-	}
-
-
 	public String getObjid() {
 		return objid;
 	}
@@ -106,11 +98,11 @@ public class AttendPatient implements Model<AttendPatientKey> {
 
 	public AttendPatientKey getId() {
 		// TODO Auto-generated method stub
-		return getKey();
+		return id;
 	}
 
-	public void setId(AttendPatientKey key) {
-		setKey(key);
+	public void setId(AttendPatientKey id) {
+		this.id = id;
 
 	}
 

@@ -23,12 +23,12 @@ public class Appointment implements Model<AppointmentKey> {
 	
 
 	@Id
-	private AppointmentKey key;
+	private AppointmentKey id;
 
 	
-	@ManyToOne
-	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
-	private Patient patient;
+//	@ManyToOne
+//	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
+//	private Patient patient;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "doctor", referencedColumnName = "user_name", insertable = false, updatable = false)
@@ -44,27 +44,14 @@ public class Appointment implements Model<AppointmentKey> {
 	private String objid;
 	private String code;
 	
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
-	public void setKey(AppointmentKey key) {
-		this.key = key;
-	}
+//	public Patient getPatient() {
+//		return patient;
+//	}
+//
+//	public void setPatient(Patient patient) {
+//		this.patient = patient;
+//	}
 	
-	public AppointmentKey getKey() {
-		return key;
-	}
-	
-	public void setKey(int patientId, int appointmentId)
-	{
-		this.key.setPatientId(patientId);
-		this.key.setAppointmentId(appointmentId);
-	}
 	/*public int getAppointmentId() {
 		return appointmentId;
 	}
@@ -120,11 +107,11 @@ public class Appointment implements Model<AppointmentKey> {
 
 	public AppointmentKey getId() {
 		// TODO Auto-generated method stub
-		return getKey();
+		return id;
 	}
 
-	public void setId(AppointmentKey key) {
-		setKey(key);
+	public void setId(AppointmentKey id) {
+		this.id = id;
 
 	}
 

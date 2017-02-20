@@ -190,7 +190,7 @@
 						<div class="row">
 		                	<div class="form-group col-md-12">
 		                    	<label class="col-md-2 control-lable" for="mttId">Type ID</label>
-		                        <div class="col-md-10">
+		                        <div class="col-md-7">
 		                        	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" class="mttId form-control input-sm" placeholder="Enter MainTreatmentType Name " required ng-minlength="1"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.mttId.$error.required">This is a required field</span>
@@ -203,7 +203,7 @@
 		                <div class="row">
 		                	<div class="form-group col-md-12">
 		                    	<label class="col-md-2 control-lable" for="mttName">Type Name</label>
-		                        <div class="col-md-10">
+		                        <div class="col-md-7">
 		                           	<input type="text" ng-model="ctrl.Record.mttName" id="mttName" class="mttName form-control input-sm" placeholder="Enter Type Name"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
