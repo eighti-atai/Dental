@@ -27,7 +27,7 @@ public class AppointmentDao extends AbstractDao<AppointmentKey, Appointment> {
 			return !appointmentList.isEmpty();
 		}
 		else{
-			appointmentKey = appointment.getKey();
+			appointmentKey = appointment.getId();
 			for (int i = 0; i < appointmentList.size(); i++) {
 				if (appointmentList.get(i).getId() == appointmentKey){
 					return true;

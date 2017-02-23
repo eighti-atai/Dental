@@ -31,14 +31,16 @@ function iframeLoaded(x) {
           if(x==='f1')
         	{
         	  	iFrameID.width = "";
-              	iFrameID.width = y + "px";
-              	iFrameID.height = h3;
+            	iFrameID.width = (y) + "px";
+            	var hf1 = document.getElementById('f1').contentDocument.body.scrollHeight ;
+            	iFrameID.height = hf1;
         	}
           else if(x==='f2')
       		{
-      	  		iFrameID.width = "";
-            	iFrameID.width = (y/2) + "px";
-            	iFrameID.height = h3/2;
+        	  	iFrameID.width = "";
+            	iFrameID.width = ((y/2)) + "px";
+            	var hf2 = document.getElementById('f2').contentDocument.body.scrollHeight ;
+            	iFrameID.height = hf2;
       		}
     }   
 }
@@ -50,6 +52,9 @@ function reloadIFrame() {
 }
 
 </script>
+<head>
+    <title>Treatment Details</title>
+</head>
 <body onresize="resizeIframe()">
 <nav class = "navbar-dfault navbar-static-top" role = "navigation" style = "margin-bottom: 0">
 <div class="navbar-header">               

@@ -207,7 +207,7 @@
     	   var scope = angular.element(document.getElementById("con")).scope();
            scope.ctrl.Record.id.patientId = patientId;
            scope.ctrl.Record.id.appointmentId = '';
-           scope.ctrl.Record.appointmentDate = null;
+           scope.ctrl.Record.appointmentDate = '';
            scope.ctrl.Record.appointmentTime = '';
            scope.ctrl.Record.doctor = '';
            scope.ctrl.Record.code = '';

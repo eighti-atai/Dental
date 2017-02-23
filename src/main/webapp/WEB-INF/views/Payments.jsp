@@ -127,9 +127,9 @@
 <!--                   	 <div id="kan" unter-search class = "lov"></div> -->
 					  <div id="kan" unter-search class = "lov"></div>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-					  <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-					  <input type="text" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-					  <input type="text" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
+					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="hidden" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
 						
 <!--                       </div> -->
                       
@@ -175,7 +175,7 @@
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Payments </span></div>
               <div class="tablecontainer">
-                  <table class="table table-hover">
+                  <table  id="tableId" class="table table-hover">
                       <thead>
                           <tr>
                           	  <th>Patient ID</th>

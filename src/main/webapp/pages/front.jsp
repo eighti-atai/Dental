@@ -11,6 +11,7 @@ $(document).ready(function() {
 	$('#f4').attr('src',base_url+'AttendPatients');
     $('#f3').attr('src',base_url+'AppointmentsDates');
     $('#f1').attr('src',base_url+'Appointments');
+   // history.scrollRestoration ='manual';
    
     //$("f2").contents().find("body").onclick = function() { alert('hhjgh') };
 })
@@ -60,15 +61,22 @@ var x1;
 	var x2p;
 	var x3p;
 setInterval(function(){
+	
 	 x1 = window[0].document.getElementById("tableId").rows.length;
 	 x2 = window[1].document.getElementById("tableId").rows.length;
 	 x3 = window[2].document.getElementById("tableId").rows.length;
 	if (x1 !== x1p||x2 !== x2p||x3 !== x3p )
 		{
+		var ifr = document.activeElement;
 			resizeIframe();
 			x1p = x1;
 			x2p = x2;
 			x3p = x3;
+			var fId = "#"+ifr.id;
+			 $('html, body').animate({
+                 scrollTop: $(fId).offset().top
+             }, 1);
+			//document.getElementById(ifr.id).contentWindow.document.body.focus();
 		}
 }, 200);
 //window.setInterval("reloadIFrame();", 30);
@@ -78,6 +86,9 @@ setInterval(function(){
 // }
 
 </script>
+<head>
+    <title>Patient/Appointment Details</title>
+</head>
 <body onresize="resizeIframe()" onload="resizeIframe()">
 
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->

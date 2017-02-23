@@ -70,7 +70,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
     	self.lovRecord = EntityService.lovRecord;
-    	getDoctors();
+    	if(EntityService.name!=='AttendPatient')
+    		{
+    			getDoctors();
+    		}
     	//setPanelHeader(title);
     }
     
@@ -553,6 +556,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 								else
 								{
 									document.getElementById(key).value = lovRecord[key];
+									//document.getElementById(key).style.$dirty = true;
+									document.getElementById(key).$setValidity('ff'.true);
+									//document.getElementById(key).setAttribute("class","style.color:red"); 
 								}
 								//}
 							}

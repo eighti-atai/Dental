@@ -194,7 +194,7 @@
                 <!-- Default panel contents -->
               <div class="panel-heading" ng-bind-html="panelHeader"></div>
               <div class="tablecontainer">
-                  <table class="table table-hover">
+                  <table  id="tableId" class="table table-hover">
                       <thead>
                           <tr>
                               <th>Treatment ID</th>

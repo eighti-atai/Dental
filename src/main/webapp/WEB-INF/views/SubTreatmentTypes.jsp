@@ -108,7 +108,7 @@
     	<div class="panel panel-default">
         	<div class="panel-heading"><span class="lead">Sub Treatment Type Details</span></div>
             <div class="formcontainer">
-           		<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+           		<form ng-submit="ctrl.submit()" name="myForm1" class="form-horizontal">
            			<div id="lov" unter-lov class = "lov"></div>
 					<div id="kan" unter-search class = "lov"></div>
            			<div id="lov" unter-lov class = "lov"></div>	
@@ -183,9 +183,10 @@
                		<table class="table table-hover">
                   		<thead>
                         	<tr>
-                   				<th>Date</th>
-                              	<th>Time</th>
-                              	<th>Doctor</th>
+                   				<th>Main Treatment Type</th>
+                              	<th>>Sub Treatment Type</th>
+                              	<th>Treatment</th>
+                              	<th>Amount</th>
                               	<th width="20%"></th>
                           	</tr>
                       	</thead>

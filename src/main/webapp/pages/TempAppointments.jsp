@@ -64,6 +64,9 @@ setInterval(function(){
 // }
 
 </script>
+<head>
+    <title>Temporary Appointments</title>
+</head>
 <body onresize="resizeIframe()" onload="resizeIframe()">
 
 <iframe  id="f1" onload="iframeLoaded('f1')" scrolling="no" >

@@ -179,7 +179,7 @@
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">Patients Queue </span></div>
-              <div class="tablecontainer">
+              <div id="tableId" class="tablecontainer">
                   <table class="table table-hover">
                       <thead>
                           <tr>

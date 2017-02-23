@@ -4,7 +4,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Appointment',
-        record :{id:{appointmentId:'',patientId:''} ,appointmentDate:null,appointmentTime:'',doctor:'',code:'',objid:null},
+        record :{id:{appointmentId:'',patientId:''} ,appointmentDate:'',appointmentTime:'',doctor:'',code:'',objid:null},
         emptyRecord :emptyRecord,
         lov :{doctor: 'DoctorLov'},
         lovRecord:{doctor:{doctor:'',userName:''}},
