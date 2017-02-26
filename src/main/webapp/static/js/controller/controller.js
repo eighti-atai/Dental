@@ -215,6 +215,13 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 
     }
      
+    function printReport(){
+    	var reportRec = {formName:"invoice", patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId};
+    	RecordService.setRestServiceUri("GenerateReport");
+    	createRecord(reportRec);
+    	}
+    
+    
     function searchRecords(){
         RecordService.searchRecord(self.Record)
             .then(
