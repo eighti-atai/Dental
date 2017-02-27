@@ -50,6 +50,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.doctors = [];
     self.populateTargetPage = populateTargetPage;
     self.InsertRecords = InsertRecords;
+    self.reloadPageFromRecord = reloadPageFromRecord;
 
     self.today = new Date();
  
@@ -62,6 +63,12 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	populatePage(self.Record);   	
     }
  
+    function reloadPageFromRecord(){
+    	if (typeof reloadPageFrom === "function") { 
+    		reloadPageFrom();   
+		}	
+    }
+    
     function init(){
     	self.Record= EntityService.record;
     	//self.EmptyRecord = angular.copy(EntityService.record);
@@ -100,7 +107,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             		bootbox.alert({
             		    message: "The record has been successfully added",
             		    title: "Information!"
-            		})},
+            		});
+            		reloadPageFromRecord();}
+            		,
             function(errResponse){
                 console.error('Error while creating Record');
                 bootbox.alert({
@@ -564,7 +573,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 								{
 									document.getElementById(key).value = lovRecord[key];
 									//document.getElementById(key).style.$dirty = true;
-									document.getElementById(key).$setValidity('ff'.true);
+									//document.getElementById(key).$setValidity('ff'.true);
 									//document.getElementById(key).setAttribute("class","style.color:red"); 
 								}
 								//}

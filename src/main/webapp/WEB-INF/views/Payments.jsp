@@ -103,6 +103,14 @@
     <script src="<c:url value='/static/js/directives/unterLovSearch.js' />"></script>
     <script src="<c:url value='/static/js/entity/Payment.js' />"></script>
     <script type="text/javascript">
+    
+	    function reloadPageFrom() 
+	    {
+	        if (typeof (parent.document.getElementById("f1").contentWindow.reloadPage) == "function")
+	        	parent.document.getElementById("f1").contentWindow.reloadPage();
+	        else
+	            alert("f1.Reset NOT found X3");
+	    } 
     	
         function populate(patientId,treatmentId) 
         {
@@ -113,6 +121,7 @@
             scope.ctrl.setPanelHeader("Payments - Patient ID: "+patientId+"Treatment ID: "+treatmentId);
             scope.$apply(scope.ctrl.searchRecords());
         }
+        
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
@@ -122,13 +131,13 @@
               <div class="panel-heading" ng-bind-html="panelHeader"></div>
               <div class="formcontainer">
               	  <!-- <md-content> -->
-                  <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                  <form ng-submit="ctrl.submit();" name="myForm" class="form-horizontal">
                   	 <div id="lov" unter-lov class = "lov"></div>
 <!--                   	 <div id="kan" unter-search class = "lov"></div> -->
 					  <div id="kan" unter-search class = "lov"></div>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
-					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required ng-minlength="1" ng-focus="ctrl.setFocusedElement()"/>
+					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID "  required/>
+					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required/>
 					  <input type="hidden" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
 						
 <!--                       </div> -->
@@ -193,7 +202,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.patientId"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.paymentNo"></span></td>
