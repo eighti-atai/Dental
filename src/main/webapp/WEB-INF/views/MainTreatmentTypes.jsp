@@ -246,7 +246,7 @@
 		                        </tr>
 		                  	</thead>
 		                	<tbody>
-		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
+		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.edit(u.objid)" >
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttId"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttName"></span></td> 
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttDescription"></span></td>

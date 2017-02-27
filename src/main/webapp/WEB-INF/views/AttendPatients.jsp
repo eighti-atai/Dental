@@ -179,8 +179,8 @@
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">Patients Queue </span></div>
-              <div id="tableId" class="tablecontainer">
-                  <table class="table table-hover">
+              <div  class="tablecontainer">
+                  <table  id="tableId" class="table table-hover">
                       <thead>
                           <tr>
                               <th>Patient ID</th>

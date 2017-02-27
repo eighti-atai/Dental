@@ -120,6 +120,26 @@
 	          	background-color: yellow;
 	      	}
 	
+			.contactNo2.ng-valid {
+	          	background-color: lightgreen;
+	      	}
+	      	.contactNo2.ng-dirty.ng-invalid-required {
+	          	background-color: red;
+	      	}
+	      	.contactNo2.ng-dirty.ng-invalid-email {
+	          	background-color: yellow;
+	      	}
+	
+			.contactNoFo.ng-valid {
+	          	background-color: lightgreen;
+	      	}
+	      	.contactNoFo.ng-dirty.ng-invalid-required {
+	          	background-color: red;
+	      	}
+	      	.contactNoFo.ng-dirty.ng-invalid-email {
+	          	background-color: yellow;
+	      	}
+	      	
 			.modal {
 			    display: none; /* Hidden by default */
 			    position: fixed; /* Stay in place */
@@ -296,13 +316,31 @@
 		                            </div>
 		                        </div>
 		                	</div>
+
+		                	<div class="form-group col-sm-4">
+		                    	<label class="col-sm-2 control-lable" for="contactNo2">Contact No 2</label>
+		                        <div class="col-sm-10">
+		                           	<input type="text" ng-model="ctrl.Record.contactNo2" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                            </div>
+		                        </div>
+		                	</div>
+		                	
+		                	<div class="form-group col-sm-4">
+		                    	<label class="col-sm-2 control-lable" for="contactNoFo">Overseas Contact</label>
+		                        <div class="col-sm-10">
+		                           	<input type="text" ng-model="ctrl.Record.contactNoFo" id="contactNoFo" class="contactNoFo form-control input-sm" placeholder="Enter Overseas Phone Number" maxlength="20" onkeypress="return isNumberKey(event)"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                            </div>
+		                        </div>
+		                	</div>                		                	
 		                </div>
 		                <div class="row">
 		                	<div class="form-actions floatRight">
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
 		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Reset Form</button>
 		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Add to Q</button>
+		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="ctrl.Record.objid==null">Add to Q</button>
 		                    </div>
 		               	</div>
 		                
@@ -317,6 +355,8 @@
 		                    	<tr>
 		                        	<th>Name</th>
 		                        	<th>Contact No</th>
+		                        	<th>Contact No2</th>
+		                        	<th>Overseas Contact</th>
 		                            <th>Address</th>
 		                            <th>Date of Birth</th>
 		                            <th>ID No</th>	                            
@@ -329,6 +369,8 @@
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo2"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNoFo"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientAddress"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'patientBirthDate', u.patientBirthDate)|date:yyyy/MM/dd"></span></td>  
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientIdNo"></span></td>

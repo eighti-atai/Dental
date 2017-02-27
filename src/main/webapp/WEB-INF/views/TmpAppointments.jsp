@@ -98,15 +98,14 @@
 	          	background-color: yellow;
 	      	}
 	      	
-	      	
 	 
-	      	.patientContactNo.ng-valid {
+	      	.contactNo.ng-valid {
 	          	background-color: lightgreen;
 	      	}
-	      	.patientContactNo.ng-dirty.ng-invalid-required {
+	      	.contactNo.ng-dirty.ng-invalid-required {
 	          	background-color: red;
 	      	}
-	      	.patientContactNo.ng-dirty.ng-invalid-email {
+	      	.contactNo.ng-dirty.ng-invalid-email {
 	          	background-color: yellow;
 	      	}
 
@@ -120,17 +119,25 @@
 	          	background-color: yellow;
 	      	}
 	      	
-	      	.contactNo.ng-valid {
+	      	.contactNo2.ng-valid {
 	          	background-color: lightgreen;
 	      	}
-	      	.contactNo.ng-dirty.ng-invalid-required {
+	      	.contactNo2.ng-dirty.ng-invalid-required {
 	          	background-color: red;
 	      	}
-	      	.contactNo.ng-dirty.ng-invalid-email {
+	      	.contactNo2.ng-dirty.ng-invalid-email {
 	          	background-color: yellow;
 	      	}
 	
-	
+			.contactNoFo.ng-valid {
+	          	background-color: lightgreen;
+	      	}
+	      	.contactNoFo.ng-dirty.ng-invalid-required {
+	          	background-color: red;
+	      	}
+	      	.contactNoFo.ng-dirty.ng-invalid-email {
+	          	background-color: yellow;
+	      	}
 			
 	    </style>
 	    
@@ -189,9 +196,9 @@
 <!-- 		                </div> -->
 <!-- 		                <div class="row"> -->
 		                	<div class="form-group col-sm-4">
-		                    	<label class="col-sm-2 control-lable" for="contactNo">Contact NO</label>
+		                    	<label class="col-sm-2 control-lable" for="contactNo">Contact No</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.contactNo" id="contactNo" class="contactNo form-control input-sm" placeholder="Enter Phone Number"/>
+		                           	<input type="text" ng-model="ctrl.Record.contactNo" id="contactNo" class="contactNo form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
@@ -244,7 +251,25 @@
 								</div>
 							</div>
 		                </div>
-		
+						<div class="row"> 
+		                	<div class="form-group col-sm-4">
+		                    	<label class="col-sm-2 control-lable" for="contactNo2">Contact No 2</label>
+		                        <div class="col-sm-10">
+		                           	<input type="text" ng-model="ctrl.Record.contactNo2" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                            </div>
+		                        </div>
+		                	</div>
+		                	
+		                	<div class="form-group col-sm-4">
+		                    	<label class="col-sm-2 control-lable" for="contactNoFo">Overseas Contact</label>
+		                        <div class="col-sm-10">
+		                           	<input type="text" ng-model="ctrl.Record.contactNoFo" id="contactNoFo" class="contactNoFo form-control input-sm" placeholder="Enter Overseas Phone Number" maxlength="20" onkeypress="return isNumberKey(event)"/>
+		                           	<div class="has-error" ng-show="myForm.$dirty">
+		                            </div>
+		                        </div>
+		                	</div>
+ 		                </div>
 		                <div class="row">
 		                	<div class="form-actions floatRight">
 		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
@@ -264,6 +289,8 @@
 		                    	<tr>
 		                        	<th>Name</th>
 		                        	<th>Contact No</th>
+		                        	<th>Contact No2</th>
+		                        	<th>Overseas Contact</th>
 		                            <th>Doctor</th>
 		                            <th>Date</th>
 		                            <th>Time</th>	                            
@@ -275,6 +302,8 @@
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.name"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo2"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNoFo"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
 		                            <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'date', u.date)|date:yyyy/MM/dd"></span></td>  
 		                           	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.time"></span></td>
@@ -315,5 +344,12 @@
 	            'scrollDefault': 'now'                 
 	            });
 	        });
+	        
+	        function isNumberKey(evt){
+	            var charCode = (evt.which) ? evt.which : event.keyCode
+	            if (charCode > 31 && (charCode < 48 || charCode > 57))
+	                return false;
+	            return true;
+	        }
 	    </script>
 </html>

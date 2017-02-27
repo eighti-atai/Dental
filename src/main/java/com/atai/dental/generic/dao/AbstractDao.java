@@ -118,49 +118,52 @@ public class AbstractDao<PK extends Serializable, T> {
 		{ 
 			Class<?> c = field.getType();
 			
-			if(c.isPrimitive() || (c.getTypeName() == "java.lang.String") || (c.getTypeName() == "java.math.BigDecimal") || (c.getTypeName() == "java.util.Date")|| (c.getTypeName() == "java.lang.Integer"))
+			if(c.isPrimitive() || (c.getTypeName() == "java.lang.String") || (c.getTypeName() == "java.math.BigDecimal") || (c.getTypeName() == "java.util.Date")|| (c.getTypeName() == "java.lang.Integer") || (c.getTypeName() == "java.lang.Double"))
 			{
 				fieldName = field.getName();
 				fieldValue = field.get(entity).toString();
 				System.out.println("field value is ----------------------"+fieldValue);
 				//if(fieldValue.contains("%"))
-				if(c.getTypeName() == "java.lang.String")
+				if(!fieldValue.contains("data:image"))
 				{
-					if (alias == null)
+					if(c.getTypeName() == "java.lang.String")
 					{
-						criteria.add(Restrictions.ilike(fieldName, "%"+field.get(entity).toString()+"%"));
-					}
-					else
-					{
-						criteria.add(Restrictions.ilike(alias + "."+fieldName, "%"+field.get(entity)+"%"));
-					}
-				}
-				else
-				{
-					if (c.getTypeName() == "java.util.Date")
-					{
-						date = (Date)field.get(entity);
 						if (alias == null)
-						{							
-							criteria.add(Restrictions.eq(fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+						{
+							criteria.add(Restrictions.ilike(fieldName, "%"+field.get(entity).toString()+"%"));
 						}
 						else
 						{
-							criteria.add(Restrictions.eq(alias + "."+fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+							criteria.add(Restrictions.ilike(alias + "."+fieldName, "%"+field.get(entity)+"%"));
 						}
 					}
 					else
 					{
-						if (alias == null)
+						if (c.getTypeName() == "java.util.Date")
 						{
-							criteria.add(Restrictions.eq(fieldName, field.get(entity)));
+							date = (Date)field.get(entity);
+							if (alias == null)
+							{							
+								criteria.add(Restrictions.eq(fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+							}
+							else
+							{
+								criteria.add(Restrictions.eq(alias + "."+fieldName, new Date(date.getYear(), date.getMonth(), date.getDate())));
+							}
 						}
 						else
 						{
-							criteria.add(Restrictions.eq(alias + "."+fieldName, field.get(entity)));
+							if (alias == null)
+							{
+								criteria.add(Restrictions.eq(fieldName, field.get(entity)));
+							}
+							else
+							{
+								criteria.add(Restrictions.eq(alias + "."+fieldName, field.get(entity)));
+							}
 						}
+						
 					}
-					
 				}
 			}
 			else

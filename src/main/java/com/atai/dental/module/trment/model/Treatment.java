@@ -22,9 +22,9 @@ public class Treatment implements Model<TreatmentKey> {
 	private TreatmentKey id;
 
 	
-	@ManyToOne
-	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
-	private Patient patient;
+//	@ManyToOne
+//	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
+//	private Patient patient;
 	
 	@Column(name = "treatment_main_type")
 	private String treatmentMainType;
@@ -52,13 +52,13 @@ public class Treatment implements Model<TreatmentKey> {
 	private Double treatmentPaid;
 	private String objid;
 	
-	public Patient getPatient() {
-		return patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+//	public Patient getPatient() {
+//		return patient;
+//	}
+//
+//	public void setPatient(Patient patient) {
+//		this.patient = patient;
+//	}
 
 	/*public void setId(TreatmentKey key) {
 		this.key = key;

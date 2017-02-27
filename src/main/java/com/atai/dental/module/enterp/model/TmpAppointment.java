@@ -34,6 +34,10 @@ public class TmpAppointment implements Model<Integer> {
 	private String objid;
 	@Column(name = "contact_no")
 	private String contactNo;
+	@Column(name = "contact_no2")
+	private String contactNo2;
+	@Column(name = "contact_no_fo")
+	private String contactNoFo;
 	
 	
 	
@@ -131,5 +135,20 @@ public class TmpAppointment implements Model<Integer> {
 		this.contactNo = contactNo;
 	}
 
+	public String getContactNo2() {
+		return contactNo2;
+	}
+
+	public void setContactNo2(String contactNo2) {
+		this.contactNo2 = contactNo2;
+	}
+
+	public String getContactNoFo() {
+		return contactNoFo;
+	}
+
+	public void setContactNoFo(String contactNoFo) {
+		this.contactNoFo = contactNoFo;
+	}
 
 }

@@ -184,6 +184,12 @@
             scope.ctrl.setPanelHeader("List of Treatments - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
         }
+        
+        function reloadPage() {
+        	var scope = angular.element(document.getElementById("con3")).scope();
+        	scope.ctrl.Record.treatmentPaid = null;
+        	scope.$apply(scope.ctrl.searchRecords());
+        	}
     </script>
 </head>
 	<body ng-app="generalModule" class="ng-cloak">

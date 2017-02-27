@@ -118,7 +118,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="mttId">Main Treatment ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.id.mttId" id="mttId" class="mttId form-control input-sm" placeholder="Main Treatment ID" required maxlength="20" style="text-transform:uppercase"  ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.id.mttId" id="mttId" class="mttId form-control input-sm" placeholder="Main Treatment ID" required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.mttId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.sttId.$error.minlength">Maximum length is 5</span>
@@ -132,7 +132,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="sttId">Sub Treatment ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.id.sttId" id="sttId" class="sttId form-control input-sm" placeholder="Sub Treatment ID" required maxlength="20" style="text-transform:uppercase" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.id.sttId" id="sttId" class="sttId form-control input-sm" placeholder="Sub Treatment ID" required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.sttId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.sttId.$error.minlength">Maximum length is 5</span>
@@ -191,7 +191,7 @@
                           	</tr>
                       	</thead>
            			<tbody>
-                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
+                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.mttId"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.sttId"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentName"></span></td>

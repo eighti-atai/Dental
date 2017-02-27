@@ -15,8 +15,9 @@ $(document).ready(function() {
 })
   function resizeIframe() {
 	iframeLoaded('f2');
-	iframeLoaded('f1');
 	iframeLoaded('f3');
+	iframeLoaded('f1');
+	
   }
     
 function iframeLoaded(x) {
@@ -29,12 +30,14 @@ function iframeLoaded(x) {
           // here you can make the height, I delete it first, then I make it again
           iFrameID.height = "";
           
-          if(x==='f1')
+          if(x==='f3')
         	{
         	  	iFrameID.width = "";
-              	iFrameID.width = ((y/2)) + "px";
-              	hf1 = document.getElementById('f3').contentDocument.body.scrollHeight ;
-              	iFrameID.height = hf1;
+          		iFrameID.width = ((y/2)) + "px";
+          		hf3 = document.getElementById('f3').contentDocument.body.scrollHeight ;
+          		iFrameID.height = hf3; 
+          	
+        	  	
         	}
           else if(x==='f2')
         	{
@@ -45,10 +48,10 @@ function iframeLoaded(x) {
         	}
           else
       		{
-      	  		iFrameID.width = "";
+        	  	iFrameID.width = "";
             	iFrameID.width = ((y/2)) + "px";
-            	hf3 = document.getElementById('f3').contentDocument.body.scrollHeight ;
-            	iFrameID.height = hf3; 
+            	hf1 = document.getElementById('f3').contentDocument.body.scrollHeight ;
+            	iFrameID.height = hf1;
       		}
     }
 }  
