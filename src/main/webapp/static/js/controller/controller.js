@@ -446,7 +446,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 			        				self.lovDataRecord[key3] = response.data[key0][key1][key3];
 			        				if(count === 0)
 			        				{
-				        				self.LovColumsHeads.push(key3);
+				        				self.LovColumsHeads.push(self.lovHeads[self.lastFocused.id][key1][key3]);
+				        				self.lovColumnHeadsOri.push(key3);
 			        				}
 		        				}
 		        			}
