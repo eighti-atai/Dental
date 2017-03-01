@@ -115,11 +115,12 @@
         function populate(patientId,treatmentId) 
         {
      	   var scope = angular.element(document.getElementById("con3")).scope();
-     	  	scope.ctrl.Record = {id:{patientId:'', treatmentId:'', paymentNo:''},paymentDate:(new Date()), paymentType:'',paymentMethod:'',amount:'', chequeNo:'',chequeExpDate:'',chequeBank:'',objid:null};
+     	  	scope.ctrl.Record = {id:{patientId:'', treatmentId:'', paymentNo:''},paymentDate:null, paymentType:'',paymentMethod:'',amount:'', chequeNo:'',chequeExpDate:'',chequeBank:'',objid:null};
             scope.ctrl.Record.id.patientId = patientId;
             scope.ctrl.Record.id.treatmentId = treatmentId;
             scope.ctrl.setPanelHeader("Payments - Patient ID: "+patientId+"Treatment ID: "+treatmentId);
             scope.$apply(scope.ctrl.searchRecords());
+            scope.ctrl.Record.paymentDate= (new Date());
         }
         
     </script>
@@ -171,7 +172,7 @@
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button>
-                              <button type="submit" ng-click="ctrl.printReport()" class="btn btn-warning btn-sm" >Print Invoice</button>
+                              <button type="button" ng-click="ctrl.printReport()" class="btn btn-warning btn-sm" >Print Invoice</button>
                           </div>
                       </div>
                   </form>
@@ -226,7 +227,7 @@
 <!--                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.chequeBank"style="width: 100%""/></td> -->
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
-                              <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
                               </td>
                           </tr>
                       </tbody>
