@@ -147,6 +147,7 @@
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
     <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
+     <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
     
     <script src="webjars/angularjs/1.5.8/angular.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
@@ -165,6 +166,7 @@
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+    <script src="<c:url value='/static/js/entity/Payment.js' />"></script>
       
     <script type="text/javascript">
     	function populatePage(Record) 
@@ -211,6 +213,8 @@
               	<div class="panel-heading"><span class="lead">Treatment</span></div>
               	<div class="formcontainer">
                 	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                	<div id="lov" unter-lov class = "lov"></div>
+					<div id="kan" unter-search class = "lov"></div>
                     	<input type="hidden" ng-model="ctrl.Record.objid" /> 
                     	<input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="treatmentId form-control input-sm" placeholder="Enter Treatmnet ID"/>
 
@@ -218,10 +222,21 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="patientId">Patient ID</label>
                               <div class="col-sm-7">
-                                  <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                                  <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-blur="ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName'])" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <div class="form-group col-sm-4">
+                              <label class="col-sm-3 control-lable" for="patientName">Patient Name</label>
+                              <div class="col-sm-7">
+                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName"  class="patientName form-control input-sm" placeholder="Patient Name " />
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.patientName.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
@@ -231,29 +246,29 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="treatmentMainType">Main Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.treatmentMainType" id="treatmentMainType" class="treatmentMainType form-control input-sm" placeholder="Enter Main Type " required maxlength="20" style="text-transform:uppercase"/>
+                                  <input type="text" ng-model="ctrl.Record.treatmentMainType" id="treatmentMainType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentMainType form-control input-sm" placeholder="Enter Main Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentMainType.$error.required">This is a required field</span>
                                       <span ng-show="myForm.treatmentMainType.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
-<!--                       	</div>  -->
+                      	</div> 
                       	
-<!--                       	<div class="row"> -->
+                      	<div class="row">
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="treatmentSubType">Sub Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" style="text-transform:uppercase"/>
+                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.treatmentSubType.$error.required">This is a required field</span>
                                       <span ng-show="myForm.treatmentSubType.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
-                      	</div> 
+<!--                       	</div>  -->
 
-                      	<div class="row">
+<!--                       	<div class="row"> -->
 <!--                           <div class="form-group col-sm-4"> -->
 <!--                               <label class="col-sm-3 control-lable" for="treatmentStat">Treatment State</label> -->
 <!--                               <div class="col-sm-7"> -->
@@ -301,9 +316,9 @@
                                   </div>
                               </div>
                           </div>
-<!--                       	</div> -->
+                      	</div>
                       	
-<!--                       	<div class="row"> -->
+                      	<div class="row">
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="treatmentDiscount">Discount</label>
                               <div class="col-sm-7">
@@ -314,9 +329,9 @@
                                   </div>
                               </div>
                           </div>
-                      	</div>
+<!--                       	</div> -->
                       	
-                      	<div class="row">
+<!--                       	<div class="row"> -->
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="treatmentTotal">Total Amount</label>
                               <div class="col-sm-7">
@@ -340,9 +355,9 @@
                                   </div>
                               </div>
                           </div>
-<!--                       	</div> -->
+                      	</div>
                       	
-<!--                       	<div class="row"> -->
+                      	<div class="row">
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="treatmentDesc">Description</label>
                               <div class="col-sm-7">
@@ -367,6 +382,7 @@
                               <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset();ctrl.clearImage();" class="btn btn-warning btn-sm">Reset Form</button>
                                <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+                               <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
                           </div>
                       </div>
                   </form>
