@@ -31,9 +31,11 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.lov;
     self.lovTitles;
     self.lovRecord;
+    self.lovHeads;
     self.ListOfValues = ListOfValues;
     self.LovRecords = [];
     self.LovColumsHeads = [];
+    self.lovColumnHeadsOri = [];
     self.lovDataRecord = [];
     self.lovClose = lovClose;
     self.setLovValue = setLovValue;
@@ -77,6 +79,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
     	self.lovRecord = EntityService.lovRecord;
+    	self.lovHeads  = EntityService.lovHeads;
     	if(EntityService.name!=='AttendPatient')
     		{
     			getDoctors();
@@ -418,6 +421,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     		self.lovTitle = self.lovTitles[self.lastFocused.id];
 	    	self.LovColumsHeads = [];
 	    	self.LovRecords = [];
+	    	self.lovColumnHeadsOri = [];
 	    	document.getElementById("lov").style.display = "none";
 	    	//document.getElementById("kan").style.display = "none";
 	    	var lovField = Reflect.get(EntityService.lov, self.lastFocused.id);
@@ -448,12 +452,24 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		        			}
 			        		else
 		        			{
-			        			var obj = new Object();
-			        			obj[key1] = response.data[key0][key1];
-			        			self.lovDataRecord[key1] = response.data[key0][key1];
-			        			if(count === 0)
+			        			if (key1 !== 'objid')
 		        				{
-			        				self.LovColumsHeads.push(key1);
+				        			var obj = new Object();
+				        			obj[key1] = response.data[key0][key1];
+				        			self.lovDataRecord[key1] = response.data[key0][key1];
+				        			if(count === 0)
+			        				{
+				        				if (self.lovHeads[self.lastFocused.id][key1] !== undefined)
+			        					{
+				        					self.LovColumsHeads.push(self.lovHeads[self.lastFocused.id][key1]);
+				        					self.lovColumnHeadsOri.push(key1);
+			        					}
+				        				else
+			        					{
+				        					self.LovColumsHeads.push(key1);
+				        					self.lovColumnHeadsOri.push(key1);
+			        					}
+			        				}
 		        				}
 		        			}
 	        			}

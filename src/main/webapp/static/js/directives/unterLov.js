@@ -17,7 +17,7 @@ angular.module('generalModule').directive('unterLov', function(){
 					"</thead>" +
 					"<tbody>" +
 					"<tr ng-repeat='u in ctrl.LovRecords' ng-click='ctrl.setLovValue(u)'>" +
-					"<td ng-repeat='a in ctrl.LovColumsHeads'>"+
+					"<td ng-repeat='a in ctrl.lovColumnHeadsOri'>"+
 					"<span ng-bind='u[a]'></span>" +
 					"</td>" +
 					"</tr>" +

@@ -8,7 +8,8 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
         emptyRecord :emptyRecord,
         lov :{mttId:'MainTreatmentType'},
         lovRecord:{mttId:{mttId:'',mttName:'',mttDescription:''}},
-        lovTitles :{mttId: 'Main Treatment Type'}
+        lovTitles :{mttId: 'Main Treatment Type'},
+        lovHeads :{mttId:{mttId:'Main Treatment ID',mttName:'Name',mttDescription:'Description'}}
     };
     return entityRec;
     
