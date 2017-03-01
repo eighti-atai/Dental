@@ -198,7 +198,7 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="contactNo">Contact No</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.contactNo" id="contactNo" class="contactNo form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                           	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.contactNo" id="contactNo" class="contactNo form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
@@ -255,7 +255,7 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="contactNo2">Contact No 2</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.contactNo2" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                           	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.contactNo2" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
