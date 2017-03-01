@@ -39,6 +39,7 @@ public class Patient implements Model<Integer> {
 	private String contactNo2;
 	@Column(name = "contact_no_fo")
 	private String contactNoFo;
+	private String title;
 	
 	
 	public String getObjid() {
@@ -136,6 +137,14 @@ public class Patient implements Model<Integer> {
 
 	public void setContactNoFo(String contactNoFo) {
 		this.contactNoFo = contactNoFo;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

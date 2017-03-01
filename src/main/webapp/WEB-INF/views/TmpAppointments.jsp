@@ -186,7 +186,7 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="name">Name</label>
 		                        <div class="col-sm-10">
-		                        	<input type="text" ng-model="ctrl.Record.name" id="name" class="name form-control input-sm" placeholder="Enter Patient Name "/>
+		                        	<input type="text" ng-model="ctrl.Record.name" id="name" class="name form-control input-sm" placeholder="Enter Patient Name " style="text-transform: capitalize;"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.name.$error.required">This is a required field</span>
 		                                <span ng-show="myForm.name.$invalid">This field is invalid </span>
@@ -300,7 +300,7 @@
 		                  	</thead>
 		                	<tbody>
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
-		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.name"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.name" style="text-transform: capitalize;"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo2"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNoFo"></span></td>

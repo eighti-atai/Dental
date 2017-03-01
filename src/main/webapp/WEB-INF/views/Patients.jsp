@@ -140,6 +140,15 @@
 	          	background-color: yellow;
 	      	}
 	      	
+	      	.title.ng-valid {
+	          	background-color: lightgreen;
+	      	}
+	      	.title.ng-dirty.ng-invalid-required {
+	          	background-color: red;
+	      	}
+	      	.title.ng-dirty.ng-invalid-email {
+	          	background-color: yellow;
+	      	}
 			.modal {
 			    display: none; /* Hidden by default */
 			    position: fixed; /* Stay in place */
@@ -238,10 +247,26 @@
 		            	<input id="patientId" type="hidden" ng-model="ctrl.Record.patientId" /> 
 		
 						<div class="row">
+						<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="title">Title</label>
+		                        <div class="col-md-10">
+		                        	<select type="text" ng-model="ctrl.Record.title" id="title" class="title form-control input-sm" placeholder="Enter Title " required >
+		                        	<option value="Mr.">Mr.</option>
+								  		<option value="Mrs.">Mrs.</option>
+								  		<option value="Miss">Miss</option>
+								  		<option value="Dr.">Dr.</option>
+								  		<option value="Rev.">Rev.</option>
+									</select>
+		                        	<div class="has-error" ng-show="myForm.$dirty">
+		                            	<span ng-show="myForm.title.$error.required">This is a required field</span>
+		                                <span ng-show="myForm.title.$invalid">This field is invalid </span>
+		                            </div>
+		                		</div>
+		                	</div>
 		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientName">Name</label>
 		                        <div class="col-md-10">
-		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1"/>
+		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1" style="text-transform: capitalize;"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.patientName.$error.required">This is a required field</span>
 		                                <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
@@ -296,16 +321,16 @@
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientGender">Gender</label>
-		                        <div class="col-md-10">
-		                      		<select ng-model="ctrl.Record.patientGender" id="patientGender" class="patientGender form-control input-sm" placeholder="Selet Gender">
-								  		<option value=""></option>
-								  		<option value="Male">Male</option>
-								  		<option value="Female">Female</option>
-									</select>
-								</div>
-							</div>
+<!-- 		                	<div class="form-group col-xs-4"> -->
+<!-- 		                    	<label class="col-md-2 control-lable" for="patientGender">Gender</label> -->
+<!-- 		                        <div class="col-md-10"> -->
+<!-- 		                      		<select ng-model="ctrl.Record.patientGender" id="patientGender" class="patientGender form-control input-sm" placeholder="Selet Gender"> -->
+<!-- 								  		<option value=""></option> -->
+<!-- 								  		<option value="Male">Male</option> -->
+<!-- 								  		<option value="Female">Female</option> -->
+<!-- 									</select> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 		                </div>
 						<div class="row"> 
 		                	<div class="form-group col-xs-4">
@@ -367,7 +392,7 @@
 		                  	</thead>
 		                	<tbody>
 		                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize" ng-dblclick="ctrl.populateRecord(u.objid)" >
-		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName"></span></td>
+		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientName" style="text-transform: capitalize;"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patientContactNo"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNo2"></span></td>
 		                        	<td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.contactNoFo"></span></td>
