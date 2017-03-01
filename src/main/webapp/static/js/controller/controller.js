@@ -456,20 +456,23 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		        				{
 				        			var obj = new Object();
 				        			obj[key1] = response.data[key0][key1];
-				        			self.lovDataRecord[key1] = response.data[key0][key1];
-				        			if(count === 0)
-			        				{
-				        				if (self.lovHeads[self.lastFocused.id][key1] !== undefined)
-			        					{
-				        					self.LovColumsHeads.push(self.lovHeads[self.lastFocused.id][key1]);
-				        					self.lovColumnHeadsOri.push(key1);
-			        					}
-				        				else
-			        					{
-				        					self.LovColumsHeads.push(key1);
-				        					self.lovColumnHeadsOri.push(key1);
-			        					}
-			        				}
+				        			if (self.lovHeads[self.lastFocused.id][key1] !== undefined)
+		        					{
+					        			self.lovDataRecord[key1] = response.data[key0][key1];
+					        			if(count === 0)
+				        				{
+					        				//if (self.lovHeads[self.lastFocused.id][key1] !== undefined)
+				        					//{
+					        					self.LovColumsHeads.push(self.lovHeads[self.lastFocused.id][key1]);
+					        					self.lovColumnHeadsOri.push(key1);
+				        					//}
+					        				//else
+				        					//{
+					        				//	self.LovColumsHeads.push(key1);
+					        				//	self.lovColumnHeadsOri.push(key1);
+				        					//}
+				        				}
+		        					}
 		        				}
 		        			}
 	        			}
