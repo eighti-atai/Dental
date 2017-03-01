@@ -6,7 +6,7 @@ angular.module('generalModule').directive('unterLov', function(){
 					"<span class='close' id='lovClose' ng-click='ctrl.lovClose()'>&times;</span>" +
 					"<h2>{{ctrl.lovTitle}}</h2>"+
 					"</div>" +
-					"<div class = 'close modal-header' id='lovSearch' ng-click='ctrl.lovSearch()'>Search</div>"+
+					//"<div class = 'close modal-header' id='lovSearch' ng-click='ctrl.lovSearch()'>Search</div>"+
 					"<table class='table table-hover'>" +
 					"<thead>" +
 					"<tr>" +
