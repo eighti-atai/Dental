@@ -27,9 +27,9 @@ public class Treatment implements Model<TreatmentKey> {
 //	private Patient patient;
 	
 	@Column(name = "treatment_main_type")
-	private String treatmentMainType;
+	private String mttId;
 	@Column(name = "treatment_sub_type")
-	private String treatmentSubType;
+	private String sttId;
 	@Column(name = "treatment_desc")
 	private String treatmentDesc;
 	@Column(name = "treatment_image")
@@ -92,20 +92,20 @@ public class Treatment implements Model<TreatmentKey> {
 
 	}
 
-	public String getTreatmentMainType() {
-		return treatmentMainType;
+	public String getmttId() {
+		return mttId;
 	}
 
-	public void setTreatmentMainType(String treatmentMainType) {
-		this.treatmentMainType = treatmentMainType;
+	public void setmttId(String mttId) {
+		this.mttId = mttId;
 	}
 
-	public String getTreatmentSubType() {
-		return treatmentSubType;
+	public String getsttId() {
+		return sttId;
 	}
 
-	public void setTreatmentSubType(String treatmentSubType) {
-		this.treatmentSubType = treatmentSubType;
+	public void setsttId(String sttId) {
+		this.sttId = sttId;
 	}
 
 	public String getTreatmentDesc() {

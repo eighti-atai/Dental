@@ -4,17 +4,17 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Treatment',
-        record :{id:{treatmentId:'',patientId:''} , patientName:'', treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
+        record :{id:{treatmentId:'',patientId:''} , patientName:'', mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
         emptyRecord :emptyRecord,
-        lov :{id:{patientId: 'Patient',treatmentId: 'Treatment'},mttId:'MainTreatmentType',sttId:'SubTreatmentType'},
-        lovRecord:{patientId:{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientContactNo:'',patientGender:''}, treatmentId:{id:{treatmentId:'',patientId:''} , treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:''}},
+        lov :{patientId: 'Patient',mttId:'MainTreatmentType',sttId:'SubTreatmentType'},
+        lovRecord:{patientId:{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientContactNo:'',patientGender:''}, mttId:{mttId:'',mttName:'',mttDescription:''}},
         lovTitles :{patientId: 'Patient',treatmentId: 'Treatment',mttId: 'Main Treatment Type',sttId: 'Sub Treatment Type'},
-        lovHeads :{patientId:{patientId:'Id',patientName:'Name',patientAddress:'Address',patientIdNo:'ID No',patientContactNo:'Contact No',patientGender:'Gender'}}
+        lovHeads :{patientId:{patientId:'Id',patientName:'Name',patientAddress:'Address',patientIdNo:'ID No',patientContactNo:'Contact No',patientGender:'Gender'},mttId:{mttId:'Id',mttName:'Name XX',mttDescription:'Description'}}
     };
     return entityRec;
     
     function emptyRecord() {
-        return {id:{treatmentId:'',patientId:''} ,patientName:'', treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
+        return {id:{treatmentId:'',patientId:''} ,patientName:'', mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
     }	
 }]);
 

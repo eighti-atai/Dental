@@ -73,32 +73,32 @@
    	.undo > button[disabled] {
         background-color: #aaa;
     }
-	.salesPartId.ng-valid {
+	.patientId.ng-valid {
         background-color: lightgreen;
     }
-   	.salesPartId.ng-dirty.ng-invalid-required {
+   	.patientId.ng-dirty.ng-invalid-required {
         background-color: red;
     }
-   	.salesPartId.ng-dirty.ng-invalid-minlength {
+   	.patientId.ng-dirty.ng-invalid-minlength {
         background-color: yellow;
     }
 
-   	.patientAddress.ng-valid {
+   	.mttId.ng-valid {
         background-color: lightgreen;
     }
-   	.patientAddress.ng-dirty.ng-invalid-required {
+   	.mttId.ng-dirty.ng-invalid-required {
         background-color: red;
     }
-   	.patientAddress.ng-dirty.ng-invalid-email {
+   	.mttId.ng-dirty.ng-invalid-email {
         background-color: yellow;
     }
-	.invPartNo.ng-valid {
+	.sttId.ng-valid {
         background-color: lightgreen;
     }
-   	.invPartNo.ng-dirty.ng-invalid-required {
+   	.sttId.ng-dirty.ng-invalid-required {
         background-color: red;
     }
-   	.invPartNo.ng-dirty.ng-invalid-minlength {
+   	.sttId.ng-dirty.ng-invalid-minlength {
         background-color: yellow;
     }
 
@@ -166,7 +166,7 @@
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
-    <script src="<c:url value='/static/js/entity/Payment.js' />"></script>
+      <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
       
     <script type="text/javascript">
     	function populatePage(Record) 
@@ -200,7 +200,7 @@
         function populate(patientId) 
         {
      	   var scope = angular.element(document.getElementById("con3")).scope();
-     	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
+     	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
             scope.ctrl.Record.id.patientId = patientId;
             //scope.ctrl.setPanelHeader("Appointment - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
@@ -233,7 +233,7 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="patientName">Patient Name</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName"  class="patientName form-control input-sm" placeholder="Patient Name " />
+                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName" readonly class="patientName form-control input-sm" placeholder="Patient Name " />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientName.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
@@ -244,12 +244,12 @@
                       	
 <!--                       	<div class="row"> -->
                           <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentMainType">Main Type</label>
+                              <label class="col-sm-3 control-lable" for="mttId">Main Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.treatmentMainType" id="treatmentMainType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentMainType form-control input-sm" placeholder="Enter Main Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentMainType.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentMainType.$invalid">This field is invalid </span>
+                                      <span ng-show="myForm.mttId.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.mttId.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
@@ -257,12 +257,12 @@
                       	
                       	<div class="row">
                           <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentSubType">Sub Type</label>
+                              <label class="col-sm-3 control-lable" for="sttId">Sub Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.treatmentSubType" id="treatmentSubType" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.treatmentMainType,sttId:ctrl.Record.treatmentSubType}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="treatmentSubType form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentSubType.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentSubType.$invalid">This field is invalid </span>
+                                      <span ng-show="myForm.sttId.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.sttId.$invalid">This field is invalid </span>
                                   </div>
                               </div>
                           </div>
@@ -411,8 +411,8 @@
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'treatmentDate', u.treatmentDate)|date:yyyy/MM/dd"></span></td>
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentSubType"></span></td> 
+                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttId"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.sttId"></span></td> 
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentTotal"></span></td> 
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentPaid"></span></td> 
 <!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td>  -->
@@ -421,8 +421,8 @@
 <!--                               <td ng-if="!ctrl.change(u.objid)"><img id="ItemPreview1" src="data:image/jpg;base64,u.treatmentImage" /></td>  -->
                                
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.treatmentId"style="width: 100%"/></td>                                                           
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.treatmentMainType" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.treatmentSubType" style="width: 100%""/></td> -->
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.mttId" style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.sttId" style="width: 100%""/></td> -->
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.treatmentImage" style="width: 100%""/></td> -->
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>

@@ -7,7 +7,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
         record :{id:{patientId:'', treatmentId:'', paymentNo:''},paymentDate:null, paymentType:'',paymentMethod:'',amount:'',chequeNo:'',chequeExpDate:'',chequeBank:'',objid:null},
         emptyRecord :emptyRecord,
         lov :{id:{patientId: 'Patient',treatmentId: 'Treatment'}},
-        lovRecord:{patientId:{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientBirthDate:null,patientContactNo:'',patientGender:'',objid:null}, treatmentId:{id:{treatmentId:'',patientId:''} , treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null}},
+        lovRecord:{patientId:{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientBirthDate:null,patientContactNo:'',patientGender:'',objid:null}, treatmentId:{id:{treatmentId:'',patientId:''} , mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null}},
         lovTitles :{patientId: 'Patient',treatmentId: 'Treatment'}
     };
     return entityRec;

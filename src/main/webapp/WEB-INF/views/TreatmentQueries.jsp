@@ -179,7 +179,7 @@
         function populate(patientId,patientName) 
         {
      	   var scope = angular.element(document.getElementById("con3")).scope();
-     	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , treatmentMainType:'', treatmentSubType:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
+     	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
             scope.ctrl.Record.id.patientId = patientId;
             scope.ctrl.setPanelHeader("List of Treatments - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
@@ -216,8 +216,8 @@
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)">
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'treatmentDate', u.treatmentDate)|date:yyyy/MM/dd"></span></td>
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentMainType"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentSubType"></span></td> 
+                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttId"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.sttId"></span></td> 
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentTotal"></span></td> 
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentPaid"></span></td> 
                               <td>

@@ -587,13 +587,16 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 								if (self.Record[key]  !== undefined)
 								{
 									self.Record[key] = lovRecord[key];
+									document.getElementById(key).focus();
 								}
 								else
 								{
 									document.getElementById(key).value = lovRecord[key];
+									document.getElementById(key).focus();
+									//document.getElementById(key).focusout()
 									//document.getElementById(key).style.$dirty = true;
 									//document.getElementById(key).$setValidity('ff'.true);
-									//document.getElementById(key).setAttribute("class","style.color:red"); 
+									document.getElementById(key).setAttribute("style", "background-color: lightgreen;");								
 								}
 								//}
 							}
@@ -602,6 +605,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 								//if (self.lov[field][self.lastFocused.id] === key)
 								//{
 									self.Record[field][key] = lovRecord[key];
+									document.getElementById(key).focus();
 								//}
 							}
 						}
