@@ -130,7 +130,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             		bootbox.alert({
             		    message: "The record has been successfully updated",
             		    title: "Information!"
-            		})},
+            		});
+            		reloadPageFromRecord();},
             function(errResponse){
             			bootbox.alert({
                 		    message: "Error while updating record",
@@ -158,7 +159,13 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	    callback: function (result) {
     	    	if( result == true ){
     	        	RecordService.deleteRecord(objid)
-    	            .then(searchRecords,
+    	            .then(function() {
+                		bootbox.alert({
+                		    message: "The record has been successfully deleted",
+                		    title: "Information!"
+                		});
+                		searchRecords;
+                		reloadPageFromRecord();},
     	            function(errResponse){
     	                console.error('Error while deleting Record');
     	                bootbox.alert({
