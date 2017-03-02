@@ -87,8 +87,13 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 	@Override
 	@DeleteMapping(value = "/Payment/{objid:.+}")
 	public ResponseEntity<Payment> delete(@PathVariable("objid") String objid) {
-		// TODO Auto-generated method stub
-		return super.delete(objid);
+		Payment paymentObject = service.getByObjid(objid);
+		Double amount = paymentObject.getAmount();
+		ResponseEntity<Payment> res = super.delete(objid);
+		Treatment treatment = paymentObject.getTreatment();
+		treatment.setTreatmentPaid(treatment.getTreatmentPaid() - amount);
+		treatmentService.update(treatment);
+		return res;
 	}
 	@Override
 	@PostMapping(value = "/Payment/Search")
