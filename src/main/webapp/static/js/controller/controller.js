@@ -592,12 +592,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 								}
 								else
 								{
-									document.getElementById(key).value = lovRecord[key];
+									//document.getElementById(key).value = lovRecord[key];
+									//var x='id.'+key;
+									self.Record['id'][key]= lovRecord[key];
 									document.getElementById(key).focus();
 									//document.getElementById(key).focusout()
 									//document.getElementById(key).style.$dirty = true;
 									//document.getElementById(key).$setValidity('ff'.true);
-									document.getElementById(key).setAttribute("style", "background-color: lightgreen;");								
+									//document.getElementById(key).setAttribute("style", "background-color: lightgreen;");
+									
 								}
 								//}
 							}
