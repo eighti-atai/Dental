@@ -204,11 +204,12 @@
             scope.ctrl.Record.id.patientId = patientId;
             //scope.ctrl.setPanelHeader("Appointment - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
+            scope.$apply(scope.ctrl.validateRecords('Patient',{patientId:scope.ctrl.Record.id.patientId},['patientName'],['patientName']));
         }
     </script>
 </head>
 	<body ng-app="generalModule" class="ng-cloak">
-    	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.fetchAllRecords()">
+    	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">
           	<div class="panel panel-default">
               	<div class="panel-heading"><span class="lead">Treatment</span></div>
               	<div class="formcontainer">
@@ -222,7 +223,7 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="patientId">Patient ID</label>
                               <div class="col-sm-7">
-                                  <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-blur="ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName'])" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
+                                  <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName'])" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.patientId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
@@ -246,7 +247,7 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="mttId">Main Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.mttId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.mttId.$invalid">This field is invalid </span>
@@ -259,7 +260,7 @@
                           <div class="form-group col-sm-4">
                               <label class="col-sm-3 control-lable" for="sttId">Sub Type</label>
                               <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" ng-focus="ctrl.setFocusedElement()"/>
+                                  <input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" />
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.sttId.$error.required">This is a required field</span>
                                       <span ng-show="myForm.sttId.$invalid">This field is invalid </span>
@@ -408,7 +409,7 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
+                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid);(ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName']));">
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'treatmentDate', u.treatmentDate)|date:yyyy/MM/dd"></span></td>
                                <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttId"></span></td>
