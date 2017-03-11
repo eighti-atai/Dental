@@ -63,16 +63,17 @@ public class Report{
 }
 
 	@PostMapping(value = "/GenerateReport")
-	public ResponseEntity<ReportRec> GenerateReport(ReportRec object){	
+	public ResponseEntity<ReportRec> GenerateReport(@RequestBody ReportRecInvoicePatientTreatment object){	
 		HashMap<String, Object> hParams;
 		String FormName = object.getFormName();
 		String RealPath = ServeletContext.getRealPath("") + File.separator + "report" + File.separator + FormName;		
 		byte[] bytes = null;
 		OutputStream outputStream = null;
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		File ReportFile = new File(RealPath + timestamp +".jasper");
-		File PdfReportFile = new File(RealPath + timestamp + ".pdf");
-		System.out.println(timestamp);
+		
+		File ReportFile = new File(RealPath + timestamp.hashCode() +".jasper");
+		File PdfReportFile = new File(RealPath + timestamp.hashCode() + ".pdf");
+		System.out.println(timestamp.hashCode());
 		if (!ReportFile.exists()){
 			try {
 				Connection conn = LocalDataSource.getConnection();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-26T11:09:53 -->
+<!-- 2017-03-03T20:07:58 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dental"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -180,8 +180,8 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="80" width="160" height="25" uuid="25e1b8b1-2ca0-4a1b-bd1a-702ba067b228"/>
-				<textElement>
-					<font fontName="Times New Roman" size="14"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
 			</textField>

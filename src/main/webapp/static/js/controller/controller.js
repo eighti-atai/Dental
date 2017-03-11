@@ -53,6 +53,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.populateTargetPage = populateTargetPage;
     self.InsertRecords = InsertRecords;
     self.reloadPageFromRecord = reloadPageFromRecord;
+    self.printReport = printReport;
 
     self.today = new Date();
  
@@ -236,6 +237,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
      
     function printReport(){
     	var reportRec = {formName:"invoice", patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId};
+    	var entityRec = {
+    	        name   :'ReportRecInvoicePatientTreatment',
+    	        record :{formName:'invoice', patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId}
+    	        };
     	RecordService.setRestServiceUri("GenerateReport");
     	createRecord(reportRec);
     	}
