@@ -235,7 +235,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 
     }
      
-    function printReport(){
+    /*function printReport(){
     	var reportRec = {formName:"invoice", patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId};
     	var entityRec = {
     	        name   :'ReportRecInvoicePatientTreatment',
@@ -243,9 +243,35 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	        };
     	RecordService.setRestServiceUri("GenerateReport");
     	createRecord(reportRec);
-    	}
+    	}*/
     
     
+    function printReport(){
+        
+    		var reportRec = {formName:"invoice", patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId};
+        	var entityRec = {
+        	        name   :'ReportRecInvoicePatientTreatment',
+        	        record :{formName:'invoice', patientId:self.Record.id.patientId, treatmentId:self.Record.id.treatmentId}
+        	        };
+	    	var current_url = $location.absUrl();
+	    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+	    	var valUrl = base_url + 'GenerateReport' ;  
+	    	$http.post(valUrl,reportRec)
+	        .then(
+		        function (response) {
+		        	bootbox.alert({
+            		    message: "The report has been successfully printed",
+            		    title: "Information!"
+            		})},
+		        function(errResponse){
+		            bootbox.alert({
+	        		    message: "Error while printing the report",
+	        		    title: "<font  color='red'>Error!</font>"
+	        		});
+		        }
+	        );
+    }
+
     function searchRecords(){
         RecordService.searchRecord(self.Record)
             .then(

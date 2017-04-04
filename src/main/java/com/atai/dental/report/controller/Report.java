@@ -67,12 +67,13 @@ public class Report{
 		HashMap<String, Object> hParams;
 		String FormName = object.getFormName();
 		String RealPath = ServeletContext.getRealPath("") + File.separator + "report" + File.separator + FormName;		
+		String RealPath1 = "C:\\Report" + File.separator + "report" + File.separator + FormName;		
 		byte[] bytes = null;
 		OutputStream outputStream = null;
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		
 		File ReportFile = new File(RealPath + timestamp.hashCode() +".jasper");
-		File PdfReportFile = new File(RealPath + timestamp.hashCode() + ".pdf");
+		File PdfReportFile = new File(RealPath1 + timestamp.hashCode() + ".pdf");
 		System.out.println(timestamp.hashCode());
 		if (!ReportFile.exists()){
 			try {
