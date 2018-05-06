@@ -76,31 +76,28 @@
       }
 
     </style>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css"> 
-    <script src="webjars/jquery/2.1.4/jquery.min.js"></script>   
-    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js""></script>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/bootstrap-datepicker.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/jquery.timepicker.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/lov.css' />" rel="stylesheet"></link>
     
-    <script src="webjars/angularjs/1.5.8/angular.js"></script>
-    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
-    <script src="<c:url value='/static/js/app.js' />"></script>
-    <script src="<c:url value='/static/js/service/service.js' />"></script>
-    <script src="<c:url value='/static/js/controller/controller.js' />"></script>
-    <script src="<c:url value='/static/js/filter/filter.js' />"></script>
-    <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
-    <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
-    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>   
-    <script src="<c:url value='/static/js/other/bootbox.min.js' />"></script>    
-    <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
-    <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
-    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
-    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
-    <script src="<c:url value='/static/js/entity/InventoryPart.js' />"></script>
-    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
+    
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css">    
+	    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+	    
+	    <script src="webjars/angularjs/1.5.8/angular.js"></script>
+	    <script src="webjars/angularjs/1.5.8/angular-sanitize.js"></script>
+	    <script src="webjars/jquery/2.1.4/jquery.min.js"></script> 
+	    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js""></script>
+	    <script src="<c:url value='/static/js/app.js' />"></script>
+	    <script src="<c:url value='/static/js/service/service.js' />"></script>
+	    <script src="<c:url value='/static/js/controller/controller.js' />"></script>
+	    <script src="<c:url value='/static/js/filter/filter.js' />"></script>
+	    <script src="<c:url value='/static/js/entity/InventoryPart.js' />"></script>
+	    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>   
+        <script src="<c:url value='/static/js/other/bootbox.min.js' />"></script>    
+	    <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
+	    <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
+	    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
+	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+	     <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
 </head>
 <body>
 	<body ng-app="generalModule" class="ng-cloak">
@@ -109,6 +106,16 @@
               <div class="panel-heading"><span class="lead">Inventory Parts</span></div>
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                  <div class="row">
+                          <div class="col-md-12 control-lable">
+                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                               
+                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+                          	   <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+                          </div>
+                      </div>
+                      <br>
                   	  <div id="lov" unter-lov class = "lov"></div>	
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 					  
@@ -172,28 +179,26 @@
                           </div>
                       </div>
                       
-                      <div class="row">
-                          <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                               <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
-                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                          	   <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
-                          </div>
-                      </div>
+                      
                   </form>
               </div>
           </div>
           
           <div class="panel panel-default">
                 <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Inventory Locations </span></div>
+              <div class="panel-heading"><span class="lead">List of Inventory Parts </span></div>
+              <div class="panel-heading"><button type="button" ng-click="ctrl.updateAll()" class="btn btn-primary btn-sm"  >Update</button>
+             
+                          </div>
               <div class="tablecontainer">
+
                   <table class="table table-hover">
+                                
                       <thead>
                           <tr>
                               <th>Inventory Part No</th>
                               <th>Description</th>
+                              <th>Category</th>
                               <th>UoM</th>
                               <th>Reorder Level</th>
                               <th>Safety Stock Level</th>
@@ -203,18 +208,20 @@
                       <tbody>
                           <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.invPartNo"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.category"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.description"></span></td>
+                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.category"></span></td>
+                              
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.uomId"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.reorderLevel"></span></td>
                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.safetyStockLevel"></span></td>
                                                                                           
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.invPartNo" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.category" style="width: 100%""/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.description"style="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.category" style="width: 100%""/></td>
+                              
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.uomId"style="width: 100%"/></td>
                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.reorderLevel" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model=u.safetyStockLevelstyle="width: 100%""/></td>
+                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.safetyStockLevel" style="width: 100%""/></td>
                               <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
                               <td>
                               <button type="button" ng-click="ctrl.editRow(u.objid)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>

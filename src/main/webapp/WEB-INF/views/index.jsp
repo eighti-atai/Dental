@@ -456,7 +456,7 @@
                                     <i class="fa fa-credit-card fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">Payments</div>
+                                    <div class="huge">Part Category</div>
                                     <div>Part Category</div>
                                 </div>
                                 </a>
@@ -465,6 +465,30 @@
                         <a href="javascript:OpenSubWindow('PC');" class="active">
                             <div class="panel-footer">
                                 <span class="pull-left">Add/View Part Category</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                        		<a href="javascript:OpenSubWindow('IP');" class="active a-db">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-credit-card fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Inventory Parts</div>
+                                    <div>Part Category</div>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="javascript:OpenSubWindow('IP');" class="active">
+                            <div class="panel-footer">
+                                <span class="pull-left">Add/View Inventory Parts</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -518,6 +542,9 @@
 	    	}
 	    	else if(name == "PC"){
 	    		window.open("PartCategories","PC");	    		
+	    	}
+	    	else if(name == "IP"){
+	    		window.open("InventoryParts","IP");	    		
 	    	}
 	    	else{
 	    		
