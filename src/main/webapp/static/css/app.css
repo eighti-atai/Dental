@@ -39,3 +39,11 @@ body, .form-control{
 .custom-width {
     width: 80px !important;
 }
+hr{
+    border:0;
+    margin:0;
+    width:100%;
+    height:2px;
+    background:black;
+    color:black;
+}

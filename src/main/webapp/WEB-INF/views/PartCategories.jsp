@@ -106,6 +106,16 @@
               <div class="panel-heading"><span class="lead">Part Categories</span></div>
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                  <div class="row">
+                          <div class="col-md-12 control-lable">
+                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                               
+                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+                          	   
+                          </div>
+                      </div>
+                      <br>
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
 					  
 					  <div class="row">
@@ -132,15 +142,6 @@
                           </div>
                       </div>
                       
-                                            
-                      <div class="row">
-                          <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                               <button type="button" ng-click="ctrl.updateAll()" class="btn btn-warning btn-sm" >Save All</button>
-                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                          </div>
-                      </div>
                   </form>
               </div>
           </div>
@@ -148,6 +149,9 @@
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Part Categories </span></div>
+               <div class="panel-heading"><button type="button" ng-click="ctrl.updateAll()" class="btn btn-primary btn-sm"  >Update</button>
+             
+                          </div>
               <div class="tablecontainer">
                   <table class="table table-hover">
                       <thead>

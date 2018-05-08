@@ -90,7 +90,7 @@
 	    <script src="<c:url value='/static/js/service/service.js' />"></script>
 	    <script src="<c:url value='/static/js/controller/controller.js' />"></script>
 	    <script src="<c:url value='/static/js/filter/filter.js' />"></script>
-	    <script src="<c:url value='/static/js/entity/InventoryPart.js' />"></script>
+	    <script src="<c:url value='/static/js/entity/InventoryPartRev.js' />"></script>
 	    <script src="<c:url value='/static/js/other/angular-canvas-painter.js' />"></script>   
         <script src="<c:url value='/static/js/other/bootbox.min.js' />"></script>    
 	    <script src="webjars/angularjs/1.5.8/angular-animate.min.js"></script>
@@ -118,15 +118,6 @@
                       <br>
                   	  <div id="lov" unter-lov class = "lov"></div>	
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
-					  
-					  <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="category">Category</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.category" id="category" class="category form-control input-sm" placeholder="Enter/Select from lov." required ng-focus="ctrl.setFocusedElement()"/>
-                              </div>
-                          </div>
-                      </div>
                       
 					  <div class="row">
                           <div class="form-group col-md-12">
@@ -154,32 +145,32 @@
                       
                       <div class="row">
                           <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="reorderLevel">Reorder Level</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.reorderLevel" id="reorderLevel" class="reorderLevel form-control input-sm" placeholder="Enter reorder level."/>
-                              </div>
-                          </div>
-                      </div>
-                      
-                      <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="description">Safety Stock Level</label>
-                              <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.Record.safetyStockLevel" id="safetyStockLevel" class="safetyStockLevel form-control input-sm" placeholder="Enter safety stock level."/>
-                              </div>
-                          </div>
-                      </div>
-                      
-                      <div class="row">
-                          <div class="form-group col-md-12">
-                              <label class="col-md-2 control-lable" for="uomId">UoM</label>
+                              <label class="col-md-2 control-lable" for="uomId">Notes</label>
                               <div class="col-md-7">
                                   <input type="text" ng-model="ctrl.Record.uomId" id="uomId" class="uomId form-control input-sm" placeholder="Enter Location Type."/>
                               </div>
                           </div>
                       </div>
                       
+                      <hr >
+                      <br>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="reorderLevel">Total Inventory</label>
+                              <div class="col-md-7">
+                                  <input type="text" readonly="readonly" ng-model="ctrl.Record.reorderLevel" id="reorderLevel" class="reorderLevel form-control input-sm" placeholder=""/>
+                              </div>
+                          </div>
+                      </div>
                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="description">Remaining Inventory</label>
+                              <div class="col-md-7">
+                                  <input type="text" readonly="readonly" ng-model="ctrl.Record.safetyStockLevel" id="safetyStockLevel" class="safetyStockLevel form-control input-sm" placeholder=""/>
+                              </div>
+                          </div>
+                      </div>
                   </form>
               </div>
           </div>
@@ -187,7 +178,7 @@
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Inventory Parts </span></div>
-              <div class="panel-heading"><button type="button" ng-click="ctrl.updateAll()" class="btn btn-primary btn-sm"  >Update</button>
+              <div class="panel-heading"><button type="button" ng-click="ctrl.updateAll()" class="btn btn-primary btn-sm"  >Add</button>
              
                           </div>
               <div class="tablecontainer">
@@ -196,12 +187,15 @@
                                 
                       <thead>
                           <tr>
-                              <th>Inventory Part No</th>
-                              <th>Description</th>
-                              <th>Category</th>
+                              <th>Received Qty</th>
+                              <th>On Hand Qty</th>
                               <th>UoM</th>
-                              <th>Reorder Level</th>
-                              <th>Safety Stock Level</th>
+                              <th>Site</th>
+                              <th>Location</th>
+                              <th>Date</th>
+                              <th>Expr Date</th>
+                              <th>Price</th>
+                              <th>Amount</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
