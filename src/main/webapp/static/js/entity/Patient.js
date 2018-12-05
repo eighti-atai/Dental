@@ -6,6 +6,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
         name   :'Patient',
         record :{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientBirthDate:null,patientContactNo:'',patientGender:'',email:'',contactNo2:'',contactNoFo:'',title:'',objid:null},
         emptyRecord :emptyRecord,
+        recordSearch :{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientBirthDate:null,patientContactNo:'',patientGender:'',email:'',contactNo2:'',contactNoFo:'',title:'',objid:null},
         lov :{doctor: 'DoctorLov'},
         lovRecord:{doctor:{doctor:'',userName:''}},
         lovTitles :{doctor: 'Doctors'}

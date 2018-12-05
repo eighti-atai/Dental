@@ -95,7 +95,7 @@ public class AbstractDao<PK extends Serializable, T> {
 		Field[] fields = entity.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			try {
-				if (field.getName()!="objid")
+				//if (field.getName()!="objid")
 					setValue(entity, criteria, field, alias);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -130,11 +130,11 @@ public class AbstractDao<PK extends Serializable, T> {
 					{
 						if (alias == null)
 						{
-							criteria.add(Restrictions.ilike(fieldName, "%"+field.get(entity).toString()+"%"));
+							criteria.add(Restrictions.ilike(fieldName, field.get(entity).toString()));
 						}
 						else
 						{
-							criteria.add(Restrictions.ilike(alias + "."+fieldName, "%"+field.get(entity)+"%"));
+							criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
 						}
 					}
 					else

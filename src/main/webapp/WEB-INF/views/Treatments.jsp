@@ -140,6 +140,54 @@
     .generalCategory.ng-dirty.ng-invalid-email {
         background-color: yellow;
     }
+    
+    .input-selector-cc {
+			    background-color: transparent;
+			    border: 0px solid;
+			    height: 20px;
+			    width: 360px;
+ 			   color: #0000FF;
+ 			    font-size:14px;
+			}
+			.collapsible {
+			    background-color: #777;
+			    color: white;
+			    cursor: pointer;
+			    padding: 4px;
+			    width: 100%;
+			    border: black;
+			    text-align: left;
+			    font-size: 10px;
+			}
+
+			.active, .collapsible:hover {
+			    background-color: #555;
+			}
+
+			.content {
+			    padding: 0 18px;
+			    display: none;
+			    overflow: hidden;
+			    background-color: #f1f1f1;
+			}
+			
+			.input-search {
+			  height: 25px;
+			  padding: 5px 10px;
+			  font-size: 12px;
+			  color:#A9A9A9;
+			  line-height: 1.5;
+  			  border-radius: 3px;
+			  border: 2px solid;
+			}
+			
+			.lead-x {
+			padding: 4px;
+				  margin-bottom: 10px;
+				  font-size: 14px;
+				  font-weight: 300;
+				  line-height: 1.4;
+				}
 
     </style>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -166,14 +214,11 @@
     <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
     <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
-      <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
-      
+    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
+    <script src="<c:url value='/static/js/directives/prevent-enter-submit.js' />"></script>
+	
     <script type="text/javascript">
-    	function populatePage(Record) 
-        {
-        	var url = Record.treatmentImage;
-        }  
-        
+	           
         function setImgBytes(dataURL)
         {
             var scope = angular.element(document.getElementById("con3")).scope();
@@ -197,261 +242,221 @@
         	x.value= x1.value-x2.value;
         	scope.ctrl.Record.treatmentTotal =  x1.value-x2.value;
         }
-        function populate(patientId) 
+        /*function populate(patientId) 
         {
      	   var scope = angular.element(document.getElementById("con3")).scope();
      	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
             scope.ctrl.Record.id.patientId = patientId;
-            //scope.ctrl.setPanelHeader("Appointment - "+patientName);
             scope.$apply(scope.ctrl.searchRecords());
             scope.$apply(scope.ctrl.validateRecords('Patient',{patientId:scope.ctrl.Record.id.patientId},['patientName'],['patientName']));
+        }*/
+        
+        
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
         }
+        setInterval(function() {
+	        window.top.postMessage(document.body.scrollHeight + '-' + 'iframe1', "*");
+	    }, 500);
+        function populatePage(Record) 
+        {
+        	//alert('02 = '+self.Record.id.treatmentId);
+        	
+            if (typeof (parent.document.getElementById("iframe-container-2").contentWindow.populate) == "function")
+            	parent.document.getElementById("iframe-container-2").contentWindow.populate(Record.id.patientId,Record.id.treatmentId);
+            
+        } 
+        function populateChild() 
+	       {
+	    	   var scope = angular.element(document.getElementById("con3")).scope();
+	    	   populatePage(scope.ctrl.Record);
+	       }
     </script>
 </head>
-	<body ng-app="generalModule" class="ng-cloak">
-    	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">
-          	<div class="panel panel-default">
-              	<div class="panel-heading"><span class="lead">Treatment</span></div>
-              	<div class="formcontainer">
-                	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-                	<div id="lov" unter-lov class = "lov"></div>
-					<div id="kan" unter-search class = "lov"></div>
+
+<body ng-app="generalModule" class="ng-cloak">
+	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">
+    	<div class="panel panel-default">
+        	<div class="panel-heading">
+        	<span class="lead">Treatment
+        	<select
+					id="headerDropDownSelector" class=" input-selector-cc "
+					ng-model="ctrl.headerDropDownSelector"
+					ng-change="ctrl.edit(ctrl.headerDropDownSelector); ">
+					<option  ng-repeat="u in ctrl.Records"  value="{{u.objid}}" >{{u.id.patientId}}
+						- {{u.patient.patientName}} - {{u.id.treatmentId}} - {{u.mttId}} - {{u.sttId}}</option> 
+				</select>
+			</span>
+			</div>
+			<div class="formcontainer">
+				<div class="collapsible"><span class="lead-x">Search Criteria </span> </div>
+				<div class="content">	
+					<input id="mttId" type="text" ng-model="ctrl.SearchRecord.id.patientId" class="input-search" placeholder="Patient ID"/> 				
+					<input type="text" ng-model="ctrl.SearchRecord.patientName" id="patientName" class="input-search" placeholder="Patient Name"/>
+					<input type="text" ng-model="ctrl.SearchRecord.mttId" id="mttId" class="input-search" placeholder="Main Tratment Type"/>
+				    <input type="text" ng-model="ctrl.SearchRecord.sttId" id="mttName" class="input-search" placeholder="Sub Tratment Type"/>
+					<md-datepicker ng-model="ctrl.SearchRecord.treatmentDate" md-placeholder="Treatment Date"></md-datepicker>
+					<input type="text" ng-model="ctrl.SearchRecord.treatmentDesc" id="treatmentDesc" class="input-search" placeholder="Treatment Desc"/>
+				</div> 
+			</div> 
+            	<div class="formcontainer">
+                	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal" prevent-enter-submit>
+                		<div id="lov" unter-lov class = "lov"></div>
+						<div id="kan" unter-search class = "lov"></div>
                     	<input type="hidden" ng-model="ctrl.Record.objid" /> 
                     	<input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="treatmentId form-control input-sm" placeholder="Enter Treatmnet ID"/>
 
                       	<div class="row">
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="patientId">Patient ID</label>
-                              <div class="col-sm-7">
-                                  <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName'])" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.patientId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.patientId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
+                        	<div class="form-group col-sm-4">
+                            <label class="col-sm-3 control-lable" for="patientId">Patient ID</label>
+                            	<div class="col-sm-7">
+                                <input type="number" ng-model="ctrl.Record.id.patientId" id="patientId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['FULLRECORD'],['patient'])" ng-focus="ctrl.setFocusedElement()" class="patientId form-control input-sm" placeholder="Enter Patient ID " required ng-minlength="1" />
+                                	<div class="has-error" ng-show="myForm.$dirty">
+                                    	<span ng-show="myForm.patientId.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.patientId.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
                           
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="patientName">Patient Name</label>
-                              <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.patientName" id="patientName" readonly class="patientName form-control input-sm" placeholder="Patient Name " />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.patientName.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       	</div>  -->
-                      	
-<!--                       	<div class="row"> -->
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="mttId">Main Type</label>
-                              <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.mttId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.mttId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
+                          	<div class="form-group col-sm-4">
+                            	<label class="col-sm-3 control-lable" for="patient.patientName">Patient Name</label>
+                              	<div class="col-sm-7">
+                                	<input type="text" ng-model="ctrl.Record.patient.patientName" id="patient.patientName" readonly class="patientName form-control input-sm" placeholder="Patient Name " />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                    	<span ng-show="myForm.patientName.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.patientName.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
+
+                          	<div class="form-group col-sm-4">
+                            	<label class="col-sm-3 control-lable" for="mttId">Main Type</label>
+                              	<div class="col-sm-7">
+                                	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.mttId.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.mttId.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
                       	</div> 
                       	
                       	<div class="row">
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="sttId">Sub Type</label>
-                              <div class="col-sm-7">
-                                  <input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.sttId.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.sttId.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       	</div>  -->
+                        	<div class="form-group col-sm-4">
+                            	<label class="col-sm-3 control-lable" for="sttId">Sub Type</label>
+                              	<div class="col-sm-7">
+                                	<input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.sttId.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.sttId.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
 
-<!--                       	<div class="row"> -->
-<!--                           <div class="form-group col-sm-4"> -->
-<!--                               <label class="col-sm-3 control-lable" for="treatmentStat">Treatment State</label> -->
-<!--                               <div class="col-sm-7"> -->
-<!--                                   <input type="text" ng-model="ctrl.Record.treatmentStat" id="treatmentStat" class="treatmentStat form-control input-sm" placeholder="Enter Treatment State " /> -->
-<!--                                   <div class="has-error" ng-show="myForm.$dirty"> -->
-<!--                                       <span ng-show="myForm.treatmentStat.$error.required">This is a required field</span> -->
-<!--                                       <span ng-show="myForm.treatmentStat.$invalid">This field is invalid </span> -->
-<!--                                   </div> -->
-<!--                               </div> -->
-<!--                           </div> -->
-<!--                       	</div>  -->
-                      	
-<!--                       	<div class="row"> -->
-<!--                           <div class="form-group col-sm-4"> -->
-<!--                               <label class="col-sm-3 control-lable" for="treatmentPaidStat">Payment State</label> -->
-<!--                               <div class="col-sm-7"> -->
-<!--                                   <input type="text" ng-model="ctrl.Record.treatmentPaidStat" id="treatmentPaidStat" class="treatmentPaidStat form-control input-sm" placeholder="Enter Payment State " /> -->
-<!--                                   <div class="has-error" ng-show="myForm.$dirty"> -->
-<!--                                       <span ng-show="myForm.treatmentPaidStat.$error.required">This is a required field</span> -->
-<!--                                       <span ng-show="myForm.treatmentPaidStat.$invalid">This field is invalid </span> -->
-<!--                                   </div> -->
-<!--                               </div> -->
-<!--                           </div> -->
-<!--                       	</div> -->
-                      	
-<!--                       	<div class="row">  -->
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-3 control-lable" for="treatmentDate">Treatment Date</label>
 		                        <div class="col-sm-7">		                        	
-		                        	<md-datepicker ng-model="ctrl.Record.treatmentDate" md-placeholder="Enter Date"></md-datepicker>
-		                        	<div class="has-error" ng-show="myForm.$dirty">
-		                        	</div>
+		                        	<md-datepicker ng-model="ctrl.Record.treatmentDate"  ng-disabled="ctrl.variableReadOnly" md-placeholder="Enter Date"></md-datepicker>
+		                        	<div class="has-error" ng-show="myForm.$dirty"></div>
 		                        </div>
 		                	</div>
-<!--  		                </div> -->
 
-<!--                       	<div class="row"> -->
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentAmount">Treatment Amount</label>
-                              <div class="col-sm-7">
-                                  <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentAmount" id="treatmentAmount" class="treatmentAmount form-control input-sm" placeholder="Treatment Amount " />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentAmount.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentAmount.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
+                          	<div class="form-group col-sm-4">
+                            	<label class="col-sm-3 control-lable" for="treatmentAmount">Treatment Amount</label>
+                              	<div class="col-sm-7">
+                                  	<input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentAmount" id="treatmentAmount" class="treatmentAmount form-control input-sm" placeholder="Treatment Amount " />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                    	<span ng-show="myForm.treatmentAmount.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.treatmentAmount.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
                       	</div>
                       	
                       	<div class="row">
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentDiscount">Discount</label>
-                              <div class="col-sm-7">
-                                  <input type="number" step="0.01" ng-model="ctrl.Record.treatmentDiscount" id="treatmentDiscount" onblur ="setTotalAmount()" class="treatmentDiscount form-control input-sm" placeholder="Enter Treatment Discount " />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentDiscount.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentDiscount.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       	</div> -->
-                      	
-<!--                       	<div class="row"> -->
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentTotal">Total Amount</label>
-                              <div class="col-sm-7">
-                                  <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentTotal" id="treatmentTotal" class="treatmentTotal form-control input-sm" placeholder="Treatment Total " />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentTotal.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentTotal.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       	</div> -->
-                      	
-<!--                       	<div class="row"> -->
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentPaid">Paid Amount</label>
-                              <div class="col-sm-7">
-                                  <input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentPaid" id="treatmentPaid" class="treatmentPaid form-control input-sm" placeholder="Paid Amount " />
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentPaid.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentPaid.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
+                        	<div class="form-group col-sm-4">
+                              	<label class="col-sm-3 control-lable" for="treatmentDiscount">Discount</label>
+                              	<div class="col-sm-7">
+                                  	<input type="number" step="0.01" ng-model="ctrl.Record.treatmentDiscount" id="treatmentDiscount" ng-readonly="ctrl.variableReadOnly" onblur ="setTotalAmount()" class="treatmentDiscount form-control input-sm" placeholder="Enter Treatment Discount " />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.treatmentDiscount.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.treatmentDiscount.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
+
+                          	<div class="form-group col-sm-4">
+                              	<label class="col-sm-3 control-lable" for="treatmentTotal">Total Amount</label>
+                              	<div class="col-sm-7">
+                                  	<input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentTotal" id="treatmentTotal" class="treatmentTotal form-control input-sm" placeholder="Treatment Total " />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.treatmentTotal.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.treatmentTotal.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
+
+                          	<div class="form-group col-sm-4">
+                              	<label class="col-sm-3 control-lable" for="treatmentPaid">Paid Amount</label>
+                              	<div class="col-sm-7">
+                                  	<input type="number" step="0.01" readonly ng-model="ctrl.Record.treatmentPaid" id="treatmentPaid" class="treatmentPaid form-control input-sm" placeholder="Paid Amount " />
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.treatmentPaid.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.treatmentPaid.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
                       	</div>
                       	
                       	<div class="row">
-                          <div class="form-group col-sm-4">
-                              <label class="col-sm-3 control-lable" for="treatmentDesc">Description</label>
-                              <div class="col-sm-7">
+                          	<div class="form-group col-sm-4">
+                              	<label class="col-sm-3 control-lable" for="treatmentDesc">Description</label>
+                              	<div class="col-sm-7">
 <!--                                   <input type="text" ng-model="ctrl.Record.treatmentDesc" id="treatmentDesc" class="treatmentDesc form-control input-sm" placeholder="Enter Treatment Desc " /> -->
-                                  <textarea rows="1" cols="50" ng-model="ctrl.Record.treatmentDesc" id="treatmentDesc" class="treatmentDesc form-control input-sm" placeholder="Enter Treatment Desc "></textarea>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.treatmentDesc.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.treatmentDesc.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
+                                  	<textarea rows="1" cols="50" ng-model="ctrl.Record.treatmentDesc" id="treatmentDesc" ng-readonly="ctrl.variableReadOnly"  class="treatmentDesc form-control input-sm" placeholder="Enter Treatment Desc "></textarea>
+                                  	<div class="has-error" ng-show="myForm.$dirty">
+                                      	<span ng-show="myForm.treatmentDesc.$error.required">This is a required field</span>
+                                      	<span ng-show="myForm.treatmentDesc.$invalid">This field is invalid </span>
+                                  	</div>
+                              	</div>
+                          	</div>
                       	</div> 
                       	
-						<div pw-canvas version="ctrl.version" ng-click="ctrl.undo()"
-           						options="{undo: true, width: 400, height: 300, color: selectedColor, lineWidth: selectedLineWidth,imageData:emptyImageData}"></div>
-      						<div pw-color-selector="['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#ffffff']" color="selectedColor"></div>
-      						<input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector">{{selectedLineWidth}} 
-<!--       						<input id="h1" type="text" ng-model="emptyImageData" > -->
-						</div>
-                      <div class="row">
-                          <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                              <button type="button" ng-click="ctrl.reset();ctrl.clearImage();" class="btn btn-warning btn-sm">Reset Form</button>
-                               <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-                               <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
-                          </div>
-                      </div>
+                      	<div class="row">
+                          	<div class="form-group col-md-6">
+		                		<div class="col-md-12">
+			                    	<input type="submit"  value="Save" class="btn btn-primary btn-sm"  ng-show ="!ctrl.variableReadOnly">
+			                        <button type="button" ng-click="ctrl.reset(ctrl.Record.objid)" class="btn btn-warning btn-sm" ng-show ="!ctrl.variableReadOnly" >Cancel</button>
+			                        <button type="button" ng-click="ctrl.exitReadOnly('Add')" class="btn btn-warning btn-sm" ng-show ="ctrl.variableReadOnly" >New</button>
+			                        <button type="button" ng-click="ctrl.exitReadOnly('Edit')" class="btn btn-warning btn-sm" ng-show ="ctrl.enableEdit()">Edit</button>
+			                        <button type="button" ng-click="ctrl.remove(ctrl.Record.objid)" class="btn btn-danger btn-sm" ng-show ="ctrl.Record.objid!=null">Delete</button>
+			                        <button type="button" ng-click="ctrl.searchRecords(ctrl.SearchRecord)" class="btn btn-warning btn-sm" >Search</button>
+			                        <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+		                    	</div>
+		                    </div>
+                      	</div>
                   </form>
-                  
-              </div>
-          
-          <div class="panel panel-default">
-                <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Treatments </span></div>
-              <div class="tablecontainer">
-                  <table id="tableId" class="table table-hover">
-                      <thead>
-                          <tr>
-                              <th>Treatment ID</th>
-                              <th>Treatment Date</th>
-                             <!--  <th>Patient ID</th> -->
-                              <th>Main Type</th>
-                              <th>Sub Type</th>
-                              <th>Total Amount</th>
-                              <th>Paid Amount</th>
-<!--                               <th>Img</th> -->
-                              <th width="20%"></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid);(ctrl.validateRecords('Patient',{patientId:ctrl.Record.id.patientId},['patientName'],['patientName']));">
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'treatmentDate', u.treatmentDate)|date:yyyy/MM/dd"></span></td>
-                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.mttId"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.sttId"></span></td> 
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentTotal"></span></td> 
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentPaid"></span></td> 
-<!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.treatmentImage"></span></td>  -->
-<!--                              <td ng-if="!ctrl.change(u.objid)"><img src="u.treatmentImage"></img></td>     -->
-<!--                               <td><img src="data:image/png;base64,></img></td -->
-<!--                               <td ng-if="!ctrl.change(u.objid)"><img id="ItemPreview1" src="data:image/jpg;base64,u.treatmentImage" /></td>  -->
-                               
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.key.treatmentId"style="width: 100%"/></td>                                                           
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.mttId" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.sttId" style="width: 100%""/></td> -->
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.treatmentImage" style="width: 100%""/></td> -->
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
-                              <td>
-                              <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
-                              </td>
-                          </tr>
-                      </tbody>
-                      
-                  </table>
-                  <button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
-        			Previous
-    			  </button>
-    						{{ctrl.currentPage+1}}/{{ctrl.numberOfPages()}}
-    			  <button ng-disabled="ctrl.currentPage >= ctrl.Records.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
-       						 	Next
-    					  </button>
-                 <!--  <input type="text" ng-model="ctrl.Records[1].salesPartId"/>
-                  ctrl.Record = ctrl.Records[1]
-                              <input type="text" ng-model="u.patientAddress"/>
-                              <input type="text" ng-model="u.invPartNo"/>
-                              <input type="text" ng-model="u.invConversionFactor"/>
-                             <input type="text" ng-model="u.uom"/>
-                              <input type="text" ng-model="u.priceCategory"/>
-                              <input type="text" ng-model="u.generalCategory"/>
-                              <input type="text" ng-model="u.objid"/>
-                              <td> {{$index}} </td> -->
-              </div>
-          </div>
-      </div>
+			</div>
+      	</div>
+      	</div>
 	</body>
+	<script type="text/javascript">
+			var coll = document.getElementsByClassName("collapsible");
+			var i;
+		
+			for (i = 0; i < coll.length; i++) {
+			  coll[i].addEventListener("click", function() {
+			    this.classList.toggle("active");
+			    var content = this.nextElementSibling;
+			    if (content.style.display === "block") {
+			      content.style.display = "none";
+			    } else {
+			      content.style.display = "block";
+			    }
+			  });
+			}
+	    </script>
 </html>

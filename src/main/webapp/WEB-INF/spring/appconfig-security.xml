@@ -8,18 +8,19 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config="true">
+
+      <http auto-config="true">
     	<headers>
         	<frame-options policy="SAMEORIGIN"/>
     	</headers>
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/index" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/Treatments" access="hasRole('DOCTOR') or hasRole('ADMIN')"/>
+        <intercept-url pattern="/Treatments" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/MainTreatmentTypes" access="hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/SubTreatmentTypes" access="hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/AttendPatients" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
-        <intercept-url pattern="/Patients" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
+       <intercept-url pattern="/Patients" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/> 
         <intercept-url pattern="/TreatmentQueries" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/Payments" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>
         <intercept-url pattern="/AppointmentsDates" access="hasRole('USER') or hasRole('DOCTOR') or hasRole('ADMIN')"/>

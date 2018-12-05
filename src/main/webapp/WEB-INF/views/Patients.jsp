@@ -186,6 +186,53 @@
 			    text-decoration: none;
 			    cursor: pointer;
 			}
+			.input-selector-cc {
+			    background-color: transparent;
+			    border: 0px solid;
+			    height: 20px;
+			    width: 360px;
+ 			   color: #0000FF;
+ 			    font-size:14px;
+			}
+			.collapsible {
+			    background-color: #777;
+			    color: white;
+			    cursor: pointer;
+			    padding: 4px;
+			    width: 100%;
+			    border: black;
+			    text-align: left;
+			    font-size: 10px;
+			}
+
+			.active, .collapsible:hover {
+			    background-color: #555;
+			}
+
+			.content {
+			    padding: 0 18px;
+			    display: none;
+			    overflow: hidden;
+			    background-color: #f1f1f1;
+			}
+			
+			.input-search {
+			  height: 25px;
+			  padding: 5px 10px;
+			  font-size: 12px;
+			  color:#A9A9A9;
+			  line-height: 1.5;
+  			  border-radius: 3px;
+			  border: 2px solid;
+			}
+			
+			.lead-x {
+			padding: 4px;
+				  margin-bottom: 10px;
+				  font-size: 14px;
+				  font-weight: 300;
+				  line-height: 1.4;
+				}
 	    </style>
 	    
 	    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -209,6 +256,7 @@
 	    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
 	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 	    <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
+	    <script src="<c:url value='/static/js/directives/prevent-enter-submit.js' />"></script>
 	</head>
 
 
@@ -216,6 +264,9 @@
 	<body ng-app="generalModule" class="ng-cloak">
 		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">  
 		
+
+							
+							
 		<!--  Add 2 Q Start-->       
 		
 		<div id="myModal" class="modal">
@@ -239,9 +290,37 @@
 		
 		<!-- Add 2 Q End -->  
 		    <div class="panel panel-default">
-		    	<div class="panel-heading"><span class="lead">Patient Details</span></div>
+			<div class="panel-heading">
+				<span class="lead">Patient Details
+				<select
+					id="headerDropDownSelector" ng-disabled="!ctrl.variableReadOnly" class=" input-selector-cc "
+					ng-model="ctrl.headerDropDownSelector"
+					ng-change="ctrl.edit(ctrl.headerDropDownSelector)">
+					<!--<select  id="patientName" class="title form-control input-sm"  ng-model="patientName" ng-options = "u.patientName as u.patientName for u in ctrl.Records"  ng-change="ctrl.edit(u.patientName) for u in ctrl.Records">-->
+					<option  ng-repeat="u in ctrl.Records"  value="{{u.objid}}" >{{u.patientId}}
+						- {{u.patientName}} - {{u.patientContactNo}}</option> 
+				</select>
+				</span> 
+			</div>
+			<div class="formcontainer">
+				<div class="collapsible"><span class="lead-x">Search Criteria </span> </div>
+				<div class="content">
+		    		
+					<input id="patientId" type="text" ng-model="ctrl.SearchRecord.patientId" class="input-search" placeholder="Patient ID"/> 				
+					<input type="text" ng-model="ctrl.SearchRecord.patientName" id="patientName" class="input-search" placeholder="Patient Name" style="text-transform: capitalize;"/>
+					<input type="text" pattern="^\d{10}$" ng-model="ctrl.SearchRecord.patientContactNo" id="patientContactNo" class="input-search" placeholder="Phone Number 1" maxlength="10" onkeypress="return isNumberKey(event)"/>
+					<md-datepicker ng-model="ctrl.SearchRecord.patientBirthDate" md-placeholder="DoF"  onkeydown="return false"></md-datepicker>
+					<input type="text" ng-model="ctrl.SearchRecord.patientIdNo" id="patientIdNo" class="input-search" placeholder="NIC No" maxlength="15" style="text-transform:uppercase"/>
+					<input type="text" ng-model="ctrl.SearchRecord.patientAddress" id="patientAddress" class="input-search" placeholder="Address"/>
+					<input type="text" ng-model="ctrl.SearchRecord.email" id="email" class="input-search" placeholder="Email"/>
+					<input type="text" pattern="^\d{10}$" ng-model="ctrl.SearchRecord.contactNo2"id="contactNo2" class="input-search" placeholder="Phone Number 2" maxlength="10" onkeypress="return isNumberKey(event)"/>
+					<input type="text" ng-model="ctrl.SearchRecord.contactNoFo" id="contactNoFo" class="input-search" placeholder="Overseas Phone Number" maxlength="20" onkeypress="return isNumberKey(event)"/>
+		                           			                           	
+		    	</div> 
+			</div>               	
+			
 		        <div class="formcontainer">
-		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal"  prevent-enter-submit>
 		        			
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
 		            	<input id="patientId" type="hidden" ng-model="ctrl.Record.patientId" /> 
@@ -250,7 +329,7 @@
 						<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="title">Title</label>
 		                        <div class="col-md-10">
-		                        	<select type="text" ng-model="ctrl.Record.title" id="title" class="title form-control input-sm" placeholder="Enter Title " required >
+		                        	<select type="text" ng-model="ctrl.Record.title" id="title" class="title form-control input-sm" placeholder="Enter Title " required  ng-disabled="ctrl.variableReadOnly">
 		                        	<option value="Mr.">Mr.</option>
 								  		<option value="Mrs.">Mrs.</option>
 								  		<option value="Miss">Miss</option>
@@ -266,7 +345,7 @@
 		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientName">Name</label>
 		                        <div class="col-md-10">
-		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1" style="text-transform: capitalize;"/>
+		                        	<input type="text" ng-model="ctrl.Record.patientName" id="patientName" ng-readonly="ctrl.variableReadOnly" class="patientName form-control input-sm" placeholder="Enter Patient Name " required ng-minlength="1" style="text-transform: capitalize;"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.patientName.$error.required">This is a required field</span>
 		                                <span ng-show="myForm.patientName.$invalid">This field is invalid </span>
@@ -279,7 +358,7 @@
 		                	<div class="form-group col-xs-4">
 		                    	<label class="col-md-2 control-lable" for="patientContactNo">Contact Number</label>
 		                        <div class="col-md-10">
-		                        	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                        	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.patientContactNo" id="patientContactNo" ng-readonly="ctrl.variableReadOnly" class="patientContactNo form-control input-sm" placeholder="Enter Contact No" maxlength="10" onkeypress="return isNumberKey(event)"/>
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
@@ -287,36 +366,36 @@
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientBirthDate">DoB</label>
+<!-- 		                	<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientBirthDate" >DoB</label>
 		                        <div class="col-md-10">		                        	
-		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate" md-placeholder="Enter date"></md-datepicker>
+		                        	<md-datepicker ng-model="ctrl.Record.patientBirthDate" md-placeholder="Enter date"  ng-disabled="ctrl.variableReadOnly"  onkeydown="return false"></md-datepicker>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                        	</div>
 		                        </div>
-		                	</div>
+		                	</div> -->
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-		                	<div class="form-group col-xs-4">
-		                    <label class="col-md-2 control-lable" for="patientIdNo">ID Number</label>
+<!-- 		                	<div class="form-group col-xs-4">
+		                    <label class="col-md-2 control-lable" for="patientIdNo" >ID Number</label>
 		                    	<div class="col-md-10">
-		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" class="patientIdNo form-control input-sm" placeholder="Enter Id No" maxlength="15" style="text-transform:uppercase"/>
+		                        	<input type="text" ng-model="ctrl.Record.patientIdNo" id="patientIdNo" ng-readonly="ctrl.variableReadOnly" class="patientIdNo form-control input-sm" placeholder="Enter Id No" maxlength="15" style="text-transform:uppercase"/>
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                			</div>
 		                        </div>
-		                    </div>
+		                    </div> -->
 <!-- 		                </div> -->
 		                      
 <!-- 		                <div class="row"> -->
-							<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="patientAddress">Address</label>
+<!-- 							<div class="form-group col-xs-4">
+		                    	<label class="col-md-2 control-lable" for="patientAddress" >Address</label>
 		                        <div class="col-md-10">
-		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
+		                           	<input type="text" ng-model="ctrl.Record.patientAddress" id="patientAddress" ng-readonly="ctrl.variableReadOnly" class="patientAddress form-control input-sm" placeholder="Enter Address"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
-		                	</div>
+		                	</div>-->
 		                	
 <!-- 		                </div> -->
 		                      
@@ -331,12 +410,13 @@
 <!-- 									</select> -->
 <!-- 								</div> -->
 <!-- 							</div> -->
+
 		                </div>
 						<div class="row"> 
 		                	<div class="form-group col-xs-4">
-		                    	<label class="col-md-2 control-lable" for="email">Email</label>
+		                    	<label class="col-md-2 control-lable" for="email" >Email</label>
 		                        <div class="col-md-10">
-		                           	<input type="text" ng-model="ctrl.Record.email" id="email" class="email form-control input-sm" placeholder="Enter Email"/>
+		                           	<input type="text" ng-model="ctrl.Record.email" id="email" ng-readonly="ctrl.variableReadOnly" class="email form-control input-sm" placeholder="Enter Email"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
@@ -345,33 +425,36 @@
 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="contactNo2">Contact No 2</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.contactNo2" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
+		                           	<input type="text" pattern="^\d{10}$" ng-model="ctrl.Record.contactNo2" ng-readonly="ctrl.variableReadOnly" id="contactNo2" class="contactNo2 form-control input-sm" placeholder="Enter Phone Number" maxlength="10" onkeypress="return isNumberKey(event)"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>
 		                	
-		                	<div class="form-group col-sm-4">
+<!-- 		                	<div class="form-group col-sm-4">
 		                    	<label class="col-sm-2 control-lable" for="contactNoFo">Overseas Contact</label>
 		                        <div class="col-sm-10">
-		                           	<input type="text" ng-model="ctrl.Record.contactNoFo" id="contactNoFo" class="contactNoFo form-control input-sm" placeholder="Enter Overseas Phone Number" maxlength="20" onkeypress="return isNumberKey(event)"/>
+		                           	<input type="text" ng-model="ctrl.Record.contactNoFo" id="contactNoFo" ng-readonly="ctrl.variableReadOnly" class="contactNoFo form-control input-sm" placeholder="Enter Overseas Phone Number" maxlength="20" onkeypress="return isNumberKey(event)"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
 		                	</div>                		                	
-		                </div>
+		                </div>-->
 		                <div class="row">
-		                	<div class="form-actions floatRight">
-		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$invalid">Reset Form</button>
-		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-		                        <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="ctrl.Record.objid==null">Add to Q</button>
+		                	<div class="col-md-12">
+		                    	<input type="submit"  value="Save" class="btn btn-primary btn-sm"  ng-show ="!ctrl.variableReadOnly">
+		                        <button type="button" ng-click="ctrl.reset(ctrl.Record.objid)" class="btn btn-warning btn-sm" ng-show ="!ctrl.variableReadOnly" ng-show ="false">Cancel</button>
+		                        <button type="button" ng-click="ctrl.exitReadOnly('Add')" class="btn btn-warning btn-sm" ng-show ="ctrl.variableReadOnly" >New</button>
+		                        <button type="button" ng-click="ctrl.exitReadOnly('Edit')" class="btn btn-warning btn-sm" ng-show ="ctrl.enableEdit()">Edit</button>
+		                        <button type="button" ng-click="ctrl.remove(ctrl.Record.objid)" class="btn btn-danger btn-sm" ng-show ="ctrl.Record.objid!=null">Delete</button>
+		                        <button type="button" ng-click="ctrl.searchRecords(ctrl.SearchRecord)" class="btn btn-warning btn-sm" >Search</button>
+		                        <!-- <button id="mbtn" type="button" class="btn btn-warning btn-sm" ng-disabled="ctrl.Record.objid==null">Add to Q</button>-->
 		                    </div>
 		               	</div>
 		                
 		        	</form>  
 		        </div>
-		              		          
+		        <!--      		          
 		        <div class="panel panel-default">
 		        	<div class="panel-heading"><span class="lead">List of Patients </span></div>
 		            <div class="tablecontainer">
@@ -423,12 +506,25 @@
 		       				Next
 		    			</button>
 		          	</div>
-		    	</div>
+		    	</div> -->
 			</div>
 		</div>	
 	</body>
 	<script type="text/javascript">
-	        
+			var coll = document.getElementsByClassName("collapsible");
+			var i;
+		
+			for (i = 0; i < coll.length; i++) {
+			  coll[i].addEventListener("click", function() {
+			    this.classList.toggle("active");
+			    var content = this.nextElementSibling;
+			    if (content.style.display === "block") {
+			      content.style.display = "none";
+			    } else {
+			      content.style.display = "block";
+			    }
+			  });
+			}
 	     // Get the modal
 	        var modal = document.getElementById('myModal');
 
@@ -472,11 +568,26 @@
             	tmpRecord.doctor = doctor.split(":").pop();
             	scope.ctrl.InsertRecords('AttendPatient',tmpRecord);
 	        });
-	        function isNumberKey(evt){
+	       /* function isNumberKey(evt){
 	            var charCode = (evt.which) ? evt.which : event.keyCode
 	            if (charCode > 31 && (charCode < 48 || charCode > 57))
 	                return false;
 	            return true;
-	        }
+	        }*/
+	        function populatePage(Record) 
+	        {
+	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
+	            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId);
+	            
+	        } 
+	        function populateChild() 
+		       {
+		    	   var scope = angular.element(document.getElementById("con1")).scope();
+		    	   populatePage(scope.ctrl.Record);
+		       }
+	        
+	        setInterval(function() {
+	            window.top.postMessage(document.body.scrollHeight + '-' + 'iframe1', "*");
+	        }, 500);
 	    </script>
 </html>

@@ -90,130 +90,84 @@
     
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Appointment')" >
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.MasterInit();" >
     	<div class="panel panel-default">
-        	<div class="panel-heading" ng-bind-html="panelHeader"></div>
-            <div class="formcontainer">
-           		<form ng-submit="ctrl.submit();" name="myForm" class="form-horizontal">
-           			<div id="lov" unter-lov class = "lov"></div>	
-               		<input type="hidden" ng-model="ctrl.Record.objid" /> 
-         			<input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " required/>
-         			<input type="hidden" ng-model="ctrl.Record.id.appointmentId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />
-                    <div class="row">
-                    	<div class="form-group col-xs-6">
-                    		<label class="col-md-2 control-lable" for="appointmentDate">Date</label>
-                    		<div class="col-md-3">
-	                            <p><md-datepicker ng-model="ctrl.Record.appointmentDate"  md-placeholder="Enter Date" required md-min-date="ctrl.today"></md-datepicker></p>
-	                            <div class="has-error" ng-show="myForm.$dirty">
-	                            	<span ng-show="myForm.appointmentDate.$error.required">This is a required field</span>
-	                                <span ng-show="myForm.appointmentDate.$invalid">This field is invalid </span>
+        	<div class="row">
+            	<div class="col-md-12"> 		          
+          			<div class="panel panel-default">
+       					<div class="panel-heading"><span class="lead">List of Appointments </span></div>
+       					<form ng-submit="ctrl.submitRecords()">
+       						<div class="row">                        
+		                		<div class="col-md-12">
+	                                <input type="submit" class="btn btn-primary    btn-sm" value="Save"  ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+	                                <input type="button" class="btn btn-danger     btn-sm" ng-click="ctrl.deleteRecords()" value="Delete"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+	                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.AddRow()" value="New"  ng-show ="!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)">
+	                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.exitReadOnly('EditTable')" value="Edit"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+	                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.resetTable()" value="Cancel" ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
 	                            </div>
                             </div>
-                 		</div>
-<!--   					</div> -->
-<!--                    	<div class="row"> -->
-                    	<div class="form-group col-xs-6">
-                         	<label class="col-md-2 control-lable" for="appointmentTime">Time</label>
-                            <div class="col-md-3">
-                            	<p> <input type="text" ng-model="ctrl.Record.appointmentTime" id="appointmentTime" class="appointmentTime form-control input-sm" placeholder="Enter Appointment Time" required  ng-blur="ctrl.populateTargetPage()"/></p>
-                              	<div class="has-error" ng-show="myForm.$dirty">
-                                	<span ng-show="myForm.appointmentTime.$error.required">This is a required field</span>
-                                </div> 
-                      		</div>
-                		</div>
-            		</div>
-                    <div class="row">
-                    	<div class="form-group col-xs-6">
-                        	<label class="col-md-2 control-lable" for="doctor">Doctor</label>
-                            <div class="col-md-3">
-                            	<select ng-model="ctrl.Record.doctor" ng-options="x for x in ctrl.doctors" id="doctor" class="doctor form-control input-sm" placeholder="Enter Doctor" required ng-focus="ctrl.setFocusedElement()"  ng-blur="ctrl.populateTargetPage()"></select>
-                              	<div class="has-error" ng-show="myForm.$dirty">
-                               		<span ng-show="myForm.doctor.$error.required">This is a required field</span>
-                                </div>
-                     		</div>
-             			</div>
-             			
-             			<div class="form-group col-xs-6">
-                        	<label class="col-md-2 control-lable" for="code" >Treatment Code</label>
-                            <div class="col-md-3">
-                            	<select ng-model="ctrl.Record.code" id="code" class="code form-control input-sm" placeholder="Select Treatment Code" >
-								  		<option value=""></option>
-								  		<option value="General">General</option>
-								  		<option value="Treatment 1">Treatment 1</option>
-								  		<option value="Treatment 2">Treatment 2</option>
-									</select>
-                     		</div>
-             			</div>
-             			
-               		</div>
-                    <div class="row">
-            			<div class="form-actions floatRight">
-                       		<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-                            <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button>
-                            <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
-<!--                             <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button> -->
-                    	</div>
-               		</div>
-    			</form>
-			</div>
-          
-          	<div class="panel panel-default">
-       			<div class="panel-heading"><span class="lead">List of Appointments </span></div>
-              	<div class="tablecontainer">
-               		<table id="tableId" class="table table-hover">
-                  		<thead>
-                        	<tr>
-                   				<th>Date</th>
-                              	<th>Time</th>
-                              	<th>Doctor</th>
-                              	<th>Treatment Code</th>
-                              	<th width="20%"></th>
-                          	</tr>
-                      	</thead>
-           			<tbody>
-                    	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)" >
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd"></span></td>
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.appointmentTime"></span></td>
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
-	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.code"></span></td>
-	                                                                                         
-	                        <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.appointmentDate"></md-datepicker></td>
-	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
-	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
-	                        <td>
-	                        	<button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
-	                        </td>
-                        </tr>
-                 	</tbody>
-                      
-                  	</table>
-                  	<button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
-        				Previous
-    			  	</button>
-    					{{ctrl.currentPage+1}}/{{ctrl.numberOfPages()}}
-    			  	<button ng-disabled="ctrl.currentPage >= ctrl.Records.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
-       					Next
-    				</button>
-              	</div>
-          	</div>
+              				<div class="tablecontainer">
+              				       		
+              				<div id="lov" unter-lov class = "lov"></div>
+               					<table id="tableId" class="table table-hover">
+                  					<thead>
+                        				<tr>
+                        					<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+		                   					<th>Date</th>
+			                              	<th>Time</th>
+			                              	<th>Doctor</th>
+			                              	<th>Treatment Code</th>
+			                              	
+	                          			</tr>
+	                      			</thead>
+	           						<tbody>
+	                    				<tr ng-repeat="u in ctrl.Records">
+                                        	<td>
+                                            	<input type="checkbox" ng-model="u.selected"  ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
+                                         	<td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+                                            	<input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
+	                                        <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+	                                         	<md-datepicker ng-model="u.appointmentDate" ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" id ="appointmentDate"></md-datepicker></td>
+	                                        <td>
+	                                            <input type="text" class="form-control" id="appointmentTime" ng-model="u.appointmentTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
+                                    		<td>
+	                                            <select  ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" ng-options="x for x in ctrl.doctors" class="form-control" ng-model="u.doctor" id="doctor" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
+                                    		<td>
+	                                            <select ng-options="s for s in ctrl.mainTreatmentTypes" class="form-control" ng-model="u.code" id="code" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
+                                    		
+                                    		</tr>
+                 					</tbody>
+
+                  				</table>
+			                  	
+    						</div>
+    					</form>
+              		</div>
+          		</div>
+      		</div>
       	</div>
-  	</div>
+  	</div> 	
 </body>
 	<script type="text/javascript">
        //var  scope= angular.element(document.getElementById("con")).scope();
        //scope.ctrl.setPanelHeader("Appointment");
-       function populate(patientId,patientName) 
+       function populate(patientId) 
        {
+    	   //aletr(patientId);
     	   var scope = angular.element(document.getElementById("con")).scope();
+    	   scope.ctrl.SearchRecord.id.patientId = patientId;
+    	   scope.ctrl.TmpRecord.id.patientId = patientId;
+           /*scope.ctrl.SearchRecord.id.treatmentId = treatmentId;
            scope.ctrl.Record.id.patientId = patientId;
            scope.ctrl.Record.id.appointmentId = '';
            scope.ctrl.Record.appointmentDate = '';
            scope.ctrl.Record.appointmentTime = '';
            scope.ctrl.Record.doctor = '';
            scope.ctrl.Record.code = '';
-           scope.ctrl.Record.objid = null;
-           scope.ctrl.setPanelHeader("Appointment - "+patientName);
-           scope.$apply(scope.ctrl.searchRecords());
+           scope.ctrl.Record.objid = null;*/
+           //scope.ctrl.setPanelHeader("Appointment - "+patientName);
+           //scope.$apply(scope.ctrl.searchRecords());
+    	   scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
        }
            
        $(function() {
@@ -227,37 +181,26 @@
        });
 
        
-//        $(document).ready(function() {
-//     	   var scopeT = angular.element(document.getElementById("con")).scope();
-// //     	   watch(scopeT.ctrl.Record, "appointmentDate", function(){
-// //     		   alert("f1.Reset NOT found X3");
-// //     		   populatePage(scopeT.ctrl.Record);
-    		   
-//     		   watch(scopeT.ctrl.Record, "doctor", function(){
-//         		   alert("f1.Reset NOT found X3");
-//         		   populatePage(scopeT.ctrl.Record);
-//        	});
-//     	})
-       function populatePage(Record) 
+       function populateList(appointmentDate,doctor) 
        {
            if (typeof (parent.document.getElementById("f3").contentWindow.populate) == "function"){
         	   var date;
-        	   if( typeof (Record.appointmentDate)==="number")
+        	   if( typeof (appointmentDate)==="number")
         		   {
-        		   date =new Date(Record.appointmentDate);      		   
+        		   date =new Date(appointmentDate);      		   
         		   }
         	   else
         		   {
-        		   date = Record.appointmentDate;
+        		   date = appointmentDate;
         		   }
         		   
         		   
         		   
-           		parent.document.getElementById("f3").contentWindow.populate(date,Record.doctor,Record.appointmentTime);
+           		parent.document.getElementById("f3").contentWindow.populate(date,doctor);
            }
            else
         	   {
-               alert("f1.Reset NOT found X3");
+               alert("f1.Reset NOT found Xwwww3");
         	   }
        }  
        

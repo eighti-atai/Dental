@@ -76,14 +76,15 @@
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
 
     <script type="text/javascript">
-       function populate(appointmentDate,doctor,time) 
+       function populate(appointmentDate,doctor) 
        {
-    	   if(appointmentDate != "" || doctor != "" || time != "")
+    	   if(appointmentDate != "" || doctor != "" )
     	   {
 	           var scope = angular.element(document.getElementById("con2")).scope();
-	           scope.ctrl.Record.date = appointmentDate;
-	           scope.ctrl.Record.time = time;
-	           scope.ctrl.Record.doctor = doctor;
+	           scope.ctrl.SearchRecord.date = appointmentDate;
+	           //scope.ctrl.SearchRecord.time = time;
+	           scope.ctrl.SearchRecord.doctor = doctor;
+	    	   
 	           var d ='';
 	           var c ='';
 	           var t ='';
@@ -95,12 +96,8 @@
 	        	   {
 	        	   		 c = doctor+"///";
 	        	   }
-	           if(time != "" )
-        	   {
-        	   		 t = time+"///";
-        	   }
-	           scope.ctrl.setPanelHeader('Appointments - '+ d+t+c);
-	           scope.$apply(scope.ctrl.searchRecords());
+	           scope.ctrl.setPanelHeader('Appointments - '+ d+c);
+	           scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
     	   }
        }
     </script>

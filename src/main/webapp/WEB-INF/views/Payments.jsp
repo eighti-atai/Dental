@@ -74,6 +74,11 @@
       .generalCategory.ng-dirty.ng-invalid-email {
           background-color: yellow;
       }
+      
+      p.ex1 {
+    max-height: 50px;
+    overflow: auto;
+}
 
     </style>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -114,134 +119,82 @@
     	
         function populate(patientId,treatmentId) 
         {
-     	   var scope = angular.element(document.getElementById("con3")).scope();
-     	  	scope.ctrl.Record = {id:{patientId:'', treatmentId:'', paymentNo:''},paymentDate:null, paymentType:'',paymentMethod:'',amount:'', chequeNo:'',chequeExpDate:'',chequeBank:'',objid:null};
-            scope.ctrl.Record.id.patientId = patientId;
-            scope.ctrl.Record.id.treatmentId = treatmentId;
-            scope.ctrl.setPanelHeader("Payments - Patient ID: "+patientId+"Treatment ID: "+treatmentId);
-            scope.$apply(scope.ctrl.searchRecords());
-            scope.ctrl.Record.paymentDate= (new Date());
+        
+        	
+     	   var scope = angular.element(document.getElementById("con")).scope();
+     	    //scope.ctrl.SearchRecord = scope.ctrl.emptyRecord();
+            scope.ctrl.SearchRecord.id.patientId = patientId;
+            scope.ctrl.SearchRecord.id.treatmentId = treatmentId;
+            scope.ctrl.TmpRecord.id.patientId = patientId;
+            scope.ctrl.TmpRecord.id.treatmentId = treatmentId;
+            scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
+            //scope.ctrl.Record.paymentDate= (new Date());
+           // alert('03 = '+treatmentId);
         }
         
+        setInterval(function() {
+		    window.top.postMessage(document.body.scrollHeight + '-' + 'iframe2', "*");
+		}, 500);
+		
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak">
-      <div id = "con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.setPanelHeader('Payment');">
-           
-          <div class="panel panel-default">
-              <div class="panel-heading" ng-bind-html="panelHeader"></div>
-              <div class="formcontainer">
-              	  <!-- <md-content> -->
-                  <form ng-submit="ctrl.submit();" name="myForm" class="form-horizontal">
-                  	 <div id="lov" unter-lov class = "lov"></div>
-<!--                   	 <div id="kan" unter-search class = "lov"></div> -->
-					  <div id="kan" unter-search class = "lov"></div>
-                      <input type="hidden" ng-model="ctrl.Record.objid" /> 
-					  <input type="hidden" ng-model="ctrl.Record.id.patientId" id="patientId" class="salesPartId form-control input-sm" placeholder="Enter Patient ID "  required/>
-					  <input type="hidden" ng-model="ctrl.Record.id.treatmentId" id="treatmentId" class="salesPartId form-control input-sm" placeholder="Enter Treatment ID " required/>
-					  <input type="hidden" ng-model="ctrl.Record.id.paymentNo" id="paymentNo" class="salesPartId form-control input-sm" placeholder="Enter Payment No "/>
-						
-<!--                       </div> -->
-                      
-                      <div class="row">
-                          <div class="form-group col-xs-6">
-                              <label class="col-xs-3 control-lable" for="amount">Amount</label>
-                              <div class="col-xs-7">
-                                  <input type="number" step="0.01" ng-model="ctrl.Record.amount" id="amount" class="salesPartId form-control input-sm" placeholder="Enter Amount " required ng-minlength="1"/>
-                                  <div class="has-error" ng-show="myForm.$dirty">
-                                      <span ng-show="myForm.amount.$error.required">This is a required field</span>
-                                      <span ng-show="myForm.amount.$error.minlength">Minimum length required is 3</span>
-                                      <span ng-show="myForm.amount.$invalid">This field is invalid </span>
-                                  </div>
-                              </div>
-                          </div>
-<!--                       </div> -->
-                      
-<!--                       <div class="row"> -->
-                          <div class="form-group col-xs-6">
-                              <label class="col-xs-3 control-lable" for="paymentDate">Payment Date</label>
-<!--                               <div class="col-xs-7">    ng-model="ctrl.myDate" -->
-									<md-datepicker ng-model="ctrl.Record.paymentDate" md-placeholder="Enter date" required></md-datepicker>
-<!--                                   <input type="date" ng-model="ctrl.Record.chequeExpDate" id="chequeExpDate" class="description form-control input-sm" placeholder="Enter Cheque Exp Date." required/> -->
-<!--                               </div> -->
-                          </div>
-                      </div>
-                      
-
-                      <div class="row">
-                          <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-<!--                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" >Reset Form</button> -->
-                              <button type="button" ng-click="ctrl.printReport()" class="btn btn-warning btn-sm" >Print Invoice</button>
-                          </div>
-                      </div>
-                  </form>
-                  
-                  <!-- </md-content> -->
-              </div>
-              
-              <!--           </div> -->
-          
-          <div class="panel panel-default">
-                <!-- Default panel contents -->
-              <div class="panel-heading"><span class="lead">List of Payments </span></div>
-              <div class="tablecontainer">
-                  <table  id="tableId" class="table table-hover">
-                      <thead>
-                          <tr>
-                          	  <th>Patient ID</th>
-                          	  <th>Treatment ID</th>
-                              <th>Payment No</th>
-                              <th>Amount</th>
-                              <th>Payment Date</th>
-                              <!-- <th>Payment Type</th>
-                              <th>Payment Method</th>
-                              <th>Cheque No</th>
-                              <th>Cheque Exp Date</th>
-                              <th>Cheque Bank</th> -->
-                              <th width="20%"></th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.edit(u.objid)">
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.patientId"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.treatmentId"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.id.paymentNo"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.amount"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'paymentDate', u.paymentDate)|date:yyyy/MM/dd"></span></td>
-                              <!-- <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.paymentType"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.paymentMethod"></span></td> -->
-<!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.chequeNo"></span></td> -->
-<!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'chequeExpDate', u.chequeExpDate)|date:yyyy/MM/dd"></span></td> -->
-<!--                               <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.chequeBank"></span></td> -->
-                              
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.id.patientId"style="width: 100%"/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.id.treatmentId"style="width: 100%"/></td>                                                            
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.id.paymentNo"style="width: 100%"/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.amount"style="width: 100%"/></td>
-                              <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.paymentDate"></md-datepicker></td>
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.paymentType" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.paymentMethod"style="width: 100%""/></td> -->
-<!--                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.chequeNo"style="width: 100%""/></td> -->
-<!--                               <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.chequeExpDate"></md-datepicker></td> -->
-<!--                               <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.chequeBank"style="width: 100%""/></td> -->
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
-                              <td>
-                              <button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-                  <button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
-        			Previous
-    			  </button>
-    						{{ctrl.currentPage+1}}/{{ctrl.numberOfPages()}}
-    			  <button ng-disabled="ctrl.currentPage >= ctrl.Records.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
-       						 	Next
-    					  </button>
-   
-              </div>
-          </div>
-      </div>
-	</body>
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.MasterInit();">   
+    <div class="generic-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form ng-submit="ctrl.submitRecords()">
+                        	<div class="row">
+                          
+		                		<div class="col-md-12">
+                                <input type="submit" class="btn btn-primary    btn-sm" value="Save"  ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                                <input  type="button" class="btn btn-danger   btn-sm" ng-click="ctrl.deleteRecords()" value="Delete"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.AddRow()" value="New"  ng-show ="!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.exitReadOnly('EditTable')" value="Edit"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.resetTable()" value="Cancel" ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                            </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+                                        <!--<th>Main Treatment Type</th>-->
+                                        <th>Payment Date</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="u in ctrl.Records">
+                                        <td>
+                                            <input type="checkbox" ng-model="u.selected" ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
+                                       <!--  <td>
+                                            <input type="text" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> 
+                                              <td>
+                                            <input type="text" class="form-control" ng-model="u.id.patientId" ng-readonly="(u.objid != null)" /></td>
+                                            <td>
+                                            <input type="text" class="form-control" ng-model="u.id.treatmentId" ng-readonly="(u.objid != null)" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="u.id.paymentNo" ng-readonly="(u.objid != null)" /></td>-->
+                                        <td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+                                            <input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'paymentDate', u.paymentDate)|date:yyyy/MM/dd" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
+                                        <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+                                         	<md-datepicker ng-model="u.paymentDate"></md-datepicker></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="u.amount" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
+                                    </tr>
+                                </tbody>
+                            </table>
+							
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
 </html>

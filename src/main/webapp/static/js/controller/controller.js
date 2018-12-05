@@ -4,9 +4,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     var self = this;
     
     self.Records=[];
+    self.OldRecords=[];
+    self.NewRecords=[];
     self.Rows=[];
     self.Record ;
+    self.OldRecord;
+    self.SearchRecord ;
     self.EmptyRecord;
+    self.TmpRecord;
+    self.NewRecord;
     self.submit = submit;
     self.edit   = edit;
     self.remove = remove;
@@ -49,17 +55,66 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.smartBind = smartBind;
     self.populatePageFromRecord = populatePageFromRecord;
     self.getDoctors = getDoctors;
-    self.doctors = [];
+	self.doctors = [];
+	self.getMainTreatmentTypes = getMainTreatmentTypes;
+	self.mainTreatmentTypes = [];
     self.populateTargetPage = populateTargetPage;
     self.InsertRecords = InsertRecords;
     self.reloadPageFromRecord = reloadPageFromRecord;
     self.printReport = printReport;
-
+    self.exitReadOnly = exitReadOnly;
+    self.makeReadOnly = makeReadOnly;
+    self.variableReadOnly = true;
+    self.enableEdit = enableEdit;
+    self.enableNew = enableNew;
+    self.appendRecords = appendRecords;
+    self.headerDropDownSelector ;
+    self.AddRow = AddRow;
+    self.submitRecords = submitRecords;
+    self.resetTable = resetTable;
+    self.variableNewLineExist = false;
+    self.variableEditLineExist = false;
+    self.isRowSelected = isRowSelected;
+    self.deleteRecords = deleteRecords;
+    self.MasterInit = MasterInit;
+    self.ppp = ppp;
     self.today = new Date();
  
     function populateRecord(objid){
-    	edit(objid);
-    	populatePage(self.Record);
+    	if(!self.variableReadOnly){
+        	var retVal = bootbox.confirm({
+        	    message: "You have some unsaved changes. Do you want to save the changes?",
+        	    title: "<font  color='blue'>Question ?</font>",
+        	    buttons: {
+        	        confirm: {
+        	            label: 'Yes',
+        	            className: 'btn-success'
+        	        },
+        	        cancel: {
+        	            label: 'No',
+        	            className: 'btn-danger'
+        	        }
+        	    },
+        	    callback: function (result) {
+        	    	//alert(result);
+        	    	if( result != true )
+        	    		{
+        	    			//edit(objid);
+        	    			self.variableReadOnly = true;
+        	    			//alert(oval);
+        	    		}
+        	    	else
+        	    		{
+        	    			self.variableReadOnly = false;
+        	    			//self.Record = angular.copy(self.OldRecord);
+        	    			//self.headerDropDownSelector = oval;
+        	    		}
+        	    }
+        	    	
+        	});
+		}
+    	
+    	//populatePage(self.Record);
     	
     }
     function populatePageFromRecord(objid){
@@ -71,19 +126,47 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     		reloadPageFrom();   
 		}	
     }
-    
-    function init(){
+    function MasterInit()
+    {
     	self.Record= EntityService.record;
+    	self.SearchRecord= EntityService.recordSearch;
+    	self.EmptyRecord = EntityService.emptyRecord();	
+    	self.TmpRecord = EntityService.emptyRecord();
+    	self.OldRecord = EntityService.emptyRecord();
+    	self.NewRecord = EntityService.emptyRecord();
     	//self.EmptyRecord = angular.copy(EntityService.record);
     	RecordService.setRestServiceUri(EntityService.name);
-    	//fetchAllRecords();
+    	fetchAllRecords();
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
     	self.lovRecord = EntityService.lovRecord;
     	self.lovHeads  = EntityService.lovHeads;
-    	if(EntityService.name!=='AttendPatient')
+		//populateTargetPage();
+		if(EntityService.name ==='Appointment')
     		{
-    			getDoctors();
+				getDoctors();
+				getMainTreatmentTypes();
+    		}
+    }
+    function init(){
+    	self.Record= EntityService.record;
+    	self.SearchRecord= EntityService.recordSearch;
+    	self.EmptyRecord = EntityService.emptyRecord();
+    	self.TmpRecord = EntityService.emptyRecord();
+    	self.OldRecord = EntityService.emptyRecord();
+    	self.NewRecord = EntityService.emptyRecord();
+    	//self.EmptyRecord = angular.copy(EntityService.record);
+    	RecordService.setRestServiceUri(EntityService.name);
+    	fetchAllRecords();
+    	self.lov = EntityService.lov;
+    	self.lovTitles = EntityService.lovTitles;
+    	self.lovRecord = EntityService.lovRecord;
+    	self.lovHeads  = EntityService.lovHeads;
+    	//'com.atai.dental.module.enterp.model.Patient@76bd7216';
+    	if(EntityService.name ==='Appointment')
+    		{
+				getDoctors();
+				getMainTreatmentTypes();
     		}
     	//setPanelHeader(title);
     }
@@ -93,6 +176,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             .then(
             function(d) {
                 self.Records = d;
+                self.headerDropDownSelector = self.Records[0].objid;
+                edit(self.Records[0].objid);
             },
             function(errResponse){
                 console.error('Error while fetching Records');
@@ -104,40 +189,71 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         );
     }
  
-    function createRecord(Record){
+    function createRecord(Record,type){
         RecordService.createRecord(Record)
             .then(
             		function() {
-            		bootbox.alert({
+            		/*bootbox.alert({
             		    message: "The record has been successfully added",
             		    title: "Information!"
-            		});
-            		reloadPageFromRecord();}
+            		});*/
+            		self.variableReadOnly = true;
+            		self.variableNewLineExist = false;
+            		self.NewRecord.objid = self.Record.objid;
+            		//searchRecords(self.SearchRecord);
+            		
+            		if(type!='list')
+            			{
+		            		appendRecords();
+		            		self.headerDropDownSelector = Record.objid;
+            			}
+            		else
+            			{
+            				self.EmptyRecord = EntityService.emptyRecord();
+            				//self.TmpRecord = EntityService.emptyRecord();
+            			}
+                    //edit(self.Records[0].objid);
+            		//reloadPageFromRecord();}
+            		if(self.variableReadOnly)
+                	{
+        				getNewRecords();
+                	}
+            		}
+            		
             		,
             function(errResponse){
                 console.error('Error while creating Record');
+                self.variableReadOnly = false;
+                self.variableNewLineExist = true;
                 bootbox.alert({
         		    message: "Error while creating record",
         		    title: "<font  color='red'>Error!</font>"
         		});
             }
         );
+        
     }
  
     function updateRecord(Record, objid){
         RecordService.updateRecord(Record, objid)
             .then(
             		function() {
-            		bootbox.alert({
+            		/*bootbox.alert({
             		    message: "The record has been successfully updated",
             		    title: "Information!"
-            		});
-            		reloadPageFromRecord();},
+            		});*/
+            		self.variableReadOnly = true;
+            	    self.variableEditLineExist = false;
+            		reloadPageFromRecord();
+            		},
             function(errResponse){
+            			self.variableReadOnly = false;
+            		    self.variableEditLineExist = true;
             			bootbox.alert({
                 		    message: "Error while updating record",
                 		    title: "<font  color='red'>Error!</font>"
                 		});
+            			
             }
         );
     }
@@ -161,13 +277,18 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	    	if( result == true ){
     	        	RecordService.deleteRecord(objid)
     	            .then(function() {
-                		bootbox.alert({
+    	            	self.variableReadOnly = true;
+                		/*bootbox.alert({
                 		    message: "The record has been successfully deleted",
                 		    title: "Information!"
-                		});
-                		searchRecords;
+                		});*/
+                		if(self.Record.objid === objid) {//clean form if the Record to be deleted is shown there.
+                            reset(null);
+                        }
+                		searchRecords(self.SearchRecord);
                 		reloadPageFromRecord();},
     	            function(errResponse){
+                	    self.variableReadOnly = true;
     	                console.error('Error while deleting Record');
     	                bootbox.alert({
     	        		    message: "Error while deleting record",
@@ -176,6 +297,50 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	            }
     	        );
     	        }
+    	    }
+    	});
+    	//confirm("Do you want to remove the record ?");
+        
+    }
+ 
+    function deleteRecords(){
+        /**/
+    	var retVal = bootbox.confirm({
+    	    message: "Do you want to remove the record ?",
+    	    title: "<font  color='blue'>Question ?</font>",
+    	    buttons: {
+    	        confirm: {
+    	            label: 'Yes',
+    	            className: 'btn-success'
+    	        },
+    	        cancel: {
+    	            label: 'No',
+    	            className: 'btn-danger'
+    	        }
+    	    },
+    	    callback: function (result) {
+    	    	if( result == true ){
+    	    		for(var i = 0; i < self.Records.length; i++){
+    		            if(self.Records[i].selected === true) {
+			    	        	RecordService.deleteRecord(self.Records[i].objid)
+			    	            .then(function() {
+			    	            	//self.Records.splice(i,1);  
+			    	            	searchRecords(self.TmpRecord);
+			    	            	console.error('deleted the Record');
+			                		},
+			    	            function(errResponse){
+			    	                console.error('Error while deleting Record');
+			    	                bootbox.alert({
+			    	        		    message: "Error while deleting record",
+			    	        		    title: "<font  color='red'>Error!</font>"
+			    	        		});
+			    	            }
+			    	        );
+    		            }
+    	    		}
+    	    		
+    	    	}
+    	    	
     	    }
     	});
     	//confirm("Do you want to remove the record ?");
@@ -227,12 +392,30 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function submit() {
         if(self.Record.objid===null){
             console.log('Saving New Record', self.Record);
-            createRecord(self.Record);
+            createRecord(self.Record,'group');
         }else{
             updateRecord(self.Record, self.Record.objid);
             console.log('Record updated with id ', self.Record.objid);
         }
 
+    }
+    
+    function submitRecords() {
+	        for(var i = 0; i < self.Records.length; i++){
+	            if(self.Records[i].objid === null) {
+	                //self.Record = angular.copy(self.Records[i]);
+	                createRecord(self.Records[i],'list');
+	               // self.Records[i].objid = self.headerDropDownSelector;
+	                //fetchAllRecords();
+	                //searchRecords(self.SearchRecord)
+	            }
+	            else
+	            	{
+	            		if(self.Records[i].selected === true) {
+	            			updateRecord(self.Records[i], self.Records[i].objid);
+	            		}
+	            	}
+	        }
     }
      
     /*function printReport(){
@@ -272,11 +455,16 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        );
     }
 
-    function searchRecords(){
-        RecordService.searchRecord(self.Record)
+    function searchRecords(RecordSet){
+    	//alert('011 = '+RecordSet.id.treatmentId);
+    	//self.Records = [];
+        RecordService.searchRecord(RecordSet)
             .then(
             function(d) {
                 self.Records = d;
+                self.headerDropDownSelector = self.Records[0].objid;
+                edit(self.Records[0].objid);
+                
             },
             function(errResponse){
                 console.error('Error while fetching Records');
@@ -287,6 +475,59 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
             }
         );
     }
+    
+    function getNewRecords(){
+    	self.NewRecord.objid = self.Record.objid;
+        RecordService.searchRecord(self.NewRecord)
+            .then(
+            function(d) {
+            	self.NewRecord.objid = self.Record.objid;
+            	self.NewRecords =[];
+                self.NewRecords = d;
+                //RecordSet = angular.copy(self.NewRecords[0]);
+				self.Record = angular.copy(self.NewRecords[0]); 
+				for(var i = 0; i < self.Records.length; i++){
+		            if(self.Records[i].objid === self.Record.objid) {
+		            	self.Records[i] =  angular.copy(self.Record);
+		                break;
+		            }
+		        }
+				if (typeof (populatePage) == "function")
+	        	{
+					//alert('01 = '+self.Record.id.treatmentId);
+	        		populatePage(self.Record);
+	        	}
+            },
+            function(errResponse){
+                console.error('Error while fetching Records');
+                bootbox.alert({
+        		    message: "Error while fetching record",
+        		    title: "<font  color='red'>Error!</font>"
+        		});
+            }
+        );
+    }
+    
+    /*function updateHeader(){
+    	self.NewRecord.objid = self.Record.objid;
+        RecordService.searchRecord(self.NewRecord)
+            .then(
+            function(d) {
+            	self.NewRecord.objid = self.Record.objid;
+            	self.NewRecords =[];
+                self.NewRecords = d;
+                //RecordSet = angular.copy(self.NewRecords[0]);
+				self.Record = angular.copy(self.NewRecords[0]); 
+            },
+            function(errResponse){
+                console.error('Error while fetching Records');
+                bootbox.alert({
+        		    message: "Error while fetching record",
+        		    title: "<font  color='red'>Error!</font>"
+        		});
+            }
+        );
+    }*/
     
     function validateRecords(entity, keys,sourceList,destList){
       
@@ -300,7 +541,15 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		        function (response) {
 		        	self.ValRecord = response.data;
 		        	for(var i = 0; i < sourceList.length; i++){
-		                self.Record[destList[i]] =self.ValRecord[sourceList[i]] ;
+		        		if(sourceList[i] === 'FULLRECORD')
+		        		{
+		        			self.Record[destList[i]] =self.ValRecord ;
+		        		}
+		        		else
+		        		{
+		        			self.Record[destList[i]] =self.ValRecord[sourceList[i]] ;
+		        		}
+		                //
 		            }
 		        },
 		        function(errResponse){
@@ -339,17 +588,82 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         console.log('id to be edited', objid);
         for(var i = 0; i < self.Records.length; i++){
             if(self.Records[i].objid === objid) {
+            	self.OldRecord = angular.copy(self.Records[i]);
                 self.Record = angular.copy(self.Records[i]);
                 break;
             }
         }
     }
  
+    function exitReadOnly(type){
+        self.variableReadOnly = false;
+        if(type === "Add")
+    	{
+        	self.Record = EntityService.emptyRecord();
+    	}
+        if(type === "EditTable")
+    	{
+        	self.OldRecords = [];
+        	for(var i = 0; i < self.Records.length; i++){
+                if(self.Records[i].selected === true) {
+                	self.variableEditLineExist = true;
+                	self.OldRecords[i] = angular.copy(self.Records[i]);
+                    //break;
+                }
+            }
+            
+    	}
+    }
+    
+    function makeReadOnly(){
+        self.variableReadOnly = true;
+    }
+    
+    
+    function enableNew(){
+    	if(self.Record.objid===null)
+    	{
+            if (self.variableReadOnly)
+            	{
+            		return true;
+            	}
+            else
+            	{
+            		return false;
+            	}
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    	        
+    }
+    
+    function enableEdit(){
+    	if(self.Record.objid===null)
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		if (self.variableReadOnly)
+        	{
+        		return true;
+        	}
+        else
+        	{
+        		return false;
+        	}
+    		
+    	}
+    	        
+    }
+    
+    
+    
     function remove(objid,fetchAll){
         console.log('id to be deleted', objid);
-        if(self.Record.objid === objid) {//clean form if the Record to be deleted is shown there.
-            reset();
-        }
+        
         if(fetchAll === 'true')
         	{deleteRecordWithFetch(objid)}
         else
@@ -372,6 +686,29 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	return false;
     }
     
+
+    
+    function AddRow(){
+    	//self.EmptyRecord = EntityService.emptyRecord();
+    	self.EmptyRecord = angular.copy(self.TmpRecord);
+    	self.Records.unshift(self.EmptyRecord);
+    	self.variableNewLineExist = true;
+    	for(var i = 0; i < self.Records.length; i++){
+            if(self.Records[i].selected === true) {
+            	self.Records[i].selected = false;
+                break;
+            }
+        }
+    }
+    
+    function isRowSelected(){
+    	for(var i = 0; i < self.Records.length; i++){
+            if(self.Records[i].selected === true) {
+            	return true;
+            }
+        }
+    }
+    
     function updateAll(){
         for(var j = 0; j < self.Rows.length; j++){
 	        for(var i = 0; i < self.Records.length; i++){
@@ -383,12 +720,46 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        updateRecord(self.Record, self.Rows[j]);
         }
         self.Rows = [];
-        reset();
+        reset(null);
     }
-    function reset(){
-    	self.Record = EntityService.emptyRecord();
-        $scope.myForm.$setPristine(); //reset Form
-        
+    
+    function appendRecords(){
+    	self.Records[self.Records.length] = angular.copy(self.Record);
+    }
+    
+    function reset(objid){
+    	if(objid===null)
+    	{
+    		//self.Record = EntityService.emptyRecord();
+    		edit(self.headerDropDownSelector);
+            $scope.myForm.$setPristine(); //reset Form
+            self.variableReadOnly = true;
+    	}
+    	else
+    	{
+    		self.Record = angular.copy(self.OldRecord) ;
+    		self.variableReadOnly = true;
+    	}
+    	self.variableNewLineExist = false;
+        self.variableEditLineExist = false;
+    	        
+    }
+    
+    function resetTable(){
+    	self.variableReadOnly = true;
+    	self.variableNewLineExist = false;
+        self.variableEditLineExist = false;
+    	for(var i = 0; i < self.Records.length; i++){
+            if(self.Records[i].objid === null) {
+                self.Records.splice(i,1);  
+            }
+            else{
+            	if(self.Records[i].selected == true) {
+            		self.Records[i] = angular.copy(self.OldRecords[i]);
+            	}
+            }
+        }
+    	        
     }
     
     function numberOfPages() {
@@ -670,8 +1041,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	document.getElementById("kan").style.display = "none";
     }
     
-    $scope.$watch('ctrl.Record.objid', function (nval, oval) {
+    $scope.$watch('ctrl.headerDropDownSelector', function (nval, oval) {
         if (oval !== nval) {
+        	
         	if (typeof (populatePage) == "function")
         	{
         		populatePage(self.Record);
@@ -679,14 +1051,19 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         }
     });
     
-    $scope.$watch('ctrl.Record.appointmentDate', function (nval, oval) {
+   /* $scope.$watch('appointmentDate', function (nval, oval) {
         if (oval !== nval) {
         	if (typeof (populatePage) == "function")
         	{
         		populatePage(self.Record);
         	}
         }
-    });
+	});*/
+	
+	function ppp(datee,codee)
+    {
+		populateList(datee,codee);
+    }
     
     function populateTargetPage()
     {
@@ -758,7 +1135,32 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        function (response) {
 	        	for (var key0 in response.data)
         		{
-	        		self.doctors.push(response.data[key0]['userName']);	
+					self.doctors.push(response.data[key0]['userName']);	
+					//alert(self.response.data[key0]['userName']);
+	        	}
+	        },
+	        function(errResponse){
+	            console.error('Error while fetching Records');
+	        }
+	        );
+	}
+	
+	function getMainTreatmentTypes()
+    {
+    	var current_url = $location.absUrl();
+		var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+		//alert(base_url);
+		//var lovUrl = base_url + 'DoctorLov/';  
+		//alert(self.Record);
+    	$http.post(base_url+"MainTreatmentType/Search/", self.lovRecord['mttId'])
+    	.then(
+			
+	        function (response) {
+	        	for (var key0 in response.data)
+        		{
+					self.mainTreatmentTypes.push(response.data[key0]['mttId']);	
+					//alert(self.response.data[key0]['mttId']);
+					//console.message(self.mainTreatmentTypes);
 	        	}
 	        },
 	        function(errResponse){

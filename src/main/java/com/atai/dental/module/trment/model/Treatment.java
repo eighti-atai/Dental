@@ -3,14 +3,22 @@ import java.sql.Blob;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.io.Serializable;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atai.dental.generic.interfaces.Model;
+import com.atai.dental.module.enterp.dao.PatientDao;
 import com.atai.dental.module.enterp.model.Patient;
+import com.atai.dental.module.enterp.service.PatientService;
 
 @Entity
 @Table(name = "treatment_tab")
@@ -19,8 +27,13 @@ public class Treatment implements Model<TreatmentKey> {
 	
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private TreatmentKey id;
 
+	
+	/*@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "treatment_id")
+	private int treatmentId;*/
 	
 //	@ManyToOne
 //	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
@@ -51,6 +64,13 @@ public class Treatment implements Model<TreatmentKey> {
 	@Column(name = "treatment_paid")
 	private Double treatmentPaid;
 	private String objid;
+	
+	@Transient
+	private String patientName;
+	
+	@ManyToOne
+	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
+	private Patient patient;
 	
 //	public Patient getPatient() {
 //		return patient;
@@ -132,13 +152,14 @@ public class Treatment implements Model<TreatmentKey> {
 		this.treatmentStat = treatmentStat;
 	}
 
-	public String getTreatmentPaidStat() {
-		return treatmentPaidStat;
+	 @Transient
+	public Patient getPatient() {	
+		return patient;
 	}
 
-	public void setTreatment_paid_stat(String treatmentPaidStat) {
-		this.treatmentPaidStat = treatmentPaidStat;
-	}
+	/*public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}*/
 
 	public String getTreatmentDoctor() {
 		return treatmentDoctor;
@@ -187,5 +208,14 @@ public class Treatment implements Model<TreatmentKey> {
 	public void setTreatmentPaid(Double treatmentPaid) {
 		this.treatmentPaid = treatmentPaid;
 	}
+	
+	public String getTreatmentPaidStat() {
+		return treatmentPaidStat;
+	}
+
+	public void setTreatment_paid_stat(String treatmentPaidStat) {
+		this.treatmentPaidStat = treatmentPaidStat;
+	}
+
 
 }

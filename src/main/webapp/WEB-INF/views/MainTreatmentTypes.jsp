@@ -6,17 +6,6 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>ATAI</title>
-	    
-	    <script type="text/javascript">
-	        function populatePage(Record) 
-	        {
-	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
-	            	parent.document.getElementById("f1").contentWindow.populate(Record.patientId, Record.mttId);
-	            else
-	                alert("f1.Reset NOT found X3");
-	        } 
-	        
-	    </script>
 		
 		<style>
 			/*html
@@ -139,6 +128,53 @@
 			    text-decoration: none;
 			    cursor: pointer;
 			}
+			.input-selector-cc {
+			    background-color: transparent;
+			    border: 0px solid;
+			    height: 20px;
+			    width: 360px;
+ 			   color: #0000FF;
+ 			    font-size:14px;
+			}
+			.collapsible {
+			    background-color: #777;
+			    color: white;
+			    cursor: pointer;
+			    padding: 4px;
+			    width: 100%;
+			    border: black;
+			    text-align: left;
+			    font-size: 10px;
+			}
+
+			.active, .collapsible:hover {
+			    background-color: #555;
+			}
+
+			.content {
+			    padding: 0 18px;
+			    display: none;
+			    overflow: hidden;
+			    background-color: #f1f1f1;
+			}
+			
+			.input-search {
+			  height: 25px;
+			  padding: 5px 10px;
+			  font-size: 12px;
+			  color:#A9A9A9;
+			  line-height: 1.5;
+  			  border-radius: 3px;
+			  border: 2px solid;
+			}
+			
+			.lead-x {
+			padding: 4px;
+				  margin-bottom: 10px;
+				  font-size: 14px;
+				  font-weight: 300;
+				  line-height: 1.4;
+				}
 	    </style>
 	    
 	    <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
@@ -160,6 +196,7 @@
 	    <script src="webjars/angularjs/1.5.8/angular-aria.min.js"></script>
 	    <script src="webjars/angularjs/1.5.8/angular-messages.min.js"></script>
 	    <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+	    <script src="<c:url value='/static/js/directives/prevent-enter-submit.js' />"></script>
 	</head>
 
 <div id="myModal" class="modal">
@@ -180,31 +217,47 @@
 </div>
 
 	<body ng-app="generalModule" class="ng-cloak">
-		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init()">           
+		<div id="con1" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">           
 		    <div class="panel panel-default">
-		    	<div class="panel-heading"><span class="lead">Main Treatment Type Details</span></div>
+		    	<div class="panel-heading">
+				<span class="lead">Main Treatment Type
+				<select
+					id="headerDropDownSelector" ng-disabled="!ctrl.variableReadOnly" class=" input-selector-cc "
+					ng-model="ctrl.headerDropDownSelector"
+					ng-change="ctrl.edit(ctrl.headerDropDownSelector); ">
+					<option  ng-repeat="u in ctrl.Records"  value="{{u.objid}}" >{{u.mttId}}
+						- {{u.mttName}}</option> 
+				</select>
+				</span> 
+			</div>
+			<div class="formcontainer">
+				<div class="collapsible"><span class="lead-x">Search Criteria </span> </div>
+				<div class="content">	
+					<input id="mttId" type="text" ng-model="ctrl.SearchRecord.mttId" class="input-search" placeholder="Type ID"/> 				
+					<input type="text" ng-model="ctrl.SearchRecord.mttName" id="mttName" class="input-search" placeholder="Type Name"/>
+					<input type="text" ng-model="ctrl.SearchRecord.mttDescription" id="mttDescription" class="input-search" placeholder="Type Description"/>
+				</div> 
+			</div> 
 		        <div class="formcontainer">
-		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+		        	<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal" prevent-enter-submit>
 		            	<input type="hidden" ng-model="ctrl.Record.objid" /> 
 		
 						<div class="row">
-		                	<div class="form-group col-md-12">
+		                	<div class="form-group col-md-6">
 		                    	<label class="col-md-2 control-lable" for="mttId">Type ID</label>
 		                        <div class="col-md-7">
-		                        	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" class="mttId form-control input-sm" placeholder="Enter MainTreatmentType Name " required ng-minlength="1"/>
+		                        	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-readonly="ctrl.variableReadOnly" class="mttId form-control input-sm" placeholder="Enter MainTreatmentType Name " required ng-minlength="1"/>
 		                        	<div class="has-error" ng-show="myForm.$dirty">
 		                            	<span ng-show="myForm.mttId.$error.required">This is a required field</span>
 		                                <span ng-show="myForm.mttId.$invalid">This field is invalid </span>
 		                            </div>
 		                		</div>
 		                	</div>
-		                </div>
-		                      
-		                <div class="row">
-		                	<div class="form-group col-md-12">
+
+		                	<div class="form-group col-md-6">
 		                    	<label class="col-md-2 control-lable" for="mttName">Type Name</label>
 		                        <div class="col-md-7">
-		                           	<input type="text" ng-model="ctrl.Record.mttName" id="mttName" class="mttName form-control input-sm" placeholder="Enter Type Name"/>
+		                           	<input type="text" ng-model="ctrl.Record.mttName" id="mttName" ng-readonly="ctrl.variableReadOnly" class="mttName form-control input-sm" placeholder="Enter Type Name"/>
 		                           	<div class="has-error" ng-show="myForm.$dirty">
 		                            </div>
 		                        </div>
@@ -212,10 +265,10 @@
 		                </div>
 		                      
 		                <div class="row">
-		                	<div class="form-group col-md-12">
+		                	<div class="form-group col-md-6">
 		                    <label class="col-md-2 control-lable" for="mttDescription">Type Description</label>
 		                    	<div class="col-md-7">
-		                        	<input type="text" ng-model="ctrl.Record.mttDescription" id="mttDescription" class="mttDescription form-control input-sm" placeholder="Enter Type Description" />
+		                        	<input type="text" ng-model="ctrl.Record.mttDescription" id="mttDescription" ng-readonly="ctrl.variableReadOnly" class="mttDescription form-control input-sm" placeholder="Enter Type Description" />
 		                            <div class="has-error" ng-show="myForm.$dirty">
 		                			</div>
 		                        </div>
@@ -223,17 +276,22 @@
 		                </div>
 		                      		
 		                <div class="row">
-		                	<div class="form-actions floatRight">
-		                    	<input type="submit"  value="{{!ctrl.Record.objid ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-		                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="IsDisabled">Reset Form</button>
-		                        <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
+		                	<div class="form-group col-md-6">
+		                		<div class="col-md-12">
+			                    	<input type="submit"  value="Save" class="btn btn-primary btn-sm"  ng-show ="!ctrl.variableReadOnly">
+			                        <button type="button" ng-click="ctrl.reset(ctrl.Record.objid)" class="btn btn-warning btn-sm" ng-show ="!ctrl.variableReadOnly" >Cancel</button>
+			                        <button type="button" ng-click="ctrl.exitReadOnly('Add')" class="btn btn-warning btn-sm" ng-show ="ctrl.variableReadOnly" >New</button>
+			                        <button type="button" ng-click="ctrl.exitReadOnly('Edit')" class="btn btn-warning btn-sm" ng-show ="ctrl.enableEdit()">Edit</button>
+			                        <button type="button" ng-click="ctrl.remove(ctrl.Record.objid)" class="btn btn-danger btn-sm" ng-show ="ctrl.Record.objid!=null">Delete</button>
+			                        <button type="button" ng-click="ctrl.searchRecords(ctrl.SearchRecord)" class="btn btn-warning btn-sm" >Search</button>
+		                    	</div>
 		                    </div>
 		               	</div>
 		                
 		        	</form>  
 		        </div>
 		              		          
-		        <div class="panel panel-default">
+		        <!-- <div class="panel panel-default">
 		        	<div class="panel-heading"><span class="lead">List of Main Treatment Types </span></div>
 		            <div class="tablecontainer">
 		                <table id="tableId" class="table table-hover">
@@ -269,8 +327,51 @@
 		       				Next
 		    			</button>
 		          	</div>
-		    	</div>
+		    	</div>-->
 			</div>
 		</div>	
 	</body>
+	<script type="text/javascript">
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+	
+		for (i = 0; i < coll.length; i++) {
+		  coll[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var content = this.nextElementSibling;
+		    if (content.style.display === "block") {
+		      content.style.display = "none";
+		    } else {
+		      content.style.display = "block";
+		    }
+		  });
+		}
+    
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+        setInterval(function() {
+	        window.top.postMessage(document.body.scrollHeight + '-' + 'iframe1', "*");
+	    }, 500);
+	    function populatePage(Record) 
+        {
+            if (typeof (parent.document.getElementById("iframe-container-2").contentWindow.populate) == "function")
+            	parent.document.getElementById("iframe-container-2").contentWindow.populate(Record.mttId);
+            
+        } 
+	    function populateChild() 
+	       {
+	    	   var scope = angular.element(document.getElementById("con1")).scope();
+	    	   populatePage(scope.ctrl.Record);
+	           /*scope.ctrl.SearchRecord.id.mttId = mttId;
+	           scope.ctrl.SearchRecord.id.sttId = '';
+	           scope.ctrl.SearchRecord.treatmentName = '';
+	           scope.ctrl.SearchRecord.treatmentAmount = '';
+	           scope.ctrl.SearchRecord.objid = null;
+	           scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));*/
+	       }
+	</script>
 </html>

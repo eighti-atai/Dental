@@ -103,11 +103,11 @@
 
     
 </head>
-<body ng-app="generalModule" class="ng-cloak">
+<!--<body ng-app="generalModule" class="ng-cloak">
 	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">
     	<div class="panel panel-default">
-        	<div class="panel-heading"><span class="lead">Sub Treatment Type Details</span></div>
-            <div class="formcontainer">
+        	<!--<div class="panel-heading"><span class="lead">Sub Treatment Type Details</span></div>
+             <div class="formcontainer">
            		<form ng-submit="ctrl.submit()" name="myForm1" class="form-horizontal">
            			<div id="lov" unter-lov class = "lov"></div>
 					<div id="kan" unter-search class = "lov"></div>
@@ -175,7 +175,7 @@
                     	</div>
                		</div>
     			</form>
-			</div>
+			</div> 
           
           	<div class="panel panel-default">
        			<div class="panel-heading"><span class="lead">List of Sub Treatment Types </span></div>
@@ -217,10 +217,87 @@
     				</button>
               	</div>
           	</div>
-      	</div>
+    </div>
   	</div>
+</body>        -->	
+  <body ng-app="generalModule" class="ng-cloak">
+	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.MasterInit();">   
+    <div class="generic-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form ng-submit="ctrl.submitRecords()">
+                        	<div class="row">
+                          
+		                		<div class="col-md-12">
+                                <input type="submit" class="btn btn-primary    btn-sm" value="Save"  ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                                <input  type="button" class="btn btn-danger   btn-sm" ng-click="ctrl.deleteRecords()" value="Delete"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.AddRow()" value="New"  ng-show ="!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.exitReadOnly('EditTable')" value="Edit"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.resetTable()" value="Cancel" ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                            </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+                                        <!--<th>Main Treatment Type</th>-->
+                                        <th>Sub Treatment Type</th>
+                                        <th>Treatment</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="u in ctrl.Records">
+                                        <td>
+                                            <input type="checkbox" ng-model="u.selected" ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
+                                       <!--  <td>
+                                            <input type="text" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> -->
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="u.id.sttId" ng-readonly="(u.objid != null)" required/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="u.treatmentName" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="u.treatmentAmount" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
+                                    </tr>
+                                </tbody>
+                            </table>
+							<!-- <div class="row">
+                            
+                                <input type="submit" class="btn btn-primary    btn-sm" value="Save"  ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                                <input  type="button" class="btn btn-danger   btn-sm" ng-click="ctrl.deleteRecords()" value="Delete"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.AddRow()" value="New"  ng-show ="!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.exitReadOnly('EditTable')" value="Edit"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.resetTable()" value="Cancel" ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                            
+                            </div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
+      	
 	<script type="text/javascript">
+		setInterval(function() {
+		    window.top.postMessage(document.body.scrollHeight + '-' + 'iframe2', "*");
+		}, 500);
+		function populate(mttId) 
+	       {
+	    	   var scope = angular.element(document.getElementById("con")).scope();
+	           scope.ctrl.SearchRecord.id.mttId = mttId;
+	           scope.ctrl.SearchRecord.id.sttId = '';
+	           scope.ctrl.SearchRecord.treatmentName = '';
+	           scope.ctrl.SearchRecord.treatmentAmount = '';
+	           scope.ctrl.SearchRecord.objid = null;
+	           scope.ctrl.TmpRecord.id.mttId = mttId;
+	           scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
+	       }
        //var scope = angular.element(document.getElementById("con")).scope();
        //scope.ctrl.setPanelHeader("SubTreatmentType");
        /*function populate(patientId,patientName) 

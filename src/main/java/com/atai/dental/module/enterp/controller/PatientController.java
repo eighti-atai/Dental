@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ import com.atai.dental.module.trment.model.Treatment;
 /*import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.service.PatientService;*/
-
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class PatientController extends AbstractController<Integer, Patient>{
 

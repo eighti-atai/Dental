@@ -292,30 +292,7 @@
             <!-- /.row -->
             <!-- /.row -->
             <div class="row">
-            <div class="col-lg-4 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                        		<a href="javascript:OpenSubWindow('TA');" class="active a-db">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-wheelchair fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">Temp App</div>
-                                    <div>Temporary Appointments </div>
-                                </div>
-                                </a>
-                            </div>
-                        </div>
-                        <a href="javascript:OpenSubWindow('TA');" class="active">
-                            <div class="panel-footer">
-                                <span class="pull-left">Add/View Temporary Appointments</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            
                 <div class="col-lg-4 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -325,7 +302,7 @@
                                     <i class="fa fa-wheelchair fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">Patients</div>
+                                    <div class="huge">Patients/Appointments Details</div>
                                     <div>Patients/Appointments Details</div>
                                 </div>
                                 </a>
@@ -340,59 +317,61 @@
                         </a>
                     </div>
                 </div>
-                </div>
-                
-                
-                
-                <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
                         		<a href="javascript:OpenSubWindow('PP');" class="active a-db">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user-md  fa-5x"></i>
+                                    <i class="fa fa-wheelchair fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">Treatments</div>
-                                    <div>Treatment Info</div>
+                                    <div>Treatments /Payments </div>
                                 </div>
                                 </a>
                             </div>
                         </div>
                         <a href="javascript:OpenSubWindow('PP');" class="active">
                             <div class="panel-footer">
-                                <span class="pull-left">Add Treatment Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div> 
-                <div class="col-lg-4 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                        		<a href="javascript:OpenSubWindow('MT');" class="active a-db">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-credit-card fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">Main</div>
-                                    <div>Main Treatment Types</div>
-                                </div>
-                                </a>
-                            </div>
-                        </div>
-                        <a href="javascript:OpenSubWindow('MT');" class="active">
-                            <div class="panel-footer">
-                                <span class="pull-left">Add/View Main Treatment Types</span>
+                                <span class="pull-left">Add/View Treatments/Payments</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                        		<a href="javascript:OpenSubWindow('TA');" class="active a-db">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-credit-card fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">Treatment Types</div>
+                                    <div>Treatment Types</div>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="javascript:OpenSubWindow('TA');" class="active">
+                            <div class="panel-footer">
+                                <span class="pull-left">Add/View Treatment Types</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                </div>
+                
+                
+                
+              <!--  <div class="row">
+               
+                
                 
                 <div class="col-lg-4 col-md-6">
                     <div class="panel panel-green">
@@ -494,7 +473,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div>-->
                               
             </div> 	
         </div>
