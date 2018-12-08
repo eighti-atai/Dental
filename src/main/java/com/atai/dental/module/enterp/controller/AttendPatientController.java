@@ -17,10 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atai.dental.generic.controller.AbstractController;
 import com.atai.dental.module.enterp.model.AttendPatient;
 import com.atai.dental.module.enterp.service.AttendPatientService;
+import com.atai.dental.module.enterp.service.SecurityService;
 
 
 @RestController
 public class AttendPatientController extends AbstractController<Integer, AttendPatient>{
+	
+	
 
 	@Autowired
 	public AttendPatientController(AttendPatientService service) {

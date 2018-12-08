@@ -242,14 +242,41 @@
         	x.value= x1.value-x2.value;
         	scope.ctrl.Record.treatmentTotal =  x1.value-x2.value;
         }
-        /*function populate(patientId) 
+        function populateThis(patientId) 
         {
-     	   var scope = angular.element(document.getElementById("con3")).scope();
-     	  	scope.ctrl.Record = {id:{treatmentId:'',patientId:''} , mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
-            scope.ctrl.Record.id.patientId = patientId;
-            scope.$apply(scope.ctrl.searchRecords());
-            scope.$apply(scope.ctrl.validateRecords('Patient',{patientId:scope.ctrl.Record.id.patientId},['patientName'],['patientName']));
-        }*/
+        	var scope = angular.element(document.getElementById("con3")).scope();
+     	    //scope.ctrl.SearchRecord = scope.ctrl.emptyRecord();
+            scope.ctrl.SearchRecord.id.patientId = patientId;
+            alert(patientId);
+            //const patient = urlParams.get('patientid');
+        	//const patientname = urlParams.get('patientname');
+        	scope.ctrl.TmpRecord.id.patientId = Number(patientId);
+        	scope.ctrl.TmpRecord.patient.patientId = Number(patientId);
+            /*scope.ctrl.SearchRecord.id.treatmentId = treatmentId;
+            
+            scope.ctrl.TmpRecord.id.treatmentId = treatmentId;*/
+            //console.error('ddddddddddddd');
+            scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
+            /*if(x !== undefined)
+            	{
+            	 x.then(
+                         function(d) {
+         					populateChild();
+                         
+                     },
+                     function(errResponse){
+                         console.error('Error while fetching Records');
+                         bootbox.alert({
+                 		    message: "Error while fetching record",
+                 		    title: "<font  color='red'>Error!</font>"
+                 		});
+                     }
+                 );
+            	}*/
+            
+            
+            
+        }
         
         
         function isNumberKey(evt){
@@ -265,8 +292,17 @@
         {
         	//alert('02 = '+self.Record.id.treatmentId);
         	
-            if (typeof (parent.document.getElementById("iframe-container-2").contentWindow.populate) == "function")
-            	parent.document.getElementById("iframe-container-2").contentWindow.populate(Record.id.patientId,Record.id.treatmentId);
+            if (typeof (parent.document.getElementById("iframe-container-2").contentWindow.populate) == "function"){
+            	if(Record === undefined)
+           		{
+            		parent.document.getElementById("iframe-container-2").contentWindow.populate(null,null);
+           		}
+            	else
+           		{
+            		parent.document.getElementById("iframe-container-2").contentWindow.populate(Record.id.patientId,Record.id.treatmentId);
+           		}
+            	
+            }
             
         } 
         function populateChild() 
@@ -435,6 +471,7 @@
 			                        <button type="button" ng-click="ctrl.remove(ctrl.Record.objid)" class="btn btn-danger btn-sm" ng-show ="ctrl.Record.objid!=null">Delete</button>
 			                        <button type="button" ng-click="ctrl.searchRecords(ctrl.SearchRecord)" class="btn btn-warning btn-sm" >Search</button>
 			                        <button type="button" ng-click="ctrl.ListOfValues()" class = "btn btn-warning btn-sm">List...</button>
+			                         <button type="button" ng-click="ctrl.printReport()" class="btn btn-warning btn-sm" >Print</button>
 		                    	</div>
 		                    </div>
                       	</div>

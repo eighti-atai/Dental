@@ -123,11 +123,22 @@
         	
      	   var scope = angular.element(document.getElementById("con")).scope();
      	    //scope.ctrl.SearchRecord = scope.ctrl.emptyRecord();
+     	   // alert('03 = '+treatmentId);
+     	   if (patientId === null ){
+
+     		 scope.ctrl.TmpRecord.id.patientId = null;
+             scope.ctrl.TmpRecord.id.treatmentId = null;
+             scope.ctrl.SearchRecord.id.patientId = -1;
+             scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
+     	   }
+     	   else
+     	   {
             scope.ctrl.SearchRecord.id.patientId = patientId;
             scope.ctrl.SearchRecord.id.treatmentId = treatmentId;
             scope.ctrl.TmpRecord.id.patientId = patientId;
             scope.ctrl.TmpRecord.id.treatmentId = treatmentId;
             scope.$apply(scope.ctrl.searchRecords(scope.ctrl.SearchRecord));
+     	   }
             //scope.ctrl.Record.paymentDate= (new Date());
            // alert('03 = '+treatmentId);
         }
@@ -158,7 +169,7 @@
                             </div>
                             <div class="row">
                             </div>
-                            <table class="table table-striped table-bordered">
+                            <table id = "tb1" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
@@ -172,13 +183,13 @@
                                         <td>
                                             <input type="checkbox" ng-model="u.selected" ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
                                        <!--  <td>
-                                            <input type="text" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> 
+                                            <input type="text" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> -->
                                               <td>
                                             <input type="text" class="form-control" ng-model="u.id.patientId" ng-readonly="(u.objid != null)" /></td>
                                             <td>
                                             <input type="text" class="form-control" ng-model="u.id.treatmentId" ng-readonly="(u.objid != null)" /></td>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="u.id.paymentNo" ng-readonly="(u.objid != null)" /></td>-->
+                                            <input type="text" class="form-control" ng-model="u.id.paymentNo" ng-readonly="(u.objid != null)" /></td>
                                         <td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
                                             <input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'paymentDate', u.paymentDate)|date:yyyy/MM/dd" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
                                         <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">

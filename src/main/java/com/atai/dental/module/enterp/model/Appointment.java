@@ -1,17 +1,22 @@
 package com.atai.dental.module.enterp.model;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.atai.dental.generic.interfaces.Model;
 import com.atai.dental.generic.other.Time12HoursValidator;
@@ -26,9 +31,8 @@ public class Appointment implements Model<AppointmentKey> {
 	private AppointmentKey id;
 
 	
-//	@ManyToOne
-//	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
-//	private Patient patient;
+	@Transient
+	private Patient patient;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "doctor", referencedColumnName = "user_name", insertable = false, updatable = false)
@@ -44,13 +48,15 @@ public class Appointment implements Model<AppointmentKey> {
 	private String objid;
 	private String code;
 	
-//	public Patient getPatient() {
-//		return patient;
-//	}
-//
-//	public void setPatient(Patient patient) {
-//		this.patient = patient;
-//	}
+	@Transient
+	public Patient getPatient() {
+		return patient;
+	}
+
+	@Transient
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 	
 	/*public int getAppointmentId() {
 		return appointmentId;

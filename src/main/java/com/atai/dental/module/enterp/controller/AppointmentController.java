@@ -26,9 +26,11 @@ import com.atai.dental.module.enterp.model.Patient;
 import com.atai.dental.module.enterp.model.TmpAppointment;
 import com.atai.dental.module.enterp.service.AppointmentService;
 import com.atai.dental.module.enterp.service.PatientService;
+import com.atai.dental.module.enterp.service.SecurityService;
 import com.atai.dental.module.enterp.service.TmpAppointmentService;
 import com.atai.dental.module.enterp.validator.AppointmentValidator;
 import com.atai.dental.module.payment.model.Payment;
+import com.atai.dental.module.enterp.service.SecurityService;
 
 
 @RestController
@@ -43,6 +45,8 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 	@Autowired
 	private PatientService patientService;
 	
+	@Autowired
+    private SecurityService securityService;
 	
 	@Autowired
 	public AppointmentController(AppointmentService service) {
@@ -71,6 +75,8 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		return super.add(object);
 	}*/
 	 
+	
+	
 	@PostMapping(value="/Appointment")
 	public ResponseEntity<?> add(@RequestBody Appointment appointment, BindingResult result){
 		
@@ -149,7 +155,25 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 	@PostMapping(value = "/Appointment/Search")
 	public ResponseEntity<List<Appointment>> search(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
+		System.out.println("#####################################"+ securityService.findLoggedInUsernameCustome());
 		return super.search(object);
+	}
+	
+
+	@PostMapping(value = "/Appointment/Search/Custom")
+	public ResponseEntity<List<Appointment>> searchToday(@RequestBody Appointment object) {
+		// TODO Auto-generated method stub
+		
+		
+		object.setDoctor(securityService.findLoggedInUsernameCustome());
+		ResponseEntity<List<Appointment>> AppointmentsList = search(object);
+		for (Appointment selectedAppointment : AppointmentsList.getBody()) 
+		{ 
+			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$"+ selectedAppointment.getId().getPatientId());
+			Patient patient = patientService.getByKey(selectedAppointment.getId().getPatientId());
+			selectedAppointment.setPatient(patient);
+		}
+		return AppointmentsList;
 	}
 
 	

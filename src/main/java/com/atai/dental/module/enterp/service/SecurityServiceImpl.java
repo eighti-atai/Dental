@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.core.userdetails.User;
+
 @Service
 public class SecurityServiceImpl implements SecurityService{
     @Autowired
@@ -24,6 +26,9 @@ public class SecurityServiceImpl implements SecurityService{
     @Transactional
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername(); //get logged in username
+        System.out.println("********************************** "+ name);
         if (userDetails instanceof UserDetails) {
             return ((UserDetails)userDetails).getUsername();
         }
@@ -31,6 +36,15 @@ public class SecurityServiceImpl implements SecurityService{
         return null;
     }
 
+    @Transactional
+    public String findLoggedInUsernameCustome() {
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername(); //get logged in username
+        System.out.println("********************************** "+ name);
+        
+        return name;
+    }
+    
     @Transactional
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

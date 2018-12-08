@@ -95,7 +95,7 @@
     <script src="<c:url value='/static/js/service/service.js' />"></script>
     <script src="<c:url value='/static/js/controller/controller.js' />"></script>
     <script src="<c:url value='/static/js/filter/filter.js' />"></script>
-    <script src="<c:url value='/static/js/entity/AttendPatient.js' />"></script>
+    <script src="<c:url value='/static/js/entity/Appointment.js' />"></script>
     
     <script src="<c:url value='/static/js/other/bootstrap-datepicker.js' />"></script>
     <script src="<c:url value='/static/js/other/jquery.timepicker.js' />"></script>
@@ -136,12 +136,12 @@
     </script>
 </head>
 <body ng-app="generalModule" class="ng-cloak" >
-      <div id="conX" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();ctrl.fetchAllRecords();" >
+      <div id="conX" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init('AttendPatient');" >
            
           <div class="panel panel-default" >
               <div class="panel-heading" style="display: none;"><span class="lead">Patients Queue</span> </div>
               <div class="formcontainer" style="display: none;">
-                  <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                 <!--  <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
                       <input type="hidden" ng-model="ctrl.Record.objid" /> 
                       <input type="text" ng-model="ctrl.Record.id.attendPatientId" id="attendPatientId" class="attendPatientId form-control input-sm" placeholder="Enter Appointment ID "/>
                       <input type="text" ng-model="ctrl.Record.id.patientId" id="patientId" class="patientId form-control input-sm" placeholder="Enter Patient ID " />  
@@ -172,7 +172,7 @@
                                <button type="button" ng-click="ctrl.searchRecords()" class="btn btn-warning btn-sm" >Search</button>
                           </div>
                       </div>
-                  </form>
+                  </form> -->
                   
               </div>
           
@@ -184,27 +184,27 @@
                       <thead>
                           <tr>
                               <th>Patient ID</th>
-                              <th>Waiting Time</th>
+                              <th>Name</th>
+                              <th>Time</th>
                               <th>Doctor</th>
+                              <th>Treatment Code</th>
                               <th width="20%"></th>
                           </tr>
                       </thead>
-                      <tbody>
-                          <tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " ng-dblclick="ctrl.populateRecord(u.objid)" >
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.patient.patientName"></span></td>                             
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.startTime"></span></td>
-                              <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
-                               
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.patient.patientName"style="width: 100%"/></td>                                                                                         
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.startTime" style="width: 100%""/></td>
-                              <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
-                              <!-- <td ng-if="ctrl.change(u.objid)"><input type="hidden" ng-model="u.objid" style="width: 80px;"/></td> -->
-                              <td>
-                                <button type="button" ng-click="ctrl.remove(u.objid,'true');" class="btn btn-danger custom-width">Remove</button>
-                              </td>
-                          </tr>
-                      </tbody>
                       
+                      	<tbody>
+           					<tr ng-repeat="u in ctrl.Records">
+                              	<td><span ng-bind="u.id.patientId"></span></td>  
+                              	<td><span ng-bind="u.patient.patientName"></span></td>                            
+                              	<td><span ng-bind="u.appointmentTime"></span></td>
+                              	<td><span ng-bind="u.doctor"></span></td>
+                              	<td><span ng-bind="u.code"></span></td>
+                              	<td>
+                                	<button type="button" ng-click="ctrl.remove(u.objid,'true');" class="btn btn-danger btn-sm">Remove</button>
+                                	<button type="button" ng-click="ctrl.openWindow('treatment',u.id.patientId,u.patient.patientName);" class="btn btn-primary btn-sm">Go</button>
+                              	</td>
+                        	</tr>
+       					</tbody>
                   </table>
                   <button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
         			Previous
@@ -213,16 +213,7 @@
     			  <button ng-disabled="ctrl.currentPage >= ctrl.Records.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
        						 	Next
     					  </button>
-                 <!--  <input type="text" ng-model="ctrl.Records[1].salesPartId"/>
-                  ctrl.Record = ctrl.Records[1]
-                              <input type="text" ng-model="u.patientAddress"/>
-                              <input type="text" ng-model="u.invPartNo"/>
-                              <input type="text" ng-model="u.invConversionFactor"/>
-                             <input type="text" ng-model="u.uom"/>
-                              <input type="text" ng-model="u.priceCategory"/>
-                              <input type="text" ng-model="u.generalCategory"/>
-                              <input type="text" ng-model="u.objid"/>
-                              <td> {{$index}} </td> -->
+
               </div>
           </div>
       </div>

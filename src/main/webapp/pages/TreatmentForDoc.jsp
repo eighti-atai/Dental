@@ -38,8 +38,17 @@ function onMyFrameLoad() {
 	if (typeof (parent.document.getElementById("iframe-container-1").contentWindow.populateChild) == "function")
         parent.document.getElementById("iframe-container-1").contentWindow.populateChild();
 	
-	alert(scope);
+	//alert(scope);
 	};
+	
+	function FrameLoad() {
+		const urlParams = new URLSearchParams(window.location.search);
+    	const patient = urlParams.get('patientid');
+    	const patientname = urlParams.get('patientname');
+    	if (typeof (parent.document.getElementById("iframe-container-1").contentWindow.populateThis) == "function")
+            parent.document.getElementById("iframe-container-1").contentWindow.populateThis(patient);
+		//alert(patient + patientname);
+		};
 </script>
 <style type="text/css">
 	
@@ -60,7 +69,7 @@ function onMyFrameLoad() {
 </head>
 <body >
 
-<iframe  id="iframe-container-1" >
+<iframe  id="iframe-container-1" onload="FrameLoad()">
 </iframe>
 <div > 
  </div> 

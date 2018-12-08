@@ -29,7 +29,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.entity = '';
     self.populateRecord = populateRecord;
     self.currentPage  = 0;
-    self.pageSize  = 5;
+    self.pageSize  = 10;
     self.myDate = new Date();
     self.setDate = setDate;
     self.setFocusedElement = setFocusedElement;
@@ -77,7 +77,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.isRowSelected = isRowSelected;
     self.deleteRecords = deleteRecords;
     self.MasterInit = MasterInit;
-    self.ppp = ppp;
+	self.ppp = ppp;
+	self.searchCustom = searchCustom;
+	self.openWindow = openWindow;
     self.today = new Date();
  
     function populateRecord(objid){
@@ -148,7 +150,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 				getMainTreatmentTypes();
     		}
     }
-    function init(){
+    function init(type){
     	self.Record= EntityService.record;
     	self.SearchRecord= EntityService.recordSearch;
     	self.EmptyRecord = EntityService.emptyRecord();
@@ -156,8 +158,14 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	self.OldRecord = EntityService.emptyRecord();
     	self.NewRecord = EntityService.emptyRecord();
     	//self.EmptyRecord = angular.copy(EntityService.record);
-    	RecordService.setRestServiceUri(EntityService.name);
-    	fetchAllRecords();
+		RecordService.setRestServiceUri(EntityService.name);
+		if (type === 'AttendPatient'){
+			searchCustom();
+		}
+		else
+		{
+			fetchAllRecords();
+		}
     	self.lov = EntityService.lov;
     	self.lovTitles = EntityService.lovTitles;
     	self.lovRecord = EntityService.lovRecord;
@@ -461,9 +469,18 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
         RecordService.searchRecord(RecordSet)
             .then(
             function(d) {
-                self.Records = d;
-                self.headerDropDownSelector = self.Records[0].objid;
-                edit(self.Records[0].objid);
+				self.Records = d;
+				if(d.length === 0)
+				{
+					self.headerDropDownSelector = null;
+                	edit(null);
+				}
+				else
+				{
+					self.headerDropDownSelector = self.Records[0].objid;
+					edit(self.Records[0].objid);
+				}
+                
                 
             },
             function(errResponse){
@@ -585,21 +602,35 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
     
     function edit(objid){
-        console.log('id to be edited', objid);
+        //console.log('id to be edited', objid);
         for(var i = 0; i < self.Records.length; i++){
             if(self.Records[i].objid === objid) {
             	self.OldRecord = angular.copy(self.Records[i]);
                 self.Record = angular.copy(self.Records[i]);
                 break;
             }
-        }
+		}
+		//alert(objid);
+		if (objid === null){
+			//alert(objid);
+			self.OldRecord = angular.copy(self.emptyRecord);
+                self.Record = angular.copy(self.emptyRecord);
+		}
+		
     }
  
     function exitReadOnly(type){
         self.variableReadOnly = false;
         if(type === "Add")
     	{
-        	self.Record = EntityService.emptyRecord();
+			self.Record = EntityService.emptyRecord();
+			self.Record = angular.copy(self.TmpRecord);
+			
+			//self.EmptyRecord = EntityService.emptyRecord();
+    	//self.EmptyRecord = angular.copy(self.TmpRecord);
+			//const patientidval = window.location.search.split("patientid=")[1];
+			//const patientname = urlParams.get('patientname');
+			//alert(patientidval);
     	}
         if(type === "EditTable")
     	{
@@ -640,6 +671,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     }
     
     function enableEdit(){
+		if (self.Record === undefined)
+		{
+			return false;
+		}
     	if(self.Record.objid===null)
     	{
     		return false;
@@ -1167,6 +1202,38 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	            console.error('Error while fetching Records');
 	        }
 	        );
-    }
+	}
+	
+	function searchCustom()
+	{
+		self.SearchRecord.appointmentDate = self.today;
+		//alert(self.today);
+		//alert(today);
+		RecordService.searchCustom(self.SearchRecord)
+            .then(
+            function(d) {
+                self.Records = d;
+            },
+            function(errResponse){
+                console.error('Error while fetching Records');
+                bootbox.alert({
+        		    message: "Error while fetching record",
+        		    title: "<font  color='red'>Error!</font>"
+        		});
+            }
+		);
+		
+		
+	}
  
+	function openWindow(name,id,idname)
+	{
+		var current_url = $location.absUrl();
+	    var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+		if(name = 'treatment')
+		{
+			
+			window.open(base_url+'pages/TreatmentForDoc.jsp?patientid='+ id+"&patientname="+idname);
+		}
+	}
 }]);
