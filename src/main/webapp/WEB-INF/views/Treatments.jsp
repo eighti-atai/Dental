@@ -242,16 +242,17 @@
         	x.value= x1.value-x2.value;
         	scope.ctrl.Record.treatmentTotal =  x1.value-x2.value;
         }
-        function populateThis(patientId) 
+        function populateThis(patientId,patientname) 
         {
         	var scope = angular.element(document.getElementById("con3")).scope();
      	    //scope.ctrl.SearchRecord = scope.ctrl.emptyRecord();
             scope.ctrl.SearchRecord.id.patientId = patientId;
-            alert(patientId);
+            //alert(patientId);
             //const patient = urlParams.get('patientid');
         	//const patientname = urlParams.get('patientname');
         	scope.ctrl.TmpRecord.id.patientId = Number(patientId);
         	scope.ctrl.TmpRecord.patient.patientId = Number(patientId);
+        	scope.ctrl.TmpRecord.patient.patientName = patientname;
             /*scope.ctrl.SearchRecord.id.treatmentId = treatmentId;
             
             scope.ctrl.TmpRecord.id.treatmentId = treatmentId;*/

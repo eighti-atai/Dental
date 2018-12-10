@@ -46,7 +46,7 @@ function onMyFrameLoad() {
     	const patient = urlParams.get('patientid');
     	const patientname = urlParams.get('patientname');
     	if (typeof (parent.document.getElementById("iframe-container-1").contentWindow.populateThis) == "function")
-            parent.document.getElementById("iframe-container-1").contentWindow.populateThis(patient);
+            parent.document.getElementById("iframe-container-1").contentWindow.populateThis(patient,patientname);
 		//alert(patient + patientname);
 		};
 </script>
