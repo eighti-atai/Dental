@@ -58,6 +58,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	self.doctors = [];
 	self.getMainTreatmentTypes = getMainTreatmentTypes;
 	self.mainTreatmentTypes = [];
+	self.getSubTreatmentTypes = getSubTreatmentTypes;
+	self.subTreatmentTypes = [];
+	self.filteredSubTreatmentTypes = filteredSubTreatmentTypes;
+	self.filteredDataArray = []
     self.populateTargetPage = populateTargetPage;
     self.InsertRecords = InsertRecords;
     self.reloadPageFromRecord = reloadPageFromRecord;
@@ -80,7 +84,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	self.ppp = ppp;
 	self.searchCustom = searchCustom;
 	self.openWindow = openWindow;
-    self.today = new Date();
+	self.today = new Date();
+
  
     function populateRecord(objid){
     	if(!self.variableReadOnly){
@@ -148,6 +153,11 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     		{
 				getDoctors();
 				getMainTreatmentTypes();
+			}
+			if(EntityService.name ==='Treatment')
+    		{
+				getMainTreatmentTypes();
+				getSubTreatmentTypes();
     		}
     }
     function init(type){
@@ -175,6 +185,11 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     		{
 				getDoctors();
 				getMainTreatmentTypes();
+			}
+			if(EntityService.name ==='Treatment')
+    		{
+				getMainTreatmentTypes();
+				getSubTreatmentTypes();
     		}
     	//setPanelHeader(title);
     }
@@ -1204,6 +1219,47 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        );
 	}
 	
+	function getSubTreatmentTypes()
+    {
+    	var current_url = $location.absUrl();
+		var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+		//alert(base_url);
+		//var lovUrl = base_url + 'DoctorLov/';  
+		//alert(self.Record);
+    	$http.post(base_url+"SubTreatmentType/Search/", self.lovRecord['sttId'])
+    	.then(
+			
+	        function (response) {
+	        	for (var key0 in response.data)
+        		{
+					//response.data[key0][key1]
+					self.subTreatmentTypes.push(response.data[key0]['id']);	
+					//alert(self.response.data[key0]['mttId']);
+					//console.message(self.mainTreatmentTypes);
+	        	}
+	        },
+	        function(errResponse){
+	            console.error('Error while fetching Records');
+	        }
+	        );
+	}
+
+	function filteredSubTreatmentTypes(val)
+    {
+		self.filteredDataArray = [];
+    	for (var key0 in self.subTreatmentTypes)
+        		{
+					if (self.subTreatmentTypes[key0]['mttId'] === val)
+					{
+						self.filteredDataArray.push(self.subTreatmentTypes[key0]['sttId']);	
+					}
+					
+					//alert(self.response.data[key0]['mttId']);
+					//console.message(self.mainTreatmentTypes);
+				}
+				return self.filteredDataArray;
+	}
+
 	function searchCustom()
 	{
 		self.SearchRecord.appointmentDate = self.today;

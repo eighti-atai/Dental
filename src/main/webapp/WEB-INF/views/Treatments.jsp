@@ -372,7 +372,8 @@
                           	<div class="form-group col-sm-4">
                             	<label class="col-sm-3 control-lable" for="mttId">Main Type</label>
                               	<div class="col-sm-7">
-                                	<input type="text" ng-model="ctrl.Record.mttId" id="mttId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" />
+                                	<select ng-options="s for s in ctrl.mainTreatmentTypes" ng-model="ctrl.Record.mttId" id="mttId" ng-disabled="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="mttId form-control input-sm" placeholder="Enter Main Type " required maxlength="20" /></select>
+                                  			
                                   	<div class="has-error" ng-show="myForm.$dirty">
                                       	<span ng-show="myForm.mttId.$error.required">This is a required field</span>
                                       	<span ng-show="myForm.mttId.$invalid">This field is invalid </span>
@@ -385,7 +386,8 @@
                         	<div class="form-group col-sm-4">
                             	<label class="col-sm-3 control-lable" for="sttId">Sub Type</label>
                               	<div class="col-sm-7">
-                                	<input type="text" ng-model="ctrl.Record.sttId" id="sttId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" />
+                                	<select ng-options="s for s in ctrl.filteredSubTreatmentTypes(ctrl.Record.mttId)" ng-model="ctrl.Record.sttId" id="sttId" ng-readonly="ctrl.variableReadOnly" ng-model-options="{ allowInvalid: true}" ng-blur="ctrl.validateRecords('SubTreatmentType',{id:{mttId:ctrl.Record.mttId,sttId:ctrl.Record.sttId}},['treatmentAmount','treatmentAmount','treatmentDiscount'],['treatmentAmount','treatmentTotal','treatmentDiscount'])" ng-focus="ctrl.setFocusedElement()" class="sttId form-control input-sm" placeholder="Enter Sub Type " required maxlength="20" /></select>
+                                  	
                                   	<div class="has-error" ng-show="myForm.$dirty">
                                       	<span ng-show="myForm.sttId.$error.required">This is a required field</span>
                                       	<span ng-show="myForm.sttId.$invalid">This field is invalid </span>
