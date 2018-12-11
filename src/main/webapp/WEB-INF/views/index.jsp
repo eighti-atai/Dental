@@ -92,7 +92,8 @@ var hf3;
 $(document).ready(function() {
 	var base_url = window.location.href.substr(0, window.location.href.indexOf('Dental')+7);
    //var a = document.getElementById('f2'); //or grab it by tagname etc
-       document.getElementById('x1').href = base_url+'pages/front.jsp';
+   	   document.getElementById('x1').href = base_url+'pages/front.jsp';
+       //document.getElementById('x1').onclick = window.open(document.getElementById('x1').href);
        document.getElementById('x2').href = base_url+'pages/TreatmentForDoc.jsp';
        document.getElementById('x3').href = base_url+'AttendPatients';
        document.getElementById('x4').href = base_url+'pages/TempAppointments.jsp';
@@ -111,7 +112,7 @@ $(document).ready(function() {
     </div>
     </div>
 	
-	<a id="x1" >
+	<a id="x1"  target="_blank"">
 	<div class="row">
     <div class="col-md-8 text-center" >
       <div class="card-counter info">
@@ -122,7 +123,7 @@ $(document).ready(function() {
     </div>
 	</a>
 
-	<a id="x2">
+	<a id="x2" target="_blank">
     <div class="row">
     <div class="col-md-8 text-center">
       <div class="card-counter info">
@@ -133,7 +134,7 @@ $(document).ready(function() {
     </div>
 	</a>
 
-	<a id="x3">
+	<a id="x3" target="_blank">
     <div class="row">
     <div class="col-md-8 text-center">
       <div class="card-counter info">
@@ -144,7 +145,7 @@ $(document).ready(function() {
     </div>
 	</a>
 
-	<a id="x4">
+	<a id="x4" target="_blank">
     <div class="row">
     <div class="col-md-8 text-center">
       <div class="card-counter info">

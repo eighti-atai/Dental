@@ -288,7 +288,7 @@
         }
         setInterval(function() {
 	        window.top.postMessage(document.body.scrollHeight + '-' + 'iframe1', "*");
-	    }, 500);
+	    }, 2);
         function populatePage(Record) 
         {
         	//alert('02 = '+self.Record.id.treatmentId);
@@ -320,7 +320,7 @@
         	<div class="panel-heading">
         	<span class="lead">Treatment
         	<select
-					id="headerDropDownSelector" class=" input-selector-cc "
+					id="headerDropDownSelector" ng-disabled="!ctrl.variableReadOnly"  class=" input-selector-cc "
 					ng-model="ctrl.headerDropDownSelector"
 					ng-change="ctrl.edit(ctrl.headerDropDownSelector); ">
 					<option  ng-repeat="u in ctrl.Records"  value="{{u.objid}}" >{{u.id.patientId}}

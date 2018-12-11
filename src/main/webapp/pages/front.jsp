@@ -101,7 +101,7 @@ function onMyFrameLoad() {
 
 </script>
 <head>
-    <title>Patient/Appointment Details</title>
+    <title>Patients/Appointments</title>
 </head>
 <body onresize="resizeIframe()" onload="resizeIframe()">
 

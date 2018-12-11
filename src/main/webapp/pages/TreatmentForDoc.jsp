@@ -65,7 +65,7 @@ function onMyFrameLoad() {
 
 </style>
 <head>
-    <title>Treatment Types</title>
+    <title>Treatments/Payments</title>
 </head>
 <body >
 
