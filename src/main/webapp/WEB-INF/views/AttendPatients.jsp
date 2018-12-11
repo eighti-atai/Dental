@@ -124,6 +124,13 @@
         $(function() {
             $('#startTime').timepicker();
         });
+        
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'HH:mm'
+            });
+        });
+        
         function insertAttendPatient(patientId,doctor) 
         {
             var scope = angular.element(document.getElementById("conX")).scope();

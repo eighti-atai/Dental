@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.atai.dental.generic.interfaces.Model;
@@ -47,6 +49,10 @@ public class Appointment implements Model<AppointmentKey> {
 	private String doctor;
 	private String objid;
 	private String code;
+	
+	@Temporal(TemporalType.TIME)
+	@Column(name = "appointment_end_time")
+	private Date appointmentEndTime;
 	
 	@Transient
 	public Patient getPatient() {
@@ -80,6 +86,14 @@ public class Appointment implements Model<AppointmentKey> {
 
 	public void setAppointmentDate(Date appointmentDate) {
 		this.appointmentDate = appointmentDate;
+	}
+	
+	public Date getAppointmentEndTime() {
+		return appointmentEndTime;
+	}
+
+	public void setAppointmentEndTime(Date appointmentEndTime) {
+		this.appointmentEndTime = appointmentEndTime;
 	}
 
 	public String getAppointmentTime() {

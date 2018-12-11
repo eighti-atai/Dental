@@ -85,6 +85,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	self.searchCustom = searchCustom;
 	self.openWindow = openWindow;
 	self.today = new Date();
+	self.toTime = toTime;
 
  
     function populateRecord(objid){
@@ -833,7 +834,37 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	}
     	
     }
-    
+	
+	function toTime(objid, field, timeString){
+		
+		//console.log(date);
+		//return date;
+
+		if(timeString===null)
+    	{
+    		return null;
+    	}
+    	/*else
+    	{
+			var tim = timeString + '';
+			
+			var timeTokens = tim.split(':');
+		    var date       = new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
+	    	for(var i = 0; i < self.Records.length; i++){
+		            if(self.Records[i].objid === objid) {
+		               Reflect.set(self.Records[i], field, date);
+		            }
+		    }
+	    	field = date;
+	    	return date;
+		}*/
+		var tim = timeString + '';
+			
+			var timeTokens = tim.split(':');
+			var date       = new Date(1970,0,1, timeTokens[0], timeTokens[1], timeTokens[2]);
+			return date;
+	}
+
     function setFocusedElement()
     {
     	self.lastFocused = document.activeElement;

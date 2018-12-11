@@ -536,9 +536,9 @@
 	        var span = document.getElementsByClassName("close")[0];
 
 	        // When the user clicks the button, open the modal 
-	        btn.onclick = function() {
+	        /*btn.onclick = function() {
 	            modal.style.display = "block";
-	        }
+	        }*/
 	        
 	        /*okBtn.onclick = function() {
 	            modal.style.display = "none";
@@ -574,6 +574,8 @@
 	                return false;
 	            return true;
 	        }*/
+	        
+	        
 	        function populatePage(Record) 
 	        {
 	            if (typeof (parent.document.getElementById("f1").contentWindow.populate) == "function")
