@@ -50,6 +50,7 @@ function onMyFrameLoad() {
 		//alert(patient + patientname);
 		};
 </script>
+<script src="https://codegena.com/assets/js/async-iframe.js"></script>
 <style type="text/css">
 	
 #iframe-container-1 {

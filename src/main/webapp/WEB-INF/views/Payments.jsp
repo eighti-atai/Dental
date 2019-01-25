@@ -117,6 +117,10 @@
 	            alert("f1.Reset NOT found X3");
 	    } 
     	
+	    function updatePaymentAmount()
+	    {
+	    	alert("OK");
+	    }
         function populate(patientId,treatmentId) 
         {
         
@@ -156,7 +160,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form ng-submit="ctrl.submitRecords()">
+                        <form ng-submit="ctrl.submitRecords(); ">
                         	<div class="row">
                           
 		                		<div class="col-md-12">
@@ -182,20 +186,22 @@
                                     <tr ng-repeat="u in ctrl.Records">
                                         <td>
                                             <input type="checkbox" ng-model="u.selected" ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
-                                       <!--  <td>
-                                            <input type="text" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> 
+                                       <!--   <td>
+                                            <input type="hidden" class="form-control" ng-model="u.id.mttId" ng-readonly="(u.objid != null)" required /></td> 
                                               <td>
-                                            <input type="hidden" class="form-control" ng-model="u.id.patientId" ng-readonly="(u.objid != null)" /></td>
+                                            <input type="text" class="form-control" ng-model="u.id.patientId" ng-readonly="(u.objid != null)" /></td>
                                             <td>
-                                            <input type="hidden" class="form-control" ng-model="u.id.treatmentId" ng-readonly="(u.objid != null)" /></td>
+                                            <input type="text" class="form-control" ng-model="u.id.treatmentId" ng-readonly="(u.objid != null)" /></td> 
                                         <td>
-                                            <input type="hidden" class="form-control" ng-model="u.id.paymentNo" ng-readonly="(u.objid != null)" /></td>-->
+                                            <input type="text" class="form-control" ng-model="u.id.paymentNo" ng-readonly="(u.objid != null)" /></td>-->
                                         <td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
                                             <input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'paymentDate', u.paymentDate)|date:yyyy/MM/dd" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
                                         <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
                                          	<md-datepicker ng-model="u.paymentDate"></md-datepicker></td>
                                         <td>
                                             <input type="text" class="form-control" ng-model="u.amount" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
+                                    
+                                   
                                     </tr>
                                 </tbody>
                             </table>

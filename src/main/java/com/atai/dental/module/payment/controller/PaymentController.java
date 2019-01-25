@@ -71,13 +71,13 @@ public class PaymentController extends AbstractController<PaymentKey, Payment> {
 	@Override
 	@PutMapping(value = url)
 	public ResponseEntity<Payment> modify(@RequestBody Payment newObject) {
-		PaymentKey key = newObject.getId();
-		Double oldAmount = service.getByKey(key).getAmount();
+		String key = newObject.getObjid();
+		Double oldAmount = service.getByObjid(key).getAmount();
 		Double newAmount = newObject.getAmount();
 		ResponseEntity<Payment> res =  super.modify(newObject);
 		if (oldAmount != newAmount)
 		{
-			Payment paymentObject = service.getByKey(key);
+			Payment paymentObject = service.getByObjid(key);
 			Treatment  treatment = paymentObject.getTreatment();
 			treatment.setTreatmentPaid((treatment.getTreatmentPaid()- oldAmount) + newAmount);
 			treatmentService.update(treatment);

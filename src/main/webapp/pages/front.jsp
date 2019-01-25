@@ -7,10 +7,10 @@ var hf2;
 var hf3;
 $(document).ready(function() {
 	var base_url = window.location.href.substr(0, window.location.href.indexOf('Dental')+7);
-	$('#f2').attr('src',base_url+'Patients');
+	$('#f2').attr('data',base_url+'Patients');
 	//$('#f4').attr('src',base_url+'AttendPatients');
-    $('#f3').attr('src',base_url+'AppointmentsDates');
-    $('#f1').attr('src',base_url+'Appointments');
+    $('#f3').attr('data',base_url+'AppointmentsDates');
+    $('#f1').attr('data',base_url+'Appointments');
    // history.scrollRestoration ='manual';
    
     //$("f2").contents().find("body").onclick = function() { alert('hhjgh') };
@@ -29,28 +29,28 @@ function iframeLoaded(x) {
       
     if(iFrameID) {
           // here you can make the height, I delete it first, then I make it again
-          iFrameID.height = "";
+          //iFrameID.height = "";
           
           if(x==='f1')
         	{
         	  	iFrameID.width = "";
               	iFrameID.width = ((y/2)) + "px";
               	hf1 = document.getElementById('f1').contentDocument.body.scrollHeight ;
-              	iFrameID.height = hf1;
+              	//iFrameID.height = hf1;
         	}
           else if(x==='f2')
         	{
         	  	iFrameID.width = "";
               	iFrameID.width = y+ "px";
               	hf2 = document.getElementById('f2').contentDocument.body.scrollHeight ;
-              	iFrameID.height = hf2;
+              	//iFrameID.height = hf2;
         	}
           else
       		{
       	  		iFrameID.width = "";
             	iFrameID.width = ((y/2)) + "px";
             	hf3 = document.getElementById('f1').contentDocument.body.scrollHeight ;
-            	iFrameID.height = hf3; 
+            	//iFrameID.height = hf3; 
       		}
     }
 }  
@@ -104,6 +104,9 @@ function onMyFrameLoad() {
     <title>Patients/Appointments</title>
 </head>
 <body onresize="resizeIframe()" onload="resizeIframe()">
+<object type="text/html" id="f2" onload="iframeLoaded('f2')" scrolling="no" height = "375px"></object>
+<object type="text/html" id="f1" onload="iframeLoaded('f1'); onMyFrameLoad(this);" scrolling="no" height = "875px"></object>
+<object type="text/html" id="f3" onload="iframeLoaded('f3')" scrolling="no" height = "875px"></object>
 
 <!-- <div class="embed-responsive embed-responsive-16by9"> -->
 
@@ -112,19 +115,19 @@ function onMyFrameLoad() {
 <!--     <a class="navbar-brand" href="javascript:window.open('../index.jsp', 'home', '');">Home</a>				 -->
 <!-- </div> -->
 </nav>
-<iframe  id="f2" onload="iframeLoaded('f2')" scrolling="no" >
-</iframe>
+<!-- <iframe  id="f2" onload="iframeLoaded('f2')" scrolling="no" >
+</iframe>-->
 <!--  </div> -->
  <div>
  </div>
 <!--  <div class="embed-responsive embed-responsive-16by9"> -->
-<iframe  id="f1" onload="iframeLoaded('f1'); onMyFrameLoad(this);" scrolling="no">
-</iframe>
+<!--<iframe  id="f1" onload="iframeLoaded('f1'); onMyFrameLoad(this);" scrolling="no">
+</iframe>-->
 <!--  </div> -->
-<iframe  id="f3" onload="iframeLoaded('f3'); " scrolling="no">
+<!--<iframe  id="f3" onload="iframeLoaded('f3'); " scrolling="no">
 </iframe>
 <div>
- </div>
+ </div>-->
 <!-- <iframe style="display:inline" id="f5"  onload="resizeIframe()"> -->
 <!-- </iframe> -->
 

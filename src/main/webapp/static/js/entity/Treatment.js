@@ -4,9 +4,9 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Treatment',
-        record :{id:{treatmentId:'',patientId:''} , patient:{patientId:'',patientName:''}, mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
+        record :{id:{treatmentId:'',patientId:''} , patient:{patientId:'',patientName:'',patientContactNo:''}, mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
         emptyRecord :emptyRecord,
-        recordSearch :{id:{treatmentId:'',patientId:''} , patient:{patientId:'',patientName:''}, mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
+        recordSearch :{id:{treatmentId:'',patientId:''} , patient:{patientId:'',patientName:'',patientContactNo:''},patientName:'', mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:'',treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null},
         lov :{patientId: 'Patient',mttId:'MainTreatmentType',sttId:'SubTreatmentType'},
         lovRecord:{patientId:{patientId:'',patientName:'',patientAddress:'',patientIdNo:'',patientContactNo:'',patientGender:''}, mttId:{mttId:'',mttName:'',mttDescription:''},sttId:{id:{sttId:'',mttId:''} , treatmentName:'', treatmentAmount:''}},
         lovTitles :{patientId: 'Patient',treatmentId: 'Treatment',mttId: 'Main Treatment Type',sttId: 'Sub Treatment Type'},
@@ -15,7 +15,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
     return entityRec;
     
     function emptyRecord() {
-        return {id:{treatmentId:'',patientId:''} ,patient:{patientId:'',patientName:''}, mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:new Date(),treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
+        return {id:{treatmentId:'',patientId:''} ,patient:{patientId:'',patientName:'',patientContactNo:''}, mttId:'', sttId:'',treatmentDesc:'', treatmentStat:'', treatmentPaidStat:'', treatmentDate:new Date(),treatmentAmount:'',treatmentDiscount:'',treatmentTotal:'',treatmentPaid:'',treatmentImage:null,objid:null};
     }	
 }]);
 

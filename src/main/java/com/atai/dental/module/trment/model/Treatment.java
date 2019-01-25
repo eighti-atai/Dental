@@ -65,8 +65,8 @@ public class Treatment implements Model<TreatmentKey> {
 	private Double treatmentPaid;
 	private String objid;
 	
-	@Transient
-	private String patientName;
+	//@Transient
+	//private String patientName;
 	
 	@ManyToOne
 	@JoinColumn(name = "patient_id", referencedColumnName = "patient_id", insertable = false, updatable = false)
@@ -157,10 +157,16 @@ public class Treatment implements Model<TreatmentKey> {
 		return patient;
 	}
 
+	// @Transient
 	/*public void setPatientName(String patientName) {
 		this.patientName = patientName;
-	}*/
+	}
 
+	 @Transient
+	public String getPatientName() {
+		return this.patientName ;
+	}
+	*/
 	public String getTreatmentDoctor() {
 		return treatmentDoctor;
 	}

@@ -86,6 +86,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	self.openWindow = openWindow;
 	self.today = new Date();
 	self.toTime = toTime;
+	self.updatePaymentAmount = updatePaymentAmount;
 
  
     function populateRecord(objid){
@@ -344,13 +345,25 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	    },
     	    callback: function (result) {
     	    	if( result == true ){
+					var arr = [];
     	    		for(var i = 0; i < self.Records.length; i++){
+						
     		            if(self.Records[i].selected === true) {
+							arr.push(i);
 			    	        	RecordService.deleteRecord(self.Records[i].objid)
 			    	            .then(function() {
-			    	            	//self.Records.splice(i,1);  
-			    	            	searchRecords(self.TmpRecord);
-			    	            	console.error('deleted the Record');
+									/*for(var j = 0; j < arr.length; j++){
+										self.Records.splice(arr[j]-j,1); 
+									}*/
+									var Rec;
+									Rec = angular.copy(self.TmpRecord);
+									if(EntityService.name === 'Payment')
+									{
+										Rec.paymentDate = null; 
+									}
+									
+			    	            	searchRecords(Rec);
+			    	            	//console.error('deleted the Record');
 			                		},
 			    	            function(errResponse){
 			    	                console.error('Error while deleting Record');
@@ -416,7 +429,8 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     function submit() {
         if(self.Record.objid===null){
             console.log('Saving New Record', self.Record);
-            createRecord(self.Record,'group');
+			createRecord(self.Record,'group');
+			
         }else{
             updateRecord(self.Record, self.Record.objid);
             console.log('Record updated with id ', self.Record.objid);
@@ -1322,5 +1336,10 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 			
 			window.open(base_url+'pages/TreatmentForDoc.jsp?patientid='+ id+"&patientname="+idname);
 		}
+	}
+
+	function updatePaymentAmount()
+	{
+		updatePaymentAmount();
 	}
 }]);

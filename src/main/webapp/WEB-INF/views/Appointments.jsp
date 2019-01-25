@@ -87,7 +87,12 @@
     <script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
     <script src="<c:url value='/static/js/directives/unterLov.js' />"></script>
 
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body ng-app="generalModule" class="ng-cloak">
 	<div id="con" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.MasterInit();" >
@@ -107,7 +112,7 @@
 	                            </div>
                             </div>
               				<div class="tablecontainer">
-              				       		
+              				    <div class="form-group">		
               				<div id="lov" unter-lov class = "lov"></div>
                					<table id="tableId" class="table table-hover">
                   					<thead>
@@ -134,7 +139,16 @@
 	                                            <select  ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" ng-options="x for x in ctrl.doctors" class="form-control" ng-model="u.doctor" id="doctor" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
                                     		<td>
 	                                            <select ng-options="s for s in ctrl.mainTreatmentTypes" class="form-control" ng-model="u.code" id="code" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
-                                    		
+                                    		 <td>
+                                    		 <!--<div class='input-group date' id='datetimepicker3'>
+	                                            <input type='text' id="datetimepicker3" ng-model="u.appointmentTime"/>
+						                     <span class="input-group-addon">
+						                     <span class="glyphicon glyphicon-calendar"></span>
+						                     </span>
+						                     </div>
+                                    		  <td>
+	                                            <input type="text" class="form-control" id="id.appointmentId" ng-model="u.id.appointmentId"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" /></td>   
+                                    		-->
                                     		</tr>
                  					</tbody>
 
@@ -151,6 +165,11 @@
 	<script type="text/javascript">
        //var  scope= angular.element(document.getElementById("con")).scope();
        //scope.ctrl.setPanelHeader("Appointment");
+
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+ });
+
        function populate(patientId) 
        {
     	   //aletr(patientId);
@@ -171,7 +190,7 @@
        }
            
        $(function() {
-           $('#appointmentTime').timepicker({
+           $('#datetimepicker3').timepicker({
         	    'disableTimeRanges': [
     	                ['11pm', '12am'],
      	                ['12am', '6am']

@@ -50,7 +50,6 @@ public class Appointment implements Model<AppointmentKey> {
 	private String objid;
 	private String code;
 	
-	@Temporal(TemporalType.TIME)
 	@Column(name = "appointment_end_time")
 	private Date appointmentEndTime;
 	

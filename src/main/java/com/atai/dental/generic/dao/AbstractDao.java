@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -86,17 +87,24 @@ public class AbstractDao<PK extends Serializable, T> {
 	{
 		Criteria criteria = getSession().createCriteria(persistentClass, "mainquery");
 		createCriteria(entity, criteria, null);
+		//criteria.toString()
+		//Criteria criteria1 = criteria.createCriteria( "patient").add(Restrictions.ilike("patientName", "uuuuuuu"));
+		System.out.println("field criteria1  is ----------------------"+criteria.hashCode());
+		//criteria1.add(Restrictions.eq("patientName", "UUU"));
 		List<T> results = criteria.list();
 		return results;
 	}
 	
 	private void createCriteria(Object entity, Criteria criteria, String alias)
 	{
+		System.out.println(criteria);
 		Field[] fields = entity.getClass().getDeclaredFields();
+		
 		for (Field field : fields) {
 			try {
 				//if (field.getName()!="objid")
 					setValue(entity, criteria, field, alias);
+					
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -122,19 +130,41 @@ public class AbstractDao<PK extends Serializable, T> {
 			{
 				fieldName = field.getName();
 				fieldValue = field.get(entity).toString();
+				System.out.println("field name  is ----------------------"+fieldName);
 				System.out.println("field value is ----------------------"+fieldValue);
 				//if(fieldValue.contains("%"))
 				if(!fieldValue.contains("data:image"))
 				{
 					if(c.getTypeName() == "java.lang.String")
 					{
+						
 						if (alias == null)
 						{
 							criteria.add(Restrictions.ilike(fieldName, field.get(entity).toString()));
 						}
 						else
-						{
-							criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
+						{   
+							System.out.println("alias value is ----------------------"+alias);
+							String str = criteria.toString();
+							System.out.println("alias ############# is ----------------------"+str);
+							//if (!str.contains("Subcriteria("+alias+":)")){
+								System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
+								 criteria.createCriteria( alias).add (Restrictions.ilike(fieldName,fieldValue));
+								
+								System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
+							//}
+							/*else
+							{
+								System.out.println("field name 2 is ----------------------"+fieldName);
+								System.out.println("field value 2 is ----------------------"+fieldValue);
+								//criteria = criteria.add(Restrictions.ilike(fieldName, field.get(entity).toString()));
+								  criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
+							}*/
+							//if(alias != "patient")
+							//{
+								//criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
+								
+							//}
 						}
 					}
 					else

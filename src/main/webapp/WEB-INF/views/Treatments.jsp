@@ -332,7 +332,8 @@
 				<div class="collapsible"><span class="lead-x">Search Criteria </span> </div>
 				<div class="content">	
 					<input id="mttId" type="text" ng-model="ctrl.SearchRecord.id.patientId" class="input-search" placeholder="Patient ID"/> 				
-					<input type="text" ng-model="ctrl.SearchRecord.patientName" id="patientName" class="input-search" placeholder="Patient Name"/>
+					<input type="text" ng-model="ctrl.SearchRecord.patient.patientName" id="patientName" class="input-search" placeholder="Patient Name"/>
+					<!--  <input type="text" ng-model="ctrl.SearchRecord.patient.patientContactNo" id="patientContactNo" class="input-search" placeholder="Patient Contact No"/>-->
 					<input type="text" ng-model="ctrl.SearchRecord.mttId" id="mttId" class="input-search" placeholder="Main Tratment Type"/>
 				    <input type="text" ng-model="ctrl.SearchRecord.sttId" id="mttName" class="input-search" placeholder="Sub Tratment Type"/>
 					<md-datepicker ng-model="ctrl.SearchRecord.treatmentDate" md-placeholder="Treatment Date"></md-datepicker>

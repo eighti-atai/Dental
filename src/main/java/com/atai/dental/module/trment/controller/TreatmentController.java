@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +33,7 @@ import com.atai.dental.module.trment.model.Treatment;
 import com.atai.dental.module.trment.model.TreatmentKey;
 import com.atai.dental.module.trment.service.TreatmentService;
 
-
+@Transactional
 @RestController
 public class TreatmentController extends AbstractController<TreatmentKey, Treatment>{
 
@@ -77,6 +80,13 @@ public class TreatmentController extends AbstractController<TreatmentKey, Treatm
 		return super.delete(objid);
 	}
 
+	 @Autowired
+	    private SessionFactory sessionFactory;
+	 
+	    protected Session getSession(){
+	        return sessionFactory.getCurrentSession();
+	    }
+	    
 	@Override
 	@PostMapping(value = "/Treatment/Search")
 	public ResponseEntity<List<Treatment>> search(@RequestBody Treatment object) {
