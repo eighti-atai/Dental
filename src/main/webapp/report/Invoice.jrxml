@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
 <!-- 2017-04-29T09:43:20 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="283" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="285" pageHeight="595" columnWidth="250" leftMargin="5" rightMargin="5" topMargin="10" bottomMargin="0" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dental"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -92,20 +92,26 @@
 	<parameter name="patient_id" class="java.lang.Integer"/>
 	<parameter name="treatment_id" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select   dental.treatment_tab.treatment_desc, dental.patient_tab.patient_name, dental.payment_tab.payment_no,  dental.payment_tab.amount,
-dental.payment_tab.payment_date
-from  dental.patient_tab,  dental.payment_tab,  dental.treatment_tab
+		<![CDATA[select   dental.treatment_tab.treatment_desc,  dental.patient_tab.patient_id, dental.patient_tab.title , dental.patient_tab.patient_name, dental.payment_tab.payment_no,  dental.payment_tab.amount,
+dental.payment_tab.payment_date, dental.sub_treatment_type_tab.stt_name, dental.main_treatment_type_tab.mtt_name
+from  dental.patient_tab,dental.payment_tab,dental.treatment_tab,dental.sub_treatment_type_tab,dental.main_treatment_type_tab
 where  dental.patient_tab.patient_id = $P{patient_id}
 and dental.treatment_tab.treatment_id = $P{treatment_id}
 and  dental.payment_tab.patient_id =  dental.patient_tab.patient_id 
 and  dental.treatment_tab.treatment_id = dental.payment_tab.treatment_id
-and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
+and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id
+and  dental.treatment_tab.treatment_sub_type = dental.sub_treatment_type_tab.stt_id
+and  dental.treatment_tab.treatment_main_type = dental.sub_treatment_type_tab.mtt_id
+and  dental.treatment_tab.treatment_main_type = dental.main_treatment_type_tab.mtt_id]]>
 	</queryString>
 	<field name="treatment_desc" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
 	<field name="patient_name" class="java.lang.String"/>
 	<field name="payment_no" class="java.lang.Integer"/>
 	<field name="payment_date" class="java.lang.String"/>
 	<field name="amount" class="java.math.BigDecimal"/>
+	<field name="stt_name" class="java.lang.String"/>
+	<field name="mtt_name" class="java.lang.String"/>
 	<variable name="Total" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
 	</variable>
@@ -123,7 +129,7 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 	</group>
 	<title>
 		<band height="106" splitType="Stretch">
-			<staticText>
+		<staticText>
 				<reportElement positionType="Float" x="1" y="73" width="100" height="14" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
@@ -132,7 +138,18 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Patient Name:]]></text>
+				<text><![CDATA[Patient ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="90" y="73" width="100" height="14" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name:]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="70" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
@@ -141,25 +158,16 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="400" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<reportElement x="160" y="10" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
 				<box rightPadding="4"/>
 				<textElement textAlignment="Left"/>
 				<text><![CDATA[Date:]]></text>
 			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="450" y="10" width="106" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="190" y="10" width="106" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="450" y="30" width="106" height="20" uuid="3836ce65-eca3-4cad-a6de-b1818def0a2b"/>
-				<textFieldExpression><![CDATA[System.currentTimeMillis()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="400" y="30" width="50" height="20" uuid="0b3f9342-da78-4cfa-9fc5-2301c4749678"/>
-				<box rightPadding="4"/>
-				<textElement textAlignment="Left"/>
-				<text><![CDATA[Invoice #]]></text>
-			</staticText>
+			
 			<staticText>
 				<reportElement x="0" y="0" width="210" height="14" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -168,22 +176,40 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Sanjeewa]]></text>
+				<text><![CDATA[Dr. Sajeewa Kandegedara]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="49" width="210" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[Phone number, web address, ecc.]]></text>
+				<text><![CDATA[081 2310610, 0773105951]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="16" width="210" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[Gampola Road, Gelioya]]></text>
+				<text><![CDATA[28 A Gelioya - Embekke Rd,]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="33" width="210" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[City, street, ZIP code]]></text>
+				<text><![CDATA[Gelioya]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="73" width="160" height="14" uuid="25e1b8b1-2ca0-4a1b-bd1a-702ba067b228">
+				<reportElement x="130" y="73" width="160" height="14" uuid="25e1b8b1-2ca0-4a1b-bd1a-702ba067b228">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="73" width="160" height="14" uuid="25e1b8b1-2ca0-4a1b-bd1a-702ba067b228">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{patient_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="73" width="160" height="14" uuid="25e1b8b1-2ca0-4a1b-bd1a-702ba067b228">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -192,23 +218,15 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="FixRelativeToBottom" x="380" y="88" width="100" height="14" uuid="46d9f0f5-25b0-4896-8986-cc4d9ded695f">
+				<reportElement positionType="FixRelativeToBottom" x="50" y="88" width="100" height="14" uuid="46d9f0f5-25b0-4896-8986-cc4d9ded695f">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{treatment_desc}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{stt_name}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="280" y="87" width="100" height="14" uuid="08a926db-7b0d-4656-a664-da8c7b319c36">
-					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
-				</reportElement>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Description]]></text>
-			</staticText>
+			
 			<staticText>
 				<reportElement x="0" y="88" width="100" height="14" uuid="b2262f8e-a968-4ac0-92f3-5c1553a2a5eb">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
@@ -216,32 +234,16 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<textElement textAlignment="Left">
 					<font fontName="Times New Roman" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Treatment No.]]></text>
+				<text><![CDATA[Treatment:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="101" y="88" width="100" height="14" uuid="405d629f-6bf4-4e76-87d7-f0a9dc5d2884">
-					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
-				</reportElement>
-				<textElement textAlignment="Left">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{treatment_id}]]></textFieldExpression>
-			</textField>
+
 		</band>
 	</title>
 	<columnHeader>
 		<band height="26">
+			
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="14" uuid="ab4d8a03-5202-496e-a8cd-0fef18ef261e">
-					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Times New Roman" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Payment No.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement key="" style="Column header" positionType="FixRelativeToBottom" x="380" y="0" width="100" height="14" uuid="579fcf34-b94d-429d-8936-faaa2fd06913">
+				<reportElement key="" style="Column header" positionType="FixRelativeToBottom" x="120" y="0" width="100" height="14" uuid="579fcf34-b94d-429d-8936-faaa2fd06913">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -250,7 +252,7 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<text><![CDATA[Amount/Rs.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="0" width="100" height="14" uuid="a23345d0-22bf-4689-a3ab-ce1aae83326b">
+				<reportElement x="0" y="0" width="100" height="14" uuid="a23345d0-22bf-4689-a3ab-ce1aae83326b">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement>
@@ -262,17 +264,8 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 	</columnHeader>
 	<detail>
 		<band height="15">
-			<textField>
-				<reportElement x="0" y="-18" width="100" height="14" uuid="9e9cf676-7bd0-4491-bbe9-bbd3be91e75c">
-					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{payment_no}]]></textFieldExpression>
-			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="380" y="-18" width="100" height="14" uuid="2bbc0997-4d40-4d03-b9e1-c229de93cc4e">
+				<reportElement x="120" y="-18" width="100" height="14" uuid="2bbc0997-4d40-4d03-b9e1-c229de93cc4e">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -282,7 +275,7 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="-18" width="100" height="14" uuid="4e35a3cc-aaea-4548-a44f-88f4abdea0ff">
+				<reportElement x="0" y="-18" width="100" height="14" uuid="4e35a3cc-aaea-4548-a44f-88f4abdea0ff">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<textElement>
@@ -295,14 +288,14 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 	<lastPageFooter>
 		<band height="56">
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="-1" y="33" width="556" height="20" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
+				<reportElement positionType="Float" mode="Opaque" x="-1" y="33" width="280" height="20" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Serif" size="8" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[THANKYOU FOR YOUR BUSINESS]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="380" y="6" width="100" height="20" uuid="af56ab3b-1268-4512-8e27-c27d4cd56c58"/>
+				<reportElement x="120" y="6" width="100" height="20" uuid="af56ab3b-1268-4512-8e27-c27d4cd56c58"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 					<paragraph lineSpacing="Double"/>
@@ -316,7 +309,7 @@ and   dental.treatment_tab.patient_id = dental.payment_tab.patient_id]]>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="110" y="7" width="100" height="20" uuid="b2b414fb-09f4-4347-8625-2b7741253180"/>
+				<reportElement x="0" y="7" width="100" height="20" uuid="b2b414fb-09f4-4347-8625-2b7741253180"/>
 				<textElement>
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>

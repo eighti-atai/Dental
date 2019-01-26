@@ -81,6 +81,7 @@ public class Report{
 				hParams = object.setReportParams();
 				
 				JasperCompileManager.compileReportToFile(RealPath + ".jrxml", ReportFile.getPath());
+				System.out.println("RealPath ::::: "+RealPath);
 				JasperReport JasperReport = (JasperReport) JRLoader.loadObjectFromFile(ReportFile.getPath());
 				JasperPrint JaserPrint = JasperFillManager.fillReport(JasperReport, hParams, conn);
 			

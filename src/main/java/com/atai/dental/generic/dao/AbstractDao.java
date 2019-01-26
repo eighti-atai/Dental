@@ -144,14 +144,21 @@ public class AbstractDao<PK extends Serializable, T> {
 						}
 						else
 						{   
-							System.out.println("alias value is ----------------------"+alias);
-							String str = criteria.toString();
-							System.out.println("alias ############# is ----------------------"+str);
-							//if (!str.contains("Subcriteria("+alias+":)")){
-								System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
-								 criteria.createCriteria( alias).add (Restrictions.ilike(fieldName,fieldValue));
-								
-								System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
+							if(alias == "id")
+							{
+								criteria.add(Restrictions.ilike(alias + "."+fieldName, field.get(entity)));
+									
+							}
+							else{
+								System.out.println("alias value is ----------------------"+alias);
+								String str = criteria.toString();
+								System.out.println("alias ############# is ----------------------"+str);
+								//if (!str.contains("Subcriteria("+alias+":)")){
+									System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
+									 criteria.createCriteria( alias).add (Restrictions.ilike(fieldName,fieldValue));
+									
+									System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+criteria.toString());
+							}
 							//}
 							/*else
 							{
