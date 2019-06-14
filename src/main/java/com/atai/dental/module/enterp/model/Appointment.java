@@ -1,6 +1,5 @@
 package com.atai.dental.module.enterp.model;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,20 +26,16 @@ import com.atai.dental.generic.other.Time12HoursValidator;
 @Table(name = "appointment_tab")
 public class Appointment implements Model<AppointmentKey> {
 
-	
-
 	@Id
 	private AppointmentKey id;
 
-	
 	@Transient
 	private Patient patient;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "doctor", referencedColumnName = "user_name", insertable = false, updatable = false)
-//	private User user;
-	
-	
+
+	// @ManyToOne
+	// @JoinColumn(name = "doctor", referencedColumnName = "user_name",
+	// insertable = false, updatable = false)
+	// private User user;
 
 	@Column(name = "appointment_date")
 	private Date appointmentDate;
@@ -49,10 +44,10 @@ public class Appointment implements Model<AppointmentKey> {
 	private String doctor;
 	private String objid;
 	private String code;
-	
+
 	@Column(name = "appointment_end_time")
-	private Date appointmentEndTime;
-	
+	private String appointmentEndTime;
+
 	@Transient
 	public Patient getPatient() {
 		return patient;
@@ -62,22 +57,18 @@ public class Appointment implements Model<AppointmentKey> {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
-	/*public int getAppointmentId() {
-		return appointmentId;
-	}
 
-	public void setAppointmentId(int appointmentId) {
-		this.appointmentId = appointmentId;
-	}
-
-	public String getPatientId() {
-		return patientId;
-	}
-
-	public void setPatientId(String patientId) {
-		this.patientId = patientId;
-	}*/
+	/*
+	 * public int getAppointmentId() { return appointmentId; }
+	 * 
+	 * public void setAppointmentId(int appointmentId) { this.appointmentId =
+	 * appointmentId; }
+	 * 
+	 * public String getPatientId() { return patientId; }
+	 * 
+	 * public void setPatientId(String patientId) { this.patientId = patientId;
+	 * }
+	 */
 
 	public Date getAppointmentDate() {
 		return appointmentDate;
@@ -86,13 +77,20 @@ public class Appointment implements Model<AppointmentKey> {
 	public void setAppointmentDate(Date appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
-	
-	public Date getAppointmentEndTime() {
-		return appointmentEndTime;
+
+	public String getAppointmentEndTime() {
+		// return appointmentEndTime;
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		return timeValidate.convertTimeBack(appointmentEndTime);
+
 	}
 
-	public void setAppointmentEndTime(Date appointmentEndTime) {
-		this.appointmentEndTime = appointmentEndTime;
+	public void setAppointmentEndTime(String appointmentEndTime) {
+		// this.appointmentEndTime = appointmentEndTime;
+		String time = appointmentEndTime.replaceAll("\\s", "");
+		Time12HoursValidator timeValidate = new Time12HoursValidator();
+		timeValidate.validate(time);
+		this.appointmentEndTime = timeValidate.convertTime(time);
 	}
 
 	public String getAppointmentTime() {
@@ -101,8 +99,8 @@ public class Appointment implements Model<AppointmentKey> {
 	}
 
 	public void setAppointmentTime(String appointmentTime) {
-		
-		String time = appointmentTime.replaceAll("\\s","");
+
+		String time = appointmentTime.replaceAll("\\s", "");
 		Time12HoursValidator timeValidate = new Time12HoursValidator();
 		timeValidate.validate(time);
 		this.appointmentTime = timeValidate.convertTime(time);

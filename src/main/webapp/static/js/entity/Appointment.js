@@ -4,8 +4,8 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
 
     var entityRec = {
         name   :'Appointment',
-        record :{id:{appointmentId:'',patientId:''} ,patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',doctor:'',code:'',appointmentEndTime:'',objid:null},
-        recordSearch :{id:{appointmentId:'',patientId:''} ,patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',doctor:'',code:'',appointmentEndTime:'',objid:null},
+        record :{id:{appointmentId:'',patientId:''} ,patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',appointmentEndTime:'',doctor:'',code:'',objid:null},
+        recordSearch :{id:{appointmentId:'',patientId:''} ,patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',appointmentEndTime:'',doctor:'',code:'',objid:null},
         emptyRecord :emptyRecord,
         lov :{doctor: 'DoctorLov'},
         lovRecord:{doctor:{doctor:'',userName:''}, mttId:{mttId:'',mttName:'',mttDescription:''}},
@@ -15,7 +15,7 @@ entityModule.factory('EntityService', ['$http', '$q', function($http, $q){
     return entityRec;
     
     function emptyRecord() {
-        return {id:{appointmentId:'',patientId:''},patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',doctor:'',code:'',appointmentEndTime:'',objid:null};
+        return {id:{appointmentId:'',patientId:''},patient:{patientId:'',patientName:''},appointmentDate:'',appointmentTime:'',appointmentEndTime:'',doctor:'',code:'',objid:null};
     }
     
 }]);/**

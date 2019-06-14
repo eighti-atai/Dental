@@ -120,6 +120,7 @@
                         					<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
 		                   					<th>Date</th>
 			                              	<th>Time</th>
+			                              	<th>End Time</th>
 			                              	<th>Doctor</th>
 			                              	<th>Treatment Code</th>
 			                              	
@@ -135,6 +136,9 @@
 	                                         	<md-datepicker ng-model="u.appointmentDate" ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" id ="appointmentDate"></md-datepicker></td>
 	                                        <td>
 	                                            <input type="text" class="form-control" id="appointmentTime" ng-model="u.appointmentTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
+                                    		<td>
+	                                            <input type="text" class="form-control" id="appointmentEndTime" ng-model="u.appointmentEndTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" /></td>   
+                                    		
                                     		<td>
 	                                            <select  ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" ng-options="x for x in ctrl.doctors" class="form-control" ng-model="u.doctor" id="doctor" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
                                     		<td>

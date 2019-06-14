@@ -113,6 +113,7 @@
                         	<tr>
                    				<th>Date</th>
                               	<th>Time</th>
+                              	<th>End Time</th>
                               	<th>Doctor</th>
                               	<th>Treatment Code</th>
                               	<th width="20%"></th>
@@ -122,11 +123,14 @@
                     	<tr ng-repeat="u in ctrl.Records | startFrom:ctrl.currentPage*ctrl.pageSize | limitTo:ctrl.pageSize " >
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="ctrl.setDate(u.objid, 'date', u.date)|date:yyyy/MM/dd"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.time"></span></td>
+	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.u.appointmentEndTime"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.doctor"></span></td>
 	                        <td ng-if="!ctrl.change(u.objid)"><span ng-bind="u.code"></span></td>
 	                                                                                         
 	                        <td ng-if="ctrl.change(u.objid)"><md-datepicker ng-model="u.appointmentDate"></md-datepicker></td>
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentTime" style="width: 100%""/></td>
+	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.appointmentEndTime" style="width: 100%""/></td>
+	                        
 	                        <td ng-if="ctrl.change(u.objid)"><input type="text" ng-model="u.doctor" style="width: 100%""/></td>
 	                        <td>
 	                        	<button type="button" ng-click="ctrl.remove(u.objid)" class="btn btn-danger custom-width">Remove</button>
