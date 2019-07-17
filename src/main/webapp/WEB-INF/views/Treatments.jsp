@@ -246,8 +246,8 @@
         {
         	var scope = angular.element(document.getElementById("con3")).scope();
      	    //scope.ctrl.SearchRecord = scope.ctrl.emptyRecord();
-            scope.ctrl.SearchRecord.id.patientId = patientId;
-            //alert(patientId);
+            scope.ctrl.SearchRecord.id.patientId = Number(patientId);
+            //alert(patientId+patientname);
             //const patient = urlParams.get('patientid');
         	//const patientname = urlParams.get('patientname');
         	scope.ctrl.TmpRecord.id.patientId = Number(patientId);
@@ -315,7 +315,7 @@
 </head>
 
 <body ng-app="generalModule" class="ng-cloak">
-	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init();">
+	<div id="con3" class="generic-container" data-ng-controller="RecordController as ctrl" ng-init="ctrl.init('Treatment');">
     	<div class="panel panel-default">
         	<div class="panel-heading">
         	<span class="lead">Treatment
@@ -396,14 +396,14 @@
                               	</div>
                           	</div>
 
-		                	<div class="form-group col-sm-4">
-		                    	<label class="col-sm-3 control-lable" for="treatmentDate">Treatment Date</label>
-		                        <div class="col-sm-7">		                        	
-		                        	<md-datepicker ng-model="ctrl.Record.treatmentDate"  ng-disabled="ctrl.variableReadOnly" md-placeholder="Enter Date"></md-datepicker>
-		                        	<div class="has-error" ng-show="myForm.$dirty"></div>
-		                        </div>
-		                	</div>
-
+<!-- 		                	<div class="form-group col-sm-4"> -->
+<!-- 		                    	<label class="col-sm-3 control-lable" for="treatmentDate">Treatment Date</label> -->
+<!-- 		                        <div class="col-sm-7">	                      	 -->
+<!-- 		                        	<md-datepicker ng-model="ctrl.Record.treatmentDate"  ng-disabled="ctrl.variableReadOnly" md-placeholder="Enter Date"></md-datepicker> -->
+<!-- 		                        	<div class="has-error" ng-show="myForm.$dirty"></div> -->
+<!-- 		                        </div> -->
+<!-- 		                	</div> -->
+		                	
                           	<div class="form-group col-sm-4">
                             	<label class="col-sm-3 control-lable" for="treatmentAmount">Treatment Amount</label>
                               	<div class="col-sm-7">

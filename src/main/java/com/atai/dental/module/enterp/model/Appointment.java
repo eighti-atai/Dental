@@ -1,6 +1,7 @@
 package com.atai.dental.module.enterp.model;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import com.atai.dental.generic.interfaces.Model;
 import com.atai.dental.generic.other.Time12HoursValidator;
@@ -40,19 +44,20 @@ public class Appointment implements Model<AppointmentKey> {
 	@Column(name = "appointment_date")
 	private Date appointmentDate;
 	@Column(name = "appointment_time")
-	private String appointmentTime;
+	private Date appointmentTime;
 	private String doctor;
 	private String objid;
 	private String code;
 
 	@Column(name = "appointment_end_time")
-	private String appointmentEndTime;
+	private Date appointmentEndTime;
 
 	@Transient
 	public Patient getPatient() {
 		return patient;
 	}
 
+	
 	@Transient
 	public void setPatient(Patient patient) {
 		this.patient = patient;
@@ -78,7 +83,8 @@ public class Appointment implements Model<AppointmentKey> {
 		this.appointmentDate = appointmentDate;
 	}
 
-	public String getAppointmentEndTime() {
+	
+	/*public String getAppointmentEndTime() {
 		// return appointmentEndTime;
 		Time12HoursValidator timeValidate = new Time12HoursValidator();
 		return timeValidate.convertTimeBack(appointmentEndTime);
@@ -104,6 +110,22 @@ public class Appointment implements Model<AppointmentKey> {
 		Time12HoursValidator timeValidate = new Time12HoursValidator();
 		timeValidate.validate(time);
 		this.appointmentTime = timeValidate.convertTime(time);
+	}*/
+
+	public Date getAppointmentTime() {
+		return appointmentTime;
+	}
+
+	public void setAppointmentTime(Date appointmentTime) {
+		this.appointmentTime = appointmentTime;
+	}
+
+	public Date getAppointmentEndTime() {
+		return appointmentEndTime;
+	}
+
+	public void setAppointmentEndTime(Date appointmentEndTime) {
+		this.appointmentEndTime = appointmentEndTime;
 	}
 
 	public String getDoctor() {

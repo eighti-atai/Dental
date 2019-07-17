@@ -25,7 +25,7 @@ public class AppointmentValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		Appointment form = (Appointment)target;
 		Date appointmentDate = form.getAppointmentDate();
-		String appointmentTime = form.getAppointmentTime();
+		Date appointmentTime = form.getAppointmentTime();
 		String doctorId = form.getDoctor();
 		
 		if(validateDoctor(errors, doctorId)){

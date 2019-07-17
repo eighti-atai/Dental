@@ -65,7 +65,7 @@
     font-size: 18px;
   }
 	</style>
-	<title>Complete Bootstrap 4 Website Layout</title>
+	<title>Dental</title>
 
 	
 	 <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">

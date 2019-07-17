@@ -96,7 +96,6 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 			TmpAppointment tmpAppointment = new TmpAppointment();
 			tmpAppointment.setCode(appointment.getCode());
 			tmpAppointment.setDate(appointment.getAppointmentDate());
-			tmpAppointment.setTime(appointment.getAppointmentTime());
 			tmpAppointment.setPatientId(appointment.getId().getPatientId());
 			tmpAppointment.setOrgAppoinmentId(appointment.getId().getAppointmentId());
 			tmpAppointment.setDoctor(appointment.getDoctor());
@@ -133,7 +132,6 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 		{
 			tmpAppointment.setCode(newObject.getCode());
 			tmpAppointment.setDate(newObject.getAppointmentDate());
-			tmpAppointment.setTime(newObject.getAppointmentTime());
 			tmpAppointment.setDoctor(newObject.getDoctor());
 			tmpAppointment.setName(patient.getPatientName());
 			tmpAppointment.setContactNo(patient.getPatientContactNo());

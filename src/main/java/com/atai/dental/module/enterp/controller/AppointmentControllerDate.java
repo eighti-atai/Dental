@@ -25,11 +25,11 @@ import com.atai.dental.module.enterp.service.TmpAppointmentService;
 
 
 @RestController
-public class AppointmentControllerDate extends AbstractController<Integer, TmpAppointment>{
+public class AppointmentControllerDate extends AbstractController<AppointmentKey, Appointment>{
 
 	@Autowired
-	public AppointmentControllerDate(TmpAppointmentService service) {
-		super(service, Integer.class, "AppointmentsDates");
+	public AppointmentControllerDate(AppointmentService service) {
+		super(service, AppointmentKey.class, "AppointmentsDates");
 		System.out.println("Appointment dates entity");
 		// TODO Auto-generated constructor stub
 	}
@@ -43,34 +43,34 @@ public class AppointmentControllerDate extends AbstractController<Integer, TmpAp
 
 	@Override
 	@GetMapping(value = "/AppointmentsDate")
-	public ResponseEntity<List<TmpAppointment>> list() {
+	public ResponseEntity<List<Appointment>> list() {
 		// TODO Auto-generated method stub
 		return super.list();
 	}
 
 	@Override
 	@PostMapping(value = "/AppointmentsDate/Search")
-	public ResponseEntity<List<TmpAppointment>> search(@RequestBody TmpAppointment object) {
+	public ResponseEntity<List<Appointment>> search(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
 		return super.search(object);
 	}
 
 	@Override
 	@DeleteMapping(value = "/AppointmentsDate/{objid:.+}")
-	public ResponseEntity<TmpAppointment> delete(@PathVariable("objid") String objid) {
+	public ResponseEntity<Appointment> delete(@PathVariable("objid") String objid) {
 		// TODO Auto-generated method stub
 		return super.delete(objid);
 	}
 
 	@Override
 	@PostMapping(value = "/AppointmentsDate")
-	public ResponseEntity<TmpAppointment> add(@RequestBody TmpAppointment object) {
+	public ResponseEntity<Appointment> add(@RequestBody Appointment object) {
 		return null;
 	}
 
 	@Override
 	@PutMapping(value = "/AppointmentsDate")
-	public ResponseEntity<TmpAppointment> modify(@RequestBody TmpAppointment newObject) {
+	public ResponseEntity<Appointment> modify(@RequestBody Appointment newObject) {
 		return null;
 	}
 

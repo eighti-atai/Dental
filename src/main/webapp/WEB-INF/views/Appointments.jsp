@@ -119,7 +119,7 @@
                         				<tr>
                         					<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
 		                   					<th>Date</th>
-			                              	<th>Time</th>
+			                              	<th>Start Time</th>
 			                              	<th>End Time</th>
 			                              	<th>Doctor</th>
 			                              	<th>Treatment Code</th>
@@ -128,31 +128,31 @@
 	                      			</thead>
 	           						<tbody>
 	                    				<tr ng-repeat="u in ctrl.Records">
-                                        	<td>
+                                        	 <td>
                                             	<input type="checkbox" ng-model="u.selected"  ng-disabled="(u.objid != null) && (ctrl.variableEditLineExist || ctrl.variableNewLineExist)"/></td>
                                          	<td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
                                             	<input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'appointmentDate', u.appointmentDate)|date:yyyy/MM/dd" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
 	                                        <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
 	                                         	<md-datepicker ng-model="u.appointmentDate" ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" id ="appointmentDate"></md-datepicker></td>
-	                                        <td>
-	                                            <input type="text" class="form-control" id="appointmentTime" ng-model="u.appointmentTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>   
-                                    		<td>
-	                                            <input type="text" class="form-control" id="appointmentEndTime" ng-model="u.appointmentEndTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" /></td>   
-                                    		
-                                    		<td>
+<!-- 	                                        <td> -->
+<!-- 	                                            <input type="text" class="form-control" id="appointmentTime" ng-model="u.appointmentTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>    -->
+<!--                                     		<td> -->
+<!-- 	                                            <input type="text" class="form-control" id="appointmentEndTime" ng-model="u.appointmentEndTime"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" /></td>    -->
+                                    		 <td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+                                            	<input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'appointmentTime', u.appointmentTime)| date:'h:mm a'" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
+	                                         <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+											    <input class="form-control" type="time" placeholder="start date" ng-model="u.appointmentTime">
+	                                         
+	                                         <td ng-if="((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+                                            	<input type="text" class="form-control" ng-model="ctrl.setDate(u.objid, 'appointmentEndTime', u.appointmentEndTime)| date:'h:mm a'" ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></td>
+	                                         <td ng-if="!((u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected))))">
+											    <input class="form-control" type="time" placeholder="start date" ng-model="u.appointmentEndTime">
+	                                         <td>       
 	                                            <select  ng-change= "ctrl.ppp(u.appointmentDate,u.doctor)" ng-options="x for x in ctrl.doctors" class="form-control" ng-model="u.doctor" id="doctor" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
-                                    		<td>
-	                                            <select ng-options="s for s in ctrl.mainTreatmentTypes" class="form-control" ng-model="u.code" id="code" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
                                     		 <td>
-                                    		 <!--<div class='input-group date' id='datetimepicker3'>
-	                                            <input type='text' id="datetimepicker3" ng-model="u.appointmentTime"/>
-						                     <span class="input-group-addon">
-						                     <span class="glyphicon glyphicon-calendar"></span>
-						                     </span>
-						                     </div>
-                                    		  <td>
-	                                            <input type="text" class="form-control" id="id.appointmentId" ng-model="u.id.appointmentId"  ng-readonly="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" /></td>   
-                                    		-->
+	                                            <select ng-options="s for s in ctrl.mainTreatmentTypes" class="form-control" ng-model="u.code" id="code" ng-disabled="(u.objid != null)&&(ctrl.variableReadOnly ||((!ctrl.variableReadOnly) && (!u.selected)))" required/></select></td>   
+                                    		 <td> 
+
                                     		</tr>
                  					</tbody>
 

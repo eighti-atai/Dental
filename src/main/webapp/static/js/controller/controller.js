@@ -32,6 +32,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.pageSize  = 10;
     self.myDate = new Date();
     self.setDate = setDate;
+    self.setFormDate = setFormDate;
     self.setFocusedElement = setFocusedElement;
     self.lastFocused;
     self.lov;
@@ -174,6 +175,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 		if (type === 'AttendPatient'){
 			searchCustom();
 		}
+		else if(type === 'Treatment'){
+			null;
+		}
 		else
 		{
 			fetchAllRecords();
@@ -203,6 +207,13 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
                 self.Records = d;
                 self.headerDropDownSelector = self.Records[0].objid;
                 edit(self.Records[0].objid);
+               // for(var i = 0; i < self.Records.length; i++){
+               /* if(self.Records[i].time !== undefined){
+                	alert(self.Records[i].time);
+                	self.Records[i].time = new Date(self.Records[i].time);
+                
+                }*/
+                //}
             },
             function(errResponse){
                 console.error('Error while fetching Records');
@@ -841,6 +852,9 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	    	for(var i = 0; i < self.Records.length; i++){
 		            if(self.Records[i].objid === objid) {
 		               Reflect.set(self.Records[i], field, (new Date(value)));
+		            	//alert(value);
+		            	//alert(new Date(value));
+		            	//self.Records[i] = (new Date(value));
 		            }
 		    }
 	    	field = new Date(value);
@@ -849,6 +863,20 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     	
     }
 	
+    function setFormDate(field, value){
+    	if(value===null)
+    	{
+    		return null;
+    	}
+    	else
+    	{
+    		Reflect.set(self.Record, field, (new Date(value)));
+	    	field = new Date(value);
+	    	return field;
+    	}
+    	
+    }
+    
 	function toTime(objid, field, timeString){
 		
 		//console.log(date);
