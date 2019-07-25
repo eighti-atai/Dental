@@ -169,6 +169,8 @@
                                 <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.AddRow()" value="New"  ng-show ="!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)">
                                 <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.exitReadOnly('EditTable')" value="Edit"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
                                 <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.resetTable()" value="Cancel" ng-show ="ctrl.variableEditLineExist || ctrl.variableNewLineExist">
+                                <input type="button" class="btn btn-warning    btn-sm" ng-click="ctrl.printReports()" value="Print"  ng-show ="(!(ctrl.variableEditLineExist || ctrl.variableNewLineExist)) && ctrl.isRowSelected()">
+                                
                             </div>
                             </div>
                             <div class="row">

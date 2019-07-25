@@ -67,6 +67,7 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
     self.InsertRecords = InsertRecords;
     self.reloadPageFromRecord = reloadPageFromRecord;
     self.printReport = printReport;
+    self.printReports = printReports;
     self.exitReadOnly = exitReadOnly;
     self.makeReadOnly = makeReadOnly;
     self.variableReadOnly = true;
@@ -504,6 +505,39 @@ angular.module('generalModule').controller('RecordController', ['$scope', 'Recor
 	        );
     }
 
+    function printReports(){
+    	//alert(patientId);
+    	
+    	for(var i = 0; i < self.Records.length; i++){
+			
+            if(self.Records[i].selected === true) {
+        
+				var reportRec = {formName:"invoice", patientId:self.Records[i].id.patientId, treatmentId:self.Records[i].id.treatmentId,paymentNo:self.Records[i].id.paymentNo};
+		    	var entityRec = {
+		    	        name   :'ReportRecInvoicePatientTreatment',
+		    	        record :{formName:'invoice', patientId:self.Records[i].id.patientId, treatmentId:self.Records[i].id.treatmentId,paymentNo:self.Records[i].id.paymentNo}
+		    	        };
+		    	var current_url = $location.absUrl();
+		    	var base_url = current_url.substr(0, current_url.indexOf('Dental')+7);
+		    	var valUrl = base_url + 'GenerateReport' ;  
+		    	$http.post(valUrl,reportRec)
+		        .then(
+			        function (response) {
+			        	bootbox.alert({
+		        		    message: "The report has been successfully printed",
+		        		    title: "Information!"
+		        		})},
+			        function(errResponse){
+			            bootbox.alert({
+		        		    message: "Error while printing the report",
+		        		    title: "<font  color='red'>Error!</font>"
+		        		});
+			        }
+		        );
+            }
+    	}
+    }
+    
     function searchRecords(RecordSet){
     	//alert('011 = '+RecordSet.id.treatmentId);
     	//self.Records = [];

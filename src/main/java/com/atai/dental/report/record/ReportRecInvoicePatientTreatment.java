@@ -5,7 +5,16 @@ import java.util.HashMap;
 public class ReportRecInvoicePatientTreatment extends ReportRec {
 	private int    patientId;
 	private int    treatmentId;
+	private int    paymentNo;
 	
+	public int getPaymentNo() {
+		return paymentNo;
+	}
+
+	public void setPaymentNo(int paymentNo) {
+		this.paymentNo = paymentNo;
+	}
+
 	public int getPatientId() {
 		return patientId;
 	}
@@ -29,6 +38,7 @@ public class ReportRecInvoicePatientTreatment extends ReportRec {
 		hParams = super.setReportParams();
 		hParams.put("patient_id", this.patientId);
 		hParams.put("treatment_id", this.treatmentId);
+		hParams.put("payment_no", this.paymentNo);
 		return hParams;
 	}
 
