@@ -71,6 +71,7 @@
 				<value>com.atai.dental.module.enterp.model.User</value>
 				<value>com.atai.dental.module.enterp.model.Role</value>
 				<value>com.atai.dental.module.enterp.model.DoctorLov</value>
+				<value>com.atai.dental.module.enterp.model.UserRole</value>
 				
 				
 				

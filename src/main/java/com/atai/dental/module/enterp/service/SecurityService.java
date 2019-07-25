@@ -4,4 +4,5 @@ public interface SecurityService {
     String findLoggedInUsername();
     String findLoggedInUsernameCustome();
     void autologin(String username, String password);
+    Number findLoggedInUsernameRole();
 }

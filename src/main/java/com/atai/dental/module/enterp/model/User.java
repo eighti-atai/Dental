@@ -62,6 +62,7 @@ public class User {
     }
 
     public String getUsername() {
+    	System.out.println("&&&&&&&*********&&&&&&&& "+ name);
         return userName;
     }
 

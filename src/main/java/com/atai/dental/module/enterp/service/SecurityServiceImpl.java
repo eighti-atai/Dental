@@ -21,6 +21,12 @@ public class SecurityServiceImpl implements SecurityService{
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private UserService userObject;
+    
+    @Autowired
+    private UserRoleService userRoleObject;
+    
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
     @Transactional
@@ -40,9 +46,30 @@ public class SecurityServiceImpl implements SecurityService{
     public String findLoggedInUsernameCustome() {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
-        System.out.println("********************************** "+ name);
+        //int id = ((Object) user).getUserId();
+        //userObject
+        com.atai.dental.module.enterp.model.User userD = userObject.findByUsername(name);
+        com.atai.dental.module.enterp.model.UserRole userRole = userRoleObject.getByKey(userD.getId());
+        System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUUUUUU"+ userRole.getRoleId());
+        
+        
         
         return name;
+    }
+    
+    @Transactional
+    public Integer findLoggedInUsernameRole() {
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername(); //get logged in username
+        //int id = ((Object) user).getUserId();
+        //userObject
+        com.atai.dental.module.enterp.model.User userD = userObject.findByUsername(name);
+        com.atai.dental.module.enterp.model.UserRole userRole = userRoleObject.getByKey(userD.getId());
+        System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUUUUUU"+ userRole.getRoleId());
+        
+        
+        
+        return userRole.getRoleId();
     }
     
     @Transactional

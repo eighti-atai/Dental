@@ -162,12 +162,15 @@ public class AppointmentController extends AbstractController<AppointmentKey, Ap
 	public ResponseEntity<List<Appointment>> searchToday(@RequestBody Appointment object) {
 		// TODO Auto-generated method stub
 		
-		
-		object.setDoctor(securityService.findLoggedInUsernameCustome());
+		//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@"+securityService.findLoggedInUsernameCustome());
+		int roleId =  (Integer) securityService.findLoggedInUsernameRole();
+		if (roleId == 2){
+			object.setDoctor(securityService.findLoggedInUsernameCustome());
+		}
 		ResponseEntity<List<Appointment>> AppointmentsList = search(object);
 		for (Appointment selectedAppointment : AppointmentsList.getBody()) 
 		{ 
-			System.out.println("$$$$$$$$$$$$$$$$$$$$$$$"+ selectedAppointment.getId().getPatientId());
+			//System.out.println("$$$$$$$$$$$$$$$$$$$$$$$"+ selectedAppointment.getId().getPatientId());
 			Patient patient = patientService.getByKey(selectedAppointment.getId().getPatientId());
 			selectedAppointment.setPatient(patient);
 		}
